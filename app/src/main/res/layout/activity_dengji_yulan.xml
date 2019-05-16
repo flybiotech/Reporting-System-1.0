@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_dengji_yulan"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,59 +13,66 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/patient_id" />
+            android:text="@string/patient_id"
+            android:textSize="@dimen/dp_16"
+            />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/patient_name" />
+            android:text="@string/patient_name"
+            android:textSize="@dimen/dp_16"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/patient_age" />
+            android:text="@string/patient_age"
+            android:textSize="@dimen/dp_16"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/patient_telephone" />
+            android:text="@string/patient_telephone"
+            android:textSize="@dimen/dp_16"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/patient_source" />
+            android:text="@string/patient_source"
+            android:textSize="@dimen/dp_16"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/patient_marriage" />
+            android:text="@string/patient_marriage"
+            android:textSize="@dimen/dp_16"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dp_1"
         android:background="@color/gray"></View>
 
     <com.shizhenbao.util.SwipeRefreshView
         android:id="@+id/srv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteX="@dimen/dp_8"
+        tools:layout_editor_absoluteY="@dimen/dp_8">
 
         <ListView
             android:id="@+id/lv_dengjiyulan"

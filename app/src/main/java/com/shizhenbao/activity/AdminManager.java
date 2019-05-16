@@ -1,28 +1,24 @@
 package com.shizhenbao.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity.R;
 import com.shizhenbao.connect.DevConnect;
 import com.shizhenbao.pop.Doctor;
-import com.shizhenbao.util.Const;
-import com.shizhenbao.wifiinfo.WifiAutoConnectManager;
-import com.view.LoadingDialog;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.LitePal;
 
 import java.util.List;
 
@@ -33,7 +29,8 @@ public class AdminManager extends AppCompatActivity implements View.OnClickListe
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Toast.makeText(AdminManager.this,  getString(R.string.setting_data_clear_success_message), Toast.LENGTH_SHORT).show();
+            MyToast.showToast(AdminManager.this,  getString(R.string.setting_data_clear_success_message));
+//            Toast.makeText(AdminManager.this,  getString(R.string.setting_data_clear_success_message), Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(AdminManager.this,LoginActivity.class);
             intent.putExtra("msg",1);
             startActivity(intent);
@@ -43,6 +40,7 @@ public class AdminManager extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_admin_manager);
         initView();
         initClick();
@@ -57,25 +55,29 @@ public class AdminManager extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt_admin:
-                List<Doctor>doctorList= DataSupport.where("dName=?","Admin").find(Doctor.class);
+                List<Doctor>doctorList= LitePal.where("dName=?","Admin").find(Doctor.class);
                 if(doctorList.size()>0){
                     for(int i=0;i<doctorList.size();i++){
                         doctorList.get(0).setdPassword("123456");
                         doctorList.get(0).save();
                     }
                 }else {
-                    Toast.makeText(AdminManager.this, getString(R.string.super_manager_error), Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(AdminManager.this, getString(R.string.super_manager_error));
+//                    Toast.makeText(AdminManager.this, getString(R.string.super_manager_error), Toast.LENGTH_SHORT).show();
                 }
                 Intent i=new Intent(AdminManager.this,LoginActivity.class);
                 i.putExtra("msg",1);
                 startActivity(i);
-                Toast.makeText(AdminManager.this, getString(R.string.super_manager_success), Toast.LENGTH_SHORT).show();
+                MyToast.showToast(AdminManager.this, getString(R.string.super_manager_success));
+//                Toast.makeText(AdminManager.this, getString(R.string.super_manager_success), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bt_sn:
 
                 break;
             case R.id.bt_delete:
                 dialogViewDeleteData();
+                break;
+            default:
                 break;
         }
     }

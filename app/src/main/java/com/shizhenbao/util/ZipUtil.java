@@ -112,12 +112,13 @@ public class ZipUtil {
           * @param zipFilePath 压缩文件路径 
           * @param destDir 解压目录 
           */
-    public static void unZip(String zipFilePath, String destDir){
+    public static boolean unZip(String zipFilePath, String destDir){
         ZipFile zipFile=null;
+        BufferedInputStream bis =null;
+        FileOutputStream fos=null;
+        BufferedOutputStream bos=null;
         try{
-            BufferedInputStream bis =null;
-            FileOutputStream fos=null;
-            BufferedOutputStream bos=null;
+
             zipFile=new ZipFile(zipFilePath,CHINESE_CHARSET);
             Enumeration<ZipEntry> zipEntries=zipFile.getEntries();
             File file,parentFile;
@@ -141,19 +142,35 @@ public class ZipUtil {
                 while((readIndex=bis.read(cache,0,CACHE_SIZE))!=-1){
                     fos.write(cache,0,readIndex);
                 }
-                bos.flush();
-                bos.close();
-                fos.close();
-                bis.close();
+
+
+
             }
         }catch(IOException e){
-            e.printStackTrace();
+
+            return false;
+//            e.printStackTrace();
         }finally{
             try{
-                zipFile.close();
+                if (bos != null) {
+                    bos.flush();
+                    bos.close();
+                }
+                if (fos != null) {
+                    fos.close();
+                }
+                if (bis != null) {
+                    bis.close();
+                }
+                if (zipFile != null) {
+                    zipFile.close();
+                }
+
             }catch(IOException e){
-                e.printStackTrace();
+                return false;
+//                e.printStackTrace();
             }
         }
+        return true;
     }
 }

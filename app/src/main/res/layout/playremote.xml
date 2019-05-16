@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/Relativelayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <com.qcam.REBufferView
+            android:id="@+id/recoder"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"></com.qcam.REBufferView>
+
+        <TableLayout
+            android:id="@+id/ctltop"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:stretchColumns="0">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="0dp"
+                android:background="#00aaaaaa">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"></ImageView>
+
+                <ImageButton
+                    android:id="@+id/exit"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/ptz_cap"
+                    android:clickable="true"
+                    android:gravity="right"
+                    android:onClick="exit"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/exitbutton"></ImageButton>
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+</LinearLayout>

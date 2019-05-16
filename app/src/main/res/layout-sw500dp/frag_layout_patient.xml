@@ -12,16 +12,21 @@
         <include layout="@layout/title_item" />
 
         <TextView
+            android:id="@+id/tv_patient_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="@dimen/dp_2"
             android:textColor="#000" />
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/dp_20"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
 
         <LinearLayout

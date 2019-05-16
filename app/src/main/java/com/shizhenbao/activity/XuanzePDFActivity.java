@@ -10,8 +10,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,8 +32,10 @@ import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
 import com.shizhenbao.util.SwipeRefreshView;
+import com.util.FileUtil;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.LitePal;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -41,7 +45,7 @@ import java.util.List;
 public class XuanzePDFActivity extends BaseActivity {
     private ListView lv;
     private static List<String> list=new ArrayList<>();
-    private String path = new Item().getSD()+"/SZB_save/"+ OneItem.getOneItem().getName();
+//    private String path = new Item().getSD()+"/SZB_save/"+ OneItem.getOneItem().getName();
     private TextView tv,tv_empty;
     private Button bt_right, bt_left;
     private List<User>  user;
@@ -49,27 +53,19 @@ public class XuanzePDFActivity extends BaseActivity {
     private List<String>userlist=new ArrayList<>();
     private static List<String>userlistPdfName=new ArrayList<>();//倒序数据源
     private static List<String>userlistPdfName1=new ArrayList<>();//正序数据源
-    private File[] files;
-    boolean i;
-    private List<File>pathList;
+//    private File[] files;
+//    boolean i;
+//    private List<File>pathList;
     private SwipeRefreshView mSwipeRefreshView;
     private static int page1;
     private static int page;
     ArrayAdapter adapter;
+    private FileUtil fileUtil;//文件操作类
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_xuanze_pdf);
-        try{
-            if(OneItem.getOneItem().getName()!=null||!OneItem.getOneItem().getName().equals("")){
-                i= new LoginRegister().getDoctor(OneItem.getOneItem().getName()).isdAdmin();
-            }else {
-                new UserManager().getExceName();
-                i= new LoginRegister().getDoctor(OneItem.getOneItem().getName()).isdAdmin();
-            }
-        }catch (Exception e){
-            new UserManager().getExceName();
-        }
         initView();
     }
 
@@ -87,21 +83,19 @@ public class XuanzePDFActivity extends BaseActivity {
             }
             doctor=new LoginRegister().getDoctor(OneItem.getOneItem().getName());
             if(doctor.isdAdmin()){//超级用户查询数据库所有的数据
-                user=DataSupport.findAll(User.class);
+                user=LitePal.findAll(User.class);
             }else {
-                user= DataSupport.where("operId=?",String.valueOf(doctor.getdId())).find(User.class);//普通用户查询自己名下的数据库
+                user= LitePal.where("operId=?",String.valueOf(doctor.getdId())).find(User.class);//普通用户查询自己名下的数据库
             }
             for(User u:user){
                 if (u.getPdfPath() != null&&!u.getPdfPath().equals("")) {//保证程序的健壮性 ,有时候u的值会为空。必须要排除 u=null 的情况
                     String[] userPathName = u.getPdfPath().split("/");
                     Log.d("TAG1", " u.getPdfPath():----- "+u.getPdfPath());
-                    if(new FragPrinter().getFileSize(new File(u.getPdfPath()))!=0){
+                    if(fileUtil.getFileSize(new File(u.getPdfPath()))!=0){
                         userlist.add(u.getPdfPath());
                     }
-                    Log.e("报告路径",u.getPdfPath());
-                    Log.e("报告数组长度",userPathName.length+"");
                     if (userPathName.length >= 3) {//保证程序的健壮性
-                        userlistPdfName1.add(userPathName[userPathName.length-1]);
+                        userlistPdfName1.add(userPathName[userPathName.length-3]+"-"+userPathName[userPathName.length-1]);
                     }
                 }
             }
@@ -111,6 +105,7 @@ public class XuanzePDFActivity extends BaseActivity {
             lv.setEmptyView(tv_empty);
             adapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1,list);
             lv.setAdapter(adapter);
+            MyToast.dissmissToast();
             new Item().setListViewHeightBasedOnChildren(lv);
 
             // 设置颜色属性的时候一定要注意是引用了资源文件还是直接设置16进制的颜色，因为都是int值容易搞混
@@ -130,6 +125,7 @@ public class XuanzePDFActivity extends BaseActivity {
             initData();
             initClick();
         }catch (Exception e){
+            e.printStackTrace();
 
         }
     }
@@ -236,7 +232,7 @@ public class XuanzePDFActivity extends BaseActivity {
 //                Toast.makeText(XuanzePDFActivity.this, "a:"+p+"b:"+o, Toast.LENGTH_SHORT).show();
                 String pin=path.substring(p+1,o);
 //                Toast.makeText(XuanzePDFActivity.this, "pin:"+pin, Toast.LENGTH_SHORT).show();
-                List<User> u=DataSupport.where("pId=?",pin).find(User.class);
+                List<User> u=LitePal.where("pId=?",pin).find(User.class);
                 for(int i=0;i<u.size();i++){
                     initPDFPreview(u.get(i).getPdfPath());
                 }
@@ -246,6 +242,7 @@ public class XuanzePDFActivity extends BaseActivity {
 
     private void initView() {
 //        userlistPdfName.clear();
+        fileUtil = new FileUtil();
         mSwipeRefreshView= (SwipeRefreshView) findViewById(R.id.srv);
         mSwipeRefreshView.setEnabled(false);
         lv = (ListView) findViewById(R.id.lv);
@@ -263,8 +260,9 @@ public class XuanzePDFActivity extends BaseActivity {
 
     //调用自带阅读器
     private void initPDFPreview(String path1) {
-        if (path1.equals("")||path1==null) {
-            Toast.makeText(this, R.string.print_Report_Non_existent, Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(path1)) {
+            MyToast.showToast(this,getString(R.string.print_Report_Non_existent));
+//            Toast.makeText(this, R.string.print_Report_Non_existent, Toast.LENGTH_SHORT).show();
             return;
         }
         OneItem.getOneItem().setFile(new File(path1));

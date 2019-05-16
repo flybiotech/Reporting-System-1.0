@@ -14,7 +14,13 @@
 
     <string name="app_name">HP Baskı</string>
     <string name="title_activity_print_preview">Baskı Önizleme</string>
+    <string name="title_activity_print_place_holder">Yazdır</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="print_preview_prompt">Aşağıda harika bir görüntünün belirdiğini hayal edin</string>
+    <string name="learn_about_mobile_print">Yazdırma Talimatları</string>
+    <string name="support">Destek:</string>
     <string name="paper_size">Kağıt Boyutu:</string>
+    <string name="paper_type">Kağıt Türü</string>
     <string name="lib_font"></string>
 
     <string name="preview_spinner_4x5">4 x 5</string>
@@ -22,13 +28,22 @@
     <string name="preview_spinner_5x7">5 x 7</string>
     <string name="preview_spinner_letter">8,5 x 11</string>
 
+    <string-array name="paper_type_array">
+        <item> Fotoğraf Kağıdı </item>
+    </string-array>
     <!-- Print Preview -->
     <string name="print_preview_menu_help">Yazdırma Yardımı</string>
     <string name="print_preview_menu_print_service_plugins">Baskı Hizmeti Sağlayıcılar</string>
 
     <!-- Print Plugin installation -->
+    <string name="hp_print_plugin_alert_header">HP Baskı Eklentisi</string>
+    <string name="install_hp_print_plugin_msg">Bir HP yazıcınız mı var? En iyi kalitede fotoğraflar yazdırmak için lütfen HP Baskı Eklentisini yükleyin.</string>
+    <string name="update_hp_print_plugin_msg">Bir HP yazıcınız mı var? En iyi kalitede fotoğraflar yazdırmak için lütfen HP Baskı Eklentisini güncelleyin.</string>
+    <string name="enable_hp_print_plugin_msg">HP Baskı Eklentisinin etkinleştirilmiş olduğundan emin olun.</string>
 
     <!-- Print Plugin helper -->
+    <string name="hp_print_helper_header">Baskı Hizmeti Yardımcısı</string>
+    <string name="install_print_plugin_msg">En iyi kalitede fotoğraflar yazdırmak için lütfen yazıcınız için uygun eklentiyi yükleyip etkinleştirin.</string>
 
     <!-- Print Service Plugin Information -->
     <string name="title_activity_print_service_plugin_info">Baskı Hizmeti Bilgileri</string>

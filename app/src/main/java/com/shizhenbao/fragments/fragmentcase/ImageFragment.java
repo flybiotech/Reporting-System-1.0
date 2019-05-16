@@ -1,10 +1,7 @@
 package com.shizhenbao.fragments.fragmentcase;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,16 +10,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.activity.ImageBrowserActivity;
 import com.activity.R;
-import com.orhanobut.logger.Logger;
+import com.bumptech.glide.Glide;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Const;
+import com.util.SouthUtil;
+import com.view.ImageViewRotation;
+import com.view.MyToast;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by dell on 2017/9/13.
@@ -31,42 +37,12 @@ import java.util.List;
 public class ImageFragment extends Fragment implements View.OnClickListener {
 
     private Button btnPre01,btnNext01,btnPre02, btnNext02;
-    private ImageView image01, image02;
+    private ImageViewRotation image01, image02;
     private TextView tvName01, tvName02;
     private List<User> mList = new ArrayList<User>();
-    private List<String> listImage01 = new ArrayList<String>();
-    private List<String> listImage02 = new ArrayList<String>();
+    private ArrayList<String> listImage01 = new ArrayList<String>();
+    private ArrayList<String> listImage02 = new ArrayList<String>();
 
-    private Handler handle = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            switch (msg.what) {
-                case 0:
-                    listImage01 = imagePathList1;
-                    if (listImage01.size() != 0) {
-//                        tvName01.setText(Const.mListUser.get(0).getpName());
-                        showImages01(listImage01.get(0));
-                    }
-                    break;
-                case 1:
-                    listImage02 = imagePathList2;
-                    if (listImage02.size() != 0) {
-                        showImages02(listImage02.get(0));
-//                        tvName02.setText(Const.mListUser.get(1).getpName());
-                    }
-                    break;
-
-                case 2:
-                    Toast.makeText(getActivity(), R.string.image_manager_picture_nothing, Toast.LENGTH_SHORT).show();
-                    break;
-
-                case 3:
-                    break;
-            }
-        }
-    };
 
     @Nullable
     @Override
@@ -81,15 +57,18 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
         btnNext01 = (Button) view.findViewById(R.id.btn_casenext01);//原图下一张
         btnPre02 = (Button) view.findViewById(R.id.btn_casepre02);//对比图上一张
         btnNext02 = (Button) view.findViewById(R.id.btn_casenext02);//对比图下一张
-        image01 = (ImageView) view.findViewById(R.id.frag_imagecase_01);//显示原图
-        image02 = (ImageView) view.findViewById(R.id.frag_imagecase_02);//显示对比图
+        image01 = (ImageViewRotation) view.findViewById(R.id.frag_imagecase_01);//显示原图
+        image02 = (ImageViewRotation) view.findViewById(R.id.frag_imagecase_02);//显示对比图
         tvName01 = (TextView) view.findViewById(R.id.textview_caseName01); //对比病例的姓名
         tvName02 = (TextView) view.findViewById(R.id.textview_caseName02); //对比病例的姓名
+
 
         btnPre01.setOnClickListener(this);
         btnNext01.setOnClickListener(this);
         btnPre02.setOnClickListener(this);
         btnNext02.setOnClickListener(this);
+        image01.setOnClickListener(this);
+        image02.setOnClickListener(this);
 
     }
 
@@ -102,8 +81,9 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
             tvName02.setText("");
 
             try {
-                getImagePathFromSD( Const.mListUser.get(0).getGatherPath()+"/PHOTOS",1);//原图
-                getImagePathFromSD02( Const.mListUser.get(1).getGatherPath()+"/PHOTOS",2);//对比图
+                getImageData(Const.mListUser.get(0),Const.imageposition,listImage01,image01,tvName01);
+                getImageData(Const.mListUser.get(1),Const.imagepositioncompare,listImage02,image02,tvName02);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -119,307 +99,172 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
             switch (v.getId()) {
 
                 case R.id.btn_casepre01://上一张
-                    if (listImage01.size() == 0||!isFastClick()) {
-                        return;
+                    Const.imageposition = Const.imageposition - 1;
+                    if (Const.imageposition < 0) {
+                        Const.imageposition = 0;
+                        MyToast.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        SouthUtil.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        Toast.makeText(MyApplication.getContext(), getString(R.string.image_manager_picture_nothing), Toast.LENGTH_SHORT).show();
                     }
-                    index--;
-                    if (index  >= 0) {
-                        showImages01(listImage01.get(index));
+                    showImages(Const.imageposition,listImage01,Const.mListUser.get(0),image01,tvName01);
 
-                    } else {
-    //                    Toast.makeText(this, "当前是最后一张", Toast.LENGTH_SHORT).show();
-                        showImages01(listImage01.get(listImage01.size()-1));
-                        index = listImage01.size()-1;
-                    }
-    //                index--;
                     break;
                 case R.id.btn_casenext01://下一张
-                    if (listImage01.size() == 0||!isFastClick()) {
-                        return;
+
+                    Const.imageposition = Const.imageposition + 1;
+                    if (Const.imageposition > listImage01.size() - 1) {
+                        Const.imageposition = listImage01.size() - 1;
+                        MyToast.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        SouthUtil.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        Toast.makeText(MyApplication.getContext(), getString(R.string.image_manager_picture_nothing), Toast.LENGTH_SHORT).show();
                     }
-                    index++;
-                    Logger.e("照片的数量："+ listImage01.size());
-                    if (index  >=listImage01.size()) {
-    //                    Toast.makeText(this, "当前是第一张", Toast.LENGTH_SHORT).show();
-                        showImages01(listImage01.get(0));
-                        index = 0;
-                    } else {
-                        showImages01(listImage01.get(index));
-                    }
+                    showImages(Const.imageposition,listImage01,Const.mListUser.get(0),image01,tvName01);
 
                     break;
 
     //---------------------------------------对比图------------------------------------------------
                 case R.id.btn_casepre02://对比图上一张
-                    if (listImage02.size() == 0||!isFastClick()) {
-                        return;
+                    Const.imagepositioncompare = Const.imagepositioncompare - 1;
+                    if (Const.imagepositioncompare < 0) {
+                        Const.imagepositioncompare = 0;
+                        MyToast.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        SouthUtil.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        Toast.makeText(MyApplication.getContext(), getString(R.string.image_manager_picture_nothing), Toast.LENGTH_SHORT).show();
                     }
-                    index--;
-                    if (index  >= 0) {
-                        showImages02(listImage02.get(index));
+                    showImages(Const.imagepositioncompare,listImage02,Const.mListUser.get(1),image02,tvName02);
 
-                    } else {
-    //                    Toast.makeText(this, "当前是最后一张", Toast.LENGTH_SHORT).show();
-                        showImages02(listImage02.get(listImage02.size()-1));
-                        index = listImage02.size()-1;
-                    }
-    //                index--;
                     break;
                 case R.id.btn_casenext02://对比图下一张
-                    if (listImage02.size() == 0||!isFastClick()) {
-                        return;
+                    Const.imagepositioncompare = Const.imagepositioncompare + 1;
+                    if (Const.imagepositioncompare > listImage02.size() - 1) {
+                        Const.imagepositioncompare = listImage02.size() - 1;
+                        MyToast.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        SouthUtil.showToast(getActivity(),getString(R.string.image_manager_picture_nothing));
+//                        Toast.makeText(MyApplication.getContext(), getString(R.string.image_manager_picture_nothing), Toast.LENGTH_SHORT).show();
                     }
-                    index++;
-                    Logger.e("照片的数量："+ listImage02.size());
-                    if (index  >=listImage02.size()) {
-    //                    Toast.makeText(this, "当前是第一张", Toast.LENGTH_SHORT).show();
-                        showImages02(listImage02.get(0));
-                        index = 0;
-                    } else {
-                        showImages02(listImage02.get(index));
-                    }
+                    showImages(Const.imagepositioncompare,listImage02,Const.mListUser.get(1),image02,tvName02);
                     break;
+
+                case R.id.frag_imagecase_01: //图像展示的点击事件
+                    //        显示放大之后的图片
+                    Intent intent = new Intent(getActivity(), ImageBrowserActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("urls", listImage01);
+                    bundle.putInt("channel", Const.imageposition);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    break;
+
+                case R.id.frag_imagecase_02:
+                    //        显示放大之后的图片
+                    Intent intent2 = new Intent(getActivity(), ImageBrowserActivity.class);
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putStringArrayList("urls", listImage02);
+                    bundle2.putInt("channel", Const.imagepositioncompare);
+                    intent2.putExtras(bundle2);
+                    startActivity(intent2);
+                    break;
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
 
 
 
     //展示图片
-    private void showImages01(String filePath) {
-        Bitmap bitmap = getBitmap(filePath);
-        if (bitmap !=null) {
-            image01.setImageBitmap(bitmap);
-            if (Const.mListUser.size() > 0) {
-                getPathSplitName(filePath,tvName01,Const.mListUser.get(0).getpName());
-            }
-
+    private void showImages(int position,List<String>urlsImage,User user,ImageView image,TextView imageName) {
+        if (urlsImage.size() < 1) {
+            return;
         }
-
-
+        //显示照片
+        Glide.with(this)//图片加载框架
+                .load(urlsImage.get(position))//图片的路径
+                .crossFade()
+                .into(image);
+        //显示照片的名称
+//        getPathSplitName(urlsImage.get(position));
+        getPathSplitName(urlsImage.get(position),imageName,user.getpId(),user.getpName(),user.getRegistDate());
     }
-
-    //展示对比图片
-    private void showImages02(String filePath) {
-        Bitmap bitmap = getBitmap(filePath);
-        if (bitmap !=null) {
-            image02.setImageBitmap(bitmap);
-            if (Const.mListUser.size() > 1) {
-                getPathSplitName(filePath,tvName02,Const.mListUser.get(1).getpName());
-            }
-
-        }
-
-    }
-
-
-    //获取bitmap
-    public static Bitmap getBitmap(String filePath) {
-        if (filePath == null) {
-            return null;
-        }
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath,options);
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(filePath, options);
-
-    }
-
-    //获取bitmap
-    public static Bitmap getBitmap(String filePath,int maxWidth,int maxHeight) {
-        if (filePath == null) {
-            return null;
-        }
-        BitmapFactory.Options options = null;
-        try {
-            options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(filePath,options);
-            options.inSampleSize = computeSampleSize(options, maxWidth, maxHeight);
-            options.inJustDecodeBounds = false;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return BitmapFactory.decodeFile(filePath, options);
-
-    }
-
-    //计算 inSampleSize
-    public static int computeSampleSize(BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
-        int initialSize = computeInitialSampleSize(options, minSideLength, maxNumOfPixels);
-        int roundedSize;
-        if (initialSize <= 8) {
-            roundedSize = 1;
-            while (roundedSize < initialSize) {
-                roundedSize <<= 1;
-            }
-        } else {
-            roundedSize = (initialSize + 7) / 8 * 8;
-        }
-        return roundedSize;
-    }
-
-    private static int computeInitialSampleSize(BitmapFactory.Options options,int minSideLength, int maxNumOfPixels) {
-        double w = options.outWidth;
-        double h = options.outHeight;
-        int lowerBound = (maxNumOfPixels == -1) ?
-                1 : (int) Math.ceil(Math.sqrt(w * h / maxNumOfPixels));
-
-        int upperBound = (minSideLength == -1) ?
-                128 :(int) Math.min(Math.floor(w / minSideLength), Math.floor(h / minSideLength));
-
-        if (upperBound < lowerBound) {
-            // return the larger one when there is no overlapping zone.
-            return lowerBound;
-        }
-        if ((maxNumOfPixels == -1) && (minSideLength == -1)) {
-            return 1;
-        } else if (minSideLength == -1) {
-            return lowerBound;
-        } else {
-            return upperBound;
-        }
-    }
-
 
 
     /**
      * 获取图片资源
-     *
-     * @return
      */
-    final List<String> imagePathList1 = new ArrayList<String>();
-//    final List<String> imagePathList2 = new ArrayList<String>();
-    private void getImagePathFromSD(final String filePath, final int index) {
-//        final List<String> imagePathList1 = new ArrayList<String>();
-//        imagePathList1.clear();
-       final Message msg = new Message();
-        new Thread(new Runnable() {
+
+    private void getImageData(final User user, final int position, final List<String>list, final ImageView image, final TextView imageName) {
+        list.clear();
+        Observable.create(new Observable.OnSubscribe<String>() {
             @Override
-            public void run() {
-                if (filePath != null) {
-//                    return null;
-                    File fileAll = new File(filePath);
-                    File[] files = fileAll.listFiles();
-                    // 将所有的文件存入ArrayList中,并过滤所有图片格式的文件
-                    for (int i = 0; i < files.length; i++) {
-                        File file = files[i];
-                        if (checkIsImageFile(file.getPath())) {
-//                得到的图片列表
-                            imagePathList1.add(file.getPath());
-//                            list02.add(file.getPath());
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext(user.getGatherPath());
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        showListImage(s,position,list,user,image,imageName);
+                    }
+                });
+
+
+
+    }
+
+
+
+    //展示该文件下病人所有的..jpg格式的图片
+    public void showListImage(String  filePath, final int position, final List<String>urlsImage, final User user, final ImageView image, final TextView imageName) {
+
+        File[] files = new File(filePath).listFiles(); //获取当前文件夹下的所有文件和文件夹
+        Observable.from(files)
+                .filter(new Func1<File, Boolean>() {
+                    @Override
+                    public Boolean call(File file) {
+                        return file.getName().endsWith(".jpg") && !file.getName().equals("方位.png");
+                    }
+                })
+                .map(new Func1<File, String>() {
+                    @Override
+                    public String call(File file) {
+                        return file.getAbsolutePath();
+                    }
+                }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        if (urlsImage.size() > 0) {
+                            showImages(position,urlsImage,user,image,imageName);//展示图片
                         }
                     }
-                    if (index == 1) {
-                        msg.obj = imagePathList1;
-//                        listImage01 = imagePathList1;
-                        handle.sendEmptyMessage(0);
-                    } else if (index==2){
-                        msg.obj = imagePathList1;
-                        handle.sendEmptyMessage(1);
+
+                    @Override
+                    public void onError(Throwable e) {
+
                     }
 
-                } else {
-                    handle.sendEmptyMessage(2);
-                }
-
-            }
-        }).start();
-
-
-
-        // 图片列表
-//        List<String> imagePathList = new ArrayList<String>();
-        // 得到sd卡内image文件夹的路径   File.separator(/)
-//        String filePath = Environment.getExternalStorageDirectory().toString() + File.separator
-//                + "image";
-        // 得到该路径文件夹下所有的文件
-
+                    @Override
+                    public void onNext(String s) {
+                        urlsImage.add(s);
+                    }
+                });
     }
 
 
-    final List<String> imagePathList2 = new ArrayList<String>();
-    private void getImagePathFromSD02(final String filePath, final int index) {
-
-//        imagePathList1.clear();
-        final Message msg = new Message();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (filePath != null) {
-//                    return null;
-                    File fileAll = new File(filePath);
-                    File[] files = fileAll.listFiles();
-                    // 将所有的文件存入ArrayList中,并过滤所有图片格式的文件
-                    for (int i = 0; i < files.length; i++) {
-                        File file = files[i];
-                        if (checkIsImageFile(file.getPath())) {
-//                得到的图片列表
-                            imagePathList2.add(file.getPath());
-//                            list02.add(file.getPath());
-                        }
-                    }
-                    if (index == 1) {
-//                        msg.obj = imagePathList1;
-//                        listImage01 = imagePathList1;
-                        handle.sendEmptyMessage(0);
-                    } else if (index==2){
-//                        msg.obj = imagePathList1;
-                        handle.sendEmptyMessage(1);
-                    }
-
-                } else {
-                    handle.sendEmptyMessage(2);
-                }
-
-            }
-        }).start();
-
-
-
-        // 图片列表
-//        List<String> imagePathList = new ArrayList<String>();
-        // 得到sd卡内image文件夹的路径   File.separator(/)
-//        String filePath = Environment.getExternalStorageDirectory().toString() + File.separator
-//                + "image";
-        // 得到该路径文件夹下所有的文件
-
-    }
-
-
-
-
-
-
-    /**
-     * 检查扩展名，得到图片格式的文件
-     * @param fName
-     * @return
-     */
-    private boolean checkIsImageFile(String fName) {
-        boolean isImageFile = false;
-        // 获取扩展名
-        String FileEnd = fName.substring(fName.lastIndexOf(".") + 1,
-                fName.length()).toLowerCase();
-        if (FileEnd.equals("jpg") || FileEnd.equals("png") || FileEnd.equals("gif")
-                || FileEnd.equals("jpeg")|| FileEnd.equals("bmp") ) {
-
-            if (fName.contains("方位.png")) {
-                isImageFile = false;
-            } else {
-                isImageFile = true;
-            }
-
-        } else {
-            isImageFile = false;
-        }
-        return isImageFile;
-    }
 
 
     /**
@@ -428,24 +273,27 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
      * @param filePath
      * @return
      */
-    private void getPathSplitName(String filePath,TextView textView,String  name) {
+    private void getPathSplitName(String filePath,TextView textView,String pId,String  name,String registerDate) {
         if (textView == null) {
             return;
         }
         try {
-//            sbImagePathName.delete(0, sbImagePathName.length());
             String[] split = filePath.split("[.]");
-//            Logger.e("得到的路径= "+filePath+"    split.length="+split.length+" ----- "+split[1]);
             if (split.length > 0) {
-//                Log.e("PRETTY_LOGGER", " split[0] = "+split[0]+"--  split[1] = "+split[1]+" -- split[2] = "+split[2]+" -- split[3] = "+split[3] );
-//                Logger.e("  "+split[0]+"  "+split[1]+"  "+split[2]+"  "+split[3]);
+
+
                 if (split[1].equals("cusuanbai")) {
                     String imageCatagory = changeInfo(split[1]);
-                    textView.setText("图片展示:(" + name+")"+imageCatagory + "状态下," + split[2] + "秒/时长" + split[3] + "分钟");
+                    textView.setText(getString(R.string.patient_id)+":"+pId+"\n"+getString(R.string.patient_name) + ":"+ name
+                            + "\n" + getString(R.string.case_image_show_time) + ":" + registerDate
+                            + "\n"+ getString(R.string.case_image_showbi)+ ":" + imageCatagory + " " + split[2] + getString(R.string.imageacitivty_acetowhite_second) + split[3] + getString(R.string.imageacitivty_acetowhite_minute));
                 } else {
                     String imageCatagory = changeInfo(split[1]);
-                    textView.setText("图片展示:(" + name+")" + imageCatagory );
+                    textView.setText(getString(R.string.patient_id)+":"+pId+"\n"+getString(R.string.patient_name) + ":" + name
+                            + "\n" + getString(R.string.case_image_show_time) + ":" + registerDate
+                            + "\n" + getString(R.string.case_image_showbi) + ":" + imageCatagory);
                 }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -453,16 +301,16 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
     }
 
     private String changeInfo(String filePath) {
-        String imageCatagory = "原图";
+        String imageCatagory =getString(R.string.image_artword);
         switch (filePath) {
             case "yuantu":
-                imageCatagory= "原图";
+                imageCatagory= getString(R.string.image_artword);
                 break;
             case "cusuanbai":
-                imageCatagory= "醋酸白";
+                imageCatagory= getString(R.string.image_acetic_acid_white);
                 break;
             case "dianyou":
-                imageCatagory= "碘油";
+                imageCatagory= getString(R.string.image_Lipiodol);
                 break;
             default:
                 break;
@@ -472,19 +320,11 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    // 两次点击按钮之间的点击间隔不能少于500毫秒
-    private static final int MIN_CLICK_DELAY_TIME = 500;
-    private static long lastClickTime;
-    //防止短时间内多次点击
-    public static boolean isFastClick() {
-        boolean flag = false;
-        long curClickTime = System.currentTimeMillis();
-        if ((curClickTime - lastClickTime) >= MIN_CLICK_DELAY_TIME) {
-            flag = true;
-        }
-        lastClickTime = curClickTime;
-        return flag;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Const.imageposition = 0;
+        Const.imagepositioncompare = 0;
+
     }
-
-
 }

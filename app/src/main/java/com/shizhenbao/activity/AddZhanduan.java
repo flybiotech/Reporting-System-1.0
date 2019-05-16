@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,7 +16,7 @@ import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class AddZhanduan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_add_zhanduan);
         initView();
         chaxun();
@@ -42,7 +44,6 @@ public class AddZhanduan extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     //6.0尺寸以下的设备，跳到这个界面
                     OneItem.getOneItem().setId(list.get(i).getpId());
-                    OneItem.getOneItem().setB(false);//如果B为真，登记跳转到诊断，如果为false,展示病人信息跳转过去
                     OneItem.getOneItem().setC(true);//判断诊断页面是否可以输入，为true时可以输入，否则不可以输入
                     Intent intent=new Intent(AddZhanduan.this,MainActivity.class);//声明Intent
                     intent.putExtra("canshu",3);//传递参数3到主页面，从主页面跳转到诊断页面
@@ -67,7 +68,7 @@ public class AddZhanduan extends AppCompatActivity {
     }
     private void chaxun(){
         list=new ArrayList<>();
-        userList= DataSupport.where("operId=?", String.valueOf(new LoginRegister().getDoctor(OneItem.getOneItem().getName()).getdId())).find(User.class);
+        userList= LitePal.where("operId=?", String.valueOf(new LoginRegister().getDoctor(OneItem.getOneItem().getName()).getdId())).find(User.class);
         for(int i=0;i<userList.size();i++){
             if(userList.get(i).getIs_diag()==1){
                 userlist.add(userList.get(i));

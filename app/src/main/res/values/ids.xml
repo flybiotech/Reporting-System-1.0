@@ -15,4 +15,22 @@
  -->
 <resources>
     <!-- Messages IDs -->
+    <item name="auto_focus" type="id" />
+    <item name="decode" type="id" />
+    <item name="decode_failed" type="id" />
+    <item name="decode_succeeded" type="id" />
+    <item name="launch_product_query" type="id" />
+    <item name="quit" type="id" />
+    <item name="restart_preview" type="id" />
+    <item name="return_scan_result" type="id" />
+    <item name="search_book_contents_failed" type="id" />
+    <item name="search_book_contents_succeeded" type="id" />
+    <item name="smartconfig" type="id" />
+    <item name="ItemsmartUser" type="id" />
+    <item name="lblsmartSSID" type="id" />
+    <item name="edtsmartSSID" type="id" />
+    <item name="lblsmartPassword" type="id" />
+    <item name="edtsmartPassword" type="id" />
+    <item name="btnsmartStart" type="id" />
+    <item name="btnsmartStop" type="id" />
 </resources>

@@ -16,52 +16,52 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
         </TableRow>
 
@@ -74,69 +74,69 @@
                 android:layout_height="wrap_content"
                 android:layout_span="3"
                 android:gravity="center"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/et_bianhao"
-                android:layout_width="143dp"
+                android:layout_width="@dimen/dp_143"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="@dimen/dp_6"
                 android:layout_span="7"
                 android:background="@drawable/edittext_shape_normal"
                 android:enabled="false"
                 android:gravity="center"
                 android:hint="@string/patient_id"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
         </TableRow>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="4dp">
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_4">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text=""
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <TextView
                 android:id="@+id/tv_print_02"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="@dimen/dp_6"
                 android:layout_weight="7"
                 android:gravity="center"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
         </LinearLayout>
     </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginLeft="@dimen/dp_3"
+        android:layout_marginRight="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_4"
         android:background="@drawable/tablelayout_bg_item"
         android:orientation="vertical">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="1dp"
+            android:padding="@dimen/dp_1"
             android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
             android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
 
@@ -144,52 +144,52 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="0.2dp"
+                    android:layout_height="@dimen/dp_0_2"
                     android:background="#fff" />
             </TableRow>
 
@@ -200,31 +200,31 @@
                     android:id="@+id/tv_print_03"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
                     android:layout_span="3"
                     android:gravity="center"
                     android:padding="2dp"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <TableRow>
@@ -235,28 +235,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_zhengzhuang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
                     android:padding="2dp"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <TableRow>
@@ -267,28 +267,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_xibaoxue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <TableRow>
@@ -299,28 +299,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_dna"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <TableRow>
@@ -331,27 +331,27 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_quyu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -362,27 +362,27 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_pinggu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -394,25 +394,25 @@
                     android:layout_span="3"
                     android:gravity="center"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_yindaojin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -423,27 +423,27 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_nizhen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -454,27 +454,27 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_yijian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -485,28 +485,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_handle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
             </TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
         </TableLayout>
 
@@ -522,52 +522,52 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
         </TableRow>
 
@@ -585,7 +585,27 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_0_2"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_0_2"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_0_2"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
@@ -595,42 +615,22 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
-                android:background="#fff" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
-                android:background="#fff" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
-                android:background="#fff" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="4dp"
-                android:background="#fff" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0.2dp"
+                android:layout_height="@dimen/dp_0_2"
                 android:background="#fff" />
         </TableRow>
 
@@ -638,30 +638,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="4dp">
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_4">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text=""
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <TextView
                 android:id="@+id/tv_print_13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="@dimen/dp_6"
                 android:layout_weight="7"
                 android:gravity="center"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
         </LinearLayout>
     </TableLayout>
 
@@ -669,14 +669,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginLeft="@dimen/dp_3"
+        android:layout_marginRight="@dimen/dp_3"
+        android:layout_marginTop="@dimen/dp_4"
         android:background="@drawable/tablelayout_bg_item"
         android:orientation="vertical"
-        android:paddingLeft="1dp"
-        android:paddingRight="1dp"
-        android:paddingTop="1dp">
+        android:paddingLeft="@dimen/dp_1"
+        android:paddingRight="@dimen/dp_1"
+        android:paddingTop="@dimen/dp_1">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -689,52 +689,52 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/dp_4"
                     android:background="#fff" />
             </TableRow>
 
@@ -747,28 +747,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_bianjie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -779,28 +779,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -811,28 +811,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_xueguan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -843,28 +843,28 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_dianranse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </TableRow>
 
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow></TableRow>
@@ -872,7 +872,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/dp_5"
                 android:background="#fff" />
 
             <TableRow>
@@ -883,22 +883,22 @@
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <EditText
                     android:id="@+id/et_cusuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_span="7"
                     android:background="@drawable/edittext_select"
                     android:gravity="center"
                     android:hint="@string/print_message_hint"
-                    android:padding="2dp"
+                    android:padding="@dimen/dp_2"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
 
             </TableRow>
@@ -911,7 +911,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_10"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -919,12 +919,13 @@
             android:id="@+id/bt_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
             android:background="@drawable/btn_bg"
             android:gravity="center"
-            android:padding="2dp"
+            android:padding="@dimen/dp_2"
+            android:textSize="@dimen/dp_15"
             android:text="@string/image_Select_patients"
             android:textAllCaps="false" />
 
@@ -932,12 +933,13 @@
             android:id="@+id/bt_choise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
             android:background="@drawable/btn_bg"
             android:gravity="center"
-            android:padding="2dp"
+            android:padding="@dimen/dp_2"
+            android:textSize="@dimen/dp_15"
             android:text="@string/print_iamge_select"
             android:textAllCaps="false" />
 
@@ -945,12 +947,13 @@
             android:id="@+id/bt_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
             android:background="@drawable/btn_bg"
             android:gravity="center"
-            android:padding="2dp"
+            android:textSize="@dimen/dp_15"
+            android:padding="@dimen/dp_2"
             android:text="@string/print_azimuth_map"
             android:textAllCaps="false" />
 
@@ -959,12 +962,13 @@
             android:id="@+id/bt_baocun"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
             android:background="@drawable/btn_bg"
             android:gravity="center"
-            android:padding="2dp"
+            android:textSize="@dimen/dp_15"
+            android:padding="@dimen/dp_2"
             android:text="@string/print_Generate_report"
             android:textAllCaps="false" />
 
@@ -972,12 +976,13 @@
             android:id="@+id/bt_giveup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
             android:background="@drawable/btn_bg"
             android:gravity="center"
-            android:padding="2dp"
+            android:padding="@dimen/dp_2"
+            android:textSize="@dimen/dp_15"
             android:text="@string/patient_clear"
             android:textAllCaps="false" />
 

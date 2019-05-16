@@ -9,7 +9,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/dp_20"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,8 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@color/weakRed"
-                android:dividerHeight="1.5dp"
-                android:textSize="@dimen/textViewNameSize" />
+                android:dividerHeight="@dimen/dp_1_5"
+                android:textSize="@dimen/dp_20" />
         </LinearLayout>
 
     </ScrollView>

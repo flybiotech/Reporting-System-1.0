@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="@dimen/dp_5">
 
         <TextView
             android:id="@+id/tv_no"
@@ -20,7 +20,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="@string/setting_picture_edit_no"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_20"/>
 
         <TextView
             android:id="@+id/tv_yes"
@@ -29,13 +30,14 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="@string/setting_picture_edit_yes"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_20"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_5"
         android:background="@color/weakRed"></View>
 
     <android.support.v4.view.ViewPager

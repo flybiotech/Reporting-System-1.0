@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <com.view.ImageViewRotation
         android:id="@+id/iv"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        />
 
     <CheckBox
         android:id="@+id/cb"

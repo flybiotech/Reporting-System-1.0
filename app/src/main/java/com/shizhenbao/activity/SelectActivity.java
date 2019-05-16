@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,8 +34,9 @@ import com.shizhenbao.util.Const;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
 import com.shizhenbao.util.SwipeRefreshView;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,7 @@ public class SelectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_select_layout);
         userManager = new UserManager(SelectActivity.this);
             //从搜索界面获取到的患者信息
@@ -65,9 +68,9 @@ public class SelectActivity extends AppCompatActivity {
             adapter=new SelectAdapter1(SelectActivity.this,itemList);
             lv_select.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            MyToast.dissmissToast();
             new Item().setListViewHeightBasedOnChildren(lv_select);//重新计算listview每个item的高度
             lv_select.setEmptyView(tv_empty);//当listview 没有数据时，就显示这个view
-
             bt_left.setOnClickListener(new View.OnClickListener() {//点击返回
             @Override
             public void onClick(View v) {
@@ -217,9 +220,9 @@ public class SelectActivity extends AppCompatActivity {
                 if(OneItem.getOneItem().getName()!=null&&!OneItem.getOneItem().getName().equals("")){
                     Doctor doctor=new LoginRegister().getDoctor(OneItem.getOneItem().getName());
                     if(!doctor.isdAdmin()){
-                        DataSupport.deleteAll(User.class,"operId=? and is_diag=?",doctor.getdId()+"",1+"");//查询所有符合条件的数据
+                        LitePal.deleteAll(User.class,"operId=? and is_diag=?",doctor.getdId()+"",1+"");//查询所有符合条件的数据
                     }else {
-                        DataSupport.deleteAll(User.class,"is_diag=?",1+"");
+                        LitePal.deleteAll(User.class,"is_diag=?",1+"");
                     }
                     list1.clear();//删除所选项
                     SelectAdapter adapter=new SelectAdapter(SelectActivity.this,list1);
@@ -240,7 +243,7 @@ public class SelectActivity extends AppCompatActivity {
         lv_select.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
-                final CharSequence[] items = {getString(R.string.patient_show_updata), getString(R.string.patient_show_delete)};//弹出框展示内容
+                final CharSequence[] items = {getString(R.string.patient_show_updata), getString(R.string.patient_show_delete),getString(R.string.patient_show_get_image)};//弹出框展示内容
                 AlertDialog.Builder builder = new AlertDialog.Builder(SelectActivity.this);//声明弹出框
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -251,7 +254,8 @@ public class SelectActivity extends AppCompatActivity {
 
                                 if (b==2){
                                     dialog.dismiss();
-                                    Toast.makeText(SelectActivity.this, R.string.patient_show_updata_error, Toast.LENGTH_SHORT).show();
+                                    MyToast.showToast(SelectActivity.this, getString(R.string.patient_show_updata_error));
+//                                    Toast.makeText(SelectActivity.this, R.string.patient_show_updata_error, Toast.LENGTH_SHORT).show();
                                 }else {
                                     Intent intent=new Intent(SelectActivity.this,ModifyActivity.class);//声明Intent
                                     intent.putExtra("second",list1.get(position).getpId());//intent传递listview中item的数据
@@ -267,7 +271,7 @@ public class SelectActivity extends AppCompatActivity {
                                         int c;
                                         c=listAllUser.get(position).getIs_diag();//判断bResult是否为true，若为true已经生成报告，false则未生成报告
                                         if(c==1){
-                                            DataSupport.deleteAll(User.class,"pId=?",list1.get(position).getpId());//查询所有符合条件的数据
+                                            LitePal.deleteAll(User.class,"pId=?",list1.get(position).getpId());//查询所有符合条件的数据
                                             list1.remove(position);//删除所选项
                                             SelectAdapter1 adapter=new SelectAdapter1(SelectActivity.this,list1);
                                             adapter.notifyDataSetChanged();//适配器刷新
@@ -283,17 +287,21 @@ public class SelectActivity extends AppCompatActivity {
                                     }
                                 });
                                 break;
-//                            case 2:
-//                                int d;
-//                                d=listAllUser.get(position).getIs_diag();
-//                                if(d==1){
-//                                    OneItem.getOneItem().setIntImage(0);
-//                                    OneItem.getOneItem().setImageId(Integer.parseInt(list1.get(position).getpId()));
-//                                    Intent intent=new Intent(SelectActivity.this,MainActivity.class);
-//                                    intent.putExtra("canshu",1);
-//                                    startActivity(intent);
-//                                    finish();
-//                                }
+                            case 2:
+                                int d;
+                                d=listAllUser.get(position).getIs_diag();
+                                if(d==1){
+                                    OneItem.getOneItem().setIntImage(0);
+                                    OneItem.getOneItem().setImageId(Integer.parseInt(list1.get(position).getpId()));
+                                    Intent intent=new Intent(SelectActivity.this,MainActivity.class);
+                                    intent.putExtra("canshu",1);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                break;
+                            default:
+                                break;
+
                         }
 
                     }

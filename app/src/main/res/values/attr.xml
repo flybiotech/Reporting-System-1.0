@@ -8,4 +8,12 @@
         </attr>
         <attr name="hint" format="string|reference" />
     </declare-styleable>
+
+    <declare-styleable name="MyTitleView">
+        <attr name="title" format="string"></attr>
+        <attr name="titleSize" format="dimension"></attr>
+
+
+    </declare-styleable>
+
 </resources>

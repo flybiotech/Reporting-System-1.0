@@ -12,7 +12,13 @@
 
 <resources>
     <string name="title_activity_print_preview">Visualização da impressão</string>
+    <string name="title_activity_print_place_holder">Imprimir</string>
+    <string name="action_settings">Configurações</string>
+    <string name="print_preview_prompt">Imagine que uma imagem de alta qualidade aparece abaixo</string>
+    <string name="learn_about_mobile_print">Instruções de impressão</string>
+    <string name="support">Suporte:</string>
     <string name="paper_size">Tamanho do papel:</string>
+    <string name="paper_type">Tipo de papel</string>
     <string name="lib_font"></string>
 
     <string name="preview_spinner_4x5">4 x 5</string>
@@ -20,13 +26,22 @@
     <string name="preview_spinner_5x7">5 x 7</string>
     <string name="preview_spinner_letter">8,5 x 11</string>
 
+    <string-array name="paper_type_array">
+        <item> Papel fotográfico </item>
+    </string-array>
     <!-- Print Preview -->
     <string name="print_preview_menu_help">Ajuda de impressão</string>
     <string name="print_preview_menu_print_service_plugins">Plugins de serviços de impressão</string>
 
     <!-- Print Plugin installation -->
+    <string name="hp_print_plugin_alert_header">Plugin de impressão HP</string>
+    <string name="install_hp_print_plugin_msg">Você possui uma impressora HP? Para imprimir fotos da melhor qualidade, instale o plugin de impressão HP.</string>
+    <string name="update_hp_print_plugin_msg">Você possui uma impressora HP? Para imprimir fotos da melhor qualidade, atualize o plugin de impressão HP.</string>
+    <string name="enable_hp_print_plugin_msg">Confira se o plugin de impressão HP está habilitado.</string>
 
     <!-- Print Plugin helper -->
+    <string name="hp_print_helper_header">Auxiliar de serviços de impressão</string>
+    <string name="install_print_plugin_msg">Para imprimir fotos da melhor qualidade, instale o plugin de impressão HP adequado à sua impressora.</string>
 
     <!-- Print Service Plugin Information -->
     <string name="title_activity_print_service_plugin_info">Informações de serviços de impressão</string>

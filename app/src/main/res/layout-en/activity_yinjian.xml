@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_yinjian"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -20,6 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_shebei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Running_equipment"
@@ -27,6 +29,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_shebei1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Running_equipment_hint"
@@ -41,6 +44,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_chuliqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Processor"
@@ -48,6 +52,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_chuliqi1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Processor_hint"
@@ -63,6 +68,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_cunchuqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Storage_space"
@@ -70,6 +76,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_cunchuqi1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Storage_space_hint"
@@ -85,6 +92,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_yunxingneicun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Run_memory"
@@ -92,6 +100,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_yunxingneicun1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Run_memory_hint"
@@ -106,6 +115,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_Android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_android_version"
@@ -113,6 +123,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_Android1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_android_version_hint"

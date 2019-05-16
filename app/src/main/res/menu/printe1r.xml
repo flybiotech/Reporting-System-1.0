@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/printer01"
+        android:title="打印"></item>
+
+    <item
+        android:id="@+id/printer02"
+        android:title="打印预览"></item>
+
+    <item
+        android:id="@+id/printer03"
+        android:title="诊断信息预览"></item>
+
+</menu>

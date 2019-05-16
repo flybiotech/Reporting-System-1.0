@@ -95,7 +95,9 @@
             android:padding="2dp"
             android:textAllCaps="false"
             android:textColorHint="@color/lightRed"
-            android:typeface="sans" />
+            android:typeface="sans"
+            android:maxLength="15"
+            />
 
     </LinearLayout>
 
@@ -256,7 +258,10 @@
             android:hint="@string/patient_ID_hint"
             android:padding="2dp"
             android:textAllCaps="false"
-            android:typeface="sans" />
+            android:typeface="sans"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:maxLength="30"
+            />
     </LinearLayout>
 
 

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,8 +21,8 @@ import com.shizhenbao.db.UserManager;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.OneItem;
 import com.util.AlignedTextUtils;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -59,6 +60,7 @@ public class CaseSearchActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_case_search);
         initView();
         initTextView();
@@ -133,7 +135,8 @@ public class CaseSearchActivity extends AppCompatActivity implements View.OnClic
 //                    Toast.makeText(this, "请输入查询条件", Toast.LENGTH_SHORT).show();
 //
 //                } else {
-                    Toast.makeText(this, getString(R.string.patient_select_patients_message), Toast.LENGTH_SHORT).show();
+                MyToast.showToast(this, getString(R.string.patient_select_patients_message));
+//                    Toast.makeText(this, getString(R.string.patient_select_patients_message), Toast.LENGTH_SHORT).show();
                     getUserInfo();
                     Intent intent = new Intent(CaseSearchActivity.this, CaseListManagerActivity.class);
                     intent.putExtra("listCase", (Serializable) userCaseList);
@@ -154,6 +157,8 @@ public class CaseSearchActivity extends AppCompatActivity implements View.OnClic
             case R.id.edit_casesearch_dateend:
                 endDate.setText("");
                 setDateDialog(endDate);
+                break;
+            default:
                 break;
         }
     }
@@ -246,7 +251,9 @@ public class CaseSearchActivity extends AppCompatActivity implements View.OnClic
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        if (dt1 == null) {
+            return 0;
+        }
         return dt1.getTime();
     }
 

@@ -1,12 +1,11 @@
 package com.shizhenbao.pop;
-
-import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
 
 /**
  * Created by zhangbin on 2017/4/28.
  */
 
-public class SystemSet extends DataSupport {
+public class SystemSet extends LitePalSupport {
     private int id;
     private String gather_path;//采集图片保存路径
     private String Hospital_name;//医院信息

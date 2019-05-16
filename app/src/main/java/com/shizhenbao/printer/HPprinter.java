@@ -28,7 +28,7 @@ public class HPprinter {
 
     PrintJobData printJobData=null;
     PrintAttributes.MediaSize mediaSize5x7;
-    PrintMetricsCollector printMetricsCollector;
+//    PrintMetricsCollector printMetricsCollector;
     public HPprinter(Activity activity) {
         this.activity = activity;
         mediaSize5x7 = new PrintAttributes.MediaSize("na_5x7_5x7in", "5 x 7", 5000, 7000);
@@ -55,7 +55,8 @@ public class HPprinter {
         createUserSelectedPDFJobData();
         printJobData.setJobName("PDF");
         PrintAttributes printAttributes = new PrintAttributes.Builder()
-                .setMediaSize(PrintAttributes.MediaSize.NA_LETTER)
+                //NA_LETTER
+                .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
                 .build();
         printJobData.setPrintDialogOptions(printAttributes);
 
@@ -69,11 +70,13 @@ public class HPprinter {
         PrintItem printItem4x6 = new PDFPrintItem(PrintAttributes.MediaSize.NA_INDEX_4X6, margins, scaleType, pdfAsset);
         PrintItem printItem5x7 = new PDFPrintItem(mediaSize5x7, margins, scaleType, pdfAsset);
         PrintItem printItemLetter = new PDFPrintItem(PrintAttributes.MediaSize.NA_LETTER, margins, scaleType, pdfAsset);
+        PrintItem printItemISO_a4 = new PDFPrintItem(PrintAttributes.MediaSize.ISO_A4, margins, scaleType, pdfAsset);
 
         printJobData = new PrintJobData(activity, printItem4x6);
 
         printJobData.addPrintItem(printItem5x7);
         printJobData.addPrintItem(printItemLetter);
+        printJobData.addPrintItem(printItemISO_a4);
 
     }
 }

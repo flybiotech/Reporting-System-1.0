@@ -36,6 +36,7 @@
             android:src="@drawable/ic_print_service_help_plugin_icon"
             android:scaleType="fitCenter"/>
         <TextView
+            android:id="@+id/print_help_activity_title_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -100,6 +101,7 @@
             android:src="@drawable/ic_wifi_icon"
             android:scaleType="fitCenter"/>
         <TextView
+            android:id="@+id/print_help_activity_title_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -137,6 +139,7 @@
             android:src="@drawable/ic_printer_error_icon"
             android:scaleType="fitCenter"/>
         <TextView
+            android:id="@+id/print_service_help_title_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -146,6 +149,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/print_help_activity_msg_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="72.33dp"

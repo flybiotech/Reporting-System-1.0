@@ -112,6 +112,7 @@ public class PrintUtil {
         } else {
             //显示需要打印的图片或者PDF  ，还显示选择打印机的设置， 和打印按钮
             readyToPrint(activity);
+
         }
 //        readyToPrint(activity);
     }
@@ -161,6 +162,7 @@ public class PrintUtil {
                 EventMetricsCollector.postMetricsToHPServer(activity, EventMetricsCollector.PrintFlowEventTypes.SENT_TO_PRINT_DIALOG);
                 PrintMetricsCollector collector = new PrintMetricsCollector(activity, androidPrintJob, appSpecificMetrics);
                 collector.start();
+//                activity.finish();
             }
         });
     }

@@ -15,12 +15,14 @@ import com.shizhenbao.activity.LoginActivity;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.util.OneItem;
+import com.view.MyToast;
 
 
 public class XiugaiPasswordActivity extends AppCompatActivity {
     Doctor doctor;
     EditText edit_oldPass,edit_newPass,edit_registerPassCover;
-    private Button btn_registerSure,btn_registerBack,bt_right,bt_left;
+    private Button btn_registerSure,btn_registerBack,bt_right;
+//    private Button bt_left;
     private TextView tv_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,8 @@ public class XiugaiPasswordActivity extends AppCompatActivity {
                             if(edit_newPass.getText().toString().trim().length()>=6){//判断输入的密码长度是否大于6.如果大于6，则可以修改，否则会提示重新输入
                                 doctor.setdPassword(edit_newPass.getText().toString());//修改对应一生的密码
                                 doctor.save();//保存对应的医生信息
-                                Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_password_modify_success, Toast.LENGTH_SHORT).show();
+                                MyToast.showToast(XiugaiPasswordActivity.this, getString(R.string.setting_password_modify_success));
+//                                Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_password_modify_success, Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(XiugaiPasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -49,20 +52,24 @@ public class XiugaiPasswordActivity extends AppCompatActivity {
                                 edit_newPass.setText("");//清空输入框
                                 edit_registerPassCover.setText("");//清空输入框
                                 edit_newPass.requestFocus();//获取焦点
-                                Toast.makeText(XiugaiPasswordActivity.this, R.string.user_register_password_error, Toast.LENGTH_SHORT).show();//提示信息
+                                MyToast.showToast(XiugaiPasswordActivity.this, getString(R.string.user_register_password_error));
+//                                Toast.makeText(XiugaiPasswordActivity.this, R.string.user_register_password_error, Toast.LENGTH_SHORT).show();//提示信息
                             }
 
                         }else {//两次输入密码不一致
                             edit_newPass.setText("");//清空数据框
                             edit_registerPassCover.setText("");//清空数据框
                             edit_newPass.requestFocus();//获取焦点
-                            Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_password_Dissimilarity, Toast.LENGTH_SHORT).show();
+                            MyToast.showToast(XiugaiPasswordActivity.this, getString(R.string.setting_password_Dissimilarity));
+//                            Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_password_Dissimilarity, Toast.LENGTH_SHORT).show();
                         }
                     }else {
-                        Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_password_Original, Toast.LENGTH_SHORT).show();
+                        MyToast.showToast(XiugaiPasswordActivity.this, getString(R.string.setting_password_Original));
+//                        Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_password_Original, Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_message_nothing, Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(XiugaiPasswordActivity.this, getString(R.string.setting_message_nothing));
+//                    Toast.makeText(XiugaiPasswordActivity.this, R.string.setting_message_nothing, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -80,7 +87,7 @@ public class XiugaiPasswordActivity extends AppCompatActivity {
         edit_registerPassCover= (EditText) findViewById(R.id.edit_registerPassCover);//第二次输入密码
         btn_registerBack= (Button) findViewById(R.id.btn_registerBack);//返回
         btn_registerSure= (Button) findViewById(R.id.btn_registerSure);//确定
-        bt_left= (Button) findViewById(R.id.btn_left);
+//        bt_left= (Button) findViewById(R.id.btn_left);
         bt_right= (Button) findViewById(R.id.btn_right);
         tv_title= (TextView) findViewById(R.id.title_text);
         tv_title.setText(getString(R.string.setting_Modify_password));

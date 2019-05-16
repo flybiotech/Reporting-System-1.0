@@ -35,6 +35,7 @@
             android:textSize="@dimen/buttonsSizeEN" />
 
         <Button
+            android:id="@+id/btn_right01"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"

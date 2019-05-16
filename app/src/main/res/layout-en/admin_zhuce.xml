@@ -6,7 +6,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/scrolWidth"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,7 +167,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="@string/user_regester_hosptal"
+                        android:text="@string/user_regester_hospital"
                         android:textAllCaps="false"
                         android:textSize="@dimen/textViewNameSize"
                         android:layout_weight="2"
@@ -177,7 +181,7 @@
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/edit"
                         android:gravity="center"
-                        android:hint="@string/user_regester_hosptal_hint"
+                        android:hint="@string/user_regester_hospital_hint"
                         android:textAllCaps="false"
                         android:layout_weight="1"
                         android:typeface="sans"

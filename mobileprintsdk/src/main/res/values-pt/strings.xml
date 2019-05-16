@@ -13,22 +13,38 @@
 
 <resources>
   <string name="title_activity_print_preview">Pré-visualização da impressão</string>
-    <string name="paper_size">Formato do papel</string>
-    <string name="lib_font"/>
+  <string name="title_activity_print_place_holder">Imprimir</string>
+  <string name="action_settings">Definições</string>
+  <string name="print_preview_prompt">Imagine que uma imagem incrível aparece abaixo</string>
+  <string name="learn_about_mobile_print">Instruções de impressão</string>
+  <string name="support">Suporte:</string>
+  <string name="paper_size">Formato do papel</string>
+  <string name="paper_type">Tipo de papel</string>
+  <string name="lib_font"/>
 
   <string name="preview_spinner_4x5"> 10x13cm </string>
   <string name="preview_spinner_4x6"> 10x15cm </string>
   <string name="preview_spinner_5x7"> 13x18cm </string>
   <string name="preview_spinner_letter"> 21,59x27,94cm </string>
 
+  <string-array name="paper_type_array">
+    <item>Papel para fotografias</item>
+  </string-array>
+
     <!-- Print Preview -->
     <string name="print_preview_menu_help">Ajuda de Impressão</string>
     <string name="print_preview_menu_print_service_plugins">Plug-ins do Serviço de Impressão</string>
 
   <!-- Print Plugin installation -->
+  <string name="hp_print_plugin_alert_header">HP Print Plugin</string>
+  <string name="install_hp_print_plugin_msg">Tem uma impressora HP? Para imprimir fotografias com a melhor qualidade, instale o HP Print Plugin.</string>
+  <string name="update_hp_print_plugin_msg">Tem uma impressora HP? Para imprimir fotografias com a melhor qualidade, atualize o HP Print Plugin.</string>
+  <string name="enable_hp_print_plugin_msg">Assegure que o seu HP Print Plugin está ativado.</string>
 
 
-    <!-- Print Plugin helper -->
+  <!-- Print Plugin helper -->
+  <string name="hp_print_helper_header">Print Service Helper</string>
+  <string name="install_print_plugin_msg">Para imprimir fotografias com a melhor qualidade, instale e ative o plugin adequado para a sua impressora.</string>
 
     <!-- Print Service Plugin Information -->
     <string name="title_activity_print_service_plugin_info">Informações do Serviço de Impressão</string>

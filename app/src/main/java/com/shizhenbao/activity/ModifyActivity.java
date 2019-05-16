@@ -1,10 +1,12 @@
 package com.shizhenbao.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +21,10 @@ import com.shizhenbao.db.UserManager;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.OneItem;
 import com.util.AlignedTextUtils;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+
+import org.litepal.LitePal;
 
 import java.util.List;
 
@@ -49,22 +53,24 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        screenInches = DeviceOfSize.getScreenSizeOfDevice2(this);
-//        if (screenInches > 6.0) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
             setContentView(R.layout.activity_modify_layout);
-//        } else {
-//            setContentView(R.layout.activity_modify_layout_phone);
-//        }
-
-
         intiView();
         initText();
+        initOriginalData();
+        initData();
+        initClick();
+    }
+
+    /**
+     * 得到原有数据
+     */
+    private void initOriginalData() {
         Intent intent = getIntent();
         String id = intent.getStringExtra("second");//得到传递过来的User的id
         edit_bianhao.setText(id);//将得到的病人的id显示在编号输入框中
         OneItem.getOneItem().setId(id);//修改单例模式类中id字段的值
-        List<User> list = DataSupport.where("pId=?", edit_bianhao.getText().toString()).find(User.class);//得到要修改的User
+        List<User> list = LitePal.where("pId=?", edit_bianhao.getText().toString()).find(User.class);//得到要修改的User
         for (int i = 0; i < list.size(); i++) {//得到要修改的记录的原有的数据
             edit_djName.setText(list.get(i).getpName());//显示要修改的病人的姓名
             edit_djAge.setText(list.get(i).getAge());//显示要修改的病人的年龄
@@ -81,8 +87,6 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
             edit_smokeTime.setText(list.get(i).getSmokeTime());  //
             edit_childCount.setText(list.get(i).getChildCount());  //
             edit_checkNotes.setText(list.get(i).getCheckNotes());  //
-
-
             String source = list.get(i).getpSource();//显示要修改的病人的来源
             switch (source) {
                 case "无":
@@ -97,7 +101,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 case "其他":
                     spin_source.setSelection(3, true);//设为true时显示为其他
                     break;
-                default:break;
+                default:
+                    break;
             }
             String marray = list.get(i).getMarry();//显示要修改的病人的婚否
             switch (marray) {
@@ -109,6 +114,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 case "未婚":
                     spin_marry.setSelection(2, true);//设为true时显示为未婚
+                    break;
+                default:
                     break;
             }
 
@@ -156,10 +163,10 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 case "其它"://
                     spin_bloodType.setSelection(5, true);
                     break;
+                default:
+                    break;
             }
         }
-        initData();
-        initClick();
     }
 
     private void initText() {
@@ -229,6 +236,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
         edit_IdNumber= (EditText) findViewById(R.id.edit_modify_idNumber);//身份证号码
         edit_CaseNumbe= (EditText) findViewById(R.id.edit_modify_CaseNumbe);//病例号
+        edit_CaseNumbe.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_SSNumber= (EditText) findViewById(R.id.edit_modify_ssNumber);//社保号，
 
         edit_hCG = (EditText) findViewById(R.id.edit_modify_HCG);//hcg
@@ -260,6 +268,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                     case 3:
                         source = getString(R.string.patient_other);
                         break;
+                        default:
+                            break;
                 }
             }
 
@@ -280,6 +290,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                         break;
                     case 2:
                         marry = getString(R.string.patient_unmarried);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -314,6 +326,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                     case 6://
                         birthControlMode = getString(R.string.patient_Women__IUD);
                         break;
+                    default:
+                        break;
 
                 }
             }
@@ -345,6 +359,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                     case 5://
                         bloodType = getString(R.string.patient_other_type);
                         break;
+                    default:
+                        break;
                 }
             }
 
@@ -355,71 +371,106 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    /**
+     * 清除输入框数据
+     * @param
+     */
+    private void initClear(){
+        edit_djName.setText("");
+        edit_djPhone.setText("");
+        edit_djAge.setText("");
+        edit_djName.setFocusable(true);//获取焦点
+        edit_IdNumber.setText("");//身份证号
+        edit_CaseNumbe.setText("");//病例号
+        edit_SSNumber.setText("");//社保号
+        edit_djName.setFocusable(true);//获取焦点
+        edit_hCG.setText("");//
+        edit_work.setText("");//
+        edit_pregnantCount.setText("");//
+        edit_childCount.setText("");//
+        edit_abortionCount.setText("");//
+        edit_sexPartnerCount.setText("");//
+        edit_smokeTime.setText("");//
+        edit_checkNotes.setText("");//
+        spin_source.setSelection(0, true);//设为true时显示为无
+        spin_marry.setSelection(0, true);//设为true时显示为无
+        spin_birthControlMode.setSelection(0, true);//设为true时显示为无
+        spin_bloodType.setSelection(0, true);//设为true时显示为无
+    }
+
+    /**
+     * 保存输入框信息
+     * @param
+     */
+    private void initSave(){
+
+        if(TextUtils.isEmpty(edit_djName.getText().toString().trim()) && TextUtils.isEmpty(edit_djPhone.getText().toString().trim())){
+            edit_djName.requestFocus();
+            MyToast.showToast(this, getString(R.string.patient_select_name));
+//            Toast.makeText(getContext(),getContext().getString(R.string.patient_select_name), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(edit_djName.getText().toString().trim())){
+            edit_djName.requestFocus();
+            MyToast.showToast(this, getString(R.string.patient_select_name));
+        }else{
+
+            if(TextUtils.isEmpty(edit_djPhone.getText().toString().trim())){//判断电话是否为空
+                edit_djPhone.requestFocus();
+                MyToast.showToast(this, getString(R.string.case_select_telephoen_hint));
+//                Toast.makeText(getContext(),getContext().getString(R.string.case_select_telephoen_hint), Toast.LENGTH_SHORT).show();
+            }else {
+                int phoneLength = edit_djPhone.getText().toString().trim().length();
+//            int idNumberLength = edit_IdNumber.getText().toString().trim().length();
+                if(edit_djPhone.getText().toString().length()==11 ||edit_djPhone.getText().toString().length()==8 ||edit_djPhone.getText().toString().length()==7){
+//            if(phoneLength>4&&phoneLength<16){
+//
+//                if (idNumberLength==0||idNumberLength<31) {
+                    String hCG = edit_hCG.getText().toString().trim();
+                    String work=edit_work.getText().toString().trim();
+                    String pregnantCount =edit_pregnantCount.getText().toString().trim();
+                    String  childCount=edit_childCount.getText().toString().trim();
+                    String abortionCount =edit_abortionCount.getText().toString().trim();
+                    String sexPartnerCount =edit_sexPartnerCount.getText().toString().trim();
+                    String  smokeTime=edit_smokeTime.getText().toString().trim();
+                    String  checkNotes=edit_checkNotes.getText().toString().trim();
+
+                    userManager.upDataUser(loginRegister.getUserName(Integer.parseInt(OneItem.getOneItem().getId())), edit_djName.getText().toString(),
+                            edit_djPhone.getText().toString(), edit_djAge.getText().toString(), source, marry, OneItem.getOneItem().getId(),
+                            edit_IdNumber.getText().toString().trim(), edit_CaseNumbe.getText().toString().trim(),
+                            edit_SSNumber.getText().toString().trim(), hCG, work, pregnantCount, childCount, abortionCount,
+                            bloodType, sexPartnerCount, smokeTime, birthControlMode, checkNotes);
+                    Intent i = new Intent(ModifyActivity.this, MainActivity.class);
+                    startActivity(i);
+                    MyToast.showToast(this,getString(R.string.patient_modify_success));
+//                    Toast.makeText(this,getString(R.string.patient_modify_success), Toast.LENGTH_SHORT).show();
+
+//                } else {
+//                    Toast.makeText(this, getString(R.string.patient_ID_error)+edit_IdNumber.getText().toString().trim().length()+getString(R.string.patient_ID_error2), Toast.LENGTH_SHORT).show();
+//                }
+//
+                }else {
+                    MyToast.showToast(this,getString(R.string.patient_telephone_error));
+//                    Toast.makeText(this, getString(R.string.patient_telephone_error), Toast.LENGTH_SHORT).show();
+                }
+            }
+//
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text_modify_cancle:
-                edit_djName.setText("");
-                edit_djPhone.setText("");
-                edit_djAge.setText("");
-                edit_djName.setFocusable(true);//获取焦点
-                edit_IdNumber.setText("");//身份证号
-                edit_CaseNumbe.setText("");//病例号
-                edit_SSNumber.setText("");//社保号
-                edit_djName.setFocusable(true);//获取焦点
-
-                edit_hCG.setText("");//
-                edit_work.setText("");//
-                edit_pregnantCount.setText("");//
-                edit_childCount.setText("");//
-                edit_abortionCount.setText("");//
-                edit_sexPartnerCount.setText("");//
-                edit_smokeTime.setText("");//
-                edit_checkNotes.setText("");//
-                spin_source.setSelection(0, true);//设为true时显示为无
-                spin_marry.setSelection(0, true);//设为true时显示为无
-                spin_birthControlMode.setSelection(0, true);//设为true时显示为无
-                spin_bloodType.setSelection(0, true);//设为true时显示为无
-
+               initClear();
                 break;
             case R.id.text_modify_save:
-                if (TextUtils.isEmpty(edit_djName.getText().toString().trim())
-                        ||TextUtils.isEmpty(edit_djAge.getText().toString().trim())
-                        ||TextUtils.isEmpty(edit_djPhone.getText().toString().trim())){
-                    Toast.makeText(ModifyActivity.this, getString(R.string.patient_register_error_message), Toast.LENGTH_SHORT).show();
-                }else{
-                    if(edit_djPhone.getText().toString().length()==11 ||edit_djPhone.getText().toString().length()==8 ||edit_djPhone.getText().toString().length()==7){
-
-                        if (edit_IdNumber.getText().toString().length() == 15 || edit_IdNumber.getText().toString().length() == 18||edit_IdNumber.getText().toString().length()==0) {
-                            String hCG = edit_hCG.getText().toString().trim();
-                            String work=edit_work.getText().toString().trim();
-                            String pregnantCount =edit_pregnantCount.getText().toString().trim();
-                            String  childCount=edit_childCount.getText().toString().trim();
-                            String abortionCount =edit_abortionCount.getText().toString().trim();
-                            String sexPartnerCount =edit_sexPartnerCount.getText().toString().trim();
-                            String  smokeTime=edit_smokeTime.getText().toString().trim();
-                            String  checkNotes=edit_checkNotes.getText().toString().trim();
-
-                            userManager.upDataUser(loginRegister.getUserName(Integer.parseInt(OneItem.getOneItem().getId())), edit_djName.getText().toString(),
-                                    edit_djPhone.getText().toString(), edit_djAge.getText().toString(), source, marry, OneItem.getOneItem().getId(),
-                                    edit_IdNumber.getText().toString().trim(), edit_CaseNumbe.getText().toString().trim(),
-                                    edit_SSNumber.getText().toString().trim(), hCG, work, pregnantCount, childCount, abortionCount,
-                                    bloodType, sexPartnerCount, smokeTime, birthControlMode, checkNotes);
-                            Intent i = new Intent(ModifyActivity.this, MainActivity.class);
-                            startActivity(i);
-                            Toast.makeText(this,getString(R.string.patient_modify_success), Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            Toast.makeText(this, getString(R.string.patient_ID_error)+edit_IdNumber.getText().toString().trim().length()+getString(R.string.patient_ID_error2), Toast.LENGTH_SHORT).show();
-                        }
-
-                    }else {
-                        Toast.makeText(this, getString(R.string.patient_telephone_error), Toast.LENGTH_SHORT).show();
-                    }
-                }
+                initSave();
                 break;
             case R.id.btn_left:
                 finish();
+                break;
+            default:
                 break;
         }
     }

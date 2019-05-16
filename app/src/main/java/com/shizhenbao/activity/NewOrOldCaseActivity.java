@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -35,13 +36,14 @@ public class NewOrOldCaseActivity extends FragmentActivity implements View.OnCli
     private ZhenDuanFragment zdFrag;//显示新旧诊断信息的fragment
     private PingJiaFragment pjFrag;//显示新旧评价的fragment
     private FragmentPagerAdapter adapter;
-    private List<User> listUser = new ArrayList<User>();
-    private TextView tv01,tv02, tv03,title;
-    private Button btn_left, btn_right;
+//    private List<User> listUser = new ArrayList<User>();
+    private TextView tv01,tv02, tv03;
+    private Button btn_left;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_neworold_layout);
 
         initView();
@@ -133,6 +135,8 @@ public class NewOrOldCaseActivity extends FragmentActivity implements View.OnCli
                 tv03.setTextColor(getResources().getColor(R.color.textcase));
                 tv03.setTextSize(20);
                 break;
+                default:
+                    break;
 
 
         }
@@ -162,6 +166,8 @@ public class NewOrOldCaseActivity extends FragmentActivity implements View.OnCli
                 switchStates (2);
                 pager.setCurrentItem(2);
                 break;
+                default:
+                    break;
 
         }
     }

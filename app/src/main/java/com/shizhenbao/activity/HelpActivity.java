@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_help);
         initView();
     }
@@ -46,15 +48,14 @@ public class HelpActivity extends AppCompatActivity {
         list.add(getString(R.string.setting_select_patient_message));
 //        list.add(getString(R.string.setting_Treasures_of_vision_modify));
 //        list.add(getString(R.string.setting_Treasures_of_vision_delete));
-//        list.add(getString(R.string.setting_Treasures_of_vision_link_faild));
+        list.add(getString(R.string.setting_Treasures_of_vision_link_faild));
         list.add(getString(R.string.setting_print_attention));
         list.add(getString(R.string.setting_select_case));
         list.add(getString(R.string.setting_Contrast_case));
 //        list.add(getString(R.string.setting_removal_used));
-//        list.add(getString(R.string.setting_Treasures_of_vision_light));
+        list.add(getString(R.string.setting_Treasures_of_vision_light));
         list.add(getString(R.string.setting_diagnosis_delete));
         list.add(getString(R.string.setting_picture_edit));
-        list.add("");
         listView = (ListView) findViewById(R.id.listview_help_layout);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);

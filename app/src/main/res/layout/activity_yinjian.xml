@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_yinjian"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,104 +21,121 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_shebei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Running_equipment"
                 android:textAllCaps="false"
-                android:textSize="20dp" />
+                android:textSize="@dimen/dp_16"
+
+                />
 
             <TextView
+                android:id="@+id/tv_shebei1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Running_equipment_hint"
                 android:textAllCaps="false"
-                android:textSize="15dp" />
+                android:textSize="@dimen/dp_15" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_chuliqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Processor"
                 android:textAllCaps="false"
-                android:textSize="20dp" />
+                android:textSize="@dimen/dp_16"
+
+                />
 
             <TextView
+                android:id="@+id/tv_chuliqi1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Processor_hint"
                 android:textAllCaps="false"
-                android:textSize="15dp" />
+                android:textSize="@dimen/dp_15" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_cunchuqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Storage_space"
                 android:textAllCaps="false"
-                android:textSize="20dp" />
+                android:textSize="@dimen/dp_16"
+                />
 
             <TextView
+                android:id="@+id/tv_cunchuqi1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Storage_space_hint"
                 android:textAllCaps="false"
-                android:textSize="15dp" />
+                android:textSize="@dimen/dp_15" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_yunxingneicun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Run_memory"
                 android:textAllCaps="false"
-                android:textSize="20dp" />
+                android:textSize="@dimen/dp_16"
+                />
 
             <TextView
+                android:id="@+id/tv_yunxingneicun1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_Run_memory_hint"
                 android:textAllCaps="false"
-                android:textSize="15dp" />
+                android:textSize="@dimen/dp_15" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_Android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_android_version"
                 android:textAllCaps="false"
-                android:textSize="20dp" />
+                android:textSize="@dimen/dp_16"
+                />
 
             <TextView
+                android:id="@+id/tv_Android1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_android_version_hint"
                 android:textAllCaps="false"
-                android:textSize="15dp" />
+                android:textSize="@dimen/dp_15" />
         </LinearLayout>
 
     </LinearLayout>

@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.activity.R;
+import com.application.MyApplication;
 import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.shizhenbao.activity.PreviewActivity;
 import com.shizhenbao.util.Item;
+import com.view.ImageViewRotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
  */
 
 public class Image1Adapter extends BaseAdapter{
-    private List<Item> list;//战士的图片的集合
+    private List<Item> list;//展示的图片的集合
     private Context context;
     private static List<String> list1 = new ArrayList<>();//选择的图片的路径的集合
     private int i;//图片选择时的position
@@ -57,7 +59,7 @@ public class Image1Adapter extends BaseAdapter{
         if (view == null) {
             viewHolder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.gridviewlist, null);
-            viewHolder.iv = (ImageView) view.findViewById(R.id.iv);
+            viewHolder.iv = (ImageViewRotation) view.findViewById(R.id.iv);
             viewHolder.cb = (CheckBox) view.findViewById(R.id.cb);
             viewHolder.textview_gridview = (TextView) view.findViewById(R.id.textview_gridview);
             view.setTag(viewHolder);
@@ -99,13 +101,16 @@ public class Image1Adapter extends BaseAdapter{
     }
 
     class ViewHolder {
-        private ImageView iv;
+        private ImageViewRotation iv;
         private CheckBox cb;
         private TextView textview_gridview;
     }
 
     public static void setList() {
-        list1.clear();
+        if (list1 != null) {
+            list1.clear();
+        }
+
     }
 
     public static List getList() {//返回被选中图片的list集合
@@ -126,7 +131,8 @@ public class Image1Adapter extends BaseAdapter{
             if (split.length > 0) {
                 if (split[1].equals("cusuanbai")) {
 //                    String imageCatagory = changeInfo(split[1]);
-                    textView.setText("" + split[2] + "秒/" + split[3] + "分钟");
+                    textView.setText("" + split[2] + MyApplication.getContext().getString(R.string.imageacitivty_acetowhite_second)+
+                            split[3] + MyApplication.getContext().getString(R.string.imageacitivty_acetowhite_minute));
 //                    tv_imagenameshow01.setText("图片展示:" + imageCatagory + "状态下,间隔" + split[2] + "秒,第" + split[3] + "张");
                 }
 //                else {
@@ -140,16 +146,17 @@ public class Image1Adapter extends BaseAdapter{
     }
 
     private String changeInfo(String filePath) {
-        String imageCatagory = "原图";
+
+        String imageCatagory = MyApplication.getContext().getString(R.string.image_artword);
         switch (filePath) {
             case "yuantu":
-                imageCatagory= "原图";
+                imageCatagory=  MyApplication.getContext().getString(R.string.image_artword);
                 break;
             case "cusuanbai":
-                imageCatagory= "醋酸白";
+                imageCatagory=  MyApplication.getContext().getString(R.string.image_acetic_acid_white);
                 break;
             case "dianyou":
-                imageCatagory= "碘油";
+                imageCatagory=  MyApplication.getContext().getString(R.string.image_Lipiodol);
                 break;
             default:
                 break;

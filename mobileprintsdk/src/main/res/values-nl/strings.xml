@@ -13,21 +13,37 @@
 
 <resources>
   <string name="title_activity_print_preview">Afdrukvoorbeeld</string>
-    <string name="paper_size">Papierformaat</string>
-    <string name="lib_font"/>
+  <string name="title_activity_print_place_holder">Printen</string>
+  <string name="action_settings">Instellingen</string>
+  <string name="print_preview_prompt">Stel je voor dat hieronder een schitterende afbeelding verschijnt</string>
+  <string name="learn_about_mobile_print">Printinstructies</string>
+  <string name="support">Ondersteuning:</string>
+  <string name="paper_size">Papierformaat</string>
+  <string name="paper_type">Papiersoort</string>
+  <string name="lib_font"/>
 
   <string name="preview_spinner_4x5"> 10x13cm </string>
   <string name="preview_spinner_4x6"> 10x15cm </string>
   <string name="preview_spinner_5x7"> 13x18cm </string>
   <string name="preview_spinner_letter"> 21,59x27,94cm </string>
 
+  <string-array name="paper_type_array">
+    <item>Fotopapier</item>
+  </string-array>
+
     <!-- Print Preview -->
     <string name="print_preview_menu_help">Help bij printen</string>
     <string name="print_preview_menu_print_service_plugins">Printservice-plugins</string>
 
   <!-- Print Plugin installation -->
+  <string name="hp_print_plugin_alert_header">HP Print Plugin</string>
+  <string name="install_hp_print_plugin_msg">Heb je een HP printer? Installeer de HP Print Plugin om de mooiste foto\'s te printen.</string>
+  <string name="update_hp_print_plugin_msg">Heb je een HP printer? Werk de HP Print Plugin bij om de mooiste foto\'s te printen.</string>
+  <string name="enable_hp_print_plugin_msg">Zorg dat de HP Print Plugin is ingeschakeld.</string>
 
-    <!-- Print Plugin helper -->
+  <!-- Print Plugin helper -->
+  <string name="hp_print_helper_header">Hulp bij de Print Service</string>
+  <string name="install_print_plugin_msg">Installeer de juiste plugin voor jouw printer en schakel deze in om de mooiste foto\'s te printen.</string>
 
     <!-- Print Service Plugin Information -->
     <string name="title_activity_print_service_plugin_info">Informatie over printservice</string>

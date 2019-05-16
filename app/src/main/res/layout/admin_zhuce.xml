@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:fadeScrollbars="false"-->
+        <!--android:scrollbarSize="@dimen/scrolWidth"-->
+        <!--android:scrollbarThumbVertical="@color/viewfinder_mask"-->
+        <!--&gt;-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,23 +26,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:text="@string/user_name"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/textViewNameSize" />
+                        android:textSize="@dimen/dp_16" />
 
                     <EditText
                         android:id="@+id/edit_registerName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:background="@drawable/edit"
                         android:enabled="false"
                         android:gravity="center"
@@ -50,24 +54,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center"
                         android:text="@string/user_password"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/textViewNameSize" />
+                        android:textSize="@dimen/dp_16" />
 
                     <EditText
                         android:id="@+id/edit_registerPass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_password_registration_hint"
@@ -79,24 +83,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center"
                         android:text="@string/user_password_again"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/textViewNameSize" />
+                        android:textSize="@dimen/dp_16" />
 
                     <EditText
                         android:id="@+id/edit_registerPassCover"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_password_again_hint"
@@ -107,24 +111,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center"
                         android:text="@string/user_register_email"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/textViewNameSize" />
+                        android:textSize="@dimen/dp_16" />
 
                     <EditText
                         android:id="@+id/edit_registerEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_register_email_hint"
@@ -134,51 +138,51 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center"
-                        android:text="@string/user_regester_hosptal"
+                        android:text="@string/user_regester_hospital"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/textViewNameSize" />
+                        android:textSize="@dimen/dp_16" />
 
                     <EditText
                         android:id="@+id/edit_hos_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:background="@drawable/edit"
                         android:gravity="center"
-                        android:hint="@string/user_regester_hosptal_hint"
+                        android:hint="@string/user_regester_hospital_hint"
                         android:textAllCaps="false" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center"
                         android:text="@string/user_regester_department"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/textViewNameSize" />
+                        android:textSize="@dimen/dp_16" />
 
                     <EditText
                         android:id="@+id/edit_hos_keshi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_regester_department_hint"
@@ -186,53 +190,100 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
 
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_100"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:background="#1e1d1d">
+            android:layout_height="@dimen/dp_10"
+            android:layout_weight="1" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/weakRed1">
+        <Button
+            android:id="@+id/btn_registerBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg_select"
+            android:text="@string/patient_return"
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_13"/>
 
-                <Button
-                    android:id="@+id/btn_registerSure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/text_service_color"
-                    android:text="@string/button_ok"
-                    android:textAllCaps="false"
-                    android:textColor="#000"
-                    android:textSize="20sp"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"
+            android:layout_weight="1" />
 
-                    />
+        <Button
+            android:id="@+id/btn_registerSure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg_select"
+            android:text="@string/sure"
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_13" />
 
-                <Button
-                    android:id="@+id/btn_registerBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/text_service_color"
-                    android:text="@string/patient_return"
-                    android:textAllCaps="false"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
-</RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginStart="0dp"-->
+        <!--android:layout_marginTop="0dp">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="#1e1d1d">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/weakRed1">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btn_registerSure"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_marginLeft="15dp"-->
+                    <!--android:background="@drawable/text_service_color"-->
+                    <!--android:text="@string/button_ok"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:textSize="20sp"-->
+
+                    <!--/>-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btn_registerBack"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_marginRight="15dp"-->
+                    <!--android:background="@drawable/text_service_color"-->
+                    <!--android:text="@string/patient_return"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:textSize="20sp" />-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+    <!--</RelativeLayout>-->
+</LinearLayout>

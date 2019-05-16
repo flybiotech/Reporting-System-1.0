@@ -1,12 +1,12 @@
 package com.shizhenbao.pop;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
 
 /**
  * Created by zhangbin on 2017/8/9.
  */
 
-public class Path extends DataSupport {
+public class Path extends LitePalSupport {
     private String PicPath;
 
 

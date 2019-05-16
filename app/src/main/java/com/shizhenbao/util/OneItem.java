@@ -15,7 +15,6 @@ public class OneItem {
     private int tab;
     private String id;//病人id
     private String name;//医生姓名
-    private boolean b;//判断哪个页面跳转到诊断页面
     private boolean c;//判断诊断页面是否可以输入
     private String gather_path,Hospital_name,Printer_wifi_user,Printer_wifi_pwd,Szb_wifi_user,Szb_wifi_pwd,Hospital_keshi;//系统设置
     private long  Line_timer;//定时时长
@@ -32,13 +31,56 @@ public class OneItem {
     private File file;//生成的pdf文件
     private String printResult;//打印结果
     private String adminName;//超级用户名称
-    private int timing;//定时
+    private int spTotalTime;//定时 设置醋酸白状态下，连续拍照的总时间
+    private int spInterval;// 设置醋酸白状态下，连续拍照的间隔时间
+    private int recordTotalTime;// 设置录制视频的时间
+
+
     private AlertDialog dialog;//打印界面选择患者对话框
     private int intImage;//获取图像界面是否弹出对话框，0不，1弹出
     private int imageId;
     private boolean temp;//图片编辑时判断由哪个界面跳转过来，false为设置，true为查询
     private int selectFTP;//判断选择哪个服务器，0为默认，1为设置
+    //主要用于加载wifi的动画，和从LiveVidActivity 界面返回时，能够弹出患者信息的对话框
+    //fragment从0开始，当从第3个和从第4个fragment直接跳转到第1个fragment的时候，会先执行onFragmentVisibleChange，再执行onstart，其他的则相反
+    private int viewPagerCount = 0; //记录ViewPager z中 ，当前 是第几个 fragment
+
+
     private OneItem(){
+
+    }
+
+
+    public int getViewPagerCount() {
+        return viewPagerCount;
+    }
+
+    public void setViewPagerCount(int viewPagerCount) {
+        this.viewPagerCount = viewPagerCount;
+    }
+
+    public int getRecordTotalTime() {
+        return recordTotalTime;
+    }
+
+    public void setRecordTotalTime(int recordTotalTime) {
+        this.recordTotalTime = recordTotalTime;
+    }
+
+    public int getSpTotalTime() {
+        return spTotalTime;
+    }
+
+    public void setSpTotalTime(int spTotalTime) {
+        this.spTotalTime = spTotalTime;
+    }
+
+    public int getSpInterval() {
+        return spInterval;
+    }
+
+    public void setSpInterval(int spInterval) {
+        this.spInterval = spInterval;
     }
 
     public int getSelectFTP() {
@@ -79,14 +121,6 @@ public class OneItem {
 
     public void setDialog(AlertDialog dialog) {
         this.dialog = dialog;
-    }
-
-    public int getTiming() {
-        return timing;
-    }
-
-    public void setTiming(int timing) {
-        this.timing = timing;
     }
 
     public int getTab() {
@@ -231,12 +265,7 @@ public class OneItem {
     public void setName(String name){
         this.name=name;
     }
-    public boolean getB(){
-        return b;
-    }
-    public void setB(boolean b){
-        this.b=b;
-    }
+
     public String getId(){
         return id;
     }

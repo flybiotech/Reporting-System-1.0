@@ -21,8 +21,10 @@ import com.shizhenbao.activity.CaseSearchActivity;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.db.UserManager;
 import com.shizhenbao.pop.User;
+import com.shizhenbao.util.LogUtil;
 import com.shizhenbao.util.OneItem;
 import com.util.AlignedTextUtils;
+import com.view.MyToast;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -38,6 +40,7 @@ import java.util.List;
 
 public class FragCaseManager extends BaseFragment implements View.OnClickListener{
 
+    private static final String TAG = "TAG_FragCaseManager";
     private EditText editName,editTel,edit01, edit02,startDate,endDate;
     private Button startBtn,bt_left,bt_right;
     private TextView tv;
@@ -113,6 +116,12 @@ public class FragCaseManager extends BaseFragment implements View.OnClickListene
         }
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     //判断当前fragment是否是显示状态
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
@@ -139,7 +148,8 @@ public class FragCaseManager extends BaseFragment implements View.OnClickListene
                 break;
             //开始查询
             case R.id.btn_casesearch_search:
-                    Toast.makeText(getActivity(), getString(R.string.patient_select_patients_message), Toast.LENGTH_SHORT).show();
+                MyToast.showToast(getActivity(), getString(R.string.patient_select_patients_message));
+//                    Toast.makeText(getActivity(), getString(R.string.patient_select_patients_message), Toast.LENGTH_SHORT).show();
                     getUserInfo();
                     Intent intent = new Intent(getActivity(), CaseListManagerActivity.class);
                     intent.putExtra("listCase", (Serializable) userCaseList);
@@ -245,6 +255,9 @@ public class FragCaseManager extends BaseFragment implements View.OnClickListene
             dt1 = sdf.parse(str1);
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+        if (dt1 == null) {
+            return 0;
         }
 
         return dt1.getTime();

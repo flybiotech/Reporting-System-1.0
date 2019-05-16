@@ -1,0 +1,206 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#eeeeee"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:background="#000000"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0px"
+                    android:text="@string/wifistart" />
+
+                <!--
+                <Button
+                    android:id="@+id/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/btnback"
+                    android:layout_marginRight="10px"
+                    android:layout_marginTop="10px"
+                    android:gravity="center_vertical"
+                    android:onClick="search"
+                    android:textColor="#ffffff"
+                    android:text="@string/search" >
+                </Button>
+                -->
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginTop="5px"
+                android:background="#111111" />
+
+            <RadioGroup
+                android:id="@+id/RadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0px"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/sta1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onSta"
+                    android:text="@string/stamod"></RadioButton>
+
+                <RadioButton
+                    android:id="@+id/ap1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100.0px"
+                    android:onClick="onAp"
+                    android:text="@string/apmod"></RadioButton>
+            </RadioGroup>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginTop="5px"
+                android:background="#111111" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="#000000"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6px"
+                android:layout_marginTop="10px"
+                android:checked="true"
+                android:gravity="center_vertical"
+                android:text="@string/curlink"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/curlink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6px"
+                android:layout_marginTop="10px"
+                android:gravity="center_vertical"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/search1"
+                android:layout_width="80px"
+                android:layout_height="60px"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20px"
+                android:background="@drawable/btnback"
+                android:clickable="true"
+                android:onClick="search"
+                android:text="@string/search"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"></Button>
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:dividerHeight="2px" />
+
+        <LinearLayout
+            android:id="@+id/aplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:text="@string/wifiname"
+                    android:textAllCaps="false" />
+
+                <EditText
+                    android:id="@+id/wifiname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="20px"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:text="@string/wifipwd"
+                    android:textAllCaps="false" />
+
+                <EditText
+                    android:id="@+id/wifipwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="20px"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40px"
+                android:onClick="set"
+                android:text="@string/ok"
+                android:textAllCaps="false"></Button>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

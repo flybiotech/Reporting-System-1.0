@@ -13,23 +13,39 @@
 
 <resources>
   <string name="title_activity_print_preview">Предварительный просмотр печати</string>
-    <string name="paper_size">Размер бумаги</string>
-    <string name="lib_font"/>
+  <string name="title_activity_print_place_holder">Печать</string>
+  <string name="action_settings">Параметры</string>
+  <string name="print_preview_prompt">Представьте, что дальше появляется фантастическое изображение</string>
+  <string name="learn_about_mobile_print">Инструкции для печати</string>
+  <string name="support">Поддержка:</string>
+  <string name="paper_size">Размер бумаги</string>
+  <string name="paper_type">Тип бумаги</string>
+  <string name="lib_font"/>
 
   <string name="preview_spinner_4x5"> 10x13cm </string>
   <string name="preview_spinner_4x6"> 10x15cm </string>
   <string name="preview_spinner_5x7"> 13x18cm </string>
   <string name="preview_spinner_letter"> 21,59x27,94cm </string>
 
+  <string-array name="paper_type_array">
+    <item>Фотобумага</item>
+  </string-array>
+
     <!-- Print Preview -->
     <string name="print_preview_menu_help">Печать справки</string>
     <string name="print_preview_menu_print_service_plugins">Подключаемые модули услуг печати</string>
 
     <!-- Print Plugin installation -->
+  <string name="hp_print_plugin_alert_header">Подключаемый модуль HP Print</string>
+  <string name="install_hp_print_plugin_msg">У вас есть принтер HP? Чтобы добиться максимально высокого качества печати фотографий, установите подключаемый модуль HP Print.</string>
+  <string name="update_hp_print_plugin_msg">У вас есть принтер HP? Чтобы добиться максимально высокого качества печати фотографий, обновите подключаемый модуль HP Print.</string>
+  <string name="enable_hp_print_plugin_msg">Убедитесь в том, что подключаемый модуль HP Print активирован.</string>
 
     <!-- Print Plugin helper -->
+  <string name="hp_print_helper_header">Помощник службы печати</string>
+  <string name="install_print_plugin_msg">Чтобы добиться максимально высокого качества фотографий, установите и активируйте соответствующий подключаемый модуль для своего принтера.</string>
 
-    <!-- Print Service Plugin Information -->
+  <!-- Print Service Plugin Information -->
   <string name="title_activity_print_service_plugin_info">Информация об услугах печати</string>
   <string name="print_service_help_title_1">Получить подключаемый модуль услуг печати</string>
   <string name="print_service_help_msg_1">Для печати необходимо установить подключаемый модуль услуг печати. Для каждой марки принтера существует свой подключаемый модуль, который позволит выполнить печать с вашего мобильного устройства. Доступны также универсальные подключаемые модули услуг печати. Выберите наиболее подходящий подключаемый модуль. Дополнительные подключаемые модули печати можно добавить в любое время.</string>

@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,35 +25,39 @@ import com.shizhenbao.fragments.FragSetting;
 import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.SystemSet;
 import com.shizhenbao.util.Const;
+import com.shizhenbao.util.CopypPicturesUtils;
 import com.shizhenbao.util.Item;
+import com.shizhenbao.util.LogUtil;
 import com.shizhenbao.util.OneItem;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.litepal.LitePalApplication.getContext;
+
 public class MainActivity extends FragmentActivity implements View.OnClickListener{
     private TextView patientInfo,getImageInfo,printerInfo,casemanager,settingInfo;
-    private FragmentManager manager;
+//    private FragmentManager manager;
     private ViewPager mViewPager;
     private FragmentPagerAdapter mAdapter;
     private List<Fragment> mFragList = new ArrayList<Fragment>();
     private int mState=-1;
-    private static String TAG = "yumeng";
+    private static String TAG = "TAG_MainActivity";
     //再按一次退出程序
     private long exitTime = 0;
 
     List<Doctor> doctorList;
-
+    private CopypPicturesUtils copypPicturesUtils;//图片复制工具
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-            setContentView(R.layout.activity_home_layout);
-
-        doctorList= DataSupport.findAll(Doctor.class);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
+        setContentView(R.layout.activity_home_layout);
+        doctorList= LitePal.findAll(Doctor.class);
         if(new Item().system()){
             SystemSet s=new LoginRegister().getSystem();
             OneItem.getOneItem().setHospital_name(s.getHospital_name());
@@ -62,11 +67,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             OneItem.getOneItem().setSzb_wifi_user(s.getSzb_wifi_user());
             OneItem.getOneItem().setSzb_wifi_pwd(s.getSzb_wifi_pwd());
         }else {
-            Toast.makeText(this, "请在个人中心-系统设置处设置医院名称", Toast.LENGTH_SHORT).show();
+            MyToast.showToast(this, getString(R.string.setting_hospital_name));
+//            Toast.makeText(this, getString(R.string.setting_hospital_name), Toast.LENGTH_SHORT).show();
         }
         init();
         getPagerAdapters(mFragList);
+        getIntentData();
+    }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        getIntentData();
+    }
+    private void getIntentData(){
         Intent intent=getIntent();
         int canshu=  intent.getIntExtra("canshu",0);//默认为登记页面
         if(canshu==0){
@@ -75,7 +90,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }else if(canshu==3){
             switchState(3);//跳到系统中心fragment
             mViewPager.setCurrentItem(3);
-       }else if(canshu==2){//调到打印报告fragment
+        }else if(canshu==2){//调到打印报告fragment
             switchState(2);
             mViewPager.setCurrentItem(2);
         } else if (canshu == 1) {//跳到图像获取界面/
@@ -84,13 +99,25 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
 
     }
-
     @Override
     protected void onStart() {
         super.onStart();
-    }
 
+        copypPicturesUtils.initCopyPicture();
+    }
+    private void setKeyguardEnable(boolean enable) {
+        //disable
+        if (!enable) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+            return;
+        }
+        //enable
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+    }
     private void init() {
+        copypPicturesUtils = new CopypPicturesUtils(this);
         mViewPager = (ViewPager) findViewById(R.id.home_viewpager);
         patientInfo = (TextView) findViewById(R.id.textView_home_patientInfo);//患者信息
         getImageInfo = (TextView) findViewById(R.id.textView_home_getImageInfo);//获取图片信息
@@ -173,6 +200,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 switchState(4);
                 mViewPager.setCurrentItem(4);
                 break;
+            default:
+                break;
         }
 
     }
@@ -195,7 +224,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         casemanager.setSelected(false);
         settingInfo.setSelected(false);
 
-        Const.wifiMark = true;//标记wifi广播的发送
+//        Const.wifiMark = true;//标记wifi广播的发送
+
 
         switch (state) {
             case 0:
@@ -203,6 +233,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 patientInfo.setSelected(true);
                 //判断是不是从其他三个fragment 跳到 FragGetImage的
                 Const.isIntent = true;
+                OneItem.getOneItem().setViewPagerCount(0); //记录当前 是第几个 fragment
                 break;
             case 1:
                 getImageInfo.setTextColor(Color.RED);
@@ -212,17 +243,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 printerInfo.setTextColor(Color.RED);
                 printerInfo.setSelected(true);
                 Const.isIntent = true;
+                OneItem.getOneItem().setViewPagerCount(2); //记录当前 是第几个 fragment
                 break;
             case 3:
                 casemanager.setTextColor(Color.RED);
                 casemanager.setSelected(true);
                 Const.isIntent = true;
+                OneItem.getOneItem().setViewPagerCount(3); //记录当前 是第几个 fragment
                 break;
 
             case 4:
                 settingInfo.setTextColor(Color.RED);
                 settingInfo.setSelected(true);
                 Const.isIntent = true;
+                OneItem.getOneItem().setViewPagerCount(4); //记录当前 是第几个 fragment
                 break;
             default:
                 break;
@@ -234,7 +268,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 
                 if ((System.currentTimeMillis() - exitTime) > 1000) {
-                    Toast.makeText(this, R.string.quit_program, Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(this, getString(R.string.quit_program));
+//                    Toast.makeText(this, R.string.quit_program, Toast.LENGTH_SHORT).show();
                     exitTime = System.currentTimeMillis();
                 } else {
                     finish();

@@ -3,9 +3,9 @@
     android:useLevel="false">
     <solid android:color="#bbbbbb" /> <!-- 定义填充的颜色值 -->
     <stroke
-        android:width="0.5dp"
+        android:width="@dimen/dp_0_5"
         android:color="#aaaaaa" />
 
-    <corners android:radius="3dp" />
+    <corners android:radius="@dimen/dp_3" />
 
 </shape>

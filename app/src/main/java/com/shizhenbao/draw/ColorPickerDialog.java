@@ -22,8 +22,8 @@ import com.activity.R;
 import cn.forward.androids.utils.Util;
 
 public class ColorPickerDialog extends Dialog {
-    private final boolean debug = true;
-    private final String TAG = "ColorPicker";
+    private static final boolean debug = true;
+    private static final String TAG = "ColorPicker";
 
     Context context;
     private String title;//标题   
@@ -102,13 +102,13 @@ public class ColorPickerDialog extends Dialog {
             mPaint.setShader(s);
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setStrokeWidth(Util.dp2px(context, 30));//圆环大小
-            r = width / 2 * 0.7f - mPaint.getStrokeWidth() * 0.5f;
+            r = width / 2.0f * 0.7f - mPaint.getStrokeWidth() * 0.5f;
 
             //中心圆参数   
             mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             mCenterPaint.setColor(mInitialColor);
             mCenterPaint.setStrokeWidth(5);
-            centerRadius = (r - mPaint.getStrokeWidth() / 2) * 0.7f;
+            centerRadius = (r - mPaint.getStrokeWidth() / 2.0f) * 0.7f;
 
             //边框参数   
             mLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);

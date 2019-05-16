@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
+
+import com.util.SouthUtil;
 
 import static com.shizhenbao.draw.DrawUtil.GRAFFITI_PIXEL_UNIT;
 
@@ -39,6 +42,9 @@ public class GraffitiBitmap extends GraffitiSelectableItem {
         if (mBitmap == null) {
             return;
         }
+//        SouthUtil.convertDpToPixel(20.0,c);
+
+
         float size = getSize();
         rect.set(0, 0, (int) size, (int) (size * mBitmap.getHeight() / mBitmap.getWidth()));
         rect.left -= 10 * GRAFFITI_PIXEL_UNIT;
@@ -48,13 +54,17 @@ public class GraffitiBitmap extends GraffitiSelectableItem {
 
         mSrcRect.set(0, 0, mBitmap.getWidth(), mBitmap.getHeight());
         mDstRect.set(0, 0, (int) size, (int) (size * mBitmap.getHeight()) / mBitmap.getWidth());
-
+        Log.e("GraffitiBitmap1",size+",,mBitmap.getHeight : "+mBitmap.getHeight() +",,mBitmap.getWidth : " + mBitmap.getWidth()+",,,"+(size * mBitmap.getHeight()) / mBitmap.getWidth());
     }
 
     @Override
     public void draw(Canvas canvas, GraffitiView graffitiView, Paint paint) {
+        Log.e("GraffitiBitmap2",mSrcRect + ",,"+mDstRect);
         canvas.drawBitmap(mBitmap, mSrcRect, mDstRect, null);
     }
+
+
+
 
 }
 

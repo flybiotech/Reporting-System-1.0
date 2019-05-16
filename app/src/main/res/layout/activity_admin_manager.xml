@@ -12,9 +12,9 @@
         android:id="@+id/bt_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
         android:text="@string/super_manager_initial"
         android:textAllCaps="false" />
 
@@ -22,9 +22,9 @@
         android:id="@+id/bt_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
         android:text="@string/setting_removal"
         android:textAllCaps="false" />
 
@@ -32,9 +32,9 @@
         android:id="@+id/bt_sn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
         android:text="设置sn号"
         android:textAllCaps="false" />
 </LinearLayout>

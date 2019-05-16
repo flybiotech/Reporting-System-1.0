@@ -15,8 +15,8 @@ import com.shizhenbao.util.Const;
  */
 
 public class CustomConfirmDialog {
-    private Button btn_yuantu, btn_posi,btn_nega;
-    private TextView tvTitle;
+    private Button  btn_posi,btn_nega;
+//    private TextView tvTitle;
     private AlertDialog.Builder builder;
     private Context context;
     private AlertDialog alertDialog;
@@ -43,8 +43,8 @@ public class CustomConfirmDialog {
     }
 
     public void show(String title,View.OnClickListener positiveListener, View.OnClickListener negativeListener) {
-        String btnPosi = "删除";
-        String btnNega = "不删除";
+        String btnPosi = context.getResources().getString(R.string.image_manage_delete_ok);
+        String btnNega = context.getResources().getString(R.string.image_manage_delete_no);
         builder = new AlertDialog.Builder(context);
 
         View customView=getCustomView(title, btnPosi, btnNega, positiveListener, negativeListener);

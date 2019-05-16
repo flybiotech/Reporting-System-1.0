@@ -13,25 +13,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity.R;
+import com.shizhenbao.util.SPUtils;
 import com.shizhenbao.wifiinfo.WifiAutoConnectManager;
 import com.shizhenbao.util.Const;
+import com.shizhenbao.wifiinfo.WifiConnectManager;
+import com.util.SouthUtil;
 
 
 //wifi联网测试
-public class WIFITestActivity extends AppCompatActivity implements View.OnClickListener{
+public class WIFITestActivity extends AppCompatActivity implements View.OnClickListener,WifiConnectManager.WifiConnectListener {
     private TextView tv01,title_text;
-    private Button btnHP,btnSZB,btnG,btnStop,btn_left,btn_right;
+    private Button btnHP,btnSZB,btnStop,btn_left,btn_right;
     WifiManager wifiManager;
     WifiAutoConnectManager wifiAutoConnectManager;
-    private WifiInfo mWifiInfo;
-    private static String TAG = "TAG003";
-    boolean f=false; //y用在wifi连接上，
-    boolean f1=false;//用在4g网络连接上
+
+    private String SZB_WIFI_NAME;
+    private String SZB_WIFI_PASS;
+    private String HP_WIFI_NAME;
+    private String HP_WIFI_PASS;
+
+//    private String timeMsg = "";
+
+    //    private WifiInfo mWifiInfo;
+    private static String TAG = "TAG_1_";
+    //    boolean f=false; //y用在wifi连接上，
+//    boolean f1=false;//用在4g网络连接上
     ConnectivityManager mConnectivityManager;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -39,16 +51,20 @@ public class WIFITestActivity extends AppCompatActivity implements View.OnClickL
             int i=msg.what;
             switch (i) {
                 case 1://表示已经连接上了指定的网络
-                    Log.d(TAG, "WIFITestActivit  jiushi111111");
+
                     tv01.setText(getString(R.string.setting_link_wifi_success));
                     break;
 
-                case 2:
-                    Log.d(TAG, "WIFITestActivity :  ggafdsgasdfga");
+                case 2: //正在连接中
                     int j=msg.arg1;
-                    tv01.setText(getString(R.string.setting_link_wifi_test)+j/5*1.0f+" s");
+                    tv01.setText(getString(R.string.setting_link_wifi_test)+j/5.0f*1.0f+" s");
 
                     break;
+
+
+
+
+
 
                 case 3:
                     tv01.setText(getString(R.string.setting_link_wifi_faild));
@@ -56,15 +72,11 @@ public class WIFITestActivity extends AppCompatActivity implements View.OnClickL
                 case 4:
                     tv01.setText(getString(R.string.setting_link_network_stop));
                     break;
-                case 5:
-                    tv01.setText(getString(R.string.setting_link_network_success));
-                    break;
-                case 6:
-                    tv01.setText(getString(R.string.setting_link_network_faild));
-                    break;
 
                 case 7:
                     tv01.setText(getString(R.string.setting_link_test));
+                    break;
+                default:
                     break;
 
             }
@@ -75,6 +87,7 @@ public class WIFITestActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.wifitest);
         init();
 
@@ -96,167 +109,143 @@ public class WIFITestActivity extends AppCompatActivity implements View.OnClickL
         btnSZB.setOnClickListener(this);
 //        btnG.setOnClickListener(this);
         btnStop.setOnClickListener(this);
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        wifiAutoConnectManager = new WifiAutoConnectManager(wifiManager,this);
-        mWifiInfo = wifiManager.getConnectionInfo();
-        mConnectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+//        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//        wifiAutoConnectManager = new WifiAutoConnectManager(wifiManager,this);
+////        mWifiInfo = wifiManager.getConnectionInfo();
+//        mConnectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
 
     @Override
     public void onClick(View v) {
+        stopThread();
         switch (v.getId()) {
             case R.id.btn01_wifiTest: //连接惠普打印机
-                handlerMessagess(7);
 
-                if (!f) {
-                    wifiAutoConnectManager.connect(Const.nameHP, Const.passHP, Const.typeWifi);
-                    f = true;
-                    getWifiConnect(Const.nameHP);
-                } else {
-                    Toast.makeText(this,R.string.setting_link_wifi_testting, Toast.LENGTH_SHORT).show();
-                } 
-               
-                f1 = false;
-                
-                break;
 
-            case R.id.btn02_wifiTest://连接世珍宝
-                handlerMessagess(7);
-                if (!f) {
-                    wifiAutoConnectManager.connect( Const.nameShiZhenBao, Const.passShiZhenBao,Const.typeWifi);//连接视珍宝的wifi
-                    f = true;
-                    getWifiConnect(Const.nameShiZhenBao);
-                } else {
-                    Toast.makeText(this, R.string.setting_link_wifi_testting, Toast.LENGTH_SHORT).show();
-                }
-
-                f1 = false;
+                HP_WIFI_NAME = (String) SPUtils.get(this, Const.HP_WIFI_SSID_KEY, "");
+                HP_WIFI_PASS = (String) SPUtils.get(this, Const.HP_WIFI_PASS_KEY, "12345678");
+                WifiConnectManager.getInstance().connectWifi(HP_WIFI_NAME, HP_WIFI_PASS, Const.WIFI_TYPE_HP, this);
 
                 break;
 
-            case R.id.btn03_wifiTest://关闭wifi，连接3g/4g网络
-//                handlerMessagess(7);
-//                if (wifiManager.isWifiEnabled()) {
-//                wifiManager.setWifiEnabled(false);
-//            }
-//
-//                f = false;
-//                f1 = true;
-////                toggleMobileData(this,false);
-//                getMobileConnect();
-//                Toast.makeText(this, "正在等待3g/4g的网络连接", Toast.LENGTH_SHORT).show();
+            case R.id.btn02_wifiTest://连接主机
+                SZB_WIFI_NAME = (String) SPUtils.get(this, Const.SZB_WIFI_SSID_KEY, "");
+                SZB_WIFI_PASS = (String) SPUtils.get(this, Const.SZB_WIFI_PASS_KEY, "12345678");
+                WifiConnectManager.getInstance().connectWifi(SZB_WIFI_NAME, SZB_WIFI_PASS, Const.WIFI_TYPE_SZB, this);
+
                 break;
-            
+
+
             case R.id.btn04_wifiTest: //停止网络测试
-                f=false;
-                f1 = false;
-                Message msg = new Message();
-                msg.what=4;
-                handler.sendMessage(msg);
+                handler.sendEmptyMessage(4);
                 break;
 
             case R.id.btn_left:
                 finish();
                 break;
-           
+            default:
+                break;
+
         }
 
     }
 
-    public void   getWifiConnect(final String string) {
 
-        new Thread(new Runnable() {
+    private Thread mThread = null;
+
+    private void setConnectTime() {
+
+        mThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 int i=0;
-                while (f) {
+                while (true) {
+
                     try {
-                        Message msg2 = new Message();
-                        msg2.what=2;
-                        msg2.arg1 = i;
-                        handler.sendMessage(msg2);
-                        WifiInfo mWifiInfo=null;
-                        NetworkInfo info= mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                        if (info.isConnected()) {
-                            mWifiInfo = wifiManager.getConnectionInfo();
-                            String ssid = mWifiInfo.getSSID();
-                            if (ssid != null && ssid.equals("\""+string+"\"")) {
-                                Message msg = new Message();
-                                msg.what=1;
-                                handler.sendMessage(msg);
-                                f = false;
-                            }
-                        }
-                        if (i > 100) {
-                            Message msg = new Message();
-                            msg.what = 3;
-                            handler.sendMessage(msg);
-                            f = false;
-                        }
-                        i++;
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
+                        return;
                     }
+
+                    Message msg2 = new Message();
+                    msg2.what=2;
+                    msg2.arg1 = i;
+                    handler.sendMessage(msg2);
+                    i++;
+
+                }
+
+
+            }
+        });
+
+        mThread.start();
+
+
+    }
+
+    private void stopThread() {
+        if (mThread!=null)mThread.interrupt();
+    }
+
+
+    @Override
+    public void startWifiConnecting(String type) {
+        setConnectTime();
+        Log.i(TAG, "startWifiConnecting: 1 ");
+    }
+
+
+
+
+    @Override
+    public void wifiConnectSuccess(String type) {
+        stopThread();
+        handler.sendEmptyMessage(1);
+        Log.i(TAG, "wifiConnectSuccess: 2");
+    }
+
+    @Override
+    public void wifiConnectFalid(String type) {
+        stopThread();
+        handler.sendEmptyMessage(3);
+        Log.i(TAG, "wifiConnectFalid:3 ");
+    }
+
+    @Override
+    public void wifiCycleSearch(String type, boolean isSSID, int count) {
+        Log.i(TAG, "wifiCycleSearch: 4  isSSID = "+isSSID+"  , type = "+type);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isSSID) {
+                    if (type.equals(Const.WIFI_TYPE_HP)) {
+                        WifiConnectManager.getInstance().connectWithWpa(HP_WIFI_NAME, HP_WIFI_PASS);
+                    }else if (type.equals(Const.WIFI_TYPE_SZB)) {
+                        WifiConnectManager.getInstance().connectWithWpa(SZB_WIFI_NAME, SZB_WIFI_PASS);
+                    }
+
                 }
             }
-        }).start();
-        }
+        });
 
-        private void getMobileConnect(){
-            boolean isPad = isPad(this);
-            if (isPad) {
-                handlerMessagess(6);
-                return;
-            } else {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        int i=0;
-                        while (f1){
-                            NetworkInfo.State state = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-                            if(NetworkInfo.State.CONNECTED==state){
-                                Log.d(TAG, "GPRS网络已连接");
-                                Message msg = new Message();
-                                msg.what = 5;
-                                handler.sendMessage(msg);
-                                f = false;
-                            }
-                            if (i > 100) {
-                                Message msg = new Message();
-                                msg.what = 6;
-                                handler.sendMessage(msg);
-                                f1 = false;
-                            }
-                            i++;
-                            try {
-                                Thread.sleep(200);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-                }).start();
-
-            }
-
-
-        }
-
-    //判断当前设备能否打电话，是否有打电话的功能
-    public static boolean isPad(Activity activity) {
-        TelephonyManager telephony = (TelephonyManager)activity.getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephony.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
-            return true;
-        }else {
-            return false;
-        }
     }
-    private void handlerMessagess(int msg1) {
-        Message msg = new Message();
-        msg.what = msg1;
-        handler.sendMessage(msg);
+
+    @Override
+    public void wifiInputNameEmpty(String type) {
+        stopThread();
+        handler.sendEmptyMessage(3);
+        Log.i(TAG, "wifiInputNameEmpty: 5 ");
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        WifiConnectManager.getInstance().stopThreadConnectWifi();
+        stopThread();
     }
 }

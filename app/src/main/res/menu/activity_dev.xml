@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:title="@string/exit" />
+    <item
+        android:id="@+id/alarmset"
+        android:orderInCategory="100"
+        android:title="@string/alarmset" />
+    <item
+        android:id="@+id/timerset"
+        android:orderInCategory="100"
+        android:title="@string/timerset" />
+    <item
+        android:id="@+id/cancel"
+        android:orderInCategory="100"
+        android:title="@string/cancel" />
+</menu>

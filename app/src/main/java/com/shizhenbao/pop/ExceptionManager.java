@@ -1,12 +1,12 @@
 package com.shizhenbao.pop;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
 
 /**
  * Created by zhangbin on 2017/9/29.
  */
 
-public class ExceptionManager extends DataSupport {
+public class ExceptionManager extends LitePalSupport {
     private String loginName;
 
     public String getLoginName() {

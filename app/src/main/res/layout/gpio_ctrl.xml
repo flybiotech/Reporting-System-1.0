@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/RadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30.0px"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/switch11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="switch1"
+            android:text="@string/switch1"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/switch22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="switch2"
+            android:text="@string/switch2"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/switch33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="switch3"
+            android:text="@string/switch3"></RadioButton>
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0px"
+        android:layout_marginTop="30.0px"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="open"
+            android:text="@string/open"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50.0px"
+            android:onClick="close"
+            android:text="@string/close"></RadioButton>
+    </RadioGroup>
+
+    <TableLayout
+        android:id="@+id/ctltop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="set"
+                android:text="@string/button_ok"></Button>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="cancel"
+                android:text="@string/button_cancel"></Button>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

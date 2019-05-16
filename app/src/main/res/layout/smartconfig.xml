@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:id="@id/smartconfig"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10.0dip">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableRow
+                android:id="@id/ItemsmartUser"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@id/lblsmartSSID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12.0dip"
+                    android:text="@string/SSID"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@id/edtsmartSSID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableRow
+                android:id="@id/ItemsmartUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@id/lblsmartPassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12.0dip"
+                    android:text="@string/Password"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@id/edtsmartPassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:password="true"
+                    android:singleLine="true" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@id/ItemsmartUser"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/chkShowPsd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick_chkShowPsd"
+                    android:text="@string/showpsd" />
+
+            </TableRow>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@id/btnsmartStart"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.0"
+                android:onClick="onClick_BtnSmartStart"
+                android:text="@string/Start" />
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:id="@id/ItemsmartUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TableRow>
+
+        </TableLayout>
+
+        <EditText
+            android:id="@+id/memSmartConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:editable="false"
+            android:ems="10"
+            android:gravity="left|top"
+            android:inputType="textMultiLine"
+            android:minLines="6"
+            android:scrollbars="vertical"
+            android:textColor="@color/white">
+
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+</FrameLayout>

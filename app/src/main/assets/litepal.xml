@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
     <litepal>
     <dbname value="DoctorDB"></dbname>
-    <version value="32" ></version>
+    <version value="33" ></version>
     <list>
         <mapping class="com.shizhenbao.pop.Doctor"></mapping>
         <mapping class="com.shizhenbao.pop.User"></mapping>

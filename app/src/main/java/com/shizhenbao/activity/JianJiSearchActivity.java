@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,6 +32,7 @@ import com.shizhenbao.util.Const;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
 import com.util.AlignedTextUtils;
+import com.view.MyToast;
 
 import java.io.File;
 import java.io.Serializable;
@@ -77,6 +79,7 @@ public class JianJiSearchActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_jian_ji_search);
         initView();
         initTextView();
@@ -156,7 +159,8 @@ public class JianJiSearchActivity extends AppCompatActivity implements View.OnCl
 //                    lv_add(userCaseList);
                     lv_list(0);
                 } else {
-                    Toast.makeText(this, getString(R.string.case_patient_nothing), Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(this, getString(R.string.case_patient_nothing));
+//                    Toast.makeText(this, getString(R.string.case_patient_nothing), Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -171,6 +175,8 @@ public class JianJiSearchActivity extends AppCompatActivity implements View.OnCl
             case R.id.edit_casesearch_dateend:
                 endDate.setText("");
                 setDateDialog(endDate);
+                break;
+            default:
                 break;
         }
     }
@@ -266,7 +272,9 @@ public class JianJiSearchActivity extends AppCompatActivity implements View.OnCl
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        if (dt1 == null) {
+            return 0;
+        }
         return dt1.getTime();
     }
 
@@ -357,7 +365,8 @@ public class JianJiSearchActivity extends AppCompatActivity implements View.OnCl
 //                            dialogset=1;
                             lv_list(num);
                         }else {
-                            Toast.makeText(getContext(), getString(R.string.image_patients_first), Toast.LENGTH_SHORT).show();
+                            MyToast.showToast(getContext(), getString(R.string.image_patients_first));
+//                            Toast.makeText(getContext(), getString(R.string.image_patients_first), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -370,7 +379,8 @@ public class JianJiSearchActivity extends AppCompatActivity implements View.OnCl
                             lv_list(num);
                         }else {
                             num--;
-                            Toast.makeText(getContext(), getString(R.string.image_patients_last), Toast.LENGTH_SHORT).show();
+                            MyToast.showToast(getContext(), getString(R.string.image_patients_last));
+//                            Toast.makeText(getContext(), getString(R.string.image_patients_last), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

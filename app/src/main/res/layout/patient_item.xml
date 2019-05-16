@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    android:paddingBottom="10dp">
+    android:paddingBottom="@dimen/dp_10">
 
 
     <TableLayout
@@ -17,52 +18,52 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
         </TableRow>
 
@@ -74,10 +75,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_id"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_bianhao"
@@ -87,7 +88,7 @@
                 android:background="@drawable/edittext_select"
                 android:enabled="false"
                 android:hint="编号"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="1"
                 android:textAllCaps="false" />
 
@@ -96,27 +97,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_name"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_djName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_required"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:textColorHint="@color/lightRed" />
+                android:textColorHint="@color/lightRed"
+                />
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
 
@@ -128,9 +130,9 @@
                 android:layout_height="wrap_content"
                 android:layout_span="2"
                 android:padding="2dp"
-                android:text="@string/patient_telephone"
+                android:text="@string/case_patient_telephone"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_djPhone"
@@ -138,42 +140,44 @@
                 android:layout_height="wrap_content"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
+                android:textColorHint="@color/lightRed"
                 android:hint="@string/patient_required"
                 android:inputType="number"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:textColorHint="@color/lightRed" />
+                android:maxLength="15"
+                />
 
             <TextView
                 android:id="@+id/tv_patient_04"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_age"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_djAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
-                android:hint="@string/patient_required"
+                android:hint="@string/patient_age"
                 android:inputType="number"
                 android:maxLength="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:textColorHint="@color/lightRed" />
+                />
 
 
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
 
@@ -184,10 +188,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_medical_record_number"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_CaseNumbe"
@@ -196,36 +200,42 @@
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_record_num_hint"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"
+                android:inputType="text"
+                />
 
             <TextView
                 android:id="@+id/tv_patient_06"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_parity_num"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_childCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_parity_num_hint"
                 android:inputType="number"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"/>
 
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
         <TableRow>
@@ -235,10 +245,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_occupation"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_work"
@@ -247,34 +257,40 @@
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_occupation_hint"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"
+                android:inputType="text"/>
 
             <TextView
                 android:id="@+id/tv_patient_08"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_smoking_history"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_smokeTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_smoking_history_hint"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"
+                android:inputType="text"/>
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
         <TableRow>
@@ -284,10 +300,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_abortion_num"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_abortionCount"
@@ -297,36 +313,40 @@
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_abortion_num_hint"
                 android:inputType="number"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"/>
 
             <TextView
                 android:id="@+id/tv_patient_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_sex_num"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_sexPartnerCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_sex_num_hint"
                 android:inputType="number"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"/>
 
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
         <TableRow>
@@ -336,10 +356,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_gravidity_num"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_pregnantCount"
@@ -349,36 +369,40 @@
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_gravidity_num_hint"
                 android:inputType="number"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"/>
 
 
             <TextView
                 android:id="@+id/tv_patient_12"
-                android:layout_width="100dp"
+                android:layout_width="@dimen/dp_100"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
                 android:padding="2dp"
                 android:text="@string/patient_social_security_number"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_ssNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_security_num_hint"
                 android:inputType="number"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"/>
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
         <TableRow>
@@ -388,28 +412,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_HCG"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_HCG"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="8"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_HCG_hint"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"
+                android:inputType="text"/>
 
         </TableRow>
 
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff"
             android:textAllCaps="false" />
 
@@ -421,27 +448,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_ID"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_idNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="8"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_ID_hint"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:maxLength="30"
+                />
 
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff"
             android:textAllCaps="false" />
 
@@ -452,28 +482,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_check_notes"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <EditText
                 android:id="@+id/edit_patient_checkNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="8"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_check_notes_hint"
                 android:inputType="textMultiLine"
-                android:padding="2dp"
-                android:textAllCaps="false" />
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"/>
 
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
 
@@ -484,10 +516,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_blood_type"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <Spinner
                 android:id="@+id/spin_patient_bloodType"
@@ -495,7 +527,7 @@
                 android:layout_height="wrap_content"
                 android:layout_span="3"
                 android:entries="@array/bloodType"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"></Spinner>
 
             <TextView
@@ -503,10 +535,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_contraceptive_methods"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <Spinner
                 android:id="@+id/spin_patient_birthControlMode"
@@ -514,13 +546,13 @@
                 android:layout_height="wrap_content"
                 android:layout_span="3"
                 android:entries="@array/birthControlMode"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"></Spinner>
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
 
@@ -531,9 +563,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_marriage"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <Spinner
                 android:id="@+id/spin_marry"
@@ -541,7 +573,7 @@
                 android:layout_height="wrap_content"
                 android:layout_span="3"
                 android:entries="@array/marry"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"></Spinner>
 
             <TextView
@@ -549,10 +581,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:text="@string/patient_source"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <Spinner
                 android:id="@+id/spin_source"
@@ -560,20 +592,20 @@
                 android:layout_height="wrap_content"
                 android:layout_span="3"
                 android:entries="@array/languages"
-                android:padding="2dp"
+                android:padding="@dimen/dp_2"
                 android:textAllCaps="false"></Spinner>
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="120dp"
+            android:layout_height="@dimen/dp_120"
             android:background="#fff" />
 
         <TableRow>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/dp_1"
                 android:layout_span="1"
                 android:background="#fff" />
 
@@ -585,11 +617,12 @@
                 android:background="@drawable/btn_bg"
                 android:gravity="center"
                 android:text="@string/patient_clear"
+                android:textSize="@dimen/dp_15"
                 android:textAllCaps="false" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/dp_1"
                 android:layout_span="1"
                 android:background="#fff" />
 
@@ -601,11 +634,12 @@
                 android:background="@drawable/btn_bg"
                 android:gravity="center"
                 android:text="@string/patient_save"
+                android:textSize="@dimen/dp_15"
                 android:textAllCaps="false" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/dp_1"
                 android:layout_span="1"
                 android:background="#fff" />
 
@@ -617,11 +651,12 @@
                 android:background="@drawable/btn_bg"
                 android:gravity="center"
                 android:text="@string/patient_add_new"
+                android:textSize="@dimen/dp_15"
                 android:textAllCaps="false" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/dp_1"
                 android:layout_span="1"
                 android:background="#fff" />
 

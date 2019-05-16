@@ -79,7 +79,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="17dp"
         android:layout_alignParentTop="true"
-        app:backgroundTint="@android:color/holo_orange_light"
+        app:backgroundTint="@android:color/black"
         android:clickable="true"
         android:src="@drawable/ic_print_preview_print_button"
         android:scaleType="fitCenter"/>

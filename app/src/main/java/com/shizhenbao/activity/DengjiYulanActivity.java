@@ -1,23 +1,18 @@
 package com.shizhenbao.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.activity.R;
-import com.itextpdf.text.DocumentException;
-import com.shizhenbao.adapter.SelectAdapter;
 import com.shizhenbao.adapter.SelectAdapter1;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.pop.User;
@@ -25,10 +20,8 @@ import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
 import com.shizhenbao.util.SwipeRefreshView;
 
+import org.litepal.LitePal;
 
-import org.litepal.crud.DataSupport;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +29,10 @@ public class DengjiYulanActivity extends AppCompatActivity {
     private ListView lv_dengjiyulan;
 //    private List<String>list;
 //    List<User> list1 = null;//查询该医生所有的病人信息
-    private User user=null;
+//    private User user=null;
     private TextView tv_title,tv_empty;
     private Button bt_left,bt_right;
-    List<User>list2= DataSupport.where("is_diag=?","2").find(User.class);//查询已生成报告的报告
+    List<User>list2= LitePal.where("is_diag=?","2").find(User.class);//查询已生成报告的报告
     boolean isAdmin=true;//判断是否为超级用户
     private static List<Item> list;//正序数据源
     private static List<Item> list1;//倒序数据源
@@ -52,12 +45,13 @@ public class DengjiYulanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_dengji_yulan);
         initView();
         Intent intent=getIntent();
         isAdmin= intent.getBooleanExtra("msg",false);//为真时为超级用户，为false时为普通用户
         //查询该医生所有的病人信息
-//        list1= DataSupport.where("operId=?", String.valueOf(new LoginRegister().getDoctor(OneItem.getOneItem().getName()).getdId())).find(User.class);
+//        list1= LitePal.where("operId=?", String.valueOf(new LoginRegister().getDoctor(OneItem.getOneItem().getName()).getdId())).find(User.class);
 
         if(isAdmin){
             initDateSUP();//超级用户数据源
@@ -93,7 +87,7 @@ public class DengjiYulanActivity extends AppCompatActivity {
     private void initDate() {//普通用户数据源
         list=new ArrayList<>();
         list1=new ArrayList<>();
-        userlist=DataSupport.where("operId=?", String.valueOf(new LoginRegister().getDoctor(OneItem.getOneItem().getName()).getdId())).find(User.class);
+        userlist=LitePal.where("operId=?", String.valueOf(new LoginRegister().getDoctor(OneItem.getOneItem().getName()).getdId())).find(User.class);
         for(int j=0;j<userlist.size();j++){
             if(userlist.get(j).getIs_diag()==2){
                 Item item = new Item();
@@ -133,7 +127,7 @@ public class DengjiYulanActivity extends AppCompatActivity {
     private void initDateSUP() {//超级用户数据源
         list=new ArrayList<>();
         list1=new ArrayList<>();
-        userlist=DataSupport.where("is_diag=?","2").find(User.class);
+        userlist=LitePal.where("is_diag=?","2").find(User.class);
         for (int j = 0; j < userlist.size(); j++) {
             Item item = new Item();
             item.setpId(userlist.get(j).getpId());

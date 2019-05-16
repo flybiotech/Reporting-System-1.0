@@ -41,7 +41,7 @@ public class DeviceOfSize  {
         int screenHeight = (int)(height/density);//屏幕高度(dp)
         Logger.e("Android设备的相关信息 "+"  屏幕宽度(像素) = "+width+"   屏幕高度(像素) = "+height+
                 "  屏幕宽度(dp) = "+screenWidth+"  屏幕高度 = "+screenHeight);
-        Log.e("PRETTY_LOGGER", "getMetric: "+ "  屏幕密度(density) = " +density +"  屏幕密度DPI = "+densityDpi );
+
     }
 
 }

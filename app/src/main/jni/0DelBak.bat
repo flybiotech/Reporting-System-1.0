@@ -1,0 +1,10 @@
+del *.obj /s
+del *.o /s
+del *.~h /s
+del *.~cpp /s
+del *.~ /s
+del *.~?? /s
+del *.dcu /s
+del *.user /s
+del *.ncb /s
+del *.suo /s/a

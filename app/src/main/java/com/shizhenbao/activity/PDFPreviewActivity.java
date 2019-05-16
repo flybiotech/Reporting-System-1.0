@@ -1,68 +1,77 @@
 package com.shizhenbao.activity;
 
+import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.print.PrintJob;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.activity.R;
-import com.joanzapata.pdfview.PDFView;
-import com.joanzapata.pdfview.listener.OnDrawListener;
-import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
-import com.joanzapata.pdfview.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.github.barteksc.pdfviewer.util.FitPolicy;
+import com.hp.mss.hpprint.util.PItem;
 import com.orhanobut.logger.Logger;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.printer.HPprinter;
 import com.shizhenbao.util.Const;
-import com.shizhenbao.util.LogUtil;
+import com.shizhenbao.util.InstallApkUtils;
 import com.shizhenbao.util.OneItem;
-import com.util.MyView;
+import com.shizhenbao.util.SPUtils;
+import com.shizhenbao.wifiinfo.WifiConnectManager;
+import com.util.FileUtil;
+import com.util.SouthUtil;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+
+import org.litepal.LitePal;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
-public class PDFPreviewActivity extends AppCompatActivity implements OnPageChangeListener,
-        OnLoadCompleteListener, OnDrawListener{
+public class PDFPreviewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener,
+        OnPageErrorListener, WifiConnectManager.WifiConnectListener {
 
-    private PDFView pdfView ;
+
+    private PDFView pdfView;
     private FloatingActionButton btnPrint;
     private String pathName;
     private HPprinter hpPrint;
+    private PrintJob printJob;
+    private InstallApkUtils installApkUtils;
+    private FileUtil fileUtil;
+
+    private String HP_WIFI_SSID = "";
+    private String HP_WIFI_PASS = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_pdfpreview);
-        pdfView= (PDFView) findViewById(R.id.pdf);
+        initView();
 
-        btnPrint = (FloatingActionButton) findViewById(R.id.printBtn_pdf);
         hpPrint = new HPprinter(this);
-        Intent intent1=getIntent();
-        pathName= intent1.getStringExtra("msg");
+        Intent intent1 = getIntent();
+        pathName = intent1.getStringExtra("msg");
         //跳到打印机的按钮{
         btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,47 +84,81 @@ public class PDFPreviewActivity extends AppCompatActivity implements OnPageChang
         displayFromFile(new File(pathName));
 
     }
-    private void displayFromFile( File file ) {
+
+    private void initView() {
+        pdfView = (PDFView) findViewById(R.id.pdfView);
+        btnPrint = (FloatingActionButton) findViewById(R.id.printBtn_pdf);
+        installApkUtils = new InstallApkUtils(this);
+        fileUtil = new FileUtil();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        wifiConnect();
+        KeyguardManager mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        boolean flag = mKeyguardManager.inKeyguardRestrictedInputMode();
+        if (!flag) {
+            printJob = PItem.getOneItem().getPrintJob();
+            if (printJob != null) {
+                finish();
+            }
+        }
+    }
+
+    private void wifiConnect() {
+        HP_WIFI_SSID = (String) SPUtils.get(this, Const.HP_WIFI_SSID_KEY, "");
+        HP_WIFI_PASS = (String) SPUtils.get(this, Const.HP_WIFI_PASS_KEY, "");
+        Log.e("TAG_1", "wifiConnect: ssid = "+ HP_WIFI_SSID +" ,pass = "+HP_WIFI_PASS+" , WIFI_TYPE_HP = "+Const.WIFI_TYPE_HP );
+        WifiConnectManager.getInstance().connectWifi(HP_WIFI_SSID, HP_WIFI_PASS, Const.WIFI_TYPE_HP_PDF, this);
+    }
+
+
+
+
+    private void displayFromFile(File file ) {
         if (!file.exists()) {
-            Toast.makeText(this, R.string.print_Report_Non_existent, Toast.LENGTH_SHORT).show();
+            MyToast.showToast(this,getString(R.string.print_Report_Non_existent));
+//            SouthUtil.showToast(this,getString(R.string.print_Report_Non_existent));
             return;
         }
-        
+
         pdfView.fromFile(file)   //设置pdf文件地址
-                .defaultPage(1)         //设置默认显示第1页
-                .onPageChange(this)     //设置翻页监听
-                .onLoad(this)           //设置加载监听
-                .onDraw(this)            //绘图监听
-                .showMinimap(false)     //pdf放大的时候，是否在屏幕的右上角生成小地图
-                .enableSwipe(true)   //是否允许翻页，默认是允许翻
-                // .pages( 2 , 3 , 4 , 5  )  //把2 , 3 , 4 , 5 过滤掉
+                .defaultPage(0)
+                .onPageChange(this)
+                .enableAnnotationRendering(true)
+                .onLoad(this)
+                .scrollHandle(new DefaultScrollHandle(this))
+                .spacing(10) // in dp
+                .onPageError(this)
+                .pageFitPolicy(FitPolicy.BOTH)
                 .load();
     }
+
     /**
      * 翻页回调
+     *
      * @param page
      * @param pageCount
      */
     @Override
     public void onPageChanged(int page, int pageCount) {
-        Toast.makeText( this , "page= " + page +
-                " pageCount= " + pageCount , Toast.LENGTH_SHORT).show();
+        MyToast.showToast(this,"page= " + page + " pageCount= " + pageCount);
+//        SouthUtil.showToast(this,"page= " + page + " pageCount= " + pageCount);
     }
 
     /**
      * 加载完成回调
-     * @param nbPages  总共的页数
+     *
+     * @param nbPages 总共的页数
      */
     @Override
     public void loadComplete(int nbPages) {
-        Toast.makeText( this ,  getString(R.string.print_Report_loading_success)+ nbPages , Toast.LENGTH_SHORT).show();
+        MyToast.showToast(this,getString(R.string.print_Report_loading_success));
+//        SouthUtil.showToast(this,getString(R.string.print_Report_loading_success));
     }
 
-    @Override
-    public void onLayerDrawn(Canvas canvas, float pageWidth, float pageHeight, int displayedPage) {
-
-    }
-//打印机
+    //打印机
     private void isPkgInstalled(final String pkgName, final String pdfPath) {
         PackageInfo packageInfo = null;//管理已安装app包名
         try {
@@ -124,56 +167,55 @@ public class PDFPreviewActivity extends AppCompatActivity implements OnPageChang
             packageInfo = null;
             e.printStackTrace();
         }
-        if (packageInfo == null)  {//判断是否安装惠普打印机服务插件
+        if (packageInfo == null) {//判断是否安装惠普打印机服务插件
             String path = Environment.getExternalStorageDirectory() + "/hp.apk";//打印服务插件本地路径
             try {
                 File file = new File(path);
                 if (!file.exists()) {
-                    copyAPK2SD(path);//将项目中的服务插件复制到本地路径下
+                    installApkUtils.copyAPK2SD(path);//将项目中的服务插件复制到本地路径下
                 }
-                installApk(this,path);
+                installApk(this, path);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            final Doctor doctor_name=new LoginRegister().getDoctor(OneItem.getOneItem().getName());
+            final Doctor doctor_name = new LoginRegister().getDoctor(OneItem.getOneItem().getName());
 
-            if(OneItem.getOneItem().getFile()==null||OneItem.getOneItem().getFile().equals("")){//判断文件不存在
-                List<User> userlist= DataSupport.findAll(User.class);
-                File f=null;
-                if(userlist.size()>0){
+            if (OneItem.getOneItem().getFile() == null) {//判断文件不存在
+                List<User> userlist = LitePal.findAll(User.class);
+                File f = null;
+                if (userlist.size() > 0) {
                     //当程序刚刚登记第一个用户，还未来得及生成报告  就点击打印报告的按钮时，这个时候是pdf地址是为空的
                     if (userlist.get(userlist.size() - 1).getPdfPath() == null) {
 //                        Toast.makeText(PDFPreviewActivity.this, R.string.print_Report_make, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Logger.t("printrt").e("用户的人数： "+userlist.size());
-                    for(int i=0;i<userlist.size();i++){
+                    Logger.t("printrt").e("用户的人数： " + userlist.size());
+                    for (int i = 0; i < userlist.size(); i++) {
 
-                        f=new File(userlist.get(userlist.size()-1).getPdfPath());
+                        f = new File(userlist.get(userlist.size() - 1).getPdfPath());
                     }
-                    if(getFileSize(f)!=0){
-                        if (pdfPath != null&&doctor_name.getEdit_hos_name()!=null) {
+                    if (fileUtil.getFileSize(f) != 0) {
+                        if (pdfPath != null && doctor_name.getEdit_hos_name() != null) {
                             hpPrint.continueButtonPrint(pdfPath);
+
                         } else {
-                            Toast.makeText(PDFPreviewActivity.this,R.string.print_Report_nothing, Toast.LENGTH_SHORT).show();
+                            MyToast.showToast(this,getString(R.string.print_Report_nothing));
+//                            SouthUtil.showToast(this,getString(R.string.print_Report_nothing));
                         }
                     }
                 }
 
-            }
+            } else {
 
-            else {
+                if (fileUtil.getFileSize(OneItem.getOneItem().getFile()) != 0) {
 
-                if(getFileSize(OneItem.getOneItem().getFile())!=0){
-
-                    if (pdfPath != null&&doctor_name.getEdit_hos_name()!=null) {
+                    if (pdfPath != null && doctor_name.getEdit_hos_name() != null) {
 
                         hpPrint.continueButtonPrint(pdfPath);
-                    }
-
-                    else {
-                        Toast.makeText(this, R.string.print_Report_nothing, Toast.LENGTH_SHORT).show();
+                    } else {
+                        MyToast.showToast(this,getString(R.string.print_Report_nothing));
+//                        SouthUtil.showToast(this,getString(R.string.print_Report_nothing));
                     }
 
 
@@ -182,89 +224,77 @@ public class PDFPreviewActivity extends AppCompatActivity implements OnPageChang
         }
     }
 
+    //根据android 版本选择不同的安装方式
+    private void installApk(Context context, String fileApk) {
 
-    /**
-     * 得到文件大小
-     */
-    public  long getFileSize(File file){
-        long size =0;
-        if(file.exists()){
-            FileInputStream fis=null;
-            try {
-                fis=new FileInputStream(file);
-                size=fis.available();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return size;
-    }
-
-
-
-    //安装apk
-    private  void installApk(Context context, String fileApk) {
-        //    通过隐式意图调用系统安装程序安装APK
-        Intent install = new Intent(Intent.ACTION_VIEW);
-//        DownloadManager dManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-//        //获取下载地址的uri   downloadFileUri: content://downloads/all_downloads/38
-//        Uri downloadFileUri = dManager.getUriForDownloadedFile(downloadApkId);
-        // 由于没有在Activity环境下启动Activity,设置下面的标签
-        install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        Log.e(TAG, "downloadFileUri: "+downloadFileUri);
         if (fileApk != null) {
             File file = new File(fileApk);
-            if (Build.VERSION.SDK_INT >= 24) {
-                Uri apkUri =
-                        FileProvider.getUriForFile(context,context.getPackageName()+ ".fileprovider", file);
-//                content://com.qcam.fileprovider/external_files/Download/update.apk
-//                Log.e(TAG, "android 7.0 : apkUri "+apkUri );
-                //添加这一句表示对目标应用临时授权该Uri所代表的文件
-                install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                install.setDataAndType(apkUri, "application/vnd.android.package-archive");
-                context.startActivity(install);
-            } else {
-//                install.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
-                //Uri.fromFile(file) : file:///storage/emulated/0/Download/update.apk
-//                Log.e(TAG, "Uri.fromFile(file) : "+Uri.fromFile(file) );
-
+            if (Build.VERSION.SDK_INT >= 24) {//android 7.0以上
+                installApkUtils.initInstallAPK();
+            }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){//Android 8.0以上，增加了一个未知来源安装的权限
+                if(!getPackageManager().canRequestPackageInstalls()){
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
+                    startActivityForResult(intent,1);
+                }else {
+                    installApkUtils.initInstallAPK();
+                }
+            } else{//android 6.0以下直接安装
+                Intent install = new Intent(Intent.ACTION_VIEW);
+                install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 install.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
                 context.startActivity(install);
             }
         } else {
-            Toast.makeText(context, R.string.print_download_faild, Toast.LENGTH_SHORT).show();
+            MyToast.showToast(this,getString(R.string.print_download_faild));
+//            SouthUtil.showToast(this, getString(R.string.print_download_faild));
         }
     }
 
+    @Override
+    public void onPageError(int page, Throwable t) {
 
-    /**
-     * 拷贝assets文件夹的APK插件到SD
-     *
-     * @param strOutFileName
-     * @throws IOException
-     */
-    private void copyAPK2SD(String strOutFileName) throws IOException {
-        LogUtil.createDipPath(strOutFileName);
-        InputStream myInput = null;
-        OutputStream myOutput = null;
-        try {
-            myInput =getAssets().open("hp.apk");
-            myOutput = new FileOutputStream(strOutFileName);
-            byte[] buffer = new byte[1024];
-            int length = myInput.read(buffer);
-            while (length > 0) {
-                myOutput.write(buffer, 0, length);
-                length = myInput.read(buffer);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            myOutput.flush();
-            myInput.close();
-            myOutput.close();
-        }
     }
 
+    @Override
+    public void startWifiConnecting(String type) {
+
+    }
+
+    @Override
+    public void wifiConnectSuccess(String type) {
+
+    }
+
+    @Override
+    public void wifiConnectFalid(String type) {
+
+    }
+
+    @Override
+    public void wifiCycleSearch(String type, boolean isSSID, int count) {
+
+        if (type.equals(Const.WIFI_TYPE_HP_PDF)) {
+           runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (isSSID) {
+                        WifiConnectManager.getInstance().connectWithWpa(HP_WIFI_SSID, HP_WIFI_PASS);
+                    } else {
+                        MyToast.showToast(PDFPreviewActivity.this,getString(R.string.wifiFailMsgprint));
+//                        SouthUtil.showToast(PDFPreviewActivity.this, getString(R.string.wifiFailMsgprint));
+                    }
+                }
+            });
+
+
+        }
+
+
+
+    }
+
+    @Override
+    public void wifiInputNameEmpty(String type) {
+
+    }
 }

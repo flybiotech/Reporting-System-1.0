@@ -52,27 +52,19 @@ public class CreateFileConstant {
         }
     }
     public void initCreateUser(User user, String UserPath){//当病人登记后创建该患者的文件夹
-        File appDir = new File(Environment.getExternalStorageDirectory(),user.getGatherPath()+getCurrentDate()+"_"+getCurrentTime()+"_"+UserPath);
+        File appDir = new File(Environment.getExternalStorageDirectory(),user.getGatherPath()+OneItem.getOneItem().getName()+"/"+getCurrentDate()+"/"+getCurrentTime()+"_"+UserPath);
         if (!appDir.exists()){
             appDir.mkdirs();
         }
-        user.setGatherPath(Environment.getExternalStorageDirectory()+user.getGatherPath()+getCurrentDate()+"_"+getCurrentTime()+"_"+UserPath);
-        user.save();
-    }
-    public void initCreateUserPHOTOS(User user, String s, String photos) {
-        File appDir = new File(Environment.getExternalStorageDirectory(),OneItem.getOneItem().getGather_path()+"/"+getCurrentDate()+"_"+getCurrentTime()+"_"+s+"/"+photos);
-        if (!appDir.exists()){
-            appDir.mkdirs();
-        }
-        user.setCutPath(Environment.getExternalStorageDirectory()+"/"+user.getGatherPath()+"/"+getCurrentDate()+"_"+getCurrentTime()+"_"+s+"/"+photos);
+        user.setGatherPath(Environment.getExternalStorageDirectory()+user.getGatherPath()+OneItem.getOneItem().getName()+"/"+getCurrentDate()+"/"+getCurrentTime()+"_"+UserPath);
         user.save();
     }
     public void initCreateCutPath(User user,String UserPath,String ShowPath){//创建医生剪辑图片的文件夹
-        File appDir = new File(Environment.getExternalStorageDirectory(),OneItem.getOneItem().getGather_path()+"/"+getCurrentDate()+"_"+getCurrentTime()+"_"+UserPath+"/"+ShowPath);
+        File appDir = new File(Environment.getExternalStorageDirectory(),OneItem.getOneItem().getGather_path()+"/"+OneItem.getOneItem().getName()+"/"+getCurrentDate()+"/"+getCurrentTime()+"_"+UserPath+"/"+ShowPath);
         if (!appDir.exists()){
             appDir.mkdirs();
         }
-        user.setCutPath(Environment.getExternalStorageDirectory()+"/"+user.getGatherPath()+"/"+getCurrentDate()+"_"+getCurrentTime()+"_"+UserPath+"/"+ShowPath);
+        user.setCutPath(Environment.getExternalStorageDirectory()+"/"+user.getGatherPath()+"/"+OneItem.getOneItem().getName()+"/"+getCurrentDate()+"/"+getCurrentTime()+"_"+UserPath+"/"+ShowPath);
         user.save();
     }
     //患者登记的时间 格式 2017-5-25
@@ -83,7 +75,7 @@ public class CreateFileConstant {
         int day=calendar.get(Calendar.DAY_OF_MONTH);
         return year + "-" + (1 + month) + "-" + day;
     }
-    //患者等级的时间 格式 2017:5:25
+    //患者等记的时间 格式 2017:5:25
     public static String getCurrentTime() {
         Calendar calendar = Calendar.getInstance();
         int hour=calendar.get(Calendar.HOUR_OF_DAY);
@@ -103,6 +95,5 @@ public class CreateFileConstant {
         }
         return createFileConstant;
     }
-
 
 }

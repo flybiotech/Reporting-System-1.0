@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,28 +16,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity.R;
-import com.shizhenbao.db.Backup;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.pop.Doctor;
+import com.shizhenbao.util.BackupsUtils;
 import com.shizhenbao.util.OneItem;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GuanliyonghuActivity extends AppCompatActivity {
     private ListView lv;
-    List<Doctor>doctorList= DataSupport.findAll(Doctor.class);
+    List<Doctor>doctorList= LitePal.findAll(Doctor.class);
     List<String>list;
     private ArrayAdapter adapter;
     boolean in;
     private TextView textView;
     private Button bt_left,bt_right;
     private Doctor doc;
+    private BackupsUtils backupsUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_guanliyonghu);
         initView();
         in=new LoginRegister().getDoctor(OneItem.getOneItem().getName()).isdAdmin();
@@ -46,6 +51,7 @@ public class GuanliyonghuActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        backupsUtils = new BackupsUtils(this);
         lv= (ListView) findViewById(R.id.lv_yonghu);
         textView= (TextView) findViewById(R.id.title_text);
         textView.setText(getString(R.string.setting_User_management));
@@ -76,23 +82,29 @@ public class GuanliyonghuActivity extends AppCompatActivity {
                                if(in){//如果为超级用户可以修改
                                     doc.setdPassword("123456");
                                    doc.save();
-                                   new Backup(GuanliyonghuActivity.this,"111").initBackDoctor();
-                                   Toast.makeText(GuanliyonghuActivity.this, R.string.setting_Restore_initial_password_success, Toast.LENGTH_SHORT).show();
+                                   backupsUtils.initBackUpDoctor(1);
+                                   MyToast.showToast(GuanliyonghuActivity.this, getString(R.string.setting_Restore_initial_password_success));
+//                                   Toast.makeText(GuanliyonghuActivity.this, R.string.setting_Restore_initial_password_success, Toast.LENGTH_SHORT).show();
                                }else {//普通用户不可以
-                                   Toast.makeText(GuanliyonghuActivity.this, R.string.setting_faild_Jurisdiction, Toast.LENGTH_SHORT).show();
+                                   MyToast.showToast(GuanliyonghuActivity.this, getString(R.string.setting_faild_Jurisdiction));
+//                                   Toast.makeText(GuanliyonghuActivity.this, R.string.setting_faild_Jurisdiction, Toast.LENGTH_SHORT).show();
                                }
                                break;
                            case 1://删除所选项
                                if(in){
                                    if(!list.get(i).equals("Admin")){
                                        dialogViewDelete(i);
-                                       new Backup(GuanliyonghuActivity.this,"111").initBackDoctor();
+                                       backupsUtils.initBackUpDoctor(1);
                                    }else {
-                                       Toast.makeText(GuanliyonghuActivity.this,R.string.setting_faild_Admin, Toast.LENGTH_SHORT).show();
+                                       MyToast.showToast(GuanliyonghuActivity.this, getString(R.string.setting_faild_Admin));
+//                                       Toast.makeText(GuanliyonghuActivity.this,R.string.setting_faild_Admin, Toast.LENGTH_SHORT).show();
                                    }
                                }else {
-                                   Toast.makeText(GuanliyonghuActivity.this, R.string.setting_faild_Jurisdiction, Toast.LENGTH_SHORT).show();
+                                   MyToast.showToast(GuanliyonghuActivity.this, getString(R.string.setting_faild_Jurisdiction));
+//                                   Toast.makeText(GuanliyonghuActivity.this, R.string.setting_faild_Jurisdiction, Toast.LENGTH_SHORT).show();
                                }
+                               break;
+                           default:
                                break;
                        }
                    }
@@ -148,7 +160,7 @@ public class GuanliyonghuActivity extends AppCompatActivity {
                     .setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            DataSupport.deleteAll(Doctor.class,"dName=?",list.get(index));//查询所有符合条件的数据
+                            LitePal.deleteAll(Doctor.class,"dName=?",list.get(index));//查询所有符合条件的数据
                             list.remove(index);//删除所选项
                             adapter=new ArrayAdapter(GuanliyonghuActivity.this,android.R.layout.simple_list_item_1,list);
                             adapter.notifyDataSetChanged();//适配器刷新

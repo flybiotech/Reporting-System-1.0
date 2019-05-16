@@ -183,14 +183,19 @@ public class PrintMetricsCollector extends Thread {
 
     }
     public int returnPrintResult(PrintJob printJob){
-        if(printJob.isCompleted()){
-            Log.i("结果","完成");
-        }else if(printJob.isQueued()){
-            Log.i("结果","队列中");
-            return 2;
-        }else if(printJob.isStarted()){
-            Log.i("结果","开始打印");
-            return 0;
+        if(printJob != null){
+            if(printJob.isCompleted()){
+                Log.e("结果","完成");
+            }else if(printJob.isQueued()){
+                Log.e("结果","队列中");
+                return 2;
+            }else if(printJob.isStarted()){
+                Log.e("结果","开始打印");
+                return 0;
+            }else if(printJob.isFailed()){
+                Log.e("结果","打印失败");
+                return 3;
+            }
         }
         return 1;
     }

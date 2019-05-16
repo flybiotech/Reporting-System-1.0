@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search_item"
+        android:title="连接打印机wifi"
+
+        ></item>
+    <item
+        android:id="@+id/add_item"
+        android:title="获取面积"
+
+        ></item>
+
+</menu>

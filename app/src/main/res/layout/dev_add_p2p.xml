@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/lblTitle"
+        android:layout_width="400px"
+        android:layout_height="70px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10px"
+        android:hint="@string/cameraname"
+        android:textAllCaps="false" />
+
+    <EditText
+        android:id="@+id/uid"
+        android:layout_width="400px"
+        android:layout_height="70px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10px"
+        android:hint="@string/camerauid"
+        android:textAllCaps="false" />
+
+    <EditText
+        android:id="@+id/uidpsd"
+        android:layout_width="400px"
+        android:layout_height="70px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10px"
+        android:hint="@string/camerauidpsd"
+        android:inputType="number"
+        android:textAllCaps="false" />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="120px"
+            android:layout_height="60px"
+            android:onClick="done"
+            android:text="@string/change"
+            android:textAllCaps="false"></Button>
+
+        <Button
+            android:id="@+id/dele"
+            android:layout_width="120px"
+            android:layout_height="60px"
+            android:layout_marginLeft="20px"
+            android:onClick="delete"
+            android:text="@string/patient_show_delete"
+            android:textAllCaps="false"></Button>
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="120px"
+            android:layout_height="60px"
+            android:layout_marginLeft="20px"
+            android:onClick="cancel"
+            android:text="@string/button_cancel"
+            android:textAllCaps="false"></Button>
+    </LinearLayout>
+
+</LinearLayout>

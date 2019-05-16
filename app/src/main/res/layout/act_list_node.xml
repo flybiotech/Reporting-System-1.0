@@ -1,0 +1,18 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="5dip"
+    >
+
+    <TextView
+        android:id="@+id/maintext"
+        android:layout_width="wrap_content"
+        android:layout_height="80px"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+</RelativeLayout>

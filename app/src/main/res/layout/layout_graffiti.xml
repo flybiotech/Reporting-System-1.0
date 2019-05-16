@@ -4,16 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/graffiti__title_bar" />
+    <include
+        android:id="@+id/graffiti__title_bar"
+        layout="@layout/graffiti__title_bar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/graffiti_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
 
         <RelativeLayout
             android:id="@+id/graffiti_panel"
@@ -23,17 +22,17 @@
             android:layout_alignParentTop="true">
 
             <LinearLayout
-
+                android:id="@+id/ll_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="@dimen/dp_40">
 
                     <Button
                         android:id="@+id/btn_clear"
@@ -43,7 +42,7 @@
                         android:background="@drawable/btn_bg"
                         android:text="@string/print_Clear_the_screen"
                         android:textColor="#000000"
-                        android:textSize="13dp" />
+                        android:textSize="@dimen/dp_13" />
 
                     <Button
                         android:id="@+id/btn_undo"
@@ -54,55 +53,91 @@
                         android:background="@drawable/btn_bg"
                         android:text="@string/print_Revoke"
                         android:textColor="#000000"
-                        android:textSize="13dp" />
+                        android:textSize="@dimen/dp_13" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:background="@drawable/graffiti_btn_effect_rect_line"-->
+
+                        <!--android:padding="2dp">-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/btn_set_color"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="fill_parent" />-->
+                    <!--</RelativeLayout>-->
+
+                    <!--<SeekBar-->
+                        <!--android:id="@+id/paint_size"-->
+                        <!--android:layout_width="260dp"-->
+                        <!--android:layout_height="33dp"-->
+                        <!--android:max="100"-->
+                        <!--android:maxHeight="33dp"-->
+                        <!--android:minHeight="33dp"-->
+                        <!--android:paddingLeft="12dp"-->
+                        <!--android:paddingRight="10dp"-->
+                        <!--android:progress="100"-->
+                        <!--android:progressDrawable="@drawable/graffiti_seekbar_bg"-->
+                        <!--android:thumb="@drawable/graffiti_thumb_seekbarr"-->
+                        <!--android:thumbOffset="0dp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/paint_size_text"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:layout_marginLeft="2dp"-->
+                        <!--android:minWidth="40dp"-->
+                        <!--android:text=""-->
+                        <!--android:textColor="#000000"-->
+                        <!--android:textSize="14dp" />-->
+                <!--</LinearLayout>-->
+
+                <RadioGroup
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/graffiti_btn_effect_rect_line"
-
-                        android:padding="2dp">
-
-                        <ImageView
-                            android:id="@+id/btn_set_color"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent" />
-                    </RelativeLayout>
-
-                    <SeekBar
-                        android:id="@+id/paint_size"
-                        android:layout_width="260dp"
-                        android:layout_height="33dp"
-                        android:max="100"
-                        android:maxHeight="33dp"
-                        android:minHeight="33dp"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="10dp"
-                        android:progress="100"
-                        android:progressDrawable="@drawable/graffiti_seekbar_bg"
-                        android:thumb="@drawable/graffiti_thumb_seekbarr"
-                        android:thumbOffset="0dp" />
-
-                    <TextView
-                        android:id="@+id/paint_size_text"
+                    android:orientation="horizontal"
+                    android:id="@+id/rg"
+                    android:layout_marginTop="@dimen/dp_10"
+                    >
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="2dp"
-                        android:minWidth="40dp"
-                        android:text=""
-                        android:textColor="#000000"
-                        android:textSize="14dp" />
-                </LinearLayout>
+                        android:id="@+id/rb1"
+                        android:text="@string/location_size_1"
+                        android:textSize="@dimen/dp_20"
+                        />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rb2"
+                        android:text="@string/location_size_2"
+                        android:textSize="@dimen/dp_20"
+                        android:layout_marginLeft="@dimen/dp_20"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rb3"
+                        android:text="@string/location_size_3"
+                        android:textSize="@dimen/dp_20"
+                        android:layout_marginLeft="@dimen/dp_20"/>
+                </RadioGroup>
+
             </LinearLayout>
+            <FrameLayout
+                android:id="@+id/graffiti_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ll_bar"/>
         </RelativeLayout>
     </RelativeLayout>
 

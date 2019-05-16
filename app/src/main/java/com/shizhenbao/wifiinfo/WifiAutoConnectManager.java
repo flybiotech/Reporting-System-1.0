@@ -7,15 +7,13 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.orhanobut.logger.Logger;
 import com.shizhenbao.util.Const;
+import com.shizhenbao.util.LogUtil;
+import com.shizhenbao.util.SPUtils;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -24,21 +22,23 @@ import java.util.List;
 
 public class WifiAutoConnectManager {
     private static final String TAG = "TAG_WifiAutoConnectManager";
-
+    private ConnectWifiIsRepeatListener connectWifiIsRepeatListener;
     private WifiManager wifiManager;
     private Context mContext;
     NetworkInfo.State wifi = null;
+    private String msgSSID = "";
     // 定义几种加密方式，一种是WEP，一种是WPA，还有没有密码的情况
 //    public enum WifiCipherType {
 //        WIFICIPHER_WEP, WIFICIPHER_WPA, WIFICIPHER_NOPASS, WIFICIPHER_INVALID
 //    }
     private ConnectivityManager conMan;
+
     // 构造函数
     public WifiAutoConnectManager(WifiManager wifiManager, Context context) {
 
         this.wifiManager = wifiManager;
         mContext = context;
-        conMan= (ConnectivityManager) mContext
+        conMan = (ConnectivityManager) mContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
     }
@@ -47,22 +47,23 @@ public class WifiAutoConnectManager {
     public void connect(String ssid, String password, int type) {
 
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-         wifi = conMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+        wifi = conMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
                 .getState();
-
+        msgSSID = ssid;
         String ssid1 = wifiInfo.getSSID();
-//        Logger.e("ssid1 :"+ssid1+ "  ssid: "+ssid+" wifi 状态："+wifi);
-        if (ssid1.equals("\"" + ssid + "\"")&& NetworkInfo.State.CONNECTED==wifi) {
+        if (!ssid1.equals("")&&ssid1.equals("\"" + ssid + "\"") && NetworkInfo.State.CONNECTED == wifi) {
             Const.wifiRepeat = true;
         } else {
             Const.wifiRepeat = false;
-            Thread thread = new Thread(new ConnectRunnable(ssid, password, type));
+            Thread thread = new Thread(new ConnectRunnable(ssid, password, getCipherType(mContext, ssid)));
             thread.start();
         }
+//        LogUtil.e(TAG," Const.wifiRepeat = "+ Const.wifiRepeat+"  password = "+password);
 
     }
 
     int mPriority = 10;
+
     // 查看以前是否也配置过这个网络
     @Nullable //这个表示可以传入空值
     private WifiConfiguration isExsits(String SSID) {
@@ -72,17 +73,15 @@ public class WifiAutoConnectManager {
         }
 
         for (int i = 0; i < existingConfigs.size(); i++) {
-
-//            boolean b = wifiManager.removeNetwork(existingConfigs.get(i).networkId);
-//            Log.e(TAG, "删除已经保存的wifi: "+b );
+            //关闭所有的可以链接的wifi
             wifiManager.disableNetwork(existingConfigs.get(i).networkId);
+            wifiManager.removeNetwork(existingConfigs.get(i).networkId);
+            wifiManager.saveConfiguration();
 
         }
-//        Log.e(TAG,"  existingConfig.priority：  " + mPriority);
 
         for (WifiConfiguration existingConfig : existingConfigs) {
-//            Log.e(TAG, "isExsits: "+existingConfig.SSID+"/n" );
-
+//             LogUtil.e(TAG,"isExsits ssid = "+existingConfig.SSID);
             if (existingConfig.SSID.equals("\"" + SSID + "\"")) {
                 return existingConfig;
             }
@@ -90,7 +89,8 @@ public class WifiAutoConnectManager {
         return null;
     }
 
-    private WifiConfiguration  createWifiInfo(String SSID, String Password,
+
+    private WifiConfiguration createWifiInfo(String SSID, String Password,
                                              int Type) {
 //        mPriority++;
         WifiConfiguration config = new WifiConfiguration();
@@ -101,11 +101,14 @@ public class WifiAutoConnectManager {
         config.allowedProtocols.clear();
         config.priority = 0;
         config.SSID = "\"" + SSID + "\"";
-        if (Type == 1) {
+        LogUtil.e(TAG,"SSID = "+SSID+" Password =  "+Password+"    Type = " + Type);
+        if (Type == 1) { //没有密码的情况
+//            config.wepKeys[0] = "\"" + "\"";
             config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+//
         }
         // wep
-        if (Type ==2) {
+        if (Type == 2) {
             if (!TextUtils.isEmpty(Password)) {
                 if (isHexWepKey(Password)) {
                     config.wepKeys[0] = Password;
@@ -121,7 +124,7 @@ public class WifiAutoConnectManager {
         }
 
 
-         // wpa
+        // wpa
         if (Type == 3) {  //WIFICIPHER_WPA WPA加密的情况
             config.preSharedKey = "\"" + Password + "\"";
             config.hiddenSSID = true;
@@ -159,14 +162,15 @@ public class WifiAutoConnectManager {
         }
     }
 
+
+
     class ConnectRunnable implements Runnable {
         private String ssid;
 
         private String password;
 
-        private int  type;
+        private int type;
 
-//        private int mPriority;//wifi 的权限
 
         public ConnectRunnable(String ssid, String password, int type) {
             this.ssid = ssid;
@@ -186,43 +190,46 @@ public class WifiAutoConnectManager {
                 try {
                     // 为了避免程序一直while循环，让它睡个100毫秒检测……
                     Thread.sleep(200);
-//                    Log.d("1111", "run: 正在打开wifi");
                 } catch (InterruptedException ie) {
-//                    Log.e(TAG, ie.toString());
                 }
             }
 
             WifiConfiguration tempConfig = isExsits(ssid);
-
             if (tempConfig != null) {
-//                wifiManager.setWifiEnabled(true);
-//                Log.e(TAG, "tempConfig. "+" tempConfig.SSID  : "+tempConfig.SSID+"   networkId: "+tempConfig.networkId );
+//                LogUtil.e(TAG,"tempConfig != null");
                 boolean b = wifiManager.enableNetwork(tempConfig.networkId,
                         true);
+                wifiManager.saveConfiguration();
+                wifiManager.reconnect();
 
-                boolean connected = false;
+//                boolean connected = false;
                 if (!b) {
-                     connected = wifiManager.reconnect();
+                    wifiManager.reconnect();
                 }
 
-//                Log.e(TAG, "save enableNetwork status enable=" + b+" connected 1  "+connected);
-
-            }
-            else {
-//                Log.e(TAG, "run: 但没有保存wifi信息时，就创新新的链接" );
+            } else {
+                LogUtil.e(TAG,"tempConfig == null ");
                 WifiConfiguration wifiConfig = createWifiInfo(ssid, password,
                         type);
-//                wifiConfig.priority = mPriority;
-//                Log.e(TAG,"create  SSID ; "+wifiConfig.SSID+ "wifi_priority 1: "+wifiConfig.priority );
                 if (wifiConfig == null) {
-//                    Log.e(TAG, "wifiConfig is null!");
                     return;
                 }
                 int netID = wifiManager.addNetwork(wifiConfig);
-                boolean enabled = wifiManager.enableNetwork(netID, true);
-//                Log.e(TAG, "create enableNetwork status enable=" + enabled);
-                boolean connected = wifiManager.reconnect();
-//                Log.e(TAG, "create enableNetwork connected=" + connected);
+//                wifiManager.setWifiEnabled(true);
+                wifiManager.enableNetwork(netID, true);
+                wifiManager.saveConfiguration();
+                wifiManager.reconnect();
+            }
+            //只有连接视珍宝的WiFi时，才去做重复查询WiFi是否连接成功
+            LogUtil.e("TAG_","msgSSID = "+msgSSID+" , szb_wifi = "+SPUtils.get(mContext,Const.SZB_WIFI_SSID_KEY,"-1"));
+            if (msgSSID.equals((String) SPUtils.get(mContext,Const.SZB_WIFI_SSID_KEY,"-1"))) {
+                try {
+                    Thread.sleep(10*1000);
+                    connectWifiIsRepeatListener.onRepeatConnect();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
 
 
@@ -254,7 +261,7 @@ public class WifiAutoConnectManager {
 
     // 获取ssid的加密方式
 
-    public static int  getCipherType(Context context, String ssid) {
+    public static int getCipherType(Context context, String ssid) {
         WifiManager wifiManager = (WifiManager) context
                 .getSystemService(Context.WIFI_SERVICE);
 
@@ -264,116 +271,34 @@ public class WifiAutoConnectManager {
 
             if (!TextUtils.isEmpty(scResult.SSID) && scResult.SSID.equals(ssid)) {
                 String capabilities = scResult.capabilities;
-                // Log.i("hefeng","capabilities=" + capabilities);
 
                 if (!TextUtils.isEmpty(capabilities)) {
 
                     if (capabilities.contains("WPA")
                             || capabilities.contains("wpa")) {
-                        Log.i("hefeng", "wpa");
-                        return  3;//WifiCipherType.WIFICIPHER_WPA;
+                        return 3;//WifiCipherType.WIFICIPHER_WPA;
                     } else if (capabilities.contains("WEP")
                             || capabilities.contains("wep")) {
-                        Log.i("hefeng", "wep");
-                        return  2;//WifiCipherType.WIFICIPHER_WEP;
+                        return 2;//WifiCipherType.WIFICIPHER_WEP;
                     } else {
-                        Log.i("hefeng", "no");
-                        return   1;//WifiCipherType.WIFICIPHER_NOPASS;
+                        return 1;//WifiCipherType.WIFICIPHER_NOPASS;
                     }
                 }
             }
         }
-        return  0;// WifiCipherType.WIFICIPHER_INVALID;
+        return 3;// WifiCipherType.WIFICIPHER_INVALID;
     }
 
 
-    /**
-     * 通过反射出不同版本的connect方法来连接Wifi
-     *
-     * @author jiangping.li
-     * @param netId
-     * @return
-     * @since MT 1.0
-     *
-     */
-//    private Method connectWifiByReflectMethod(int netId) {
-//        Method connectMethod = null;
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//
-//            System.out.println("connectWifiByReflectMethod road 1");
-//            // 反射方法： connect(int, listener) , 4.2 <= phone‘s android version
-//            for (Method methodSub : wifiManager.getClass().getDeclaredMethods()) {
-//                if ("connect".equalsIgnoreCase(methodSub.getName())) {
-//                    Class<?>[] types = methodSub.getParameterTypes();
-//                    if (types != null && types.length > 0) {
-//                        if ("int".equalsIgnoreCase(types[0].getName())) {
-//                            connectMethod = methodSub;
-//                        }
-//                    }
-//                }
-//            }
-//            if (connectMethod != null) {
-//                try {
-//                    connectMethod.invoke(wifiManager, netId, null);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    System.out.println("connectWifiByReflectMethod Android "
-//                            + Build.VERSION.SDK_INT + " error!");
-//
-//                    return null;
-//                }
-//            }
-//        } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN) {
-//            // 反射方法: connect(Channel c, int networkId, ActionListener listener)
-//            // 暂时不处理4.1的情况 , 4.1 == phone‘s android version
-//            System.out.println("connectWifiByReflectMethod road 2");
-//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
-//                && Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-//            System.out.println("connectWifiByReflectMethod road 3");
-//            // 反射方法：connectNetwork(int networkId) ,
-//            // 4.0 <= phone‘s android version < 4.1
-//            for (Method methodSub : wifiManager.getClass()
-//                    .getDeclaredMethods()) {
-//                if ("connectNetwork".equalsIgnoreCase(methodSub.getName())) {
-//                    Class<?>[] types = methodSub.getParameterTypes();
-//                    if (types != null && types.length > 0) {
-//                        if ("int".equalsIgnoreCase(types[0].getName())) {
-//                            connectMethod = methodSub;
-//                        }
-//                    }
-//                }
-//            }
-//            if (connectMethod != null) {
-//                try {
-//                    connectMethod.invoke(wifiManager, netId);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    System.out.println("connectWifiByReflectMethod Android "
-//                            + Build.VERSION.SDK_INT + " error!");
-//                    return null;
-//                }
-//            }
-//        } else {
-//            // < android 4.0
-//            return null;
-//        }
-//        return connectMethod;
-//    }
-//
-//    public String getCurrentWifiname() {
-//        try {
-//            if(wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED){  //wifi已经打开
-//                WifiInfo info = wifiManager.getConnectionInfo();
-//                String wifiId = info != null ? info.getSSID() : null;
-//
-//                return wifiId;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
+    public void setConnectWifiIsRepeatListener(ConnectWifiIsRepeatListener listener) {
+        connectWifiIsRepeatListener = listener;
+    }
+
+    public interface ConnectWifiIsRepeatListener{
+        void onRepeatConnect();
+
+    }
 
 
 }

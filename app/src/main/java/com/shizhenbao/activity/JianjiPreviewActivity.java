@@ -5,8 +5,10 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +22,7 @@ import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
+import com.view.MyToast;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -36,6 +39,7 @@ public class JianjiPreviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_jianji_preview);
         gv= (GridView) findViewById(R.id.gv);
         bt_rush= (Button) findViewById(R.id.flush);
@@ -46,7 +50,7 @@ public class JianjiPreviewActivity extends AppCompatActivity {
         iniTClick();
     }
     public void initSelect(String id){
-        if(!id.equals("")||id!=null){
+        if(!TextUtils.isEmpty(id)){
             user=new LoginRegister().getUserName(Integer.parseInt(id));
         }
         gathPath=user.getGatherPath();
@@ -71,7 +75,8 @@ public class JianjiPreviewActivity extends AppCompatActivity {
         bt_rush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(JianjiPreviewActivity.this, getString(R.string.setting_picture_preview), Toast.LENGTH_SHORT).show();
+                MyToast.showToast(JianjiPreviewActivity.this, getString(R.string.setting_picture_preview));
+//                Toast.makeText(JianjiPreviewActivity.this, getString(R.string.setting_picture_preview), Toast.LENGTH_SHORT).show();
                 initDAta();
             }
         });

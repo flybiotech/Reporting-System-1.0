@@ -15,8 +15,6 @@ import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Const;
 import com.util.AlignedTextUtils;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,8 +54,12 @@ public class ZhenDuanFragment extends Fragment {
         try {
             mUser0 = list.get(0);
             mUser1 = list.get(1);
-            tvName01.setText(getString(R.string.case_diagnosis_result_show)+"("+mUser0.getpName()+"):");
-            tvName02.setText(getString(R.string.case_contrast_diagnosis_result_show)+"("+mUser1.getpName()+"):");
+            tvName01.setText(getString(R.string.case_diagnosis_result_show)+" : "+getString(R.string.patient_id)+":"+mUser0.getpId()+"\n"
+                    +getString(R.string.patient_name)+":"+mUser0.getpName()+", "
+            +getString(R.string.case_image_show_time)+":"+mUser0.getRegistDate());
+            tvName02.setText(getString(R.string.case_diagnosis_result_show)+" : "+getString(R.string.patient_id)+":"+mUser1.getpId()+"\n"
+                    +getString(R.string.patient_name)+":"+mUser1.getpName()+", "
+                    +getString(R.string.case_image_show_time)+":"+mUser1.getRegistDate());
             showUserInfoResult(newTextView, mUser0);
             showUserInfoResult(oldTextView, mUser1);
         } catch (Exception e) {
@@ -78,7 +80,122 @@ public class ZhenDuanFragment extends Fragment {
     //诊断
     private void showUserInfoResult(TextView view,User mUser) {
         if (mUser != null) {
-            if (isChain) {
+//            if (isChain) {
+//                sb2.delete(0, sb2.length());
+//                listAllLength2.clear();
+//                startList2.clear();
+//                endList2.clear();
+//                if (mUser.getSymptom() != null) {
+//                    sb2.append(getString(R.string.print_symptom) + " : " + mUser.getSymptom() + "\n\n");
+//                    startList2.add(0);
+//                    endList2.add(2);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_symptom) + " : " + "\n\n");
+//                    startList2.add(0);
+//                    endList2.add(2);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//                if (mUser.getAdvice() != null) {
+//                    sb2.append(getString(R.string.print_cytology) + " : " + mUser.getAdvice() + "\n\n");
+//                    startList2.add(listAllLength2.get(0));
+//                    endList2.add(listAllLength2.get(0) + 3);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_cytology) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(0));
+//                    endList2.add(listAllLength2.get(0) + 3);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//                if (mUser.getHpv_dna() != null) {
+//                    sb2.append(getString(R.string.print_HPV_DNA) + " : " + mUser.getHpv_dna() + "\n\n");
+//                    startList2.add(listAllLength2.get(1));
+//                    endList2.add(listAllLength2.get(1) + 7);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_HPV_DNA) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(1));
+//                    endList2.add(listAllLength2.get(1) + 7);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//                if (mUser.getBingbian() != null) {
+//                    sb2.append(getString(R.string.print_Lesion_area) + " : " + mUser.getBingbian() + "\n\n");
+//                    startList2.add(listAllLength2.get(2));
+//                    endList2.add(listAllLength2.get(2) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_Lesion_area) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(2));
+//                    endList2.add(listAllLength2.get(2) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//
+//                if (mUser.getSummary() != null) {
+//                    sb2.append(getString(R.string.print_Overall_assessment) + " : " + mUser.getSummary() + "\n\n");
+//                    startList2.add(listAllLength2.get(3));
+//                    endList2.add(listAllLength2.get(3) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_Overall_assessment) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(3));
+//                    endList2.add(listAllLength2.get(3) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//
+//                if (mUser.getYindaojin() != null) {
+//                    sb2.append(getString(R.string.print_colposcopic) + " : " + mUser.getYindaojin() + "\n\n");
+//                    startList2.add(listAllLength2.get(4));
+//                    endList2.add(listAllLength2.get(4) + 5);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_colposcopic) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(4));
+//                    endList2.add(listAllLength2.get(4) + 5);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//                if (mUser.getNizhen() != null) {
+//                    sb2.append(getString(R.string.print_Suspected) + " : " + mUser.getNizhen() + "\n\n");
+//                    startList2.add(listAllLength2.get(5));
+//                    endList2.add(listAllLength2.get(5) + 2);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_Suspected) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(5));
+//                    endList2.add(listAllLength2.get(5) + 2);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//                if (mUser.getZhuyishixiang() != null) {
+//                    sb2.append(getString(R.string.print_attention) + " : " + mUser.getZhuyishixiang() + "\n\n");
+//                    startList2.add(listAllLength2.get(6));
+//                    endList2.add(listAllLength2.get(6) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_attention) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(6));
+//                    endList2.add(listAllLength2.get(6) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//                if (mUser.getHandle() != null) {
+//                    sb2.append(getString(R.string.print_opinion) + " : " + mUser.getHandle() + "\n\n");
+//                    startList2.add(listAllLength2.get(7));
+//                    endList2.add(listAllLength2.get(7) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                } else {
+//                    sb2.append(getString(R.string.print_opinion) + " : " + "\n\n");
+//                    startList2.add(listAllLength2.get(7));
+//                    endList2.add(listAllLength2.get(7) + 4);
+//                    listAllLength2.add(sb2.toString().length());
+//                }
+//
+//            } else { //英文
                 sb2.delete(0, sb2.length());
                 listAllLength2.clear();
                 startList2.clear();
@@ -86,48 +203,48 @@ public class ZhenDuanFragment extends Fragment {
                 if (mUser.getSymptom() != null) {
                     sb2.append(getString(R.string.print_symptom) + " : " + mUser.getSymptom() + "\n\n");
                     startList2.add(0);
-                    endList2.add(2);
+                    endList2.add(getString(R.string.print_symptom).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_symptom) + " : " + "\n\n");
                     startList2.add(0);
-                    endList2.add(2);
+                    endList2.add(getString(R.string.print_symptom).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
                 if (mUser.getAdvice() != null) {
                     sb2.append(getString(R.string.print_cytology) + " : " + mUser.getAdvice() + "\n\n");
                     startList2.add(listAllLength2.get(0));
-                    endList2.add(listAllLength2.get(0) + 3);
+                    endList2.add(listAllLength2.get(0) + getString(R.string.print_cytology).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_cytology) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(0));
-                    endList2.add(listAllLength2.get(0) + 3);
+                    endList2.add(listAllLength2.get(0) + getString(R.string.print_cytology).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
                 if (mUser.getHpv_dna() != null) {
                     sb2.append(getString(R.string.print_HPV_DNA) + " : " + mUser.getHpv_dna() + "\n\n");
                     startList2.add(listAllLength2.get(1));
-                    endList2.add(listAllLength2.get(1) + 7);
+                    endList2.add(listAllLength2.get(1) + getString(R.string.print_HPV_DNA).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_HPV_DNA) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(1));
-                    endList2.add(listAllLength2.get(1) + 7);
+                    endList2.add(listAllLength2.get(1) + getString(R.string.print_HPV_DNA).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
                 if (mUser.getBingbian() != null) {
                     sb2.append(getString(R.string.print_Lesion_area) + " : " + mUser.getBingbian() + "\n\n");
                     startList2.add(listAllLength2.get(2));
-                    endList2.add(listAllLength2.get(2) + 4);
+                    endList2.add(listAllLength2.get(2) + getString(R.string.print_Lesion_area).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_Lesion_area) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(2));
-                    endList2.add(listAllLength2.get(2) + 4);
+                    endList2.add(listAllLength2.get(2) + getString(R.string.print_Lesion_area).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
@@ -135,12 +252,12 @@ public class ZhenDuanFragment extends Fragment {
                 if (mUser.getSummary() != null) {
                     sb2.append(getString(R.string.print_Overall_assessment) + " : " + mUser.getSummary() + "\n\n");
                     startList2.add(listAllLength2.get(3));
-                    endList2.add(listAllLength2.get(3) + 4);
+                    endList2.add(listAllLength2.get(3) + getString(R.string.print_Overall_assessment).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_Overall_assessment) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(3));
-                    endList2.add(listAllLength2.get(3) + 4);
+                    endList2.add(listAllLength2.get(3) + getString(R.string.print_Overall_assessment).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
@@ -148,166 +265,51 @@ public class ZhenDuanFragment extends Fragment {
                 if (mUser.getYindaojin() != null) {
                     sb2.append(getString(R.string.print_colposcopic) + " : " + mUser.getYindaojin() + "\n\n");
                     startList2.add(listAllLength2.get(4));
-                    endList2.add(listAllLength2.get(4) + 5);
+                    endList2.add(listAllLength2.get(4) + getString(R.string.print_colposcopic).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_colposcopic) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(4));
-                    endList2.add(listAllLength2.get(4) + 5);
+                    endList2.add(listAllLength2.get(4) + getString(R.string.print_colposcopic).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
                 if (mUser.getNizhen() != null) {
                     sb2.append(getString(R.string.print_Suspected) + " : " + mUser.getNizhen() + "\n\n");
                     startList2.add(listAllLength2.get(5));
-                    endList2.add(listAllLength2.get(5) + 2);
+                    endList2.add(listAllLength2.get(5) + getString(R.string.print_Suspected).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_Suspected) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(5));
-                    endList2.add(listAllLength2.get(5) + 2);
+                    endList2.add(listAllLength2.get(5) + getString(R.string.print_Suspected).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
                 if (mUser.getZhuyishixiang() != null) {
                     sb2.append(getString(R.string.print_attention) + " : " + mUser.getZhuyishixiang() + "\n\n");
                     startList2.add(listAllLength2.get(6));
-                    endList2.add(listAllLength2.get(6) + 4);
+                    endList2.add(listAllLength2.get(6) + getString(R.string.print_attention).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_attention) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(6));
-                    endList2.add(listAllLength2.get(6) + 4);
+                    endList2.add(listAllLength2.get(6) + getString(R.string.print_attention).length());
                     listAllLength2.add(sb2.toString().length());
                 }
 
                 if (mUser.getHandle() != null) {
                     sb2.append(getString(R.string.print_opinion) + " : " + mUser.getHandle() + "\n\n");
                     startList2.add(listAllLength2.get(7));
-                    endList2.add(listAllLength2.get(7) + 4);
+                    endList2.add(listAllLength2.get(7) + getString(R.string.print_opinion).length());
                     listAllLength2.add(sb2.toString().length());
                 } else {
                     sb2.append(getString(R.string.print_opinion) + " : " + "\n\n");
                     startList2.add(listAllLength2.get(7));
-                    endList2.add(listAllLength2.get(7) + 4);
+                    endList2.add(listAllLength2.get(7) + getString(R.string.print_opinion).length());
                     listAllLength2.add(sb2.toString().length());
                 }
-
-            } else { //英文
-                sb2.delete(0, sb2.length());
-                listAllLength2.clear();
-                startList2.clear();
-                endList2.clear();
-                if (mUser.getSymptom() != null) {
-                    sb2.append(getString(R.string.print_symptom) + " : " + mUser.getSymptom() + "\n\n");
-                    startList2.add(0);
-                    endList2.add(7);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_symptom) + " : " + "\n\n");
-                    startList2.add(0);
-                    endList2.add(7);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-                if (mUser.getAdvice() != null) {
-                    sb2.append(getString(R.string.print_cytology) + " : " + mUser.getAdvice() + "\n\n");
-                    startList2.add(listAllLength2.get(0));
-                    endList2.add(listAllLength2.get(0) + 8);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_cytology) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(0));
-                    endList2.add(listAllLength2.get(0) + 8);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-                if (mUser.getHpv_dna() != null) {
-                    sb2.append(getString(R.string.print_HPV_DNA) + " : " + mUser.getHpv_dna() + "\n\n");
-                    startList2.add(listAllLength2.get(1));
-                    endList2.add(listAllLength2.get(1) + 7);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_HPV_DNA) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(1));
-                    endList2.add(listAllLength2.get(1) + 7);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-                if (mUser.getBingbian() != null) {
-                    sb2.append(getString(R.string.print_Lesion_area) + " : " + mUser.getBingbian() + "\n\n");
-                    startList2.add(listAllLength2.get(2));
-                    endList2.add(listAllLength2.get(2) + 10);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_Lesion_area) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(2));
-                    endList2.add(listAllLength2.get(2) + 10);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-
-                if (mUser.getSummary() != null) {
-                    sb2.append(getString(R.string.print_Overall_assessment) + " : " + mUser.getSummary() + "\n\n");
-                    startList2.add(listAllLength2.get(3));
-                    endList2.add(listAllLength2.get(3) + 10);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_Overall_assessment) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(3));
-                    endList2.add(listAllLength2.get(3) + 10);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-
-                if (mUser.getYindaojin() != null) {
-                    sb2.append(getString(R.string.print_colposcopic) + " : " + mUser.getYindaojin() + "\n\n");
-                    startList2.add(listAllLength2.get(4));
-                    endList2.add(listAllLength2.get(4) + 10);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_colposcopic) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(4));
-                    endList2.add(listAllLength2.get(4) + 10);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-                if (mUser.getNizhen() != null) {
-                    sb2.append(getString(R.string.print_Suspected) + " : " + mUser.getNizhen() + "\n\n");
-                    startList2.add(listAllLength2.get(5));
-                    endList2.add(listAllLength2.get(5) + 8);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_Suspected) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(5));
-                    endList2.add(listAllLength2.get(5) + 8);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-                if (mUser.getZhuyishixiang() != null) {
-                    sb2.append(getString(R.string.print_attention) + " : " + mUser.getZhuyishixiang() + "\n\n");
-                    startList2.add(listAllLength2.get(6));
-                    endList2.add(listAllLength2.get(6) + 9);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_attention) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(6));
-                    endList2.add(listAllLength2.get(6) + 9);
-                    listAllLength2.add(sb2.toString().length());
-                }
-
-                if (mUser.getHandle() != null) {
-                    sb2.append(getString(R.string.print_opinion) + " : " + mUser.getHandle() + "\n\n");
-                    startList2.add(listAllLength2.get(7));
-                    endList2.add(listAllLength2.get(7) + 9);
-                    listAllLength2.add(sb2.toString().length());
-                } else {
-                    sb2.append(getString(R.string.print_opinion) + " : " + "\n\n");
-                    startList2.add(listAllLength2.get(7));
-                    endList2.add(listAllLength2.get(7) + 9);
-                    listAllLength2.add(sb2.toString().length());
-                }
-            }
+//            }
 
             try {
                 view.setText(AlignedTextUtils.addConbine2(sb2.toString(), startList2, endList2));

@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_cytology"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_xibaoxue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_HPV_DNA"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_dna"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_symptom"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_zhengzhuang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_Overall_assessment"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_pinggu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_Lesion_area"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_quyu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:text="@string/print_colposcopic"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_yindaojin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_Suspected"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_nizhen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_attention"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_yijian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_border"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_bianjie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_color"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_blood_vessel"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_xueguan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_Iodine_staining"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_dianranse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow></TableRow>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/print_Acetic_acid_change"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_cusuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_select"
+                android:gravity="center"
+                android:hint="@string/print_message_hint"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</LinearLayout>

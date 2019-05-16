@@ -1,16 +1,189 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="all"
+    >
 
 
+    <string name="intentToShenZhenBao01">视珍宝一代</string>
+    <string name="intentToShenZhenBao02">视珍宝二代</string>
+    <string name="intentToCamera">本地摄像头</string>
+
+
+    <string name="action_settings">Settings</string>
     <string name="accessibility_service_description">智能安装服务，无需用户的任何操作就可以自动安装程序。</string>
 
 
     <!-- 视珍宝相关-->
+    <string name="mvalm">Detect move</string>
+    <string name="audalm">Detect audio</string>
+    <string name="mailalm">Detect mail</string>
+    <string name="land">Rotate</string>
+    <string name="port">Rotate</string>
+    <string name="prompt">Tip</string>
+    <string name="alarmset">Alarm Set</string>
+    <string name="slectType">Choose Mode</string>
+    <string name="ipmode">IP Mode</string>
+    <string name="p2pmode">P2P Mode</string>
+    <string name="loadrecord">Failed to load record files!</string>
+    <string name="sd">The SD card not exist!</string>
+    <string name="signal">Signal:</string>
+    <string name="loadingrecord">Loading record files...</string>
+    <string name="loadinginfo">Loading device information...</string>
+    <string name="failloadinfo">Failed to load device information...</string>
+    <string name="loadingwifi">Loading wifi information...</string>
+    <string name="failloadwifi">Failed to load wifi information！</string>
+    <string name="reboot">The camera is rebooting，please connect later！</string>
+    <string name="wifistart">WIFI Started</string>
+    <string name="stamod">STA Mod</string>
+    <string name="apmod">AP Mod</string>
+    <string name="curlink">Current Link:</string>
+    <string name="wifiname">WIFI Name:</string>
+    <string name="wifipwd">WIFI Pwd :</string>
+    <string name="langset">Language Set</string>
+    <string name="pwdwrong1">Password should be 5 or 13 characters or 10 or 26 hexadecimal digits!</string>
+    <string name="pwdwrong2">Password should be 8 characters！</string>
+    <string name="seted">Successfully Set!</string>
+    <string name="searchFinished">Finished Searching</string>
+    <string name="searchnotFinished">Please wait while searching！</string>
+    <string name="novibrate">NO</string>
+    <string name="vibrate">YES</string>
+    <string name="nocap">NO</string>
+    <string name="cap">YES</string>
+    <string name="nosnd">NO</string>
+    <string name="snd">YES</string>
+    <string name="switch1">Switch1</string>
+    <string name="switch2">Switch2</string>
+    <string name="switch3">Switch3</string>
+    <string name="timerset">Trigger setting</string>
+    <string name="style1">Style 1</string>
+    <string name="style2">Style 2</string>
+    <string name="style3">Style 3</string>
+    <string name="success">Successfully Set!</string>
+    <string name="failed">Set Failed!</string>
+    <string name="whecap">snapshot:</string>
+    <string name="whevib">vibration:</string>
+    <string name="whesnd">ring:</string>
+    <string name="nowifi">Current IP camera does not have WIFI device！</string>
+    <string name="INFO_DevName">DevName:</string>
+    <string name="INFO_DevModal">DevModal:</string>
+    <string name="INFO_SN">SN:</string>
+    <string name="INFO_SoftVersion">SoftVersion:</string>
+    <string name="DISK_DiskSize">DISK_DiskSize:</string>
+    <string name="DISK_FreeSize">DISK_FreeSize:</string>
+    <string name="INFO_ethLinkStatus">EthLinkStatus:</string>
+    <string name="INFO_upnpStatus">uPnP:</string>
+    <string name="INFO_WlanStatus">Wifi-Link Status:</string>
+    <string name="INFO_p2pStatus">P2PStatus:</string>
+    <string name="NET_DDNSDomain">NET_DDNS:</string>
+    <string name="open">OPEN</string>
+    <string name="close">CLOSE</string>
+    <string name="devinfo">Device Information</string>
+    <string name="pixset">Pixel Setting</string>
+    <string name="almset">Alarm Settings</string>
+    <string name="alarm">Alarming</string>
+    <string name="wifiset">WIFI Setting</string>
+    <string name="wait">Please wait...</string>
+    <string name="loadingImg">Loading……</string>
+    <string name="realvid">Real Time Video</string>
+    <string name="recordvid">Record Video</string>
+    <string name="cameraset">Camera Settings</string>
+    <string name="imgshow_title">View Alarm Pictures</string>
+    <string name="imgshow_filename">Pic Name：</string>
+    <string name="alarmImgDescription">Alarm Pic</string>
+    <string name="showInZoomMode">Show In Zoom Mode</string>
+    <string name="dialog_title_clearImg">Clear current images</string>
+    <string name="dialog_message_clearImg">Are you sure to clear current images？</string>
+    <string name="progress_title">Please wait</string>
+    <string name="progress_message_clearImg">Clearing images……</string>
+    <string name="menu_clearImg">Clear current images</string>
+    <string name="imglist_title">Alarm Pic List</string>
 
+    <string name="add">Add</string>
+    <string name="search">Search</string>
+    <string name="devlist">Dev List</string>
+    <string name="cameraname">Camera Name</string>
+    <string name="cameraip">Camera Ip</string>
+    <string name="dataport">Data Port</string>
+    <string name="httpport">Web Port</string>
+    <string name="camerauid">Camera UID</string>
+    <string name="camerauidpsd">UID PSD</string>
+    <string name="usr">User Name</string>
+    <string name="pwd">Pass Word</string>
+    <string name="change">Change</string>
+    <string name="scan">Scan</string>
     <string name="cancel">取消</string>
+    <string name="delete">Delete</string>
+    <string name="video">Real Time Video</string>
+    <string name="recordvideo">Record Video</string>
+    <string name="susrecord">Record video successful！</string>
+    <string name="begrecord">Begin recording video！</string>
+
+    <string name="fun">Functicon</string>
+    <string name="instructions">Instructions</string>
+    <string name="suscapture">Capture picture successful!</string>
+
+    <string name="help_dialog_text">Record file is in /sdcard/record，capture picture is in /sdcard/alarm when alarm,the phone will vibrate.</string>
+
+    <string name="button_custom_product_search">自定义搜索</string>
+    <string name="button_google_shopper">谷歌购物</string>
+    <string name="button_share_by_email">通过email分享</string>
+    <string name="button_share_by_sms">通过短信分享</string>
+    <string name="button_web_search">confirm information</string>
+    <string name="msg_bulk_mode_scanned">批量扫描：找到条码，已保存</string>
+    <string name="msg_camera_framework_bug">抱歉，Android相机出现问题。您可能需要重启设备。</string>
+    <string name="msg_default_format">format</string>
+    <string name="msg_default_meta">source data</string>
+    <string name="msg_default_mms_subject">Hi</string>
+    <string name="msg_default_status">Set the two-dimensional code in the frame</string>
+    <string name="msg_default_time">time</string>
+    <string name="msg_default_type">type</string>
+    <string name="msg_google_shopper_missing">谷歌购物未安装</string>
+    <string name="msg_install_google_shopper">谷歌购物是一款将条码扫描和商品比价相结合的应用，谷歌购物不使用浏览器，您想尝试吗？</string>
+    <string name="msg_intent_failed">抱歉，无法打开所需软件。 条码内容可能无效。</string>
+    <string name="msg_share_subject_line">这是我所扫描条码的内容</string>
+    <string name="preferences_actions_title">找到条码时</string>
+    <string name="preferences_bulk_mode_summary">连续扫描并保存多个条形码</string>
+    <string name="preferences_bulk_mode_title">批量扫描模式</string>
+    <string name="preferences_copy_to_clipboard_title">复制到剪切板</string>
+    <string name="preferences_custom_product_search_summary" formatted="false">替换：％s=内容，％f=格式，％t=类型</string>
+    <string name="preferences_custom_product_search_title">自定义搜索网址</string>
+    <string name="preferences_decode_1D_title">扫描 一维条码</string>
+    <string name="preferences_decode_Data_Matrix_title">扫描 DM码</string>
+    <string name="preferences_decode_QR_title">扫描 QR码</string>
+    <string name="preferences_front_light_summary">前灯可用时，打开前灯</string>
+    <string name="preferences_front_light_title">前灯</string>
+    <string name="preferences_general_title">一般设置</string>
+    <string name="preferences_play_beep_title">提示音</string>
+    <string name="preferences_remember_duplicates_summary">在历史记录中保存重复记录</string>
+    <string name="preferences_remember_duplicates_title">记住重复</string>
+    <string name="preferences_result_title">结果设置</string>
+    <string name="preferences_reverse_image_summary">设备上启用了前置摄像头只</string>
+    <string name="preferences_reverse_image_title">反转摄像机的图像</string>
+    <string name="preferences_scanning_title">条码类型选择</string>
+    <string name="preferences_search_country">搜索国家</string>
+    <string name="preferences_supplemental_summary">尝试检索关于条码内容的更多信息</string>
+    <string name="preferences_supplemental_title">检索更多信息</string>
+    <string name="preferences_vibrate_title">振动</string>
+    <string name="result_text">找到纯文本</string>
+    <string name="zxing_url">http://code.google.com/p/zxing</string>
+    <string name="usepreset">Preset Use</string>
+    <string name="setpreset">Perset Set</string>
+    <string name="clearpreset">Perset Clear</string>
+    <string name="stereo">Press the right mic for talking,and release for listening!</string>
+    <string name="choose">Please choose camera before checking video!</string>
+    <string name="SSID">SSID:</string>
+    <string name="Password">Password:</string>
+    <string name="Start">SmartConfig</string>
+    <string name="SmartConfiging">SmartConfiging...</string>
+    <string name="SmartConfigOver">Configuration finish</string>
+    <string name="showpsd">Show Password</string>
 
 
+    <string name="sure">确定</string>
+    <string name="hello_world">hello_world</string>
     <string name="title_activity_new_or_old_case">NewOrOldCaseActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     //--------------------------------------------------------------------------
 
     //----------------------------------------------------注册登陆模块
@@ -39,20 +212,21 @@
     <string name="user_password_again_hint">请再次输入密码</string>
     <string name="user_register_email">邮箱绑定:</string>
     <string name="user_register_email_hint">请输入邮箱（例如：XXXXX@XXX.com）</string>
-    <string name="user_regester_hosptal">医院名称:</string>
+    <string name="user_regester_hospital">医院名称:</string>
     <string name="user_regester_department">科室名称:</string>
-    <string name="user_regester_hosptal_hint">请输入医院名称</string>
+    <string name="user_regester_hospital_hint">请输入医院名称</string>
     <string name="user_regester_department_hint">请输入科室名称</string>
     <string name="button_ok">确定</string>
     <string name="button_cancel">取消</string>
     <string name="ok">确认</string>
+    <string name="setting_hospital_name">请在个人中心-系统设置处设置医院名称</string>
 
     //-----------------------------------------------------------------患者信息模块
 
     <string name="patients_information">患者信息</string>
     <string name="patient_id">编号</string>
     <string name="patient_name">姓名</string>
-    <string name="patient_telephone">电话</string>
+    <string name="patient_telephone">电话号码</string>
     <string name="patient_age">年龄</string>
     <string name="patient_gravidity_num">孕次</string>
     <string name="patient_parity_num">产次</string>
@@ -130,21 +304,25 @@
     <string name="patient_show_delete_all_prompt">您确定要删除全部信息吗？</string>
     <string name="patient_show_delete">删除</string>
     <string name="patient_show_updata">修改</string>
+    <string name="patient_show_get_image">获取图像</string>
     <string name="patient_show_delete_sure">您确定要删除信息吗？</string>
     <string name="patient_show_updata_error">已经生成报告，不能修改</string>
     <string name="patient_modify_success">信息修改成功</string>
     <string name="patient_data_no">暂无数据</string>
     <string name="patient_Biopsy_location">活检位置</string>
+    <string name="fragPrintererror">error</string>
 
     //--------------------------------------------------------图像获取模块
 
     <string name="image_Select_patients">选择患者</string>
     <string name="image_cancel">取消</string>
+
     <string name="image_Previous_page">上一页</string>
     <string name="image_next_page">下一页</string>
     <string name="image_dialog_automatic">已帮助您自动选择</string>
+    <string name="image_dialog_loading">正在加载主机...</string>
     <string name="image_set_wifi">设置WIFI</string>
-    <string name="image_set_wifi_message">未检测到可用的视珍宝主机，请点击下方“WIFI设置”，连接可用的视珍宝主机</string>
+    <string name="image_set_wifi_message">未检测到可用的主机，请点击下方“WIFI设置”，连接可用的主机</string>
     <string name="image_set_wifi_sure">WIFI设置</string>
     <string name="image_set_patients_error">请先登记一个患者信息</string>
     <string name="image_patients_last">已经是最后一页了</string>
@@ -152,11 +330,121 @@
     <string name="image_get_image">图像获取</string>
     <string name="image_camera">照相机</string>
     <string name="image_search">搜索</string>
+    <string name="image_timing_finash">计时已完成，可以重新进行计时</string>
+    <string name="image_artword">原图</string>
+    <string name="image_acetic_acid_white">醋酸白</string>
+    <string name="image_Lipiodol">碘油</string>
+    <string name="image_duration_three">时长3分钟</string>
+    <string name="image_duration_five">时长5分钟</string>
+    <string name="image_duration_six">时长6分钟</string>
+    <string name="image_duration_eight">时长8分钟</string>
+    <string name="image_duration_ten">时长10分钟</string>
+    <string name="image_pickup_one">时长1分钟</string>
+    <string name="image_pickup_three">时长3分钟</string>
+    <string name="image_pickup_five">时长4分钟</string>
+    <string name="image_pickup_six">时长5分钟</string>
+    <string name="image_pickup_ten">时长10分钟</string>
+    <string name="image_interval_fifteen">间隔15秒</string>
+    <string name="image_interval_twenty">间隔20秒</string>
+    <string name="image_interval_thirty">间隔30秒</string>
+    <string name="image_handle_message">正在处理拍摄的照片...</string>
+    <string name="image_photograph_error">拍照失败</string>
+    <string name="image_photograph_type">设置拍照模式，每次</string>
+    <string name="image_photograph_one">只拍一张</string>
+    <string name="image_photograph_more">连续拍照</string>
+    <string name="image_photograph_in">在</string>
+    <string name="image_photograph_interval">分钟内每隔</string>
+    <string name="image_photograph_continuition">秒连续拍照</string>
+    <string name="image_pickup_begin">已经开始录像</string>
+    <string name="image_pickup_end">已完成录像</string>
+    <string name="image_pickup_error">命令执行失败</string>
+    <string name="image_picture_Testing">检测到该照片不清晰,是否需要重新拍照?</string>
+    <string name="image_picture_Remake">重拍</string>
+    <string name="image_picture_Remake_no">不重拍</string>
+    <string name="image_picture_save_no">没有保存该照片</string>
+    <string name="image_picture_save_success">照片保存成功</string>
+    <string name="image_timing_begin">开始计时</string>
+    <string name="image_timing_clear">停拍</string>
+    <string name="image_setting_light_white">白光</string>
+    <string name="image_setting_light_green">绿光</string>
+    <string name="image_setting">设置</string>
+    <string name="image_setting_AP">设置AP模式</string>
+    <string name="image_setting_STA">设置STA模式</string>
+    <string name="image_setting_STA_SignalStrength">信号强度</string>
+    <string name="image_setting_pickup">录像设置</string>
+    <string name="image_setting_snapshot">拍照设置</string>
+    <string name="iamge_setting_button_left">按键靠右</string>
+    <string name="image_setting_pickup_time">设置录像时间，每次录制</string>
+    <string name="image_setting_pickup_minute">分钟</string>
+    <string name="image_setting_AP_dialog">设为AP模式</string>
+    <string name="image_setting_AP_name">请输入AP的WIFI名称</string>
+    <string name="image_setting_AP_password">请输入AP的WIFI密码</string>
+    <string name="image_setting_AP_message1">设置AP</string>
+    <string name="image_setting_AP_message2">WIFI名称</string>
+    <string name="image_setting_AP_message3">WIFI密码</string>
+    <string name="image_setting_AP_password_updata">修改WIFI密码</string>
+    <string name="image_setting_success">设置成功</string>
+    <string name="image_setting_success_message">设置成功，重启后生效</string>
+    <string name="image_setting_faild">设置失败</string>
+    <string name="image_setting_STA_wifi">当前设备没有搜索到有效的无线网络</string>
+    <string name="image_setting_STA_wifi_password">请输入WIFI密码</string>
+    <string name="image_setting_STA_message">设置STA</string>
+    <string name="image_setting_STA_dialog">设为STA模式</string>
+    <string name="image_setting_restart">确定重启？</string>
+    <string name="image_setting_restart_message">重启后生效</string>
+    <string name="image_setting_restart_successs">设备已重启</string>
+    <string name="image_setting_restart_faild">重启失败</string>
     <string name="image_setting_refresh">刷新</string>
-    <string name="image_manage_delete_title">您确定要删除这些照片吗?</string>
+    <string name="image_manage_picture">图片</string>
+    <string name="image_manage_pickup">视频</string>
+    <string name="image_manage_delete_title">您确定要删除选中的内容吗?</string>
     <string name="image_manage_delete_ok">删除</string>
     <string name="image_manage_delete_no">不删除</string>
+    <string name="image_manage_all_cancel">取消全选</string>
+    <string name="image_manage_all">全选</string>
+    <string name="image_manage_delete_all">批量删除</string>
+    <string name="image_manage_save_as">另存为</string>
+    <string name="image_manager_pickup_delete">录像已经删除</string>
+    <string name="image_manager_pickup_delete_faild">录像删除失败</string>
+    <string name="image_manager_pickup_error">视频文件不存在</string>
+    <string name="image_manager_updown">下载</string>
     <string name="image_manager_picture_nothing">没有图片了</string>
+    <string name="image_host_state">离线</string>
+    <string name="image_Device_list">设备列表</string>
+    <string name="tipChooseImage">请选择要下载的图片</string>
+    <string name="tipChooseVideo">请选择要下载的视频</string>
+    <string name="saveToAlbm">保存到图库</string>
+    <string name="saveToCertainFolder">保存到指定文件夹</string>
+    <string name="information">资料</string>
+    <string name="saveSuccessToAlbm">已经保存至图库</string>
+    <string name="saveSuccessToCertainFolder">已经保存至文件夹</string>
+    <string name="chooseImageForDelete">请选择要删除的图片</string>
+    <string name="chooseVideoForDelete">请选择要删除的视频</string>
+    <string name="videoLoading">视频加载中...</string>
+    <string name="downloading">正在下载...</string>
+    <string name="nodevice">当前没有搜索到设备</string>
+    <string name="dbExecFailed">数据操作错误</string>
+    <string name="devNameSetSuccessed">设置名称成功</string>
+    <string name="enterDevName">请输入设备名称</string>
+    <string name="changeDevName">修改设备名称</string>
+    <string name="gettingDevStatus">正在获得设备连接状态，请稍后</string>
+    <string name="waitingForStatus">正在获得设备连接状态，请稍后</string>
+    <string name="disconnectFromDev">当前平板没有连接到此设备</string>
+    <string name="containUnsupportCharacter">请勿包含,或@字符</string>
+    <string name="tip">提示</string>
+    <string name="exit">确认退出？</string>
+    <string name="wifiSuccessMsg">WIFI连接成功</string>
+    <string name="wifiProcessMsg">正在尝试连接WIFI...</string>
+    <string name="wifiFailMsg">WIFI连接失败,请查看主机的WIFI是否设置正确...</string>
+    <string name="wifiFailMsgHP">WIFI连接失败,请查看打印机的WIFI是否设置正确...</string>
+    <string name="wifi_no_eixst">请检查主机是否已经打开，后台正在搜索 WIFI....</string>
+    <string name="wifi_SZBname_empty">主机WIFI 未设置，请设置WIFI账号和密码</string>
+    <string name="wifi_HPname_empty">打印机WIFI 未设置，请设置WIFI账号和密码</string>
+    <string name="wifiFailMsgprint">请检查打印机WIFI是否已经打开，后台正在搜索 WIFI.....</string>
+    <string name="saveImage">"正在保存图片..."</string>
+    <string name="saveImageFailed">"图片保存失败"</string>
+    <string name="saveImageSuccess">"图片保存成功"</string>
+    <string name="ftpFileNo">服务器文件不存在</string>
 
     //----------------------------------------------------------报告打印模块
 
@@ -171,17 +459,22 @@
     <string name="print_Suspected">拟诊</string>
     <string name="print_attention">注意事项</string>
     <string name="print_baogaoshengcheng">报告生成</string>
-    <string name="print_Assessment_results">RCI评估</string>
+    <string name="print_Assessment_results">诊断评估</string>
+    <string name="print_title">阴道镜检查报告单</string>
     <string name="print_border">边界/表面</string>
     <string name="print_color">颜色</string>
     <string name="print_blood_vessel">血管</string>
     <string name="print_Iodine_staining">碘染色</string>
-    <string name="print_Acetic_acid_change">评估结果</string>
+    <string name="print_Acetic_acid_change">诊断结果</string>
     <string name="print_opinion">处理意见</string>
     <string name="print_Report_printing">报告打印</string>
     <string name="print_id_null">编号不能为空</string>
     <string name="print_patient_select">请先选择患者</string>
+    <string name="location_size_1">小图标</string>
+    <string name="location_size_2">中图标</string>
+    <string name="location_size_3">大图标</string>
     <string name="print_dialog_title">提示框</string>
+    <string name="print_pringting">打印中...</string>
     <string name="print_dialog_message">文件正在打印，请稍等...</string>
     <string name="print_message_supplement">请填写完诊断信息</string>
     <string name="print_hospital_setting">设置医院名称</string>
@@ -211,25 +504,40 @@
     <string name="print_Report_Preview">报告预览列表</string>
     <string name="print_Report_Non_existent">PDF文件不存在</string>
     <string name="print_Report_loading_success">加载完成</string>
+    <string name="print_Report_make">请生成一个PDF报告</string>
     <string name="print_Report_nothing">暂时还没有PDF报告</string>
     <string name="print_Report_updata">报告修改列表</string>
     <string name="print_Report_updata_title">报告修改</string>
     <string name="print_Report_success">报告生成成功</string>
     <string name="print_picture_no_choise">没有选中删除的图片</string>
-    <string name="print_picture_three">患者上传图片最多选择三张</string>
+    <string name="print_picture_three">图片最多选择四张</string>
+    <string name="print_original_picture">患者原始图片</string>
+    <string name="print_Acetic_acid_white_picture">患者醋酸白图片</string>
+    <string name="print_Iodized_oil">患者碘油图片</string>
+    <string name="print_Doctors_diagnose_pictures">医生诊断图片</string>
     <string name="print_Clear_the_screen">清屏</string>
     <string name="print_Revoke">撤销</string>
     <string name="print_eight_no_more">您最多可以标记8处</string>
+    <string name="graffiti_moving_pic">单指移动、双指缩放</string>
+    <string name="graffiti_clear_screen">清屏</string>
     <string name="graffiti_cant_undo_after_clearing">清屏后不可撤销</string>
     <string name="graffiti_saving_picture">保存图片</string>
     <string name="graffiti_enter">确定</string>
     <string name="graffiti_cancel">取消</string>
+    <string name="graffiti_success">成功</string>
+    <string name="graffiti_failed">失败</string>
+    <string name="graffiti_edit">标记</string>
+    <string name="graffiti_remove">移除</string>
+    <string name="graffiti_top">置顶</string>
+    <string name="imageacitivty_acetowhite_second">秒/</string>
+    <string name="imageacitivty_acetowhite_minute">分钟</string>
+    <string name="printFaild">报告打印失败</string>
 
     //---------------------------------------------病例管理模块
 
     <string name="case_title">病历管理</string>
     <string name="case_patient_telephone">电话号码</string>
-    <string name="case_select_telephoen_hint">请输入手机号码</string>
+    <string name="case_select_telephoen_hint">请输入电话号码</string>
     <string name="case_select_data">起始日期</string>
     <string name="case_select_data_begin">开始日期</string>
     <string name="case_select_data_end">结束日期</string>
@@ -238,53 +546,64 @@
     <string name="case_patient_nothing">没有搜索到符合条件的患者</string>
     <string name="case_register_message">登记信息</string>
     <string name="case_image_show">图片显示</string>
+    <string name="case_image_show_time">登记时间</string>
+    <string name="case_image_showbi">图片展示</string>
     <string name="case_image_up">上翻</string>
     <string name="case_image_down">下翻</string>
     <string name="case_image_Contrast_up">对比图上翻</string>
     <string name="case_image_Contrast_down">对比图下翻</string>
     <string name="case_message_title">病历信息</string>
     <string name="case_result_show">诊断结果显示</string>
-    <string name="case_assessment_show">RCI评估显示</string>
+    <string name="case_assessment_show">诊断评估显示</string>
     <string name="case_assessment_result_show">病历评估结果</string>
     <string name="case_contrast_assessment_result_show">对比病历评估结果</string>
     <string name="case_diagnosis_result_show">病历诊断结果</string>
     <string name="case_contrast_diagnosis_result_show">对比病历诊断结果</string>
     <string name="case_only_two">只能选择两份病历进行对比</string>
     <string name="case_is_two">选择两个,可以进行病历对比</string>
+    <string name="case_image_video">视频列表</string>
 
     //---------------------------------------------系统中心模块
-
+    <string name="setting_sd_noMemory">SD卡内存不足，请更换SD卡</string>
     <string name="setting_backups_success_message">数据备份成功</string>
+    <string name="setting_backups_faild_message">数据备份失败</string>
     <string name="setting_recovery_success_message">数据恢复成功</string>
+    <string name="setting_recovery_faild_message">数据恢复失败</string>
     <string name="setting_data_clear_success_message">数据清除成功</string>
     <string name="setting_network_Unavailability">网络连接不可用，请切换网络...</string>
     <string name="setting_link_server_faild">服务器连接失败，请检查服务器设置</string>
     <string name="setting_local_sn">请输入本机SN号</string>
     <string name="setting_backups_loading">文件正在备份，请稍等...</string>
+    <string name="setting_download_file">文件正在下载，请稍等...</string>
     <string name="setting_recovery_loading">文件正在恢复，请稍等...</string>
     <string name="setting_ftp_server_title">请先设置FTP服务器</string>
+    <string name="setting_default_server">默认服务器</string>
     <string name="setting_ftp_server_success">FTP服务器设置成功</string>
     <string name="setting_ftp_server_error">请填写完整数据，否则将不能使用FTP备份和恢复</string>
     <string name="setting_ftp_backups">FTP备份</string>
     <string name="setting_local_backups">本地备份</string>
     <string name="setting_ftp_recovery">FTP恢复</string>
+    <string name="settint_no_sd">本地无SD卡</string>
     <string name="setting_local_recovery">本地恢复</string>
+    <string name="setting_data_base_have_data">您的数据库中已有数据，不能使用此功能！</string>
     <string name="setting_recovery_no_data">暂无备份数据，不能进行恢复</string>
     <string name="setting_input_terms">请输入术语</string>
     <string name="setting_save_Route">保存路径</string>
     <string name="setting_User_switching">用户切换</string>
     <string name="setting_User_management">用户管理</string>
     <string name="setting_Modify_password">修改密码</string>
+    <string name="setting_print_set">报告设置</string>
     <string name="setting_wifi">WIFI设置</string>
     <string name="setting_Networking_test">联网测试</string>
     <string name="setting_add_terms">添加术语</string>
     <string name="setting_advanced_setting">高级设置</string>
-    <string name="setting_Picture_editor">图片编辑</string>
+    <string name="setting_Picture_editor">图片标记</string>
     <string name="setting_data_backup">数据备份</string>
     <string name="setting_data_backupoast">没有外置SD卡,暂时无法备份数据到SD卡上</string>
     <string name="setting_data_recovery">数据恢复</string>
     <string name="setting_Parameter_configuration">参数配置</string>
     <string name="setting_removal">一键清除</string>
+    <string name="setting_Version_update">版本更新</string>
     <string name="setting_about_us">关于我们</string>
     <string name="setting_Common_problem">常见问题</string>
     <string name="setting_title">系统中心</string>
@@ -294,16 +613,21 @@
     <string name="setting_picture_Route">采集图片路径设置</string>
     <string name="setting_FTP_Route">FTP备份路径设置</string>
     <string name="setting_local_route">本地备份路径设置</string>
+    <string name="setting_Artwork_threshold">原图像和醋酸白图像阈值设置</string>
+    <string name="setting_Lipiodol_threshold">碘油图像阈值设置</string>
     <string name="setting_dialog_dissmiss">弹出框消失时间设置</string>
-    <string name="setting_please_change">请选择</string>
+    <string name="setting_please_change">报告中是否显示诊断结果？</string>
+    <string name="setting_Artwork_threshold_hint">请输入原图像和醋酸白图像清晰度的阈值</string>
+    <string name="setting_Lipiodol_threshold_hint">请输入碘油图像清晰度的阈值</string>
     <string name="setting_FTP_Route_hint">请输入FTP备份保存路径</string>
     <string name="setting_local_Route_hint">请输入本地备份保存路径</string>
     <string name="setting_dialog_dissmiss_hint">请输入对话框消失时间</string>
     <string name="setting_dialog_dissmiss_faild1">设置失败,时间设置不能为空</string>
-    <string name="setting_dialog_dissmiss_faild2">设置失败,时间设置不能为负数</string>
+    <string name="setting_dialog_dissmiss_faild2">设置失败,时间设置范围为3-15s</string>
     <string name="setting_dialog_dissmiss_success">时间设置成功</string>
     <string name="setting_Version_updata">版本更新</string>
     <string name="setting_Version_updata_message">发现新版本！请及时更新</string>
+    <string name="setting_Version_updata_title">报告系统2.0版本升级</string>
     <string name="setting_Version_Newest">已经是最新版本，不需要进行更新</string>
     <string name="setting_Restore_factory_settings">恢复出厂设置</string>
     <string name="setting_Restore_factory_settings_message">本次清除会清空数据库数据，本地保存数据以及采集到的图像信息。</string>
@@ -324,46 +648,48 @@
     <string name="setting_new_password_sure">确认密码:</string>
     <string name="setting_new_password_sure_hint">请再次输入新密码</string>
     <string name="setting_clear_success">清除成功</string>
-    <string name="setting_wifi_name">选择需要保存的wifi名称</string>
+    <string name="setting_save_success">清除成功</string>
+    <string name="setting_wifi_name">选择需要保存的WIFI名称</string>
     <string name="setting_gps">设置GPS</string>
-    <string name="setting_gps_list">需要先打开GPS开关，才能搜索到附近的wifi信息</string>
+    <string name="setting_gps_list">需要先打开GPS开关，才能搜索到附近的WIFI信息</string>
     <string name="setting_wifi_title">设置</string>
-    <string name="setting_Treasures_of_vision_wifi">视珍宝WIFI</string>
+    <string name="setting_Treasures_of_vision_wifi">主机WIFI</string>
     <string name="setting_printer_wifi">打印机WIFI</string>
     <string name="setting_WIFI_name">WIFI名称：</string>
     <string name="setting_WIFI_name_hint">请输入WIFI名称</string>
     <string name="setting_WIFI_password">WIFI密码：</string>
     <string name="setting_WIFI_password_hint">请输入WIFI密码</string>
-    <string name="setting_link_wifi_success">恭喜您连上了指定的wifi</string>
-    <string name="setting_link_wifi_test">正在尝试连接指定的wifi,已经等候了</string>
-    <string name="setting_link_wifi_faild">没有连接上指定的wifi，请您重新测试连接</string>
+    <string name="setting_link_wifi_success">恭喜您连上了指定的WIFI</string>
+    <string name="setting_link_wifi_test">正在尝试连接指定的WIFI,已经等候了</string>
+    <string name="setting_link_wifi_faild">没有连接上指定的WIFI，请您重新测试连接</string>
     <string name="setting_link_network_stop">网络连接测试已经停止了</string>
     <string name="setting_link_network_success">3g/4g连接测试连接成功</string>
     <string name="setting_link_network_faild">3g/4g网络连接失败</string>
     <string name="setting_link_test">正在测试连接网络中...</string>
-    <string name="setting_link_wifi_testting">正在尝试连接wifi中,请稍后</string>
+    <string name="setting_link_wifi_testting">正在尝试连接WIFI中,请稍后</string>
     <string name="setting_button_test">请点击按钮测试</string>
     <string name="setting_button_printer_test">惠普打印机连接测试</string>
-    <string name="setting_button_Treasures_of_vision_test">数码电子阴道镜连接测试</string>
+    <string name="setting_button_Treasures_of_vision_test">主机连接测试</string>
     <string name="setting_button_network_test">3G/4G 网络连接测试</string>
     <string name="setting_button_test_stop">停止网络连接测试</string>
     <string name="setting_sd">不能对sd卡操作</string>
-    <string name="setting_edit_no_more">您已经保存了三张编辑过的图像了，现在已经不能再编辑了,可以进入图片管理界面删除已经编辑好的图片</string>
+    <string name="setting_edit_no_more">您已经保存了三张标记过的图像了，现在已经不能再标记了,可以进入图片管理界面删除已经标记好的图片</string>
     <string name="setting_file_null">文件夹路径为空</string>
     <string name="setting_length">长度</string>
     <string name="setting_acreage">面积</string>
     <string name="setting_picture_saved">您已经保存过这张图片了</string>
+    <string name="setting_picture_non_edit">您还未标记这张图片</string>
     <string name="setting_picture_manage">图片管理</string>
     <string name="setting_picture_preview">正在刷新</string>
-    <string name="setting_picture_edit_yes">已编辑图片</string>
-    <string name="setting_picture_edit_no">未编辑图片</string>
+    <string name="setting_picture_edit_yes">已标记图片</string>
+    <string name="setting_picture_edit_no">未标记图片</string>
     <string name="setting_picture_save_success">保存成功</string>
     <string name="setting_permission_closed">你没有打开权限</string>
     <string name="setting_picture_show_faild">图片显示失败</string>
     <string name="setting_Repaint">重绘</string>
     <string name="setting_picture_select">选取图片</string>
     <string name="setting_Running_equipment">运行设备：</string>
-    <string name="setting_Running_equipment_hint">Android平板电脑,Android智能手机</string>
+    <string name="setting_Running_equipment_hint">Android平板电脑</string>
     <string name="setting_Processor">处  理  器：</string>
     <string name="setting_Processor_hint">kernel 2.6以上</string>
     <string name="setting_Storage_space">存储空间：</string>
@@ -372,42 +698,52 @@
     <string name="setting_Run_memory_hint">不低于3G</string>
     <string name="setting_android_version">Android版本：</string>
     <string name="setting_android_version_hint">不低于4.4</string>
-
-
     <string name="setting_app_name">软件名称 </string>
-    <string name="setting_app_name1">：系统报告1.0</string>
-    <string name="setting_Version_specification_model">版本规格型号</string>
-    <string name="setting_Version_specification_model_ancer">：FLY_SZB_P</string>
-    <string name="setting_version">发布版本号</string>
+    <string name="setting_app_name1">：报告系统2.0</string>
+    <string name="setting_Version_specification_model">软件型号规格</string>
+    <string name="setting_Version_specification_model_ancer">：FLY-SZB-S</string>
+    <string name="setting_version">软件发布版本</string>
     <string name="setting_version_ancer">：V</string>
-    <string name="setting_version_all">完整版本号</string>
-    <string name="setting_version_all_ancer">：SZB_V1.0_675</string>
-
-
-    <string name="setting_ftp_disconnect">与FTP断开连接</string>
+    <string name="setting_version_all">软件完整版本</string>
+    <string name="setting_version_all_ancer">：V2.0.0.0.1176</string>
     <string name="setting_ordinary_register">普通用户如何注册?</string>
     <string name="setting_select_patient_message">如何查询病人登记的信息?</string>
+    <string name="setting_Treasures_of_vision_modify">如何修改主机的设备名称?</string>
+    <string name="setting_Treasures_of_vision_delete">如何删除主机?</string>
+    <string name="setting_Treasures_of_vision_link_faild">主机连接不上怎么办?</string>
     <string name="setting_print_attention">打印报告时需要注意的问题?</string>
     <string name="setting_select_case">如何查看病人的病历?</string>
     <string name="setting_Contrast_case">如何对比病人的病历?</string>
+    <string name="setting_removal_used">一键清除功能怎么使用?</string>
+    <string name="setting_Treasures_of_vision_light">如何设置主机的白光绿光?</string>
     <string name="setting_diagnosis_delete">如何删除诊断术语?</string>
-    <string name="setting_picture_edit">如何对患者的图片进行编辑?</string>
+    <string name="setting_picture_edit">如何对患者的图片进行标记?</string>
     <string name="setting_ordinary_register_show1">1 : 第一次登录此软件时,先注册一个Admin用户,因为Admin账号已经默认，所以只需要填写密码就可以,然后填写邮箱和您所在的医院及科室,然后点击【保存】</string>
     <string name="setting_ordinary_register_show2">2 : 注册普通用户时,只需要填写账号和密码及邮箱即可完成注册</string>
     <string name="setting_select_patient_message_show1">1 : 在患者信息界面点击【登记查询】，跳转至查询条件界面</string>
     <string name="setting_select_patient_message_show2">2 : 如果需要查询该账户名下所有的患者信息，直接点击【查询】；如果需要查询特定的患者信息，可以输入查询条件，点击【查询】(查询条件不需要精确，可以输入特定信息，该账户名下包含此条件的患者信息会被全部查询到)</string>
     <string name="setting_select_patient_message_show3">3 : Admin用户可以查询出所有未生成报告的患者信息，普通用户只可以查询自己名下未生成报告的患者信息</string>
+    <string name="setting_Treasures_of_vision_modify_show1">1 : 在图像获取界面点击已经查询到的主机的修改按钮，如图中红圈标记所示：</string>
+    <string name="setting_Treasures_of_vision_modify_show2">2 ： 在弹出的对话框中输入设备名称，完成后点击【确定】</string>
+    <string name="setting_Treasures_of_vision_delete_show1">1 : 在图像获取界面点击已经查询到的主机的删除按钮，如图中红圈标记所示：</string>
+    <string name="setting_Treasures_of_vision_delete_show2">2 : 点击后设备信息被清空，如果需要重新连接主机，点击右上角搜索按钮（需要有一个未生成报告的患者）</string>
+    <string name="setting_Treasures_of_vision_link_faild_show1">1 : 尝试重新在系统设置里面设置主机的WIFI ,【系统设置】->【WIFI设置】 </string>
+    <string name="setting_Treasures_of_vision_link_faild_show2">2 : WIFI保存之后,再去图像获取界面自动搜索主机</string>
+    <string name="setting_Treasures_of_vision_link_faild_show3">3 : 如果经过前两步还是连接不上主机,尝试将软件重新启动</string>
     <string name="setting_print_attention_show1">1 : 如果在生成报告的过程当中，PDF报告生成失败,可以在 【菜单】->【报告修改】->选中PDF报告,然后修改PDF报告,点击生成报告就可以了</string>
     <string name="setting_select_case_show">1 : 选中【病历管理】->输入查询条件(条件可以为空),然后点击【查询】->直接点击你需要查看的病人,然后显示出病人的病历信息</string>
     <string name="setting_Contrast_case_show1">1 : 选中【病历管理】->输入查询条件(条件可以为空),然后点击【查询】</string>
     <string name="setting_Contrast_case_show2">2 : 选中两个你要对比的病历,然后随意点击其中一个选中的病历即可</string>
+    <string name="setting_removal_used_show">1 : 一键清除需要连接主机,手动连接主机的WIFI之后,再点击一键清除按钮,点击【确认】按钮,就能删除主机里面的照片和视频以及本地的所有数据</string>
+    <string name="setting_Treasures_of_vision_light_show1">1 : 选中【图像获取】进入到主机界面之后,选中设置按钮</string>
+    <string name="setting_Treasures_of_vision_light_show2">2 : 选中白光或者绿光</string>
     <string name="setting_diagnosis_delete_show1">1 : 选中【报告打印】进入到报告打印界面之后,选中一个选项 </string>
     <string name="setting_diagnosis_delete_show2">2 : 长按要选出的选项,等弹出一个对话框时,点击【删除】即可</string>
-    <string name="setting_picture_edit_show1">1 : 选中【系统设置】进入到系统设置界面之后,选中【图片编辑】</string>
-    <string name="setting_picture_edit_show2">2 : 选中需要编辑图片的患者</string>
-    <string name="setting_picture_edit_show3">3 : 选中一张需要编辑的图片,点击之后就可以开始编辑了</string>
-    <string name="setting_WeChat">视珍宝微信公共平台</string>
-    <string name="setting_The_official_website">视珍宝官网</string>
+    <string name="setting_picture_edit_show1">1 : 选中【系统设置】进入到系统设置界面之后,选中【图片标记】</string>
+    <string name="setting_picture_edit_show2">2 : 选中需要标记图片的患者</string>
+    <string name="setting_picture_edit_show3">3 : 选中一张需要标记的图片,点击之后就可以开始标记了</string>
+    <string name="setting_WeChat">上海法路源医疗器械有限公司微信公众号</string>
+    <string name="setting_The_official_website">上海法路源医疗器械有限公司官网</string>
     <string name="setting_version_message">版本信息</string>
     <string name="setting_local_sn_message">本机SN号</string>
     <string name="setting_server_ip">服  务  器  IP</string>
@@ -418,8 +754,13 @@
     <string name="setting_server_name_hint">请输入FTP服务器的用户名</string>
     <string name="setting_server_password">密             码</string>
     <string name="setting_server_password_hint">请输入FTP服务器的用户密码</string>
+    <string name="setting_connectwifi">正在连接视诊宝的WIFI</string>
     <string name="setting_next">下一步</string>
     <string name="setting_delete_sure_again">请再次确认</string>
+    <string name="setting_database_title">清除数据库</string>
+    <string name="setting_backuo_faild">数据备份失败</string>
+    <string name="setting_print_display">显示</string>
+    <string name="setting_print_nodisplay">不显示</string>
     //--------------------------------------------超级超级用户
 
     <string name="super_manager">管理Admin用户密码</string>
@@ -446,6 +787,7 @@
     <string name="term_cytology15">非典型颈管/不明来源腺细胞倾向瘤变</string>
     <string name="term_cytology16">AIS（子宫颈管原位腺癌）</string>
     <string name="term_cytology17">子宫颈管腺癌</string>
+    <string name="term_cytology18">子宫内膜腺癌</string>
 
     <string name="term_HPV_DNA1">非 HPV16/18高危型</string>
     <string name="term_HPV_DNA2">HPV DNA检测+</string>
@@ -464,6 +806,7 @@
     <string name="term_HPV_DNA15"></string>
     <string name="term_HPV_DNA16"></string>
     <string name="term_HPV_DNA17"></string>
+    <string name="term_HPV_DNA18"></string>
 
     <string name="term_symptom1">分泌物脓性，带异味</string>
     <string name="term_symptom2">妊娠期阴道流血</string>
@@ -482,6 +825,7 @@
     <string name="term_symptom15">孕前检查</string>
     <string name="term_symptom16">常规体检</string>
     <string name="term_symptom17"></string>
+    <string name="term_symptom18"></string>
 
 
     <string name="term_Assessment1">鳞柱交界完全可见</string>
@@ -501,6 +845,7 @@
     <string name="term_Assessment15"></string>
     <string name="term_Assessment16"></string>
     <string name="term_Assessment17"></string>
+    <string name="term_Assessment18"></string>
 
     <string name="term_Lesion1">宫颈组织炎症变化</string>
     <string name="term_Lesion2">鳞状上皮化生</string>
@@ -519,6 +864,7 @@
     <string name="term_Lesion15">原位腺癌</string>
     <string name="term_Lesion16"></string>
     <string name="term_Lesion17"></string>
+    <string name="term_Lesion18"></string>
 
     <string name="term_colposcopic1">白斑（角化，过度角化）</string>
     <string name="term_colposcopic2">微小乳状或微小脑回状醋酸白色上皮</string>
@@ -537,13 +883,14 @@
     <string name="term_colposcopic15">薄的醋白上皮不规则，地图样边界</string>
     <string name="term_colposcopic16">细镶嵌</string>
     <string name="term_colposcopic17">细小点状血管</string>
+    <string name="term_colposcopic18">微小乳状或微小脑回状醋酸白色上皮</string>
 
     <string name="term_Suspected1">子宫颈未见上皮内病变或恶性变</string>
     <string name="term_Suspected2">子宫颈鳞状上皮低度病变</string>
     <string name="term_Suspected3">子宫颈鳞状上皮高度病变</string>
     <string name="term_Suspected4">可疑子宫颈癌</string>
     <string name="term_Suspected5">可疑子宫颈腺性病变</string>
-    <string name="term_Suspected6">其他（杂类）：包括湿疣，炎症，息肉，子宫颈治疗后的改变，如狭窄、变形、扭曲、瘀hen、增厚或者粘膜脆性增加、子宫颈子宫内膜异位等</string>
+    <string name="term_Suspected6">其他（杂类）：包括湿疣，炎症，息肉，子宫颈治疗后的改变，如狭窄、变形、扭曲、瘀痕、增厚或者粘膜脆性增加、子宫颈子宫内膜异位等</string>
     <string name="term_Suspected7">阴道镜检查后处理建议</string>
     <string name="term_Suspected8"></string>
     <string name="term_Suspected9"></string>
@@ -555,6 +902,7 @@
     <string name="term_Suspected15"></string>
     <string name="term_Suspected16"></string>
     <string name="term_Suspected17"></string>
+    <string name="term_Suspected18"></string>
 
     <string name="term_attention1">7个工作日回医院取报告</string>
     <string name="term_attention2">24小时后自取阴道纱布，注意出血及分泌物情况</string>
@@ -573,6 +921,7 @@
     <string name="term_attention15"></string>
     <string name="term_attention16"></string>
     <string name="term_attention17"></string>
+    <string name="term_attention18"></string>
 
     <string name="term_opinion1">宫颈细胞学检查</string>
     <string name="term_opinion2">宫颈组织摘除术</string>
@@ -591,6 +940,7 @@
     <string name="term_opinion15"></string>
     <string name="term_opinion16"></string>
     <string name="term_opinion17"></string>
+    <string name="term_opinion18"></string>
 
 
     <string name="term_border1">湿疣样或小乳头样轮廓，模糊醋酸白色上皮，边缘呈云絮状或羽毛状，成
@@ -611,6 +961,7 @@
     <string name="term_border15"></string>
     <string name="term_border16"></string>
     <string name="term_border17"></string>
+    <string name="term_border18"></string>
 
 
     <string name="term_color1">明亮雪白，一过性、模糊、半透明的醋酸白色上皮</string>
@@ -630,6 +981,7 @@
     <string name="term_color15"></string>
     <string name="term_color16"></string>
     <string name="term_color17"></string>
+    <string name="term_color18"></string>
 
 
     <string name="term_blood_vessel1">细点状或细小镶嵌，细口径的血管，形态不清晰，毛细血管间距狭窄</string>
@@ -649,6 +1001,7 @@
     <string name="term_blood_vessel15"></string>
     <string name="term_blood_vessel16"></string>
     <string name="term_blood_vessel17"></string>
+    <string name="term_blood_vessel18"></string>
 
     <string name="term_Iodine_staining1">碘实验+），产生一种赤棕色。按以上标准（2/6）时，而碘染色实验-）时，即病变区域为芥末黄色时，视为低度病变</string>
     <string name="term_Iodine_staining2">部分区域染为浅棕色，斑驳的龟背样表现</string>
@@ -667,6 +1020,7 @@
     <string name="term_Iodine_staining15"></string>
     <string name="term_Iodine_staining16"></string>
     <string name="term_Iodine_staining17"></string>
+    <string name="term_Iodine_staining18"></string>
 
 
     <string name="term_Acetic_acid1"></string>
@@ -686,13 +1040,25 @@
     <string name="term_Acetic_acid15"></string>
     <string name="term_Acetic_acid16"></string>
     <string name="term_Acetic_acid17"></string>
+    <string name="term_Acetic_acid18"></string>
 
     <!-- 版本更新的相关信息-->
+    <string name="notification_title">正在下载...</string>
     <string name="notification_fail">下载失败</string>
+    <string name="notification_pagesize">安装包大小:</string>
+    <string name="notification_speed">下载速度:</string>
+    <string name="notification_ticker">开始下载</string>
+    <string name="notifyTitle">提示</string>
+    <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
 
     <string name="pdfcreate_Inspection_record">检查记录</string>
     <string name="pdfcreate_cervical_cytology">细胞学</string>
     <string name="pdfcreate_HPV">HPV_DNA</string>
     <string name="pdfcreate_check_data">检查时间</string>
     <string name="pdfcreate_check_doctor">检查医生</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="save_graff_toast">保存完成</string>
+    <string name="confirm_util">确定</string>
+
 </resources>

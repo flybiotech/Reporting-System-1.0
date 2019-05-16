@@ -12,22 +12,26 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextPaint;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity.R;
 import com.itextpdf.text.DocumentException;
+import com.shizhenbao.UI.MyEditTextDialog;
+import com.shizhenbao.adapter.Printdialogadapter;
 import com.shizhenbao.constant.DeviceOfSize;
-import com.shizhenbao.db.Backup;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.draw.GraffitiActivity;
 import com.shizhenbao.fragments.FragSetting;
@@ -35,14 +39,16 @@ import com.shizhenbao.pop.Diacrisis;
 import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.SystemSet;
 import com.shizhenbao.pop.User;
+import com.shizhenbao.util.BackupsUtils;
 import com.shizhenbao.util.Const;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
 import com.shizhenbao.util.PDFCreate;
 import com.util.AlignedTextUtils;
 import com.view.LoadingDialog;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.LitePal;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -50,8 +56,10 @@ import java.io.FilenameFilter;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static org.litepal.LitePalApplication.getContext;
 
@@ -69,15 +77,26 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
     private double screenInches;//屏幕的尺寸
     private LoadingDialog loadingDialog;
     EditText et_handle;
+    private RelativeLayout rl;
+    private LinearLayout ll;
+    private boolean isChina = true; //判断是否是英文的系统 true ：表示中文
+    SimpleDateFormat formatter = null; //转化时间
     public static final int REQ_CODE_GRAFFITI = 101;
     private TextView tv01,tv02,tv03,tv04,tv05,tv06,tv07,tv08,tv09,tv10,tv11,tv12,tv13,tv14,tv15,tv16,tv17,tv18;
     private String[] tvName;
     ListView listView_self = null;
     EditText edit_self = null;
+    int surface;
+    int color;
+    int vessel;
+    int stain;
+    private BackupsUtils backupsUtils;
+    private MyEditTextDialog myEditTextDialog;
+    SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();////用来存放CheckBox的选中状态，true为选中,false为没有选中
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         screenInches = DeviceOfSize.getScreenSizeOfDevice2(this);
         if (screenInches > 6.0) {
             setContentView(R.layout.activity_zhen_duan_xiugai);
@@ -107,19 +126,27 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
         et_color.setText(user.getColor());
         et_dianranse.setText(user.getDianranse());
         et_cusuan.setText(user.getCusuan());
+
         et_xueguan.setText(user.getXueguna());
         et_handle.setText(user.getHandle());
         loadingDialog = new LoadingDialog(this);
-
+        if(user.getCusuan()!=null&&!user.getCusuan().equals("")){
+            String dex=user.getCusuan().substring(0,1);
+            Const.sumnumberM=Integer.parseInt(dex);
+        }
+        surface=user.getSurfacenum();
+        color=user.getColornnum();
+        vessel=user.getVesselnum();
+        stain=user.getStainnum();
         PDFCreate.setPdfCreateInterfaceListener(this);
-
+//        et_cusuan.setEnabled(false);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         user= new LoginRegister().getUserName(Integer.parseInt(id));//根据pId得到对应的User
-        List<SystemSet> systemSet=DataSupport.findAll(SystemSet.class);
+        List<SystemSet> systemSet=LitePal.findAll(SystemSet.class);
         for(int i=0;i<systemSet.size();i++){
            String localsn=systemSet.get(0).getLocal_svn();
             Const.sn=localsn;
@@ -127,12 +154,16 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
     }
 
     private void initView() {
-        tvName = new String[]{getContext().getString(R.string.print_patient_id), getContext().getString(R.string.print_diagnosis_result), getContext().getString(R.string.patient_name), getContext().getString(R.string.print_cytology), getContext().getString(R.string.print_HPV_DNA),getContext().getString(R.string.print_symptom),
+        tvName = new String[]{this.getString(R.string.print_patient_id), getContext().getString(R.string.print_diagnosis_result), getContext().getString(R.string.patient_name), getContext().getString(R.string.print_cytology), getContext().getString(R.string.print_HPV_DNA),getContext().getString(R.string.print_symptom),
                 getContext().getString(R.string.print_Overall_assessment), getContext().getString(R.string.print_Lesion_area), getContext().getString(R.string.print_colposcopic), getContext().getString(R.string.print_Suspected), getContext().getString(R.string.print_attention),getString(R.string.print_opinion),
                 getContext().getString(R.string.print_Assessment_results), getContext().getString(R.string.print_border),  getContext().getString(R.string.print_color), getContext().getString(R.string.print_blood_vessel),
                 getContext().getString(R.string.print_Iodine_staining), getContext().getString(R.string.print_Acetic_acid_change)};
         user= new LoginRegister().getUserName(Integer.parseInt(id));//根据pId得到对应的User
+        backupsUtils = new BackupsUtils(this);
 //        user.getImage();
+        rl= (RelativeLayout) findViewById(R.id.rl);
+        setVisible(true);
+        rl.requestFocus();
         btn_right = (Button) findViewById(R.id.btn_right);//这个是菜单按钮
         tv_title = (TextView)findViewById(R.id.title_text);//这个是标题栏
         bt_baocun= (Button)findViewById(R.id.bt_baocun);//保存按钮
@@ -207,6 +238,8 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
         et_handle.setFocusableInTouchMode(false);
         et_handle.setClickable(true);
         btn_right.setVisibility(View.INVISIBLE);
+//        et_cusuan.setEnabled(false);
+        myEditTextDialog = new MyEditTextDialog(ZhenDuanXiugaiActivity.this);
     }
 
     private void initClick(){
@@ -246,6 +279,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
         tv13 = (TextView) findViewById(R.id.tv_print_13);
         TextPaint tp1 = tv13.getPaint();
         tp1.setFakeBoldText(true);
+        tv13.setVisibility(View.INVISIBLE);
         tv14 = (TextView) findViewById(R.id.tv_print_14);
         tv15 = (TextView) findViewById(R.id.tv_print_15);
         tv16 = (TextView) findViewById(R.id.tv_print_16);
@@ -266,8 +300,13 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
 
     //修改数据库
     private void initBaocun(){
-        SimpleDateFormat formatter   =   new   SimpleDateFormat   ("yyyy年MM月dd日   HH:mm:ss");//系统当前时间
-        Date curDate =  new Date(System.currentTimeMillis());
+        if (isChina) {
+            formatter   =   new   SimpleDateFormat   ("yyyy年MM月dd日   HH:mm:ss", Locale.getDefault());//系统当前时间
+        } else {
+            formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss 'CST' yyyy", Locale.ENGLISH);
+        }
+
+        Date curDate =  new Date();
         user.setAdvice(et_yijian.getText().toString());
         user.setHpv_dna(et_dna.getText().toString());
         user.setSymptom(et_zhengzhuang.getText().toString());
@@ -289,6 +328,10 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
         user.setDianranse(et_dianranse.getText().toString().trim());
         user.setCusuan(et_cusuan.getText().toString().trim());
         user.setHandle(et_handle.getText().toString().trim());
+        user.setSurfacenum(surface);//边界评分
+        user.setColornnum(color);//颜色评分
+        user.setVesselnum(vessel);//血管评分
+        user.setStainnum(stain);//碘染色评分
         user.setPdfPath(user.getGatherPath()+"/"+(user.getpId() +"_"+ user.getpName() + ".pdf"));
         user.save();//保存所有改变
         OneItem.getOneItem().setC(false);//如果为true,诊断信息可以添加，如果为false,诊断信息不可以添加
@@ -297,6 +340,11 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
     }
     //清除重新输入
     private void give_up(){
+        Const.sumnumberM=0;
+        surface=-1;
+        stain=-1;
+        vessel=-1;
+        color=-1;
         et_yindaojin.setText("");
         et_xibaoxue.setText("");
         et_zhengzhuang.setText("");
@@ -315,7 +363,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
     }
     //跳转到照片展示页面
     private void openImage(){
-        Intent intent=new Intent(getContext(),ImageActivity.class);
+        Intent intent=new Intent(ZhenDuanXiugaiActivity.this,ImageActivity.class);
         intent.putExtra("msg",et_bianhao.getText().toString());//将编号传递过去
         intent.putExtra("msgName",et_name.getText().toString());
         startActivity(intent);
@@ -332,7 +380,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                 @Override
                 public void run() {
                     try {
-                        new PDFCreate(getContext()).initView(u,2);//点击生成pdf文件
+                        new PDFCreate(ZhenDuanXiugaiActivity.this).initView(u,2);//点击生成pdf文件
                         OneItem.getOneItem().setD(1);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -370,7 +418,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                 }
             }else if(showList.size()==0){
                 for(int j=0;j<3;j++){
-                    OneItem.getOneItem().getList().add(Environment.getExternalStorageDirectory().getAbsolutePath() + "/AFLY/kb.png");
+                    OneItem.getOneItem().getList().add(Environment.getExternalStorageDirectory().getAbsolutePath() + "/AFLY/blank.png");
                 }
             }else {
                 for(int i=0;i<3;i++){
@@ -393,7 +441,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                     Resources res = this.getResources();//添加空白图片到本地文件夹
                     BitmapDrawable d = (BitmapDrawable) res.getDrawable(R.drawable.kb);
                     Bitmap img = d.getBitmap();
-                    String fn = "kb.png";
+                    String fn = "blank.png";
                     String path = new Item().getSD() + "/AFLY/" + fn;
                     try{
                         OutputStream os = new FileOutputStream(path);
@@ -405,7 +453,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                     openImage();
                 break;
             case R.id.bt_baocun:
-                final List<Doctor>doctorList=DataSupport.where("dName=?","Admin").find(Doctor.class);//只有超级用户才可以设置医院，查询Admin表中的数据
+                final List<Doctor>doctorList=LitePal.where("dName=?","Admin").find(Doctor.class);//只有超级用户才可以设置医院，查询Admin表中的数据
                 for(int i=0;i<doctorList.size();i++){
                     if(!doctorList.get(0).getEdit_hos_name().equals("")&&!doctorList.get(0).getEdit_hos_keshi().equals("")){//判断医院名称是否为空
                         SystemSet s=new LoginRegister().getSystem();//新建数据库记录
@@ -419,17 +467,21 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                         if(doctor.isdAdmin()){
                             if(doctorList.get(0).getEdit_hos_name().equals("")){
 //                                a=3;
-                                Toast.makeText(getContext(), getString(R.string.print_hospital_setting), Toast.LENGTH_SHORT).show();
-                                new FragSetting().HosName(getContext());
+                                MyToast.showToast(this,getString(R.string.print_hospital_setting));
+//                                Toast.makeText(getContext(), getString(R.string.print_hospital_setting), Toast.LENGTH_SHORT).show();
+//                                new FragSetting().HosName(getContext());
+                                myEditTextDialog.editDialogShow(getString(R.string.print_hospital_setting),0);
                             }else if(doctorList.get(0).getEdit_hos_keshi().equals("")){
 //                                a=3;
-                                Toast.makeText(getContext(),getString(R.string.print_department_setting), Toast.LENGTH_SHORT).show();
-                                new FragSetting().Departments(getContext());
+                                MyToast.showToast(this,getString(R.string.print_department_setting));
+//                                Toast.makeText(getContext(),getString(R.string.print_department_setting), Toast.LENGTH_SHORT).show();
+                                myEditTextDialog.editDialogShow(getString(R.string.print_department_setting),1);
                             }
                         }else {
                             loadingDialog.dismiss();
 //                            user.setIs_diag(1);
-                            Toast.makeText(getContext(),getString(R.string.print_setting_message), Toast.LENGTH_SHORT).show();
+                            MyToast.showToast(this,getString(R.string.print_setting_message));
+//                            Toast.makeText(getContext(),getString(R.string.print_setting_message), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -484,7 +536,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                 // 图片路径
                 User user=new LoginRegister().getUserName(Integer.parseInt(et_bianhao.getText().toString().trim()));
 
-                String mImagePath = Environment.getExternalStorageDirectory()+"/AFLY/fwt.png";
+                String mImagePath = Environment.getExternalStorageDirectory()+"/AFLY/position.png";
                 String mSavePath=user.getGatherPath()+"/";
 //                    Toast.makeText(getContext(), "保存路径："+mSavePath, Toast.LENGTH_SHORT).show();
                 GraffitiActivity.startActivityForResult(this, mImagePath,mSavePath, true,REQ_CODE_GRAFFITI);
@@ -494,7 +546,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
     }
     private void showTerm(int temp){
         diaList=new ArrayList<>();
-        diacrisisList= DataSupport.findAll(Diacrisis.class);
+        diacrisisList= LitePal.findAll(Diacrisis.class);
         for(int i=0;i<diacrisisList.size();i++){
             switch (temp){
                 case 1:
@@ -567,7 +619,9 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                     if(diacrisisList.get(i).getHandle()!=null&&!"".equals(diacrisisList.get(i).getHandle())){
                         diaList.add(diacrisisList.get(i).getHandle());
                     }
-                default:break;
+                    break;
+                default:
+                    break;
             }
         }
         lv_addDia(diaList,temp);
@@ -583,7 +637,8 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             give_up();//清除
-                            Toast.makeText(ZhenDuanXiugaiActivity.this,R.string.print_data_clear, Toast.LENGTH_SHORT).show();
+                            MyToast.showToast(ZhenDuanXiugaiActivity.this,getString(R.string.print_data_clear));
+//                            Toast.makeText(ZhenDuanXiugaiActivity.this,R.string.print_data_clear, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton(getString(R.string.patient_no_empty), new DialogInterface.OnClickListener() {
@@ -598,61 +653,110 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
         }
         dialogdelete.show();
     }
-    private void lv_addDia(final List<String> list, final int temp){
+
+
+    //将之前选择的术语对应的选择显示出来
+    private void showSelected(String data,List<String> listTerm,ListView listView){
+        if(listTerm.size() > 0){
+            for(int i = 0;i<listTerm.size();i++){
+                if(data.contains(listTerm.get(i))){
+                    sparseBooleanArray.put(i,true);
+                    listView.setItemChecked(i,true);
+                }
+            }
+        }
+    }
+
+    private Printdialogadapter printdialogadapter;
+    private void lv_addDia(final List<String> listTerm, final int temp){
+
 
         LinearLayout linearLayoutMain = new LinearLayout(this);//自定义一个布局文件
         linearLayoutMain.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
-        View view_self= LayoutInflater.from(this).inflate(R.layout.simple_list,null);
+        View view_self = LayoutInflater.from(this).inflate(R.layout.simple_list, null);
         linearLayoutMain.addView(view_self);
         view_self.setFadingEdgeLength(0);
         view_self.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        listView_self= (ListView) view_self.findViewById(R.id.lv_show);
-        edit_self= (EditText) view_self.findViewById(R.id.et_show);
-        ArrayAdapter selectAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
-        listView_self.setAdapter(selectAdapter);
+        listView_self = (ListView) view_self.findViewById(R.id.lv_show);
+        listView_self.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        edit_self = (EditText) view_self.findViewById(R.id.et_show);
+        printdialogadapter = new Printdialogadapter(this,listTerm);
+//        ArrayAdapter selectAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, list);
+        listView_self.setAdapter(printdialogadapter);
+        listView_self.setSelection(ListView.FOCUS_DOWN);
         new Item().setListViewHeightBasedOnChildren(listView_self);//重新计算listview每个item的高度
-        switch (temp){//给editText初始化值
+        switch (temp) {//给editText初始化值
             case 1:
-                edit_self.setText(et_xibaoxue.getText().toString().trim());
+                String cytology = et_xibaoxue.getText().toString().trim();
+                edit_self.setText(cytology);
+                showSelected(cytology,listTerm,listView_self);
                 break;
             case 2:
-                edit_self.setText(et_dna.getText().toString().trim());
+                String dna = et_dna.getText().toString().trim();
+                edit_self.setText(dna);
+                showSelected(dna,listTerm,listView_self);
                 break;
             case 3:
-                edit_self.setText(et_zhengzhuang.getText().toString().trim());
+                String diagnosis = et_zhengzhuang.getText().toString().trim();
+                edit_self.setText(diagnosis);
+                showSelected(diagnosis,listTerm,listView_self);
                 break;
             case 4:
-                edit_self.setText(et_pinggu.getText().toString().trim());
+                String assessment = et_pinggu.getText().toString().trim();
+                edit_self.setText(assessment);
+                showSelected(assessment,listTerm,listView_self);
                 break;
             case 5:
-                edit_self.setText(et_quyu.getText().toString().trim());
+                String region = et_quyu.getText().toString().trim();
+                edit_self.setText(region);
+                showSelected(region,listTerm,listView_self);
                 break;
             case 6:
-                edit_self.setText(et_yindaojin.getText().toString().trim());
+                String colposcopy = et_yindaojin.getText().toString().trim();
+                edit_self.setText(colposcopy);
+                showSelected(colposcopy,listTerm,listView_self);
                 break;
             case 7:
-                edit_self.setText(et_nizhen.getText().toString().trim());
+                String suspected = et_nizhen.getText().toString().trim();
+                edit_self.setText(suspected);
+                showSelected(suspected,listTerm,listView_self);
                 break;
             case 8:
-                edit_self.setText(et_yijian.getText().toString().trim());
+                String opinion = et_yijian.getText().toString().trim();
+                edit_self.setText(opinion);
+                showSelected(opinion,listTerm,listView_self);
                 break;
             case 9:
+                String color = et_color.getText().toString().trim();
                 edit_self.setText(et_color.getText().toString().trim());
+                showSelected(color,listTerm,listView_self);
                 break;
             case 10:
-                edit_self.setText(et_xueguan.getText().toString().trim());
+                String bloodvessel = et_xueguan.getText().toString().trim();
+                edit_self.setText(bloodvessel);
+                showSelected(bloodvessel,listTerm,listView_self);
                 break;
             case 11:
-                edit_self.setText(et_dianranse.getText().toString().trim());
+                String iodinestaining = et_dianranse.getText().toString().trim();
+                edit_self.setText(iodinestaining);
+                showSelected(iodinestaining,listTerm,listView_self);
                 break;
             case 12:
-                edit_self.setText(et_cusuan.getText().toString().trim());
+                String aceticacid = et_cusuan.getText().toString().trim();
+                edit_self.setText(aceticacid);
+                showSelected(aceticacid,listTerm,listView_self);
                 break;
             case 13:
-                edit_self.setText(et_bianjie.getText().toString().trim());
+                String boundary = et_bianjie.getText().toString().trim();
+                edit_self.setText(boundary);
+                showSelected(boundary,listTerm,listView_self);
                 break;
             case 14:
-                edit_self.setText(et_handle.getText().toString().trim());
+                String handle = et_handle.getText().toString().trim();
+                edit_self.setText(handle);
+                showSelected(handle,listTerm,listView_self);
+                break;
+            default:
                 break;
         }
 
@@ -662,212 +766,248 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                 .setNegativeButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (temp){//将edit的值赋给各个选项的输入框
+                        if(sparseBooleanArray != null){
+                            sparseBooleanArray.clear();
+                        }
+
+                        switch (temp) {//将edit的值赋给各个选项的输入框
                             case 1:
-                                et_xibaoxue.setText(edit_self.getText().toString());
+                                et_xibaoxue.setText(edit_self.getText().toString().trim());
                                 break;
                             case 2:
-                                et_dna.setText(edit_self.getText().toString());
+                                et_dna.setText(edit_self.getText().toString().trim());
                                 break;
                             case 3:
-                                et_zhengzhuang.setText(edit_self.getText().toString());
+                                et_zhengzhuang.setText(edit_self.getText().toString().trim());
                                 break;
                             case 4:
-                                et_pinggu.setText(edit_self.getText().toString());
+                                et_pinggu.setText(edit_self.getText().toString().trim());
                                 break;
                             case 5:
-                                et_quyu.setText(edit_self.getText().toString());
+                                et_quyu.setText(edit_self.getText().toString().trim());
                                 break;
                             case 6:
-                                et_yindaojin.setText(edit_self.getText().toString());
+                                et_yindaojin.setText(edit_self.getText().toString().trim());
                                 break;
                             case 7:
-                                et_nizhen.setText(edit_self.getText().toString());
+                                et_nizhen.setText(edit_self.getText().toString().trim());
                                 break;
                             case 8:
-                                et_yijian.setText(edit_self.getText().toString());
+                                et_yijian.setText(edit_self.getText().toString().trim());
                                 break;
                             case 9:
-                                et_color.setText(edit_self.getText().toString());
+                                et_color.setText(edit_self.getText().toString().trim());
                                 break;
                             case 10:
-                                et_xueguan.setText(edit_self.getText().toString());
+                                et_xueguan.setText(edit_self.getText().toString().trim());
                                 break;
                             case 11:
-                                et_dianranse.setText(edit_self.getText().toString());
+                                et_dianranse.setText(edit_self.getText().toString().trim());
                                 break;
                             case 12:
-                                et_cusuan.setText(edit_self.getText().toString());
+                                et_cusuan.setText(edit_self.getText().toString().trim());
                                 break;
                             case 13:
-                                et_bianjie.setText(edit_self.getText().toString());
+                                et_bianjie.setText(edit_self.getText().toString().trim());
                                 break;
                             case 14:
-                                et_handle.setText(edit_self.getText().toString());
+                                et_handle.setText(edit_self.getText().toString().trim());
+                                break;
+                            default:
                                 break;
                         }
                         dialog.cancel();
                     }
                 }).create();
-//        dialog.setView(edit);
         dialog.setCanceledOnTouchOutside(false);//使除了dialog以外的地方不能被点击
         dialog.show();
-        listView_self.setFocusable(false);
+//        listView.setFocusable(false);
         listView_self.setOnItemClickListener(new AdapterView.OnItemClickListener() {//响应listview中的item的点击事件
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                switch (temp){//根据点击给edit赋值
+                boolean isChecked = false;
+                if(temp == 9||temp==10||temp==11||temp==13){//将listview 的多选改造成单选
+                    for(int i = 0;i < listTerm.size();i++){
+                        if(i != arg2){//只要不是点击的item,都设置为false,未点击状态
+                            sparseBooleanArray.put(i,false);
+                            listView_self.setItemChecked(i,false);
+                        }else {
+                            isChecked = sparseBooleanArray.get(arg2);
+                            if(isChecked){//如果处于选中状态，则取消该状态
+                                sparseBooleanArray.put(i,false);
+                                listView_self.setItemChecked(i,false);
+                            }else {//如果处于未选中状态，则修改为选中状态
+                                sparseBooleanArray.put(i,true);
+                                listView_self.setItemChecked(i,true);
+                            }
+                        }
+                    }
+                    isChecked = sparseBooleanArray.get(arg2);
+
+                }else {
+                    SparseBooleanArray sparseBooleanArray1 = listView_self.getCheckedItemPositions();
+                    isChecked = sparseBooleanArray1.get(arg2);
+                }
+                switch (temp) {//根据点击给edit赋值
                     case 1:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
-//                        diaList.remove(arg2);
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 2:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 3:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 4:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 5:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 6:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 7:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 8:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
-                    case 9:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                    case 9://颜色
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
-                    case 10:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                    case 10://血管
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
-                    case 11:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                    case 11://碘染色
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
-                    case 12:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                    case 12://评估结果
+                        edit_self.setText(listTerm.get(arg2));
                         break;
-                    case 13:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+                    case 13://边界
+                        setSelection(temp,isChecked,arg2,listTerm);
                         break;
                     case 14:
-                        edit_self.setText(edit_self.getText().toString()+list.get(arg2));
+
+                        setSelection(temp,isChecked,arg2,listTerm);
+                        break;
+                    default:
                         break;
                 }
                 onResume();
             }
         });
+
         listView_self.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                List<Diacrisis>diacrisisList;
+                List<Diacrisis> diacrisisList;
                 int diaId = 0;
-                switch (temp){
+                switch (temp) {
                     case 1:
-                        diacrisisList=DataSupport.where("cytology=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("cytology=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,1,list,i,listView_self,edit_self);
+                        initId(diaId, 1, listTerm, i, listView_self, edit_self);
                         break;
                     case 2:
-                        diacrisisList=DataSupport.where("dna=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("dna=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,2,list,i,listView_self,edit_self);
+                        initId(diaId, 2, listTerm, i, listView_self, edit_self);
                         break;
                     case 3:
-                        diacrisisList=DataSupport.where("Symptom=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("Symptom=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,3,list,i,listView_self,edit_self);
+                        initId(diaId, 3, listTerm, i, listView_self, edit_self);
                         break;
                     case 4:
-                        diacrisisList=DataSupport.where("Assessment=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("Assessment=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,4,list,i,listView_self,edit_self);
+                        initId(diaId, 4, listTerm, i, listView_self, edit_self);
                         break;
                     case 5:
-                        diacrisisList=DataSupport.where("region=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("region=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,5,list,i,listView_self,edit_self);
+                        initId(diaId, 5, listTerm, i, listView_self, edit_self);
                         break;
                     case 6:
-                        diacrisisList=DataSupport.where("Colposcopy=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("Colposcopy=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,6,list,i,listView_self,edit_self);
+                        initId(diaId, 6, listTerm, i, listView_self, edit_self);
                         break;
                     case 7:
-                        diacrisisList=DataSupport.where("Suspected=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("Suspected=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,7,list,i,listView_self,edit_self);
+                        initId(diaId, 7, listTerm, i, listView_self, edit_self);
                         break;
                     case 8:
-                        diacrisisList=DataSupport.where("attention=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("attention=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,8,list,i,listView_self,edit_self);
+                        initId(diaId, 8, listTerm, i, listView_self, edit_self);
                         break;
                     case 9:
-                        diacrisisList=DataSupport.where("color=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("color=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,9,list,i,listView_self,edit_self);
+                        initId(diaId, 9, listTerm, i, listView_self, edit_self);
                         break;
                     case 10:
-                        diacrisisList=DataSupport.where("xueguna=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("xueguna=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,10,list,i,listView_self,edit_self);
+                        initId(diaId, 10, listTerm, i, listView_self, edit_self);
                         break;
                     case 11:
-                        diacrisisList=DataSupport.where("dianranse=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("dianranse=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,11,list,i,listView_self,edit_self);
+                        initId(diaId, 11, listTerm, i, listView_self, edit_self);
                         break;
                     case 12:
-                        diacrisisList=DataSupport.where("cusuan=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("cusuan=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,12,list,i,listView_self,edit_self);
+                        initId(diaId, 12, listTerm, i, listView_self, edit_self);
                         break;
                     case 13:
-                        diacrisisList=DataSupport.where("bianjie=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("bianjie=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,13,list,i,listView_self,edit_self);
+                        initId(diaId, 13, listTerm, i, listView_self, edit_self);
                         break;
                     case 14:
-                        diacrisisList=DataSupport.where("handle=?",list.get(i)).find(Diacrisis.class);
-                        for(int j=0;j<diacrisisList.size();j++){
-                            diaId=diacrisisList.get(0).getDiaId();
+                        diacrisisList = LitePal.where("handle=?", listTerm.get(i)).find(Diacrisis.class);
+                        for (int j = 0; j < diacrisisList.size(); j++) {
+                            diaId = diacrisisList.get(0).getDiaId();
                         }
-                        initId(diaId,14,list,i,listView_self,edit_self);
+                        initId(diaId, 14, listTerm, i, listView_self, edit_self);
+                        break;
+                    default:
                         break;
                 }
                 return false;
@@ -876,7 +1016,7 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
     }
 
     private void initId(int diaId, final int temp, final List<String>list, final int m, final ListView listView,final EditText edit){
-        List<Diacrisis>diacrisisList=DataSupport.where("diaId=?",diaId+"").find(Diacrisis.class);
+        List<Diacrisis>diacrisisList=LitePal.where("diaId=?",diaId+"").find(Diacrisis.class);
         for(int i=0;i<diacrisisList.size();i++){
             dia=diacrisisList.get(0);
         }
@@ -1013,6 +1153,8 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                         selectAdapter13.notifyDataSetChanged();
                         listView.setAdapter(selectAdapter13);
                         break;
+                        default:
+                            break;
                 }
                 dialog.dismiss();
             }
@@ -1041,12 +1183,11 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                         initBaocun();//保存添加的诊断信息 并且生成PDF报告
                         onResume();//保存完成后刷新当前页面，使输入框为不可操作的状态
 //                        OneItem.getOneItem().setD(1);
-                        new Backup(ZhenDuanXiugaiActivity.this,Const.sn).initBackups();
+                        backupsUtils.initBackUpUser(1);
                     }else if(user.getImage()==2){
                         initBaocun();
                         onResume();
-                        new Backup(ZhenDuanXiugaiActivity.this,Const.sn).initBackups();
-//                        OneItem.getOneItem().setD(2);
+                        backupsUtils.initBackUpUser(1);
                     }
 
             }
@@ -1068,13 +1209,110 @@ public class ZhenDuanXiugaiActivity extends AppCompatActivity implements View.On
                 if (loadingDialog != null) {
                     loadingDialog.dismiss();
                 }
-                Toast.makeText(ZhenDuanXiugaiActivity.this, R.string.print_Report_success, Toast.LENGTH_SHORT).show();
+                MyToast.showToast(ZhenDuanXiugaiActivity.this,getString(R.string.print_Report_success));
+//                Toast.makeText(ZhenDuanXiugaiActivity.this, R.string.print_Report_success, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
 
     }
 
+    private void setSelection(int temp,boolean isChecked,int arg2,List<String>listTerm){
+        if(temp == 9||temp == 10||temp ==11 ||temp==13){
+            if(isChecked){
+                edit_self.setText((CharSequence) listTerm.get(arg2));
+                Const.sumnumberM += arg2;
+                Log.e("printer3",Const.sumnumberM+"  ,, cc");
+                if(temp == 9){
+                    if (Const.color != -1 && Const.sumnumberM != 0) {
+                        Const.sumnumberM -= Const.color;
+                    }
+                    Const.color = arg2;
+                }
+                if(temp == 10){
+                    if (Const.vessel != -1 && Const.sumnumberM != 0) {
+                        Const.sumnumberM -= Const.vessel;
+                    }
+                    Const.vessel = arg2;
+                }
+                if(temp == 11){
+                    if (Const.stain != -1 && Const.sumnumberM != 0) {
+                        Const.sumnumberM -= Const.stain;
+                    }
+                    Const.stain = arg2;
+                }
+                if(temp == 13){
+                    if (Const.surface != -1 && Const.sumnumberM != 0) {
+                        Const.sumnumberM -= Const.surface;
+                    }
+                    Const.surface = arg2;
+                }
+                Log.e("printer1",Const.sumnumberM+"  ,, aa");
+                if (Const.sumnumberM >= 0 && Const.sumnumberM <= 2) {
+                    et_cusuan.setText(Const.sumnumberM + "(CIN1)");
+                } else if (Const.sumnumberM >= 3 && Const.sumnumberM <= 4) {
+                    et_cusuan.setText(Const.sumnumberM + "(CIN1 or CIN2)");
+                } else if (Const.sumnumberM >= 5 && Const.sumnumberM <= 8) {
+                    et_cusuan.setText(Const.sumnumberM + "(CIN 2-3)");
+                }
+            }else {
+                edit_self.setText("");
+                if(temp == 9){
+                    Const.sumnumberM -= Const.color;
+                    Const.color = -1;
+                }
+                if(temp == 10){
+                    Const.sumnumberM -= Const.vessel;
+                    Const.vessel = -1;
+                }
+                if(temp == 11){
+                    Const.sumnumberM -= Const.stain;
+                    Const.stain = -1;
+                }
+                if(temp == 13){
+                    Const.sumnumberM -= Const.surface;
+                    Const.surface = -1;
+                }
+
+                Log.e("printer2",Const.sumnumberM+"  ,, bb");
+                if (Const.sumnumberM >= 0 && Const.sumnumberM <= 2) {
+                    et_cusuan.setText(Const.sumnumberM + "(CIN1)");
+                } else if (Const.sumnumberM >= 3 && Const.sumnumberM <= 4) {
+                    et_cusuan.setText(Const.sumnumberM + "(CIN1 or CIN2)");
+                } else if (Const.sumnumberM >= 5 && Const.sumnumberM <= 8) {
+                    et_cusuan.setText(Const.sumnumberM + "(CIN 2-3)");
+                }
+            }
+        }else {
+            if(isChecked){
+                edit_self.setText(listTerm.get(arg2) + ";" + edit_self.getText().toString().trim());
+            }else {
+                String data = edit_self.getText().toString().toString();
+                String click_data = listTerm.get(arg2);
+                String new_data = delete(data,click_data);
+                edit_self.setText(new_data);
+            }
+        }
+    }
+    //删除数组指定位置的数据
+    private String  delete(String data,String click_data){
+        String [] datas = data.split(";");
+        if(datas.length > 0){
+            List<String>list = Arrays.asList(datas);
+            for(int i =0; i < list.size();i++){
+                if(list.get(i).contains(click_data)){
+                    data = "";
+                    List<String>arraayList = new ArrayList<String>(list);
+                    arraayList.remove(click_data);
+                    for(int j=0;j<arraayList.size();j++){
+                        data += arraayList.get(j)+";";
+                    }
+                }
+            }
+        }
+
+        return data;
+    }
     @Override
     protected void onPause() {
         super.onPause();

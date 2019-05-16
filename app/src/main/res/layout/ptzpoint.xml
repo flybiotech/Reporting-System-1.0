@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#66bbbbbb"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:id="@+id/ctltop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:background="#ee666666">
+
+            <Button
+                android:id="@+id/topre"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_pre_on"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="@string/usepreset"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"></Button>
+
+            <Button
+                android:id="@+id/setpre"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_pre"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="@string/setpreset"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"></Button>
+
+            <Button
+                android:id="@+id/clearpre"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_pre"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="@string/clearpreset"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"></Button>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:background="#ee666666">
+
+            <Button
+                android:id="@+id/pre1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="1"
+                android:textAllCaps="false"></Button>
+
+            <Button
+                android:id="@+id/pre2"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="2"
+                android:textAllCaps="false"></Button>
+
+            <Button
+                android:id="@+id/pre3"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="3"
+                android:textAllCaps="false"></Button>
+
+            <Button
+                android:id="@+id/pre4"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="4"
+                android:textAllCaps="false"></Button>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:background="#ee666666">
+
+            <Button
+                android:id="@+id/pre5"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="5"
+                android:textAllCaps="false"></Button>
+
+            <Button
+                android:id="@+id/pre6"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="6"></Button>
+
+            <Button
+                android:id="@+id/pre7"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="7"></Button>
+
+            <Button
+                android:id="@+id/pre8"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="8"></Button>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:background="#ee666666">
+
+            <Button
+                android:id="@+id/pre9"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="9"></Button>
+
+            <Button
+                android:id="@+id/pre10"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="10"></Button>
+
+            <Button
+                android:id="@+id/pre11"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="11"></Button>
+
+            <Button
+                android:id="@+id/pre12"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="12"></Button>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:background="#ee666666">
+
+            <Button
+                android:id="@+id/pre13"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="13"></Button>
+
+            <Button
+                android:id="@+id/pre14"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="14"></Button>
+
+            <Button
+                android:id="@+id/pre15"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="15"></Button>
+
+            <Button
+                android:id="@+id/pre16"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pre_num"
+                android:clickable="true"
+                android:onClick="pre_btn_click"
+                android:text="16"></Button>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

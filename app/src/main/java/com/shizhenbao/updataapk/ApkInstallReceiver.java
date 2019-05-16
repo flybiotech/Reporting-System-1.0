@@ -13,6 +13,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.activity.R;
+import com.view.MyToast;
 
 import java.io.File;
 
@@ -89,7 +90,8 @@ public class ApkInstallReceiver extends BroadcastReceiver {
             }
 
         } else {
-            Toast.makeText(context, context.getString(R.string.notification_fail), Toast.LENGTH_SHORT).show();
+            MyToast.showToast(context, context.getString(R.string.notification_fail));
+//            Toast.makeText(context, context.getString(R.string.notification_fail), Toast.LENGTH_SHORT).show();
         }
     }
 

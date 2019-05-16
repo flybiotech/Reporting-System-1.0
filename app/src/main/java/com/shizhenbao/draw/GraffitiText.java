@@ -14,7 +14,7 @@ import static com.shizhenbao.draw.DrawUtil.GRAFFITI_PIXEL_UNIT;
 
 public class GraffitiText extends GraffitiSelectableItem {
     private final static Paint sPaint = new Paint();
-    private String mText;
+    private String mText="";
 
     public GraffitiText(GraffitiView.Pen pen, String text, float size, GraffitiColor color, int textRotate, int rotateDegree, float x, float y, float px, float py) {
         super(pen, size, color, textRotate, rotateDegree, x, y, px, py);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.shizhenbao.fragments.BaseFragment;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Const;
 import com.shizhenbao.util.Item;
+import com.view.MyToast;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -33,14 +35,14 @@ import java.util.List;
 public class YETFragment extends BaseFragment  {
     private GridView gv;
     //    private Button bt_rush;
-    private List<Item> list;
+//    private List<Item> list;
     String id;
     private User user;
     String gathPath;
     private List <Item>listitem=null;
     public ImageManagerAdapter adapter;
     private List<String>list1=new ArrayList<>();//病人照片路径集合
-    private boolean isVisibless=false;
+//    private boolean isVisibless=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +63,7 @@ public class YETFragment extends BaseFragment  {
     }
     public String initSelect(String id){
 
-        if(!id.equals("")||id!=null){
+        if(!TextUtils.isEmpty(id)){
             user=new LoginRegister().getUserName(Integer.parseInt(id));
         }
         gathPath=user.getGatherPath();
@@ -147,7 +149,8 @@ public class YETFragment extends BaseFragment  {
         com.orhanobut.logger.Logger.e(" 2 yes 编辑过的图像显示界面 OnCancleImage  ");
         list1= ImageManagerAdapter.getList();//选择病人上传图片集合
         if (list1.size() == 0) {
-            Toast.makeText(getContext().getApplicationContext(),getString(R.string.print_picture_no_choise), Toast.LENGTH_SHORT).show();
+            MyToast.showToast(getContext().getApplicationContext(),getString(R.string.print_picture_no_choise));
+//            Toast.makeText(getContext().getApplicationContext(),getString(R.string.print_picture_no_choise), Toast.LENGTH_SHORT).show();
             return;
         }
         for (int i=0;i<list1.size();i++) {

@@ -62,6 +62,6 @@ public class SelectAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        private TextView tv_pid, tv_pName,tv_pAge,tv_pTel;
+        private TextView tv_pid, tv_pName;
     }
 }

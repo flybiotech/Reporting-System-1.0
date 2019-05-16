@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.activity.R;
+import com.shizhenbao.util.LogUtil;
 
 /**
  * Created by dell on 2017/8/21.
@@ -21,6 +22,9 @@ import com.activity.R;
 
 public class WifiLoadingAnim extends View{
 
+    public final int WIFI_STATE_SUCCESS = 0; //wifi连接成功
+    public final int WIFI_STATE_PROCESS = 1;//wifi正在连接
+    public final int WIFI_STATE_FAIL = 2;  // wifi连接失败，
     private float mWidth = 0f;
     private Paint mPaint;
     //WiFi图像有几条圆弧
@@ -28,7 +32,7 @@ public class WifiLoadingAnim extends View{
     private static String TAG = "TAG_WifiLoadingAnim";
 
 
-    private ValueAnimator valueAnimator;
+    private static ValueAnimator valueAnimator;
     private float mAnimatedValue = 0.9f;
     //    这个构造方法只有一个参数Context上下文。当我们在JAVA代码中直接通过new关键在创建这个控件时，就会调用这个方法。
     public WifiLoadingAnim(Context context) {
@@ -86,13 +90,11 @@ public class WifiLoadingAnim extends View{
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        Log.e(TAG, "getMeasuredWidth: "+getMeasuredWidth()+"  getWidth: "+getWidth()+"  getMeasuredHeight: "+getMeasuredHeight()+"  getHeight: "+getHeight());
         if (getMeasuredWidth() > getHeight()) {
             mWidth = getMeasuredHeight();
         } else {
             mWidth = getMeasuredWidth();
         }
-        Log.e(TAG, "mWidth——onMeasure: "+mWidth );
     }
 
     @Override
@@ -101,9 +103,7 @@ public class WifiLoadingAnim extends View{
         canvas.save();//锁画布(为了保存之前的画布状态)
         //平移，将画布的坐标原点向左右方向移动x，向上下方向移动y.canvas的默认位置是在（0,0）
         canvas.translate(0, mWidth / signalSize);
-
-//        canvas.translate(0, mWidth);
-        Log.e(TAG, " mWidth / signalSize: "+( mWidth / signalSize) );
+        //       signalSize WiFi图像有几条圆弧
         mPaint.setStrokeWidth(mWidth / signalSize / 2 / 2 / 2);
         int scale = (int) ((mAnimatedValue * signalSize - (int) (mAnimatedValue * signalSize)) * signalSize) + 1;
         RectF rect = null;
@@ -136,14 +136,18 @@ public class WifiLoadingAnim extends View{
      *
      */
     public void startAnim() {
-//        stopAnim();
+//        if (mOnWifiStateMsg != null) {
+//            mOnWifiStateMsg.wifiStateMsg(WIFI_STATE_PROCESS);
+//        }
+
         startViewAnim(0f,1.0f,4000);
-
-
-
     }
 
     public void stopAnim() {
+//        if (mOnWifiStateMsg != null) {
+//
+//            mOnWifiStateMsg.wifiStateMsg(WIFI_STATE_SUCCESS);
+//        }
         if (valueAnimator != null) {
             /**
              * 也就是说，如果我们调用了setFillAfter(true)，动画结束的时候就不会调用clearAnimation()，mCurrentAnimation就不会被置空了。在我们实现的动画里，确实调用了setFillAfter(true)。。。
@@ -155,6 +159,7 @@ public class WifiLoadingAnim extends View{
             valueAnimator.end();
 //            mAnimatedValue = 0.9f;
             mAnimatedValue = 0.0f;
+            valueAnimator.removeAllUpdateListeners();
             /**
              * 在这么多线程当中，把主要是负责控制UI界面的显示、更新和控件交互的线程称为UI线程，由于onCreate()方法是由UI线程执行的，所以也可以把UI线程理解为主线程。其余的线程可以理解为工作者线程。
              invalidate()得在UI线程中被调动，在工作者线程中可以通过Handler来通知UI线程进行界面更新。
@@ -165,8 +170,13 @@ public class WifiLoadingAnim extends View{
     }
 
 
-    private ValueAnimator startViewAnim(float startF, final float endF, long time) {
-        valueAnimator = ValueAnimator.ofFloat(startF, endF);
+    private void startViewAnim(float startF, final float endF, long time) {
+        if (valueAnimator == null) {
+            valueAnimator = ValueAnimator.ofFloat(startF, endF);
+        }
+
+
+       valueAnimator.removeAllUpdateListeners();
         valueAnimator.setDuration(time);//动画执行的时间
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);//无限循环
@@ -196,13 +206,12 @@ public class WifiLoadingAnim extends View{
             //当动画结束时调用
             @Override
             public void onAnimationEnd(Animator animation) {
-
+//                LogUtil.e(TAG,"onAnimationEnd  当动画结束时调用");
             }
 
             //当动画取消时
             @Override
             public void onAnimationCancel(Animator animation) {
-
             }
 
             //当动画重复时
@@ -211,11 +220,25 @@ public class WifiLoadingAnim extends View{
 
             }
         });
+
         if (!valueAnimator.isRunning()) {
             valueAnimator.start();
         }
-        return valueAnimator;
     }
+
+
+
+    OnWifiStateMsg mOnWifiStateMsg;
+    public interface OnWifiStateMsg{
+        void wifiStateMsg(int mState);
+    }
+
+    public void setWifiStateMsg(OnWifiStateMsg mOnWifiStateMsg){
+        this.mOnWifiStateMsg = mOnWifiStateMsg;
+    }
+
+
+
 
 
 }

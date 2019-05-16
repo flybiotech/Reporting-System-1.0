@@ -10,7 +10,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/dp_20"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,60 +25,60 @@
                 android:id="@+id/textview_help_item_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"
-                android:lineSpacingExtra="10dp"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20"
+                android:lineSpacingExtra="@dimen/dp_10"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <ImageView
                 android:id="@+id/image_help_item_01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
                 android:scaleType="matrix" />
 
             <TextView
                 android:id="@+id/textview_help_item_02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"
-                android:lineSpacingExtra="10dp"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20"
+                android:lineSpacingExtra="@dimen/dp_10"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <ImageView
                 android:id="@+id/image_help_item_02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
                 android:scaleType="matrix" />
 
             <TextView
                 android:id="@+id/textview_help_item_03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"
-                android:lineSpacingExtra="10dp"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20"
+                android:lineSpacingExtra="@dimen/dp_10"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <ImageView
                 android:id="@+id/image_help_item_03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_10"
                 android:scaleType="matrix" />
 
         </LinearLayout>

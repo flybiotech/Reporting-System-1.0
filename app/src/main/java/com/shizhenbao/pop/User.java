@@ -1,6 +1,6 @@
 package com.shizhenbao.pop;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * Created by fly on 2017/3/23.
  */
 //测试账号： a 密码123
-public class  User extends DataSupport implements Serializable{
+public class  User extends LitePalSupport implements Serializable{
     private String pId;//病人的id
     private String pName;//病人的姓名
     private String tel;//病人的电话号码
@@ -57,9 +57,46 @@ public class  User extends DataSupport implements Serializable{
     private int image;//判断该患者是否选择图片,1否，2是
     private String gatherPath;//采集图片路径
 
+    private int surfacenum;//边界评分
+    private int colornnum;//颜色评分
+    private int vesselnum;//血管评分
+    private int stainnum;//碘染色评分
+
     private String cutPath;
 
     private String pdfPath;//pdf保存路径
+
+    public int getSurfacenum() {
+        return surfacenum;
+    }
+
+    public void setSurfacenum(int surfacenum) {
+        this.surfacenum = surfacenum;
+    }
+
+    public int getColornnum() {
+        return colornnum;
+    }
+
+    public void setColornnum(int colornnum) {
+        this.colornnum = colornnum;
+    }
+
+    public int getVesselnum() {
+        return vesselnum;
+    }
+
+    public void setVesselnum(int vesselnum) {
+        this.vesselnum = vesselnum;
+    }
+
+    public int getStainnum() {
+        return stainnum;
+    }
+
+    public void setStainnum(int stainnum) {
+        this.stainnum = stainnum;
+    }
 
     public int getImage() {
         return image;

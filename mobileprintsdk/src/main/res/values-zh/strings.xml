@@ -13,23 +13,38 @@
 <resources>
 
   <string name="title_activity_print_preview">打印预览</string>
-    <string name="paper_size">纸张大小</string>
-    <string name="lib_font"></string>
+  <string name="title_activity_print_place_holder">打印</string>
+  <string name="action_settings">设置</string>
+  <string name="print_preview_prompt">想象一个大型图像出现在下部</string>
+  <string name="learn_about_mobile_print">打印引导</string>
+  <string name="support">支持</string>
+  <string name="paper_size">纸张大小</string>
+  <string name="paper_type">纸张类型</string>
+  <string name="lib_font"></string>
 
   <string name="preview_spinner_4x5">4 x 5</string>
   <string name="preview_spinner_4x6">4 x 6</string>
   <string name="preview_spinner_5x7">5 x 7</string>
   <string name="preview_spinner_letter">8.5 x 11</string>
 
-    <!-- Print Preview -->
+  <string-array name="paper_type_array">
+    <item> 照片纸 </item>
+  </string-array>
+  <!-- Print Preview -->
   <string name="print_preview_menu_help">打印帮助</string>
   <string name="print_preview_menu_print_service_plugins">打印服务插件</string>
 
   <!-- Print Plugin installation -->
+  <string name="hp_print_plugin_alert_header">惠普打印插件</string>
+  <string name="install_hp_print_plugin_msg">你有惠普打印机吗？为了打印最好质量的照片，请安装惠普打印插件。</string>
+  <string name="update_hp_print_plugin_msg">你有惠普打印机吗？为了打印最好质量的照片，请更新惠普打印插件。</string>
+  <string name="enable_hp_print_plugin_msg">确认你的惠普打印插件可用。</string>
 
-    <!-- Print Plugin helper -->
+  <!-- Print Plugin helper -->
+  <string name="hp_print_helper_header">打印服务助手</string>
+  <string name="install_print_plugin_msg">为了打印最好质量的照片，请安装合适的插件并启动。</string>
 
-    <!-- Print Service Plugin Information -->
+  <!-- Print Service Plugin Information -->
   <string name="title_activity_print_service_plugin_info">打印服务信息</string>
   <string name="print_service_help_title_1">获取打印服务插件</string>
   <string name="print_service_help_msg_1">你必须安装打印服务插件。每个品牌的打印机都有自己的插件，使您可以使用移动设备打印。通用打印服务插件也可使用。选择为您提供最佳服务的插件。你可以随时添加额外的打印插件。</string>

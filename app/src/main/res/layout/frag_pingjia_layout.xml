@@ -7,7 +7,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/dp_20"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,12 +28,12 @@
                     android:id="@+id/textview_casepingjia01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:text="@string/case_assessment_result_show"
                     android:textAllCaps="false"
                     android:textColor="@color/textcase"
-                    android:textSize="@dimen/textViewNameSize"
+                    android:textSize="@dimen/dp_16"
 
                     />
 
@@ -37,10 +41,10 @@
                     android:id="@+id/textView_franzhenduan_newcase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:text=""
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
             </LinearLayout>
 
@@ -54,21 +58,21 @@
                     android:id="@+id/textview_casepingjia02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:text="@string/case_contrast_assessment_result_show"
                     android:textAllCaps="false"
                     android:textColor="@color/textcase"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
                 <TextView
                     android:id="@+id/textView_franzhenduan_oldcase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:text=""
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
 
             </LinearLayout>
         </LinearLayout>

@@ -14,6 +14,7 @@ import com.activity.R;
 import com.bumptech.glide.Glide;
 import com.shizhenbao.activity.PreviewActivity;
 import com.shizhenbao.util.Item;
+import com.view.ImageViewRotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class ImageAdapter extends BaseAdapter {
         if (view == null) {
             viewHolder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.gridviewlist, null);
-            viewHolder.iv = (ImageView) view.findViewById(R.id.iv);
+            viewHolder.iv = (ImageViewRotation) view.findViewById(R.id.iv);
             viewHolder.cb = (CheckBox) view.findViewById(R.id.cb);
             view.setTag(viewHolder);
         } else {
@@ -88,12 +89,15 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        private ImageView iv;
+        private ImageViewRotation iv;
         private CheckBox cb;
     }
 
     public static void setList() {
-        list1.clear();
+        if (list1 != null) {
+            list1.clear();
+        }
+
     }
 
     public static List getList() {//返回被选中图片的list集合

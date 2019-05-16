@@ -40,7 +40,8 @@ public class DimenTool {
                     //tempString = tempString.replaceAll(" ", "");
                     String start = tempString.substring(0, tempString.indexOf(">") + 1);
                     String end = tempString.substring(tempString.lastIndexOf("<") - 2);
-                    int num = Integer.valueOf(tempString.substring(tempString.indexOf(">") + 1, tempString.indexOf("</dimen>") - 2));
+//                    int num = Integer.valueOf(tempString.substring(tempString.indexOf(">") + 1, tempString.indexOf("</dimen>") - 2));
+                    int num=Integer.parseInt(tempString.substring(tempString.indexOf(">") + 1, tempString.indexOf("</dimen>") - 2));
 
 //                    sw360.append(start).append((int) Math.round(num * 0.6)).append(end).append("\n");
 //                    sw480.append(start).append((int) Math.round(num * 0.6)).append(end).append("\n");
@@ -113,9 +114,13 @@ public class DimenTool {
             out.println(text);
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if (out != null) {
+                out.close();
+            }
         }
 
-        out.close();
+
     }
 
     public static void main(String[] args) {

@@ -4,10 +4,15 @@ import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.os.Environment;
 
+import com.shizhenbao.util.Item;
+import com.shizhenbao.util.OneItem;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Comparator;
 
 /**
@@ -63,7 +68,7 @@ public class FileUtil {
             f.createNewFile();
             FileOutputStream fOut = null;
             fOut = new FileOutputStream(f);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, fOut);
             fOut.flush();
             fOut.close();
         } catch (FileNotFoundException e) {
@@ -76,18 +81,18 @@ public class FileUtil {
         return true;
     }
 
-    static class CompratorByLastModified implements Comparator<File> {
-        public int compare(File f1, File f2) {
-            long diff = f1.lastModified() - f2.lastModified();
-            if (diff > 0) {
-                return -1;
-            } else if (diff == 0) {
-                return 0;
-            } else {
-                return 1;
-            }
-        }
-    }
+//    static class CompratorByLastModified implements Comparator<File> {
+//        public int compare(File f1, File f2) {
+//            long diff = f1.lastModified() - f2.lastModified();
+//            if (diff > 0) {
+//                return -1;
+//            } else if (diff == 0) {
+//                return 0;
+//            } else {
+//                return 1;
+//            }
+//        }
+//    }
 
     /**
      * 获取图片缩略图
@@ -130,6 +135,9 @@ public class FileUtil {
     }
 
     public static boolean isFileExist(String path) {
+        if (path == null) {
+            return false;
+        }
         File file = new File(path);
         if(file.exists()) {
 
@@ -141,4 +149,79 @@ public class FileUtil {
 
     }
 
+    /**
+     * 获取文件大小（包括文件夹）
+     * @return
+     */
+    public static String getAutoFilesSize(){
+        String filepath=new Item().getSD()+"/"+ OneItem.getOneItem().getGather_path();
+        File file=new File(filepath);
+        long blockSize=0;
+        try {
+            if(file.isDirectory()){
+                blockSize=getFile(file);
+            }else {
+                blockSize=getFileSize(file);
+            }
+
+        }catch (Exception e){
+
+        }
+        return FormetFileSize(blockSize);
+    }
+    /**
+     * 获取本地单个文件的大小
+     */
+    public static long getFileSize(File file) {
+        long size = 0;
+        if (file.exists()) {
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(file);
+                size = fis.available();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (fis != null) {
+                        fis.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return size;
+    }
+
+    /*
+ 转换文件大小
+  */
+    private static String FormetFileSize(long fileS){
+        DecimalFormat df=new DecimalFormat("#.00");
+        String fileSizeString="";
+        String wrongSize="0GB";
+        if(fileS==0){
+            return wrongSize;
+        }
+        fileSizeString=df.format((double)fileS/1073741824)+"GB";
+        return fileSizeString;
+    }
+    /*
+   获取指定文件夹
+    */
+    private static long getFile(File f) throws Exception {
+        long size=0;
+        File filest[]=f.listFiles();
+        for(int i=0;i<filest.length;i++){
+            if(filest[i].isDirectory()){
+                size=size+getFile(filest[i]);
+            }else {
+                size=size+getFileSize(filest[i]);
+            }
+        }
+        return size;
+    }
 }

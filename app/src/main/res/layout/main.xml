@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#eeeeee"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:id="@+id/lay"
+            android:layout_width="fill_parent"
+            android:layout_height="80px"
+            android:background="@drawable/title_main_status"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:id="@+id/row"
+                android:layout_marginTop="10px">
+
+                <ImageButton
+                    android:id="@+id/btn1"
+                    android:layout_width="60px"
+                    android:layout_height="60px"
+                    android:layout_marginLeft="15px"
+                    android:background="@drawable/search"
+                    android:clickable="true"
+                    android:onClick="onClick_Search"
+                    android:textColor="#ffffff"></ImageButton>
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/devlist"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"></TextView>
+
+                <ImageButton
+                    android:id="@+id/btn2"
+                    android:layout_width="60px"
+                    android:layout_height="60px"
+                    android:layout_marginRight="15px"
+                    android:background="@drawable/add"
+                    android:clickable="true"
+                    android:onClick="onClick_Add"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"></ImageButton>
+            </TableRow>
+        </TableLayout>
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:dividerHeight="2px" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layhelp"
+        android:layout_width="fill_parent"
+        android:layout_height="54dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/almbtn"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/alm"
+                android:onClick="onClick_AlarmLst"></ImageButton>
+
+            <Button
+                android:id="@+id/language"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/btnback"
+                android:clickable="true"
+                android:onClick="onClick_Language"
+                android:text="Language"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"></Button>
+
+            <ImageButton
+                android:id="@+id/four"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/settings_0"
+                android:onClick="onClick_SmartConfig"></ImageButton>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/helpbtn"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/about0"
+            android:onClick="onClick_About"></ImageButton>
+    </RelativeLayout>
+
+</RelativeLayout>

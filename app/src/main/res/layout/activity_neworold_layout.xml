@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/LinerHeight"
+        android:layout_height="@dimen/dp_55"
         android:background="@drawable/title_shape">
 
         <TextView
@@ -19,31 +19,32 @@
             android:text="@string/case_patient_contrast_tip"
             android:textAllCaps="false"
             android:textColor="#000"
-            android:textSize="@dimen/textSizetitle" />
+            android:textSize="@dimen/dp_20" />
 
         <Button
             android:id="@+id/btn_left01"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/dp_85"
+            android:layout_height="@dimen/dp_45"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/dp_10"
             android:background="@drawable/btn_bg"
             android:text="@string/patient_return"
             android:textAllCaps="false"
             android:textColor="#000"
-            android:textSize="@dimen/buttonsSize" />
+            android:textSize="@dimen/dp_20" />
 
         <Button
-            android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:id="@+id/btn_right01"
+            android:layout_width="@dimen/dp_85"
+            android:layout_height="@dimen/dp_45"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/btn_bg"
             android:textAllCaps="false"
             android:textColor="#000"
-            android:textSize="15sp"
+            android:textSize="@dimen/dp_20"
             android:visibility="gone" />
 
 
@@ -62,7 +63,7 @@
             android:gravity="center"
             android:text="@string/case_image_show"
             android:textAllCaps="false"
-            android:textSize="@dimen/textViewNameSize" />
+            android:textSize="@dimen/dp_25" />
 
         <TextView
             android:id="@+id/tv_nor02"
@@ -72,7 +73,7 @@
             android:gravity="center"
             android:text="@string/case_result_show"
             android:textAllCaps="false"
-            android:textSize="18dp" />
+            android:textSize="@dimen/dp_25" />
 
         <TextView
             android:id="@+id/tv_nor03"
@@ -80,9 +81,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/case_assessment_show"
+
             android:textAllCaps="false"
-            android:textSize="18dp" />
+            android:textSize="@dimen/dp_25" />
 
     </LinearLayout>
 

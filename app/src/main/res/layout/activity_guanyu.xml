@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_guanyu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,10 +14,10 @@
 
         <ImageView
             android:id="@+id/iv_erweima"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="@dimen/dp_30" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,27 +25,30 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="@string/setting_WeChat"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_16"/>
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:id="@+id/iv_guanwang"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/guanwnag" />
+            android:layout_marginTop="@dimen/dp_30"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="@string/setting_The_official_website"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_16"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/dp_30"
             android:orientation="vertical"
             android:background="@color/white">
 
@@ -52,71 +56,80 @@
                 android:id="@+id/tv_app_version_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/dp_20"
                 android:text="@string/setting_version_message"
                 android:textAllCaps="false"
+                android:textSize="@dimen/dp_16"
                 android:textColor="@color/black"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="@dimen/dp_20">
                 <TextView
                     android:id="@+id/tv_banben_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/dp_16"/>
                 <TextView
                     android:id="@+id/tv_banben_name_ancer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:textSize="@dimen/dp_16"
                     android:text=""/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="@dimen/dp_20">
                 <TextView
-                android:id="@+id/tv_banben_model"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false" />
+                    android:id="@+id/tv_banben_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/dp_16"/>
                 <TextView
                     android:id="@+id/tv_banben_model_ancer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:textSize="@dimen/dp_16"
                     />
             </LinearLayout>
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp">
-              <TextView
-                  android:id="@+id/tv_banben_version"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textAllCaps="false" />
-              <TextView
-                  android:id="@+id/tv_banben_version_ancer"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginLeft="5dp"/>
-          </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="@dimen/dp_20">
+                <TextView
+                    android:id="@+id/tv_banben_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/dp_16"/>
+                <TextView
+                    android:id="@+id/tv_banben_version_ancer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:textSize="@dimen/dp_16"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20">
                 <TextView
                     android:id="@+id/tv_banben_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/dp_16"/>
                 <TextView
                     android:id="@+id/tv_banben_all_ancer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:textSize="@dimen/dp_16"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -124,22 +137,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/dp_30"
             android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/dp_20"
                 android:text="@string/setting_local_sn_message"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="@dimen/dp_16"/>
 
             <EditText
                 android:id="@+id/et_svn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="@dimen/dp_16"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

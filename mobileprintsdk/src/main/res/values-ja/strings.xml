@@ -14,7 +14,13 @@
 
     <string name="app_name">HPプリント</string>
     <string name="title_activity_print_preview">印刷プレビュー</string>
+    <string name="title_activity_print_place_holder">印刷する</string>
+    <string name="action_settings">設定</string>
+    <string name="print_preview_prompt">最高に素晴らしい画像がこの下に表示されることを想像してください</string>
+    <string name="learn_about_mobile_print">ページを印刷するには</string>
+    <string name="support">サポート：</string>
     <string name="paper_size">用紙サイズ:</string>
+    <string name="paper_type">用紙の種類</string>
     <string name="lib_font"></string>
 
     <string name="preview_spinner_4x5">4 x 5インチ</string>
@@ -22,13 +28,22 @@
     <string name="preview_spinner_5x7">5 x 7インチ</string>
     <string name="preview_spinner_letter">8.5 x 11インチ</string>
 
+    <string-array name="paper_type_array">
+        <item> 写真用紙 </item>
+    </string-array>
     <!-- Print Preview -->
     <string name="print_preview_menu_help">印刷のヘルプ</string>
     <string name="print_preview_menu_print_service_plugins">印刷サービスプラグイン</string>
 
     <!-- Print Plugin installation -->
+    <string name="hp_print_plugin_alert_header">HP印刷プラグイン</string>
+    <string name="install_hp_print_plugin_msg">HPプリンタをお持ちですか? 最高品質の写真を印刷するには、HPの印刷プラグインをインストールしてください。</string>
+    <string name="update_hp_print_plugin_msg">HPプリンタをお持ちですか? 最高品質の写真を印刷するには、HPの印刷プラグインを更新してください。</string>
+    <string name="enable_hp_print_plugin_msg">HPの印刷プラグインが有効であることを確認してください。</string>
 
     <!-- Print Plugin helper -->
+    <string name="hp_print_helper_header">印刷サービスヘルパ</string>
+    <string name="install_print_plugin_msg">最高品質の写真を印刷するには、使用するプリンタ用の適切なプラグインをインストールし、有効にしてください。</string>
 
     <!-- Print Service Plugin Information -->
     <string name="title_activity_print_service_plugin_info">印刷サービス情報</string>

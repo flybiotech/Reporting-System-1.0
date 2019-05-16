@@ -1,12 +1,11 @@
 package com.shizhenbao.pop;
-
-import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
 
 /**
  * Created by zhangbin on 2017/9/12.
  */
 
-public class Admin extends DataSupport {
+public class Admin extends LitePalSupport {
     private String controllerName;
     private String controllerPassword;
 

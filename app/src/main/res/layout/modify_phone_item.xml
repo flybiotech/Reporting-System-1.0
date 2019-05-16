@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="编      号"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_bianhao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:enabled="false"
+                android:hint="编号"
+                android:padding="2dp"
+                android:text="1"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="姓      名"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_djName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="患者姓名"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="电      话"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_djPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="电话号码"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="年      龄"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_djAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="患者年龄"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="孕      次"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_pregnantCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="怀孕次数"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_06"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="产      次"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_childCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="产次"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_07"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="职      业"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="请输入职业"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="吸 烟 史"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_smokeTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="吸烟史"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_09"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="流产次数"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_abortionCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="流产次数"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="性伙伴数"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_sexPartnerCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="性伙伴数"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="病  历  号"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_CaseNumbe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="病历号"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="社  保  号"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_ssNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="社保号"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="H    C   G"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_HCG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="8"
+                android:background="@drawable/edittext_select"
+                android:hint="HCG"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="身  份  证"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_idNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="8"
+                android:background="@drawable/edittext_select"
+                android:hint="身份证号"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="检查注释"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_modify_checkNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="8"
+                android:background="@drawable/edittext_select"
+                android:hint="请输入检查注释内容"
+                android:inputType="textMultiLine"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="血      型"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <Spinner
+                android:id="@+id/spin_modify_bloodType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/bloodType"
+                android:padding="2dp"></Spinner>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="避孕方式"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <Spinner
+                android:id="@+id/spin_modify_birthControlMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/birthControlMode"
+                android:padding="2dp"></Spinner>
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="婚      否"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <Spinner
+                android:id="@+id/spin_modify_marry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/marry"
+                android:padding="2dp"></Spinner>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="病人来源"
+                android:textAllCaps="false"
+                android:textSize="15dp" />
+
+            <Spinner
+                android:id="@+id/spin_modify_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/languages"
+                android:padding="2dp"></Spinner>
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_span="2"
+                android:background="#fff" />
+
+            <Button
+                android:id="@+id/text_modify_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_span="2"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:text="取消"
+                android:textAllCaps="false" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_span="2"
+                android:background="#fff" />
+
+            <Button
+                android:id="@+id/text_modify_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_span="2"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:text="保存"
+                android:textAllCaps="false" />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</LinearLayout>

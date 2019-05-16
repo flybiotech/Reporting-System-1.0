@@ -12,6 +12,7 @@
         <include layout="@layout/title_item" />
 
         <TextView
+            android:id="@+id/tv_patient_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -22,7 +23,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbarSize="@dimen/scrolWidth"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
 
         <LinearLayout

@@ -82,6 +82,8 @@ public class BaseActivity  extends AppCompatActivity{
                     openGpsPermission();
                 }
                 break;
+                default:
+                    break;
         }
     }
 

@@ -17,23 +17,32 @@
             android:id="@+id/textview_contrast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginLeft="30dp"
-            android:textAllCaps="false" />
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_18"/>
 
         <com.shizhenbao.util.SwipeRefreshView
             android:id="@+id/srv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            tools:layout_editor_absoluteX="@dimen/dp_8"
+            tools:layout_editor_absoluteY="@dimen/dp_8">
 
             <ListView
                 android:id="@+id/list_caselist_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@color/weakRed"
-                android:dividerHeight="1dp"></ListView>
+
+                android:dividerHeight="@dimen/dp_1"
+                android:fastScrollEnabled="true"
+                android:focusable="true"
+                android:scrollbarSize="@dimen/dp_20"
+                ></ListView>
+
+
+
         </com.shizhenbao.util.SwipeRefreshView>
 
         <TextView
@@ -42,7 +51,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/patient_data_no"
-            android:textSize="20sp" />
+            android:scrollbarSize="@dimen/dp_20" />
     </LinearLayout>
 
 

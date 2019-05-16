@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.activity.R;
 import com.shizhenbao.util.OneItem;
 
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -215,7 +216,7 @@ public class GraffitiView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         setBG();
-        mCopyLocation.updateLocation(toX(w / 2), toY(h / 2));
+        mCopyLocation.updateLocation(toX(w / 2.0f), toY(h / 2.0f));
         if (!mReady) {
             mGraffitiListener.onReady();
             mReady = true;
@@ -473,13 +474,13 @@ public class GraffitiView extends View {
             mPrivateHeight = getHeight();
         }
         // 使图片居中
-        mCentreTranX = (getWidth() - mPrivateWidth) / 2f;
-        mCentreTranY = (getHeight() - mPrivateHeight) / 2f;
+        mCentreTranX = (getWidth() - mPrivateWidth) / 2.0f;
+        mCentreTranY = (getHeight() - mPrivateHeight) / 2.0f;
 
         initCanvas();
         resetMatrix();
 
-        mAmplifierRadius = Math.min(getWidth(), getHeight()) / 4;
+        mAmplifierRadius = Math.min(getWidth(), getHeight()) / 4.0f;
         mAmplifierPath = new Path();
         mAmplifierPath.addCircle(mAmplifierRadius, mAmplifierRadius, mAmplifierRadius, Path.Direction.CCW);
         mAmplifierHorizonX = (int) (Math.min(getWidth(), getHeight()) / 2 - mAmplifierRadius);
@@ -901,7 +902,6 @@ public class GraffitiView extends View {
      * 保存
      */
     public void save() {
-
         mSelectedItem = null;
 
         // 保存的时候，把文字画上去
@@ -909,7 +909,7 @@ public class GraffitiView extends View {
             draw(mBitmapCanvas, item);
         }
         mGraffitiListener.onSaved(mGraffitiBitmap, mBitmapEraser);
-        Toast.makeText(getContext(), "保存完成", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.save_graff_toast), Toast.LENGTH_SHORT).show();
     }
 
     /**

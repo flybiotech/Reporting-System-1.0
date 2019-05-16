@@ -15,15 +15,13 @@ public class ProgressInputStream extends InputStream {
     private long lastUpdate;
 
     private boolean closed;
-    
-    public FTP.UploadProgressListener listener;
+
     private File localFile;
 
-    public ProgressInputStream(InputStream inputStream, FTP.UploadProgressListener listener, File localFile) {
+    public ProgressInputStream(InputStream inputStream, File localFile) {
         this.inputStream = inputStream;
         this.progress = 0;
         this.lastUpdate = 0;
-        this.listener = listener;
         this.localFile = localFile;
         
         this.closed = false;
@@ -59,7 +57,7 @@ public class ProgressInputStream extends InputStream {
     private long maybeUpdateDisplay(long progress, long lastUpdate) {
         if (progress - lastUpdate > TEN_KILOBYTES) {
             lastUpdate = progress;
-            this.listener.onUploadProgress(FTP_UPLOAD_LOADING, progress, this.localFile);
+//            this.listener.onUploadProgress(FTP_UPLOAD_LOADING, progress, this.localFile);
         }
         return lastUpdate;
     }

@@ -1,16 +1,14 @@
 package com.shizhenbao.fragments;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity.R;
-import com.application.MyApplication;
-import com.orhanobut.logger.Logger;
 import com.shizhenbao.activity.SearchActivity;
-import com.shizhenbao.constant.CreateFileConstant;
-import com.shizhenbao.constant.DeviceOfSize;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.db.UserManager;
 import com.shizhenbao.pop.SystemSet;
@@ -36,13 +30,11 @@ import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Const;
 import com.shizhenbao.util.OneItem;
 import com.util.AlignedTextUtils;
+import com.view.MyToast;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.LitePal;
 
 import java.util.List;
-
-import mpos.sdk.lib.BTLib;
-import mpos.sdk.lib.model.DevItem;
 
 
 /**
@@ -51,6 +43,8 @@ import mpos.sdk.lib.model.DevItem;
  */
 
 public class FragPatient  extends BaseFragment implements View.OnClickListener  {
+
+    private static final String TAG = "TAG_FragPatient";
 
     private Button btn_left, btn_right,text_cancle,text_save,text_dengji_next; //身份证号，       病例 号。      社保号
     private EditText edit_bianhao, edit_djName, edit_djPhone, edit_djAge,edit_IdNumber,edit_CaseNumbe,edit_SSNumber;
@@ -62,7 +56,7 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
     private EditText edit_sexPartnerCount;//性伙伴数量
     private EditText edit_smokeTime;//吸烟史
     private EditText edit_checkNotes;//检查注释
-    private double screenInches;//屏幕的尺寸
+//    private double screenInches;//屏幕的尺寸
     private Spinner spin_source, spin_marry,spin_birthControlMode,spin_bloodType;
     private String source,marry,birthControlMode,bloodType;
     private UserManager userManager;//这个是管理用户的类
@@ -81,8 +75,8 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = null;
-        screenInches = DeviceOfSize.getScreenSizeOfDevice2(getActivity());
-            view=inflater.inflate(R.layout.frag_layout_patient, container, false);
+//        screenInches = DeviceOfSize.getScreenSizeOfDevice2(getActivity());
+        view=inflater.inflate(R.layout.frag_layout_patient, container, false);
         init(view);
         initTextView(view);
         return view;
@@ -91,13 +85,15 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
         super.onFragmentVisibleChange(isVisible);
+//        LogUtil.e(TAG,"onFragmentVisibleChange.isVisible =  "+isVisible);
         OneItem.getOneItem().setIntImage(1);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        List<SystemSet> systemSet= DataSupport.findAll(SystemSet.class);
+//        LogUtil.e(TAG,"onStart()");
+        List<SystemSet> systemSet= LitePal.findAll(SystemSet.class);
         for(int i=0;i<systemSet.size();i++){
             String localsn=systemSet.get(0).getLocal_svn();
             Const.sn=localsn;
@@ -107,15 +103,8 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
         if (Const.isSave) {
             clearUserInfo();
         }
-        //这个方法暂时不需要了，所以被注释了
-//        DeviceOfSize.getMetric(getActivity());
-
-
         initData();//spinner点击事件
-        OneItem.getOneItem().setB(true);//当进入登记页面时，设定由登记页面跳转到其他页面
         editTextChangeListener();
-
-//        DeviceOfSize.getMetric(getActivity());
 
     }
 
@@ -131,7 +120,7 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
         marry = getContext().getString(R.string.patient_nothing);
         birthControlMode=getContext().getString(R.string.patient_nothing);
         bloodType=getContext().getString(R.string.patient_nothing);//设置默认值
-        tvName = new String[]{getContext().getString(R.string.print_patient_id), getContext().getString(R.string.patient_name), getContext().getString(R.string.patient_telephone), getContext().getString(R.string.patient_age), getContext().getString(R.string.patient_gravidity_num),
+        tvName = new String[]{getContext().getString(R.string.print_patient_id), getContext().getString(R.string.patient_name), getContext().getString(R.string.case_patient_telephone), getContext().getString(R.string.patient_age), getContext().getString(R.string.patient_gravidity_num),
                 getContext().getString(R.string.patient_parity_num), getContext().getString(R.string.patient_occupation), getContext().getString(R.string.patient_smoking_history), getContext().getString(R.string.patient_abortion_num), getContext().getString(R.string.patient_sex_num), getContext().getString(R.string.patient_medical_record_number), getContext().getString(R.string.patient_social_security_number), getContext().getString(R.string.patient_HCG), getContext().getString(R.string.patient_ID), getContext().getString(R.string.patient_check_notes), getContext().getString(R.string.patient_blood_type), getContext().getString(R.string.patient_contraceptive_methods), getContext().getString(R.string.patient_marriage), getContext().getString(R.string.patient_source)};
 //        OneItem.getOneItem().setIntImage(1);
         rl= (RelativeLayout) view.findViewById(R.id.rl);
@@ -147,6 +136,7 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
         edit_djPhone= (EditText) view.findViewById(R.id.edit_djPhone);//电话
         edit_IdNumber= (EditText) view.findViewById(R.id.edit_patient_idNumber);//身份证号码
         edit_CaseNumbe= (EditText) view.findViewById(R.id.edit_patient_CaseNumbe);//病例号
+        edit_CaseNumbe.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_SSNumber= (EditText) view.findViewById(R.id.edit_patient_ssNumber);//社保号，
         text_dengji_next= (Button) view.findViewById(R.id.text_dengji_next);
         rl.requestFocus();//得到焦点
@@ -229,7 +219,6 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
         tv17 = (TextView) view.findViewById(R.id.tv_patient_17);
         tv18 = (TextView) view.findViewById(R.id.tv_patient_18);
         tv19 = (TextView) view.findViewById(R.id.tv_patient_19);
-
          TextView[] tvData = {tv01, tv02, tv03, tv04, tv05, tv06, tv07, tv08, tv09, tv10, tv11, tv12, tv13, tv14, tv15, tv16, tv17, tv18, tv19};
 //        if (screenInches > 6.0) {
             for (int i=0;i<tvName.length;i++) {
@@ -389,8 +378,10 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
             case R.id.text_dengji_next:
                 if (Const.isSave) {//当已经保存好了用户信息之后，就可以新增下一个患者了
                     claerEdit();
+                    text_cancle.setEnabled(true);
                 } else {
-                    Toast.makeText(getContext(), getContext().getString(R.string.patient_save_message), Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(getContext(), getContext().getString(R.string.patient_save_message));
+//                    Toast.makeText(getContext(), getContext().getString(R.string.patient_save_message), Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -450,43 +441,64 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
     }
 
     private void saveUserInfo() {
-        if (TextUtils.isEmpty(edit_djName.getText().toString().trim())
-                ||TextUtils.isEmpty(edit_djAge.getText().toString().trim())
-                ||TextUtils.isEmpty(edit_djPhone.getText().toString().trim())){//判断登记的病人信息是否为空
-            Toast.makeText(getContext(),getContext().getString(R.string.patient_register_error_message), Toast.LENGTH_SHORT).show();
+
+        if(TextUtils.isEmpty(edit_djName.getText().toString().trim()) && TextUtils.isEmpty(edit_djPhone.getText().toString().trim())){
+            edit_djName.requestFocus();
+            MyToast.showToast(getContext(), getContext().getString(R.string.patient_select_name));
+//            Toast.makeText(getContext(),getContext().getString(R.string.patient_select_name), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(edit_djName.getText().toString().trim())){//判断登记的姓名是否为空
+            edit_djName.requestFocus();
+            MyToast.showToast(getContext(), getContext().getString(R.string.patient_select_name));
+//            Toast.makeText(getContext(),getContext().getString(R.string.patient_select_name), Toast.LENGTH_SHORT).show();
         }else {
+            if(TextUtils.isEmpty(edit_djPhone.getText().toString().trim())){//判断电话是否为空
+                edit_djPhone.requestFocus();
+                MyToast.showToast(getContext(), getContext().getString(R.string.case_select_telephoen_hint));
+//                Toast.makeText(getContext(),getContext().getString(R.string.case_select_telephoen_hint), Toast.LENGTH_SHORT).show();
+            }else {
+                //判断输入的电话号码是否正常（包括11位，8位，7位）
+                if (edit_djPhone.getText().toString().trim().length() == 11 || edit_djPhone.getText().toString().trim().length() == 7 || edit_djPhone.getText().toString().trim().length() == 8) {
+                    int phoneLength = edit_djPhone.getText().toString().trim().length();
+                    int idNumberLength = edit_IdNumber.getText().toString().trim().length();
+                    //将患者信息保存到数据库中
+                    if (idNumberLength==15||idNumberLength==18||idNumberLength==0){
+                        String bianhao=edit_bianhao.getText().toString().trim();
+                        int temp=bianhao.indexOf("(");
+                        String bianhaoindex=bianhao.substring(0,temp);
+                        String hCG = edit_hCG.getText().toString().trim();
+                        String work = edit_work.getText().toString().trim();
+                        String pregnantCount = edit_pregnantCount.getText().toString().trim();
+                        String childCount = edit_childCount.getText().toString().trim();
+                        String abortionCount = edit_abortionCount.getText().toString().trim();
+                        String sexPartnerCount = edit_sexPartnerCount.getText().toString().trim();
+                        String smokeTime = edit_smokeTime.getText().toString().trim();
+                        String checkNotes = edit_checkNotes.getText().toString().trim();
 
-            //判断输入的电话号码是否正常（包括11位，8位，7位）
-            if (edit_djPhone.getText().toString().trim().length() == 11 || edit_djPhone.getText().toString().trim().length() == 7 || edit_djPhone.getText().toString().trim().length() == 8) {
-                //将患者信息保存到数据库中
-                if (edit_IdNumber.getText().toString().trim().length() == 18 || edit_IdNumber.getText().toString().trim().length() == 15 || edit_IdNumber.getText().toString().trim().length() == 0) {
-                    String bianhao=edit_bianhao.getText().toString().trim();
-                    int temp=bianhao.indexOf("(");
-                    String bianhaoindex=bianhao.substring(0,temp);
-                    String hCG = edit_hCG.getText().toString().trim();
-                    String work = edit_work.getText().toString().trim();
-                    String pregnantCount = edit_pregnantCount.getText().toString().trim();
-                    String childCount = edit_childCount.getText().toString().trim();
-                    String abortionCount = edit_abortionCount.getText().toString().trim();
-                    String sexPartnerCount = edit_sexPartnerCount.getText().toString().trim();
-                    String smokeTime = edit_smokeTime.getText().toString().trim();
-                    String checkNotes = edit_checkNotes.getText().toString().trim();
+                        boolean isSave = userManager.save(new User(), source, marry, bianhaoindex,
+                                edit_djName.getText().toString().trim(), edit_djAge.getText().toString().trim(), edit_djPhone.getText().toString().trim(),
+                                loginRegister.getDoctorId(OneItem.getOneItem().getName()), false, edit_IdNumber.getText().toString().trim(), edit_CaseNumbe.getText().toString().trim(),
+                                edit_SSNumber.getText().toString().trim(), hCG, work, pregnantCount, childCount, abortionCount, bloodType, sexPartnerCount, smokeTime, birthControlMode, checkNotes);
 
-                    userManager.save(new User(), source, marry, bianhaoindex,
-                            edit_djName.getText().toString().trim(), edit_djAge.getText().toString().trim(), edit_djPhone.getText().toString().trim(),
-                            loginRegister.getDoctorId(OneItem.getOneItem().getName()), false, edit_IdNumber.getText().toString().trim(), edit_CaseNumbe.getText().toString().trim(),
-                            edit_SSNumber.getText().toString().trim(), hCG, work, pregnantCount, childCount, abortionCount, bloodType, sexPartnerCount, smokeTime, birthControlMode, checkNotes);
-                    Toast.makeText(getContext(), getContext().getString(R.string.patient_register_success_message), Toast.LENGTH_SHORT).show();
-                    edit_bianhao.setText(bianhaoindex+"("+getString(R.string.patient_yet_register)+")");
-                    OneItem.getOneItem().setC(true);//判断诊断页面是否可以输入，为true时可以输入，为false时不可以输入
-                    Const.isSave =true;//表示已经保存过了
+                        if(isSave){
+                            text_cancle.setEnabled(false);
+                            MyToast.showToast(getContext(), getContext().getString(R.string.patient_register_success_message));
+                        }
+//                        Toast.makeText(getContext(), getContext().getString(R.string.patient_register_success_message), Toast.LENGTH_SHORT).show();
+                        edit_bianhao.setText(bianhaoindex+"("+getString(R.string.patient_yet_register)+")");
+                        OneItem.getOneItem().setC(true);//判断诊断页面是否可以输入，为true时可以输入，为false时不可以输入
+                        Const.isSave =true;//表示已经保存过了
+                    } else {
+                        MyToast.showToast(getContext(), getActivity().getString(R.string.patient_ID_error) + edit_IdNumber.getText().toString().trim().length() + getActivity().getString(R.string.patient_ID_error2));
+//                        Toast.makeText(getContext(), getActivity().getString(R.string.patient_ID_error) + edit_IdNumber.getText().toString().trim().length() + getActivity().getString(R.string.patient_ID_error2), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(getContext(), getActivity().getString(R.string.patient_ID_error) + edit_IdNumber.getText().toString().trim().length() + getActivity().getString(R.string.patient_ID_error2), Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(getContext(), getContext().getString(R.string.patient_telephone_error));
+//                    Toast.makeText(getContext(), getContext().getString(R.string.patient_telephone_error), Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(getContext(), getContext().getString(R.string.patient_telephone_error), Toast.LENGTH_SHORT).show();
             }
-//                    }
         }
     }
 

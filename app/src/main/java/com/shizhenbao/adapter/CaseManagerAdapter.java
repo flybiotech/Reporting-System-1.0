@@ -3,21 +3,29 @@ package com.shizhenbao.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.text.UnicodeSet;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activity.ListDevAdapter;
 import com.activity.R;
 import com.orhanobut.logger.Logger;
+import com.shizhenbao.activity.CaseListManagerActivity;
 import com.shizhenbao.activity.CaseManagerActivity;
 import com.shizhenbao.activity.NewOrOldCaseActivity;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Const;
+import com.suke.widget.SwitchButton;
+import com.view.MyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +146,8 @@ public class CaseManagerAdapter extends BaseAdapter {
                     Logger.e("user  :  "+mList.get(position));
                     context.startActivity(intent);
                 }else {
-                    Toast.makeText(context,context.getString(R.string.case_only_two), Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(context,context.getString(R.string.case_only_two));
+//                    Toast.makeText(context,context.getString(R.string.case_only_two), Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -156,7 +165,8 @@ public class CaseManagerAdapter extends BaseAdapter {
                   Logger.e("(Integer) v.getTag()  : "+(Integer) v.getTag()+" hold: "+hold);
                   if (!hold) {
                     listSelect.add(mList.get((Integer) v.getTag()));
-                      Toast.makeText(context, context.getString(R.string.case_is_two), Toast.LENGTH_SHORT).show();
+                      MyToast.showToast(context,context.getString(R.string.case_is_two));
+//                      Toast.makeText(context, context.getString(R.string.case_is_two), Toast.LENGTH_SHORT).show();
                       Logger.e("选中了 现在有几个 ："+listSelect.size());
 //                    mSwitchClickListener.OnSelectClicked(listSelect,position);
 //                    Toast.makeText(context, "开", Toast.LENGTH_SHORT).show();

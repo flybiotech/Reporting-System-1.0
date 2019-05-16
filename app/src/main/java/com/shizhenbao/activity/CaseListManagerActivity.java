@@ -5,20 +5,24 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.activity.R;
+import com.adapter.SDVideoRecyclerAdapter;
 import com.orhanobut.logger.Logger;
 import com.shizhenbao.adapter.CaseManagerAdapter;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Const;
 import com.shizhenbao.util.Item;
+import com.shizhenbao.util.LogUtil;
 import com.shizhenbao.util.SwipeRefreshView;
+import com.view.MyToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +47,9 @@ public class CaseListManagerActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_case_list_manager);
+        LogUtil.e("CaseListManagerActivity","CaseListManagerActivity name = "+getClass().getSimpleName().toString());
         initView();
         showListView();
     }
@@ -52,14 +58,9 @@ public class CaseListManagerActivity extends AppCompatActivity implements View.O
         listCase1 =(ArrayList<User> ) getIntent().getSerializableExtra("listCase");
         listCase.clear();
 //        Logger.e( "人数：" + listCase.size());
-        try{
-            for(int i=listCase1.size()-1;i>=0;i--){
-                listCase.add(listCase1.get(i));
-            }
-        }catch (Exception e){
-            Log.e("图片异常",e.getMessage());
+        for(int i=listCase1.size()-1;i>=0;i--){
+            listCase.add(listCase1.get(i));
         }
-
         mSwipeRefreshView= (SwipeRefreshView) findViewById(R.id.srv);
         mSwipeRefreshView.setEnabled(false);
         tvName = (TextView) findViewById(R.id.tv_caselist_name);//姓名
@@ -78,6 +79,7 @@ public class CaseListManagerActivity extends AppCompatActivity implements View.O
         title.setText(getString(R.string.case_patient_list));
         page=0;
         page1=0;
+
     }
 
     private List<Boolean> ischeck = new ArrayList<>();
@@ -92,6 +94,7 @@ public class CaseListManagerActivity extends AppCompatActivity implements View.O
         }
         adapter = new CaseManagerAdapter(this,userList,ischeck);
         listView.setAdapter(adapter);
+        MyToast.dissmissToast();
         listView.setEmptyView(tv_empty);
         // 设置颜色属性的时候一定要注意是引用了资源文件还是直接设置16进制的颜色，因为都是int值容易搞混
         // 设置下拉进度的背景颜色，默认就是白色的
@@ -220,6 +223,8 @@ public class CaseListManagerActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.btn_left://标题栏左边的按钮
                 finish();
+                break;
+            default:
                 break;
         }
     }

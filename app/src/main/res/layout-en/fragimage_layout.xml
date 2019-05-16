@@ -6,7 +6,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/scrolWidth"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -14,75 +18,12 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/rela_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
+                android:layout_marginRight="15dp"
                 >
-
-
-                <Button
-                    android:id="@+id/btn_casepre01"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
-                    android:text="@string/case_image_up"
-                    android:layout_weight="1"
-                    android:typeface="sans"
-                    android:layout_marginLeft="15dp"
-                    />
-
-                <Button
-                    android:id="@+id/btn_casenext01"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
-                    android:text="@string/case_image_down"
-                    android:typeface="sans"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="15dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-
-
-                <Button
-                    android:id="@+id/btn_casepre02"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
-                    android:text="@string/case_image_Contrast_up"
-                    android:layout_weight="1"
-                    android:typeface="sans"
-                    android:layout_marginRight="15dp"
-                    />
-
-                <Button
-                    android:id="@+id/btn_casenext02"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/btn_bg"
-                    android:text="@string/case_image_Contrast_down"
-                    android:layout_weight="1"
-                    android:typeface="sans"
-                    android:layout_marginRight="15dp"
-                    />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/textview_caseName01"
                     android:layout_width="wrap_content"
@@ -91,28 +32,103 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp" />
 
-                <ImageView
-                    android:id="@+id/frag_imagecase_01"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:scaleType="matrix" />
 
+                <Button
+                    android:id="@+id/btn_casenext01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:text="@string/case_image_down"
+                    android:typeface="sans"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentRight="true"
+                    />
+                <Button
+                    android:id="@+id/btn_casepre01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:text="@string/case_image_up"
+                    android:typeface="sans"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toLeftOf="@id/btn_casenext01"
+                    />
+
+            </RelativeLayout>
+
+            <com.view.ImageViewRotation
+                android:id="@+id/frag_imagecase_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+
+
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp"
+                >
                 <TextView
                     android:id="@+id/textview_caseName02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp" />
+                    android:layout_marginTop="5dp" />
 
-                <ImageView
-                    android:id="@+id/frag_imagecase_02"
-                    android:layout_width="match_parent"
+
+                <Button
+                    android:id="@+id/btn_casenext02"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:scaleType="matrix" />
-            </LinearLayout>
+                    android:background="@drawable/btn_bg"
+                    android:text="@string/case_image_Contrast_down"
+                    android:typeface="sans"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentRight="true"
+                    />
+                <Button
+                    android:id="@+id/btn_casepre02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:text="@string/case_image_Contrast_up"
+                    android:typeface="sans"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toLeftOf="@id/btn_casenext02"
+                    />
+
+
+
+            </RelativeLayout>
+
+            <com.view.ImageViewRotation
+                android:id="@+id/frag_imagecase_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+
+                />
 
         </LinearLayout>
     </ScrollView>

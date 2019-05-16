@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/dp_20"
         android:background="#fff">
 
         <Button
@@ -19,11 +19,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="@dimen/dp_15"
             android:background="@drawable/btn_bg"
             android:text="@string/setting_Repaint"
             android:textAllCaps="false"
-            android:textSize="@dimen/textViewNameSize" />
+            android:textSize="@dimen/dp_16" />
 
         <Button
             android:id="@+id/btn_jianji_save01"
@@ -33,17 +33,17 @@
             android:background="@drawable/btn_bg"
             android:text="@string/patient_save"
             android:textAllCaps="false"
-            android:textSize="@dimen/textViewNameSize" />
+            android:textSize="@dimen/dp_16" />
 
         <Button
             android:id="@+id/btn_jianji_album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/btn_bg"
             android:text="@string/setting_picture_select"
             android:textAllCaps="false"
-            android:textSize="@dimen/textViewNameSize" />
+            android:textSize="@dimen/dp_16" />
     </RelativeLayout>
 
     <LinearLayout
@@ -51,15 +51,26 @@
         android:layout_height="match_parent"
         android:background="#fff"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="10dp"
 
-        <ImageView
+        >
+
+        <!--<ImageView-->
+            <!--android:id="@+id/image_jianji_show"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:scaleType="centerInside"-->
+            <!--android:rotation="90"-->
+            <!--android:src="@drawable/kb" />-->
+
+        <com.shizhenbao.UI.ImagePathView
             android:id="@+id/image_jianji_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerInside"
-            android:src="@drawable/kb" />
+            />
 
     </LinearLayout>
 </LinearLayout>

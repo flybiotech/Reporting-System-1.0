@@ -34,6 +34,7 @@
             android:src="@drawable/ic_print_service_help_plugin_icon"
             android:scaleType="fitCenter"/>
         <TextView
+            android:id="@+id/print_service_help_title_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#515151"
@@ -71,6 +72,7 @@
             android:src="@drawable/ic_print_service_help_enable"
             android:scaleType="fitCenter"/>
         <TextView
+            android:id="@+id/print_service_help_title_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#515151"
@@ -81,6 +83,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/print_service_help_msg_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="72.33dp"

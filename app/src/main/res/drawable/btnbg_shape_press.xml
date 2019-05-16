@@ -3,11 +3,11 @@
     android:shape="rectangle">
     <!--设置描边颜色-->
     <stroke
-        android:width="1.5dp"
+        android:width="@dimen/dp_1_5"
         android:color="@color/lightRed" />
     <!--设置填充颜色-->
     <solid android:color="#fff" />
-    <corners android:radius="100dp" />
+    <corners android:radius="@dimen/dp_100" />
     <gradient
         android:angle="45"
         android:endColor="@color/lightRed"

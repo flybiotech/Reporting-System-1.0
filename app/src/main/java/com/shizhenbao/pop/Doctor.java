@@ -1,12 +1,11 @@
 package com.shizhenbao.pop;
-
-import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
 
 /**
  * Created by fly on 2017/3/23.
  */
 //测试账号： a 密码123
-public class Doctor extends DataSupport {
+public class Doctor extends LitePalSupport {
     private int dId;
     private String dName;
     private String dPassword;

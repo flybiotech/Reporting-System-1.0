@@ -11,10 +11,12 @@ import com.shizhenbao.constant.CreateFileConstant;
 import com.shizhenbao.pop.Diacrisis;
 import com.shizhenbao.pop.ExceptionManager;
 import com.shizhenbao.pop.User;
+import com.shizhenbao.util.BackupsUtils;
 import com.shizhenbao.util.Const;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.OneItem;
-import org.litepal.crud.DataSupport;
+
+import org.litepal.LitePal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,9 +31,9 @@ import java.util.List;
 public class UserManager {
     Context context;
     public static List<Item>listItem=new ArrayList<Item>();
-    public static String TAG = "TAG3";
+    public static final String TAG = "TAG3";
     OneItem oneItem;
-    public Backup backup;
+    private BackupsUtils backupsUtils;
     public UserManager() {
         oneItem = OneItem.getOneItem();
     }
@@ -63,12 +65,13 @@ public class UserManager {
     }
 
     //保存病人信息
-    public void save(User user,String source,String marry,String pId,String userName,String userAge,
+    public boolean save(User user,String source,String marry,String pId,String userName,String userAge,
                      String userTel,int doctorId,boolean isResult,String idNumber,String caseNumbe,
                      String sSNumber ,String hCG,String work,String pregnantCount ,String  childCount,
                      String abortionCount , String bloodType ,String sexPartnerCount ,String  smokeTime,
                      String birthControlMode, String checkNotes  ){
-        List<User>users=DataSupport.where("pId=?",pId).find(User.class);
+        List<User>users=LitePal.where("pId=?",pId).find(User.class);
+        boolean isSave = false;
         if(users.size()==0){
             user.setpSource(source);//病人来源
             user.setMarry(marry);//病人婚否
@@ -96,10 +99,9 @@ public class UserManager {
             user.setCheckNotes(checkNotes);
             user.setGatherPath("/"+OneItem.getOneItem().getGather_path()+"/");
             user.setImage(1);
-            user.save();
+            isSave = user.save();
             new CreateFileConstant().initCreateUser(user,pId+"_"+userName);
             new CreateFileConstant().initCreateCutPath(user,pId+"_"+userName,"User_cut");
-            new CreateFileConstant().initCreateUserPHOTOS(user,pId+"_"+userName,"PHOTOS");
         }else {
             for(int i=0;i<users.size();i++){
                 users.get(0).setpSource(source);//病人来源
@@ -128,18 +130,17 @@ public class UserManager {
                 users.get(0).setBirthControlMode(birthControlMode);
                 users.get(0).setCheckNotes(checkNotes);
 //                users.get(0).setGatherPath("/"+OneItem.getOneItem().getGather_path()+"/");
-                users.get(0).save();
+                isSave = users.get(0).save();
             }
         }
-
-        backup=new Backup(context, Const.sn);
-        backup.initBackups();
-
+        backupsUtils = new BackupsUtils(context);
+        backupsUtils.initBackUpUser(1);
+        return isSave;
     }
 
     //自动生成编号
     public void bianhao(EditText editText){
-        List<User> list= DataSupport.where("pName!=?","").find(User.class);//查询所有不为空的User数据库中的数据
+        List<User> list= LitePal.where("pName!=?","").find(User.class);//查询所有不为空的User数据库中的数据
         for(int i=0;i<list.size();i++){
             editText.setText(String.valueOf(Integer.parseInt(list.get(list.size()-1).getpId())+1)+"("+context.getString(R.string.patient_unregistered) +")");//遍历list集合，将最后一项的pId+1赋值给edit_bianhao
         }
@@ -151,7 +152,7 @@ public class UserManager {
         }
     }
     public void getExceName(){//异常处理，得到登陆的账户
-        List<ExceptionManager>exceptionManagerList=DataSupport.findAll(ExceptionManager.class);
+        List<ExceptionManager>exceptionManagerList=LitePal.findAll(ExceptionManager.class);
         for(int i=0;i<exceptionManagerList.size();i++){
             OneItem.getOneItem().setName(exceptionManagerList.get(0).getLoginName());
         }
@@ -235,24 +236,24 @@ public class UserManager {
 
         switch (i) {
             case 0://查询所有的患者的信息
-                list1 = DataSupport.where("operId=?", operId).limit(limitCount).find(User.class);
+                list1 = LitePal.where("operId=?", operId).limit(limitCount).find(User.class);
 
                 break;
             case 1:
-                list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0),operId,"%"+list.get(0)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where("operId=?"+"   and   "+list2.get(0),operId,"%"+list.get(0)+"%").limit(limitCount).find(User.class);
                 break;
             case 2:
-                list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1),operId,"%"+list.get(0)+"%","%"+list.get(1)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1),operId,"%"+list.get(0)+"%","%"+list.get(1)+"%").limit(limitCount).find(User.class);
                 break;
             case 3:
-                list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2),operId, "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2),operId, "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").limit(limitCount).find(User.class);
                 break;
             case 4:
-                list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), operId,"%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), operId,"%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").limit(limitCount).find(User.class);
                 break;
 
             case 5:
-                list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").limit(limitCount).find(User.class);
                 break;
         }
 
@@ -294,24 +295,24 @@ public class UserManager {
         switch (i) {
 
             case 0://查询所有的患者的信息
-                list1 = DataSupport.where("pName!=?","").limit(limitCount).find(User.class);
+                list1 = LitePal.where("pName!=?","").limit(limitCount).find(User.class);
                 break;
             case 1:
-                list1 = DataSupport.where(list2.get(0),"%"+list.get(0)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where(list2.get(0),"%"+list.get(0)+"%").limit(limitCount).find(User.class);
 
                 break;
             case 2:
-                list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1),"%"+list.get(0)+"%","%"+list.get(1)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1),"%"+list.get(0)+"%","%"+list.get(1)+"%").limit(limitCount).find(User.class);
                 break;
             case 3:
-                list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").limit(limitCount).find(User.class);
                 break;
             case 4:
-                list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").limit(limitCount).find(User.class);
                 break;
 
             case 5:
-                list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").limit(limitCount).find(User.class);
+                list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").limit(limitCount).find(User.class);
                 break;
 
         }
@@ -398,53 +399,53 @@ public class UserManager {
 
         switch (i) {
             case 0://查询所有的患者的信息
-                list1 = DataSupport.where("operId=?", operId).find(User.class);
+                list1 = LitePal.where("operId=?", operId).find(User.class);
                 break;
             case 1:
-                list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0),operId,"%"+list.get(0)+"%").find(User.class);
+                list1 = LitePal.where("operId=?"+"   and   "+list2.get(0),operId,"%"+list.get(0)+"%").find(User.class);
                 break;
             case 2:
                 if (f5 && f6) {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1),operId,list.get(0),list.get(1)).find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1),operId,list.get(0),list.get(1)).find(User.class);
                 } else {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1),operId,"%"+list.get(0)+"%","%"+list.get(1)+"%").find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1),operId,"%"+list.get(0)+"%","%"+list.get(1)+"%").find(User.class);
                 }
 
                 break;
             case 3:
                 if (f5) {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2),operId, "%"+list.get(0)+"%",list.get(1),list.get(2)).find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2),operId, "%"+list.get(0)+"%",list.get(1),list.get(2)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2),operId, "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2),operId, "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").find(User.class);
 
                 }
                 break;
             case 4:
                 if (f5) {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), operId,"%"+list.get(0)+"%","%"+list.get(1)+"%",list.get(2),list.get(3)).find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), operId,"%"+list.get(0)+"%","%"+list.get(1)+"%",list.get(2),list.get(3)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), operId,"%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), operId,"%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").find(User.class);
 
                 }
                     break;
 
             case 5:
                 if (f5) {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%",list.get(3),list.get(4)).find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%",list.get(3),list.get(4)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").find(User.class);
 
                 }
                   break;
             case 6:
                 if (f5) {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%",list.get(4),list.get(5)).find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%",list.get(4),list.get(5)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%","%"+list.get(5)+"%").find(User.class);
+                    list1 = LitePal.where("operId=?"+"   and   "+list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),operId,"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%","%"+list.get(5)+"%").find(User.class);
 
                 }
                 break;
@@ -496,56 +497,56 @@ public class UserManager {
         switch (i) {
 
             case 0://查询所有的患者的信息
-                list1 = DataSupport.where("pName!=?","").find(User.class);
+                list1 = LitePal.where("pName!=?","").find(User.class);
                 break;
             case 1:
-                list1 = DataSupport.where(list2.get(0),"%"+list.get(0)+"%").find(User.class);
+                list1 = LitePal.where(list2.get(0),"%"+list.get(0)+"%").find(User.class);
 
                 break;
             case 2:
 //                Logger.e("UserManager运行到这里了");
                 if (f5 && f6) {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1),list.get(0),list.get(1)).find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1),list.get(0),list.get(1)).find(User.class);
 //                    Logger.e("  1 list1.size : "+list1.size());
                 } else {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1),"%"+list.get(0)+"%","%"+list.get(1)+"%").find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1),"%"+list.get(0)+"%","%"+list.get(1)+"%").find(User.class);
 //                    Logger.e("  2 list1.size : "+list1.size());
                 }
                 break;
             case 3:
                 if (f5) {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2), "%"+list.get(0)+"%",list.get(1),list.get(2)).find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2), "%"+list.get(0)+"%",list.get(1),list.get(2)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%").find(User.class);
                 }
                 break;
             case 4:
                 if (f5) {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), "%"+list.get(0)+"%","%"+list.get(1)+"%",list.get(2),list.get(3)).find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), "%"+list.get(0)+"%","%"+list.get(1)+"%",list.get(2),list.get(3)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3), "%"+list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%").find(User.class);
 
                 }
                 break;
 
             case 5:
                 if (f5) {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%",list.get(3),list.get(4)).find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%",list.get(3),list.get(4)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%").find(User.class);
 
                 }
                 break;
 
             case 6:
                 if (f5) {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%",list.get(4),list.get(5)).find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%",list.get(4),list.get(5)).find(User.class);
 
                 } else {
-                    list1 = DataSupport.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%","%"+list.get(5)+"%").find(User.class);
+                    list1 = LitePal.where(list2.get(0)+"  and  "+list2.get(1)+"   and   "+list2.get(2)+"   and   "+list2.get(3)+"   and   "+list2.get(4)+"   and   "+list2.get(5),"%"+ list.get(0)+"%","%"+list.get(1)+"%","%"+list.get(2)+"%","%"+list.get(3)+"%","%"+list.get(4)+"%","%"+list.get(5)+"%").find(User.class);
 
                 }
                 break;
@@ -561,27 +562,27 @@ public class UserManager {
      * 比较两个日期的大小，日期格式为yyyy-MM-dd
      *
      * @param str1 the first date
-     * @param str2 the second date
+
      * @return true <br/>false
      */
-    public static boolean isDate2Bigger(String str1, String str2) {
-        boolean isBigger = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date dt1 = null;
-        Date dt2 = null;
-        try {
-            dt1 = sdf.parse(str1);
-            dt2 = sdf.parse(str2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if (dt1.getTime() > dt2.getTime()) {
-            isBigger = false;
-        } else if (dt1.getTime() <= dt2.getTime()) {
-            isBigger = true;
-        }
-        return isBigger;
-    }
+//    public static boolean isDate2Bigger(String str1, String str2) {
+//        boolean isBigger = false;
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date dt1 = null;
+//        Date dt2 = null;
+//        try {
+//            dt1 = sdf.parse(str1);
+//            dt2 = sdf.parse(str2);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        if (dt1.getTime() > dt2.getTime()) {
+//            isBigger = false;
+//        } else if (dt1.getTime() <= dt2.getTime()) {
+//            isBigger = true;
+//        }
+//        return isBigger;
+//    }
 
 
     public static long isDate2Bigger(String str1) {
@@ -595,13 +596,10 @@ public class UserManager {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        if (dt1.getTime() > dt2.getTime()) {
-//            isBigger = false;
-//        } else if (dt1.getTime() <= dt2.getTime()) {
-//            isBigger = true;
-//        }
-        long time = dt1.getTime();
-        Logger.e("登记时间 ："+time);
+        if (dt1 == null) {
+            return 0;
+        }
+
         return dt1.getTime();
     }
 

@@ -16,12 +16,12 @@
             android:id="@+id/tv01_wifiTest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:gravity="center"
             android:text="@string/setting_button_test"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="@dimen/dp_20" />
 
 
         <Button
@@ -29,57 +29,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/btn_bg"
-            android:paddingBottom="3dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="3dp"
+            android:paddingBottom="@dimen/dp_3"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_3"
             android:text="@string/setting_button_printer_test"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_16"/>
 
         <Button
             android:id="@+id/btn02_wifiTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/btn_bg"
-            android:paddingBottom="3dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="3dp"
+            android:paddingBottom="@dimen/dp_3"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_3"
             android:text="@string/setting_button_Treasures_of_vision_test"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_16"/>
 
         <Button
             android:id="@+id/btn03_wifiTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/btn_bg"
-            android:paddingBottom="3dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="3dp"
+            android:paddingBottom="@dimen/dp_3"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_3"
             android:text="@string/setting_button_network_test"
             android:textAllCaps="false"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:textSize="@dimen/dp_16"/>
 
         <Button
             android:id="@+id/btn04_wifiTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/btn_bg"
-            android:paddingBottom="3dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="3dp"
+            android:paddingBottom="@dimen/dp_3"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_3"
             android:text="@string/setting_button_test_stop"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="@dimen/dp_16"/>
     </LinearLayout>
 
     <TableLayout
@@ -92,58 +96,58 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="4dp"
+                android:layout_height="@dimen/dp_4"
                 android:background="#fff" />
         </TableRow>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="@dimen/dp_20"
             android:background="#fff" />
 
         <TableRow>
@@ -153,28 +157,28 @@
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/dp_30"
             android:background="#fff" />
 
         <TableRow>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:layout_span="1"
                 android:background="#fff" />
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:layout_span="2"
                 android:background="#fff" />
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:layout_span="1"
                 android:background="#fff" />
 
@@ -182,21 +186,21 @@
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/dp_30"
             android:background="#fff" />
 
         <TableRow>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:layout_span="1"
                 android:background="#fff" />
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_10"
                 android:layout_span="2"
                 android:background="#fff" />
 

@@ -5,9 +5,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridView;
@@ -25,7 +29,9 @@ import com.shizhenbao.constant.CreateFileConstant;
 import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Item;
+import com.shizhenbao.util.LogUtil;
 import com.shizhenbao.util.OneItem;
+import com.view.MyToast;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -35,31 +41,31 @@ import java.util.List;
 public class ImageActivity extends AppCompatActivity implements View.OnClickListener{
     private GridView gv_bingren,gv_yisheng,gv_cusuan,gv_dianyou;
     private List <Item>listitem=null;//病人原图路径集合
-//    private List <Item>listitem4=null;//病人碘油路径集合
-//    private List <Item>listitem5=null;//病人醋酸白路径集合
+    private List <Item>listitem4=null;//病人碘油路径集合
+    private List <Item>listitem5=null;//病人醋酸白路径集合
     private List <Item>listitem2=null;//医生编辑过后的图片
-    private Button bt;
+//    private Button bt;
     private List<String>list1=new ArrayList<>();//病人原图路径集合
-//    private List<String>list4=new ArrayList<>();//病人碘油路径集合
-//    private List<String>list5=new ArrayList<>();//病人醋酸白路径集合
+    private List<String>list4=new ArrayList<>();//病人碘油路径集合
+    private List<String>list5=new ArrayList<>();//病人醋酸白路径集合
     private List<String>list2=new ArrayList<>();//医生照片路径集合
     private List<String>list3=new ArrayList<>();//选择照片集合
     private List<String>list6=new ArrayList<>();//病人照片选择照片集合
     private Button bt_lef,bt_right;
     private TextView tv_title;
-    private boolean b= OneItem.getOneItem().getB();
     private String id=null,name="";
     private User user;
     private String gathPath;
-    CreateFileConstant cfc = new CreateFileConstant();
     private ImageAdapter adapter;//展示原图的
-//    private Image1Adapter adapter1;//展示醋酸白的图片
-//    private Image2Adapter adapter2;//展示碘油的图片
+    private Image1Adapter adapter1;//展示醋酸白的图片
+    private Image2Adapter adapter2;//展示碘油的图片
     private ImageDCAdapter adapterDc;//医生编辑过后的图片
     private CustomConfirmDialog customConfirmDialog = null;
+    private FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_image);
         Intent intent = getIntent();
         id = intent.getStringExtra("msg");//得到传递过来的病人id值
@@ -75,7 +81,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     }
     public String initSelect(String id){
 
-        if(!id.equals("")||id!=null){
+        if(!TextUtils.isEmpty(id)){
             user=new LoginRegister().getUserName(Integer.parseInt(id));
         }
         gathPath=user.getGatherPath();
@@ -83,16 +89,18 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     }
     private void initClick() {
         bt_lef.setOnClickListener(this);//返回按钮点击
-        bt.setOnClickListener(this);//确定按钮点击
+//        bt.setOnClickListener(this);//确定按钮点击
+        floatingActionButton.setOnClickListener(this);
     }
 
     private void initView() {
         customConfirmDialog=new CustomConfirmDialog(this);
-        gv_bingren= (GridView) findViewById(R.id.gv_bingren);
-//        gv_cusuan= (GridView) findViewById(R.id.gv_cusuan);
-//        gv_dianyou= (GridView) findViewById(R.id.gv_dianyou);
+        gv_bingren= (GridView) findViewById(R.id.gv_yuanshi);
+        gv_cusuan= (GridView) findViewById(R.id.gv_cusuan);
+        gv_dianyou= (GridView) findViewById(R.id.gv_dianyou);
         gv_yisheng= (GridView) findViewById(R.id.gv_yisheng);
-        bt= (Button) findViewById(R.id.bt);
+//        bt= (Button) findViewById(R.id.bt);
+        floatingActionButton = findViewById(R.id.image_save);
         bt_lef= (Button) findViewById(R.id.btn_left);
         bt_right= (Button) findViewById(R.id.btn_right);
         bt_right.setVisibility(View.VISIBLE);
@@ -108,13 +116,13 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     }
     //展示该文件下病人所有的..jpg格式的图片
     public void showList() {
-        gathPath=initSelect(id)+"/PHOTOS";
+        gathPath=initSelect(id);
         if (gathPath == null) {
             return;
         }
         listitem = new ArrayList<>();
-//        listitem4 = new ArrayList<>();
-//        listitem5 = new ArrayList<>();
+        listitem4 = new ArrayList<>();
+        listitem5 = new ArrayList<>();
         if (new Item().getSD() != null) {
             File[] files = new File(gathPath).listFiles(new FilenameFilter() {
                 @Override
@@ -127,38 +135,37 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                     return a;
                 }
             });
-            if (files.length != 0) {
+            if (files!=null&&files.length != 0) {
                 //遍历数组动态添加图片到对象中去
                 for (File file : files) {
                     if(!file.getName().equals("方位.png")&&file.getName()!="方位.png"){
 //                        String image=file.getName().substring(17,file.getName().length());
                         String image=file.getName();
-                        if(image.contains(".jpg")){
+                        if(image.contains("yuantu")&&image.contains(".jpg")){
                             Item itemImage=new Item();
                             itemImage.setCb(new CheckBox(this));
                             itemImage.setPath(gathPath+"/"+file.getName());//图片路径
                             listitem.add(itemImage);
+                        }else if(image.contains("dianyou")&&image.contains(".jpg")){
+                            Item itemImage=new Item();
+                            itemImage.setCb(new CheckBox(this));
+                            itemImage.setPath(gathPath+"/"+file.getName());//图片路径
+                            listitem4.add(itemImage);
+                        }else if(image.contains("cusuanbai")&&image.contains(".jpg")){
+                            Item itemImage=new Item();
+                            itemImage.setCb(new CheckBox(this));
+                            itemImage.setPath(gathPath+"/"+file.getName());//图片路径
+                            listitem5.add(itemImage);
                         }
-//                        else if(image.contains("dianyou")&&image.contains(".jpg")){
-//                            Item itemImage=new Item();
-//                            itemImage.setCb(new CheckBox(this));
-//                            itemImage.setPath(gathPath+"/"+file.getName());//图片路径
-//                            listitem4.add(itemImage);
-//                        }else if(image.contains("cusuanbai")&&image.contains(".jpg")){
-//                            Item itemImage=new Item();
-//                            itemImage.setCb(new CheckBox(this));
-//                            itemImage.setPath(gathPath+"/"+file.getName());//图片路径
-//                            listitem5.add(itemImage);
-//                        }
                     }
                 }
             }
             adapter = new ImageAdapter(this,listitem);//展示原图的图片
             gv_bingren.setAdapter(adapter);
-//            adapter1 = new Image1Adapter(this,listitem5);//展示醋酸白的图片
-//            gv_cusuan.setAdapter(adapter1);
-//            adapter2 = new Image2Adapter(this,listitem4);//展示碘油的图片
-//            gv_dianyou.setAdapter(adapter2);
+            adapter1 = new Image1Adapter(this,listitem5);//展示醋酸白的图片
+            gv_cusuan.setAdapter(adapter1);
+            adapter2 = new Image2Adapter(this,listitem4);//展示碘油的图片
+            gv_dianyou.setAdapter(adapter2);
         }
     }
     //展示该文件下医生所有的.png格式的图片
@@ -179,7 +186,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                         return a;
                     }
                 });
-                if(files.length!=0){
+                if(files!=null&&files.length!=0){
                     for (File file : files) {
                         Item itemImage=new Item();
                         itemImage.setCb(new CheckBox(this));
@@ -203,22 +210,23 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         list1=new ArrayList<>();//病人原图路径集合
         list2=new ArrayList<>();//病人原图路径集合
-//        list4=new ArrayList<>();//病人原图路径集合
-//        list5=new ArrayList<>();//病人原图路径集合
+        list4=new ArrayList<>();//病人原图路径集合
+        list5=new ArrayList<>();//病人原图路径集合
         list1.clear();
         list2.clear();
-//        list4.clear();
-//        list5.clear();
-        list1=ImageAdapter.getList();//选择病人上传图片集合
-//        list4=Image1Adapter.getList();//选择病人碘油图片集合
-//        list5=Image2Adapter.getList();//选择病人醋酸白图片集合
+        list4.clear();
+        list5.clear();
+        list1=ImageAdapter.getList();//选择病人原图上传图片集合
+        list4=Image1Adapter.getList();//选择病人碘油图片集合
+        list5=Image2Adapter.getList();//选择病人醋酸白图片集合
         list2=ImageDCAdapter.getList();//选择医生上传图pain
 //        Toast.makeText(this, "a:"+list1.size()+"b:"+list4.size()+"c:"+list5.size(), Toast.LENGTH_SHORT).show();
         switch (v.getId()){
             case R.id.btn_right://右边删除键
                 if(id!=null&&!id.equals("")) {
-                    if (list1.size() == 0 && list2.size() == 0 ) {
-                        Toast.makeText(this, getString(R.string.print_picture_no_choise), Toast.LENGTH_SHORT).show();
+                    if (list1.size() == 0 && list2.size() == 0 && list4.size() == 0 && list5.size() == 0) {
+                        MyToast.showToast(this, getString(R.string.print_picture_no_choise));
+//                        Toast.makeText(this, getString(R.string.print_picture_no_choise), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (customConfirmDialog == null) {
@@ -235,22 +243,22 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                                 File file = new File(list2.get(i));
                                 file.delete();
                             }
-//                            for (int i = 0; i < list4.size(); i++) {
-//                                File file = new File(list4.get(i));
-//                                file.delete();
-//                            }
-//                            for (int i = 0; i < list5.size(); i++) {
-//                                File file = new File(list5.get(i));
-//                                file.delete();
-//                            }
+                            for (int i = 0; i < list4.size(); i++) {
+                                File file = new File(list4.get(i));
+                                file.delete();
+                            }
+                            for (int i = 0; i < list5.size(); i++) {
+                                File file = new File(list5.get(i));
+                                file.delete();
+                            }
                             ImageAdapter.setList();
                             ImageDCAdapter.setList();
                             Image1Adapter.setList();
                             Image2Adapter.setList();
                             adapter.notifyDataSetChanged();
                             adapterDc.notifyDataSetChanged();
-//                            adapter1.notifyDataSetChanged();
-//                            adapter2.notifyDataSetChanged();
+                            adapter1.notifyDataSetChanged();
+                            adapter2.notifyDataSetChanged();
                             try {
                                 if (customConfirmDialog != null) {
                                     customConfirmDialog.dimessDialog();
@@ -272,67 +280,138 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                     });
 
                 }else {
-                    Toast.makeText(this, getString(R.string.print_patient_select), Toast.LENGTH_SHORT).show();
+                    MyToast.showToast(this, getString(R.string.print_patient_select));
+//                    Toast.makeText(this, getString(R.string.print_patient_select), Toast.LENGTH_SHORT).show();
                 }
 
                 break;
 
             case R.id.btn_left:
-                if(!id.equals(getString(R.string.patient_id))&&!id.equals("")&&id!=null){
-                    list1.clear();//清除数据源
-                    list2.clear();//清除数据源
-                    if(!id.equals(getString(R.string.patient_id))&&!id.equals("")){
-                        user=new LoginRegister().getUserName(Integer.parseInt(id));//根据传递过来的id得到相应的user数据
-                        if(user.getImage()==1||user.getImage()==0){
-                            OneItem.getOneItem().setList(new ArrayList<String>());
-                        }else if(user.getImage()==2){
-                            OneItem.getOneItem().setList(user.getImgPath());
-                        }
-                    }
-                }
+                ImageAdapter.setList();
+                Image1Adapter.setList();
+                Image2Adapter.setList();
+                ImageDCAdapter.setList();
+//                if(!id.equals(getString(R.string.patient_id))&&!id.equals("")&&id!=null){
+//                    list1.clear();//清除数据源
+//                    list2.clear();//清除数据源
+//                    if(!id.equals(getString(R.string.patient_id))&&!id.equals("")){
+//                        user=new LoginRegister().getUserName(Integer.parseInt(id));//根据传递过来的id得到相应的user数据
+//                        if(user.getImage()==1||user.getImage()==0){
+//                            OneItem.getOneItem().setList(new ArrayList<String>());
+//                        }else if(user.getImage()==2){
+//                            OneItem.getOneItem().setList(user.getImgPath());
+//                        }
+//                    }
+//                }
                 finish();
                 break;
-            case R.id.bt:
+
+            case R.id.image_save:
                 OneItem.getOneItem().setD(2);
                 list3.clear();
                 list6.clear();
                 list6.addAll(list1);
-//                list6.addAll(list4);
-//                list6.addAll(list5);
+                list6.addAll(list4);
+                list6.addAll(list5);
                 if(!id.equals(getString(R.string.patient_id))&&!id.equals("")) {//如果传递过来的id为空，点击确定直接退出页面
-                    if(list6.size()>3){//判断选择病人图片是否大于三张
-                        Toast.makeText(ImageActivity.this,getString(R.string.print_picture_three), Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        user=new LoginRegister().getUserName(Integer.parseInt(id));//根据传递过来的id得到相应的user数据
-                        list3.addAll(list6);
-                        list3.addAll(list2);
-                        if(list3.size()==0){//如果没有选择图片则添加空白图片
-                            for(int i=0;i<3;i++){
-                                list3.add(Environment.getExternalStorageDirectory().getAbsolutePath() + "/AFLY/kb.png");
-                            }
-                            user.setImgPath(list3);
-                            user.setImage(1);
-                        }else {
-                            user.setImgPath(list3);
-                            user.setImage(2);
+//                    if(list6.size()>3){//判断选择病人图片是否大于三张
+//                        Toast.makeText(ImageActivity.this,getString(R.string.print_picture_three), Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+                    user=new LoginRegister().getUserName(Integer.parseInt(id));//根据传递过来的id得到相应的user数据
+                    list3.addAll(list6);
+                    list3.addAll(list2);
+                    if(list3.size()==0){//如果没有选择图片则添加空白图片
+                        for(int i=0;i<3;i++){
+                            list3.add(Environment.getExternalStorageDirectory().getAbsolutePath() + "/AFLY/blank.png");
                         }
-//                    user.setImgPath(list3);
-                        user.updateAll("pId=?",id);
-//                        user.save();
-                        OneItem.getOneItem().setList(list3);//为OneItem类中的list赋值
-                        list1.clear();//清除数据源
-                        list2.clear();//清除数据源
-//                        list4.clear();
-//                        list5.clear();
-                        finish();
+                        user.setImgPath(list3);
+                        user.setImage(1);
+                    }else if(list3.size()>4){
+                        MyToast.showToast(ImageActivity.this,getString(R.string.print_picture_three));
+//                        Toast.makeText(ImageActivity.this,getString(R.string.print_picture_three), Toast.LENGTH_SHORT).show();
+                        return;
+                    }else {
+                        user.setImgPath(list3);
+                        user.setImage(2);
                     }
+//                    user.setImgPath(list3);
+                    user.updateAll("pId=?",id);
+//                        user.save();
+                    OneItem.getOneItem().setList(list3);//为OneItem类中的list赋值
+                    list1.clear();//清除数据源
+                    list2.clear();//清除数据源
+                    list4.clear();
+                    list5.clear();
+                    finish();
+//                    }
                 }else {
                     finish();
                 }
 
                 break;
+//            case R.id.bt:
+//                OneItem.getOneItem().setD(2);
+//                list3.clear();
+//                list6.clear();
+//                list6.addAll(list1);
+//                list6.addAll(list4);
+//                list6.addAll(list5);
+//                if(!id.equals(getString(R.string.patient_id))&&!id.equals("")) {//如果传递过来的id为空，点击确定直接退出页面
+////                    if(list6.size()>3){//判断选择病人图片是否大于三张
+////                        Toast.makeText(ImageActivity.this,getString(R.string.print_picture_three), Toast.LENGTH_SHORT).show();
+////                    }
+////                    else {
+//                    user=new LoginRegister().getUserName(Integer.parseInt(id));//根据传递过来的id得到相应的user数据
+//                    list3.addAll(list6);
+//                    list3.addAll(list2);
+//                    if(list3.size()==0){//如果没有选择图片则添加空白图片
+//                        for(int i=0;i<3;i++){
+//                            list3.add(Environment.getExternalStorageDirectory().getAbsolutePath() + "/AFLY/blank.png");
+//                        }
+//                        user.setImgPath(list3);
+//                        user.setImage(1);
+//                    }else if(list3.size()>4){
+//                        MyToast.showToast(ImageActivity.this,getString(R.string.print_picture_three));
+////                        Toast.makeText(ImageActivity.this,getString(R.string.print_picture_three), Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }else {
+//                        user.setImgPath(list3);
+//                        user.setImage(2);
+//                    }
+////                    user.setImgPath(list3);
+//                    user.updateAll("pId=?",id);
+////                        user.save();
+//                    OneItem.getOneItem().setList(list3);//为OneItem类中的list赋值
+//                    list1.clear();//清除数据源
+//                    list2.clear();//清除数据源
+//                    list4.clear();
+//                    list5.clear();
+//                    finish();
+////                    }
+//                }else {
+//                    finish();
+//                }
+//
+//                break;
+            default:
+                break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            ImageAdapter.setList();
+            Image1Adapter.setList();
+            Image2Adapter.setList();
+            ImageDCAdapter.setList();
+            finish();
+
+            return true;
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private List<String> fileSplitNameList = new ArrayList<>();

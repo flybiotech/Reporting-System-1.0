@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import com.shizhenbao.db.UserManager;
 import com.shizhenbao.util.Const;
 import com.shizhenbao.util.OneItem;
 import com.util.AlignedTextUtils;
+import com.view.MyToast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_search_layout);
         init();
         //判断用户是否是超级管理员， true 表示是超级管理员，，false 表示是普通医生
@@ -109,7 +112,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_search_search:
-                Toast.makeText(this, R.string.patient_select_patients_message, Toast.LENGTH_SHORT).show();
+                MyToast.showToast(this,getString(R.string.patient_select_patients_message));
+//                Toast.makeText(this, R.string.patient_select_patients_message, Toast.LENGTH_SHORT).show();
                 getUserInfo();
                 Intent intent = new Intent(SearchActivity.this, SelectActivity.class);
                 startActivity(intent);
@@ -119,6 +123,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 textView_date.setText("");
                 setDateDialog();
                 break;
+                default:
+                    break;
         }
 
     }

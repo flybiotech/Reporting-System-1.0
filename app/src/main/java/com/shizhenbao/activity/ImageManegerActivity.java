@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class ImageManegerActivity extends FragmentActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_image_maneger);
         initView();
         switchStates(0);
@@ -115,6 +117,8 @@ public class ImageManegerActivity extends FragmentActivity implements View.OnCli
                 tv_yes.setTextColor(getResources().getColor(R.color.textcase));
                 tv_yes.setTextSize(20);
                 break;
+            default:
+                break;
         }
     }
 
@@ -160,6 +164,8 @@ public class ImageManegerActivity extends FragmentActivity implements View.OnCli
                         customConfirmDialog.dimessDialog();
                     }
                 });
+                break;
+            default:
                 break;
         }
     }

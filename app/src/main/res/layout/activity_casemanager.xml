@@ -9,22 +9,30 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff">
+        android:background="#fff"
+        android:layout_marginEnd="@dimen/dp_20"
+
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/dp_20"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/dp_5"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/dp_20"
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:text="@string/case_register_message"
                 android:textAllCaps="false"
                 android:textColor="@color/textcase"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,57 +44,57 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_select"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_5"
                     android:text=" "
                     android:textAllCaps="false"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16" />
             </LinearLayout>
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/print_diagnosis_result"
                 android:textColor="@color/textcase"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <TextView
                 android:id="@+id/tv_zhenduanresult_clm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_select"
-                android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="5dp"
-                android:textSize="@dimen/textViewNameSize" />
+                android:paddingBottom="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5"
+                android:textSize="@dimen/dp_16"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/print_Assessment_results"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:textColor="@color/textcase"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/dp_16" />
 
             <TextView
                 android:id="@+id/tv_pinggu_clm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_select"
-                android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="5dp"
-                android:textSize="@dimen/textViewNameSize" />
+                android:paddingBottom="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5"
+                android:textSize="@dimen/dp_16"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical">
 
                 <TextView
@@ -95,48 +103,67 @@
                     android:layout_height="wrap_content"
                     android:text="@string/case_image_show"
                     android:textColor="@color/textcase"
-                    android:textSize="@dimen/textViewNameSize" />
+                    android:textSize="@dimen/dp_16"
+                    />
 
-                <ImageView
+                <com.view.ImageViewRotation
                     android:id="@+id/image_clm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:scaleType="matrix" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dp_350"
+                    android:layout_height="@dimen/dp_350"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btn_pre01"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
-                        android:background="@drawable/btn_bg"
-                        android:text="@string/case_image_up"
-                        android:textSize="@dimen/buttonsSize"
-                        />
-
-                    <Button
-                        android:id="@+id/btn_next01"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="60dp"
-                        android:background="@drawable/btn_bg"
-                        android:text="@string/case_image_down"
-                        android:textSize="@dimen/buttonsSize"
-                        />
+                    android:scaleType="fitXY"
 
 
-                </LinearLayout>
+                    />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_30"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_pre01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:text="@string/case_image_up"
+                    android:textSize="@dimen/dp_20"
+                    />
+
+                <Button
+                    android:id="@+id/btn_next01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_60"
+                    android:background="@drawable/btn_bg"
+                    android:text="@string/case_image_down"
+                    android:textSize="@dimen/dp_20"
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_case_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/case_image_video"
+                android:textSize="@dimen/dp_16"
+                android:textColor="@color/textcase"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/case_recycler_vdieo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
 
         </LinearLayout>
 

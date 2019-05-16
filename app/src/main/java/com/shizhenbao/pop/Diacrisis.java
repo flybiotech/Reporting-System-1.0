@@ -1,12 +1,13 @@
 package com.shizhenbao.pop;
 
-import org.litepal.crud.DataSupport;
+
+import org.litepal.crud.LitePalSupport;
 
 /**
  * Created by zhangbin on 2017/5/26.
  */
 
-public class Diacrisis extends DataSupport {
+public class Diacrisis extends LitePalSupport {
     private int diaId;
     private String cytology;//细胞学
     private String dna;//dna

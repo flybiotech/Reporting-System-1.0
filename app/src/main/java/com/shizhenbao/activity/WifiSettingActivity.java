@@ -3,15 +3,21 @@ package com.shizhenbao.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.location.LocationManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.TransformationMethod;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,53 +31,97 @@ import com.shizhenbao.activity.base.BaseActivity;
 import com.shizhenbao.constant.CreateFileConstant;
 import com.shizhenbao.constant.DeviceOfSize;
 import com.shizhenbao.db.LoginRegister;
-import com.shizhenbao.wifiinfo.WifiHotAdapter;
-import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.SystemSet;
 import com.shizhenbao.util.Const;
-import com.shizhenbao.util.OneItem;
-
-import org.litepal.crud.DataSupport;
+import com.shizhenbao.util.SPUtils;
+import com.shizhenbao.wifiinfo.WifiHotAdapter;
+import com.util.SouthUtil;
+import com.view.MyToast;
+import com.view.PasswordCharSequence;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
 public class WifiSettingActivity extends BaseActivity implements View.OnClickListener {
-    private    Button clear,save,btn_right,btn_left,selectBtnHP,selectBtnGetImageSoft;
-    private    EditText editName,editPass;
-    private    int wifiID;
+    private Button clear, save, btn_right, btn_left, selectBtnHP, selectBtnGetImageSoft;
+    private EditText editName, editPass;
+    private int wifiID;
     private TextView title_text;
     private List<SystemSet> system;
     private LoginRegister lr;
     private WifiHotAdapter adapter;
     private String wifiName = "";
-    private int wifiIndex=0;//判断是否 是从FragGetImage 中直接跳过来的
+    private int wifiIndex = 0;//判断是否 是从FragGetImage 中直接跳过来的 1 ：表示是从FragGetImage 那边跳过来的
     private double screenInches;//屏幕的尺寸
+    private List<ScanResult> results = new ArrayList<ScanResult>();
+    private String ssid = "";
+    private String pass = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_wifi_setting);
         init();
         Intent intent = getIntent();
-         wifiIndex = intent.getIntExtra("wifiIndex", 0);
-        if (wifiIndex ==1) {
+        wifiIndex = intent.getIntExtra("wifiIndex", 0);
+        if (wifiIndex == 1) {//表示从FragmentImage跳转过来的
+            SPUtils.put(this, Const.LOGINCOUNT, "1");
+            Const.FIRSTSHOW = true;
             selectBtn(1);
         }
+        initEditFormat();
     }
+
+    private void initEditFormat() {
+        editPass.setTransformationMethod(new TransformationMethod() {
+            @Override
+            public CharSequence getTransformation(CharSequence charSequence, View view) {
+                return new PasswordCharSequence(charSequence);
+            }
+
+            @Override
+            public void onFocusChanged(View view, CharSequence charSequence, boolean b, int i, Rect rect) {
+
+            }
+        });
+    }
+
 
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         if (!hasPermission(CreateFileConstant.ASK_CALL_BLUE_PERMISSION)) {
             requestPermission(CreateFileConstant.ASK_CALL_BLUE_CODE, CreateFileConstant.ASK_CALL_BLUE_PERMISSION);
         } else {
             if (wifiIndex == 1) {
-                refreshWifiList(getWifiList(this));
+                refreshWifiList(this);
+            } else {
+                selectBtn(1);
+                ssid=(String) SPUtils.get(this, Const.SZB_WIFI_SSID_KEY,  "");
+                pass=(String) SPUtils.get(this, Const.SZB_WIFI_PASS_KEY,  "");
+                editName.setText(ssid);
+                editPass.setText(pass);
             }
         }
+
+
     }
 
-    private void init(){
+    private void init() {
         clear = (Button) findViewById(R.id.btn_wifiSetting_clear01);
         save = (Button) findViewById(R.id.btn_wifiSetting_save01);
         selectBtnHP = (Button) findViewById(R.id.btn_wifisetting_hp);
@@ -102,86 +152,45 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_wifiSetting_clear01:// 清除相关信息
                 editName.setText("");
                 editPass.setText("");
-                Toast.makeText(this,R.string.setting_clear_success, Toast.LENGTH_SHORT).show();
+                MyToast.showToast(this,getString(R.string.setting_clear_success));
+//                SouthUtil.showToast(this,getString(R.string.setting_clear_success));
                 break;
 
             case R.id.btn_wifiSetting_save01://保存相关信息
-                system= DataSupport.findAll(SystemSet.class);
-                SystemSet system1 = null;
-                if (wifiID==0){
-                    if(system.size()==0){//数据为空时创建表
-                        system1=new SystemSet();
-                        Const.nameHP=(editName.getText().toString().trim());
-                        Const.passHP=(editPass.getText().toString().trim());
-                        system1.setPrinter_wifi_user(editName.getText().toString().trim());
-                        system1.setPrinter_wifi_pwd(editPass.getText().toString().trim());
-                    }else {
-                        for(int i=0;i<system.size();i++){
-                            system1=system.get(0);
-                            Const.nameHP=(editName.getText().toString().trim());
-                            system1.setPrinter_wifi_user(editName.getText().toString().trim());
-                            system1.setPrinter_wifi_pwd(editPass.getText().toString().trim());
-                           Const.passHP=(editPass.getText().toString().trim());
-                        }
-                    }
-//                    Const.devModel = null;
-                    system1.save();
-                }else {
+//                system= DataSupport.findAll(SystemSet.class);
+//                SystemSet system1 = null;
+                if (wifiID == 0) {
+                    SPUtils.put(this, Const.HP_WIFI_SSID_KEY, editName.getText().toString().trim() + "");
+                    SPUtils.put(this, Const.HP_WIFI_PASS_KEY, editPass.getText().toString().trim() + "");
 
-                    if(system.size()==0){//数据为空时创建表
-                        system1=new SystemSet();
-                        Const.nameShiZhenBao=editName.getText().toString().trim();
-                        Const.passShiZhenBao=editPass.getText().toString().trim();
-                        system1.setSzb_wifi_user(editName.getText().toString().trim());
-                        system1.setSzb_wifi_pwd(editPass.getText().toString().trim());
-                    }else {
-                        for(int i=0;i<system.size();i++){
-                            system1=system.get(0);
-                            Const.nameShiZhenBao=editName.getText().toString().trim();
-                            Const.passShiZhenBao=editPass.getText().toString().trim();
-                            system1.setSzb_wifi_user(editName.getText().toString().trim());
-                            system1.setSzb_wifi_pwd(editPass.getText().toString().trim());
-                        }
-                    }
-                    system1.save();
+                } else {
+                    SPUtils.put(this, Const.SZB_WIFI_SSID_KEY, editName.getText().toString().trim() + "");
+                    SPUtils.put(this, Const.SZB_WIFI_PASS_KEY, editPass.getText().toString().trim() + "");
                 }
-
-
-                if (Const.loginCount != 3) {
-                    //这段代码是判断 图像获取界面的wifi设置对话框出现的次数
-                    Doctor doctor = lr.getDoctor(OneItem.getOneItem().getName());
-                    //查找医生登陆的次数
-//                int doctorLoginCount = lr.getDoctorLoginCount(OneItem.getOneItem().getName());
-                    if (doctor != null) {
-                        doctor.setLoginCount(3);
-                        doctor.updateAll("dName =? ", OneItem.getOneItem().getName());
-                        Const.dialogWifiSetting = false;
-                        Const.loginCount = 3;
-                    } else {
-//                        Const.loginCount = 1;
-                    }
-                }
-
-                Toast.makeText(this, R.string.setting_picture_save_success, Toast.LENGTH_SHORT).show();
-
+                MyToast.showToast(this,getString(R.string.setting_picture_save_success));
+//                SouthUtil.showToast(this, getString(R.string.setting_picture_save_success));
                 finish();
 
                 break;
             case R.id.btn_wifisetting_hp: //惠普打印机wifi设置
                 selectBtn(0);
-                refreshWifiList(getWifiList(this));
+                refreshWifiList(this);
                 break;
             case R.id.btn_wifisetting_getImageSoft://图像获取软件wifi设置
                 selectBtn(1);
-                refreshWifiList(getWifiList(this));
+                refreshWifiList(this);
                 break;
             case R.id.btn_left:
                 finish();
                 break;
+            default:
+                break;
+
+
         }
     }
 
@@ -192,14 +201,18 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
         switch (mState) {
             case 0:
                 wifiID = 0;
-                editPass.setText(Const.passHP);
+
+                editName.setText((String) SPUtils.get(this, Const.HP_WIFI_SSID_KEY, ""));
+                editPass.setText((String) SPUtils.get(this, Const.HP_WIFI_PASS_KEY, "12345678"));
                 selectBtnHP.setSelected(true);
                 break;
             case 1:
                 wifiID = 1;
-                editPass.setText(Const.passShiZhenBao);
+                editName.setText((String) SPUtils.get(this, Const.SZB_WIFI_SSID_KEY, ""));
+                editPass.setText((String) SPUtils.get(this, Const.SZB_WIFI_PASS_KEY, "12345678"));
                 selectBtnGetImageSoft.setSelected(true);
-
+                break;
+            default:
                 break;
         }
 
@@ -209,40 +222,70 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
     public void openGpsPermission() {
         super.openGpsPermission();
         if (wifiIndex == 1) {
-            refreshWifiList(getWifiList(this));
+//            refreshWifiList(getWifiList(this));
+            refreshWifiList(this);
         }
 
     }
+
 
     //给listview 列表填充数据 ,将搜索到的wifi显示在listview上
-    private void refreshWifiList(List<ScanResult> results) {
-        if (results.size() == 0) {
-            openGPSSettings();
-        } else {
-            if (null == adapter) {
-                adapter = new WifiHotAdapter(results, this);
-            } else {
-                adapter.refreshData(results);
-            }
-            lv_add(results);
-        }
-    }
-
-
-
-
-    public static final List<ScanResult> getWifiList(Context context){
-        WifiManager wifiManager = (WifiManager)context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    private void refreshWifiList(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (!wifiManager.isWifiEnabled()) {
             wifiManager.setWifiEnabled(true);
         }
         wifiManager.startScan();
-        List<ScanResult> wifiList  = wifiManager.getScanResults();
-        return wifiList.size()>0? wifiList:new ArrayList();
+        List<ScanResult> scan = wifiManager.getScanResults();
+        //如果没有搜索到wifi，就开启GPS
+        if (scan.size() == 0) {
+            openGPSSettings();
+        } else {
+            if (results == null) {
+                results = new ArrayList<ScanResult>();
+            }
+            results.clear();
+
+            Observable.from(scan)
+                    .filter(new Func1<ScanResult, Boolean>() {
+                        @Override
+                        public Boolean call(ScanResult scanResult) {
+                            return scanResult.SSID.contains(Const.HP_SSID_FILTER) || scanResult.SSID.contains(Const.SZB_SSID_FILTER);
+                        }
+                    }).map(new Func1<ScanResult, ScanResult>() {
+                @Override
+                public ScanResult call(ScanResult scanResult) {
+                    return scanResult;
+                }
+            }).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<ScanResult>() {
+                        @Override
+                        public void onCompleted() {
+                            if (null == adapter) {
+                                adapter = new WifiHotAdapter(results, WifiSettingActivity.this);
+                            } else {
+                                adapter.refreshData(results);
+                            }
+                            lv_add(results);
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(ScanResult scanResult) {
+                            results.add(scanResult);
+                        }
+                    });
+        }
     }
 
 
-    private void lv_add(final List<ScanResult> results){
+    private void lv_add(final List<ScanResult> results) {
         LinearLayout linearLayoutMain = new LinearLayout(this);//自定义一个布局文件
         linearLayoutMain.setLayoutParams(new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT));
@@ -278,6 +321,7 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
 
     //跳到GPS设置界面
     private int GPS_REQUEST_CODE = 10;
+
     private boolean checkGPSIsOpen() {
         boolean isOpen;
         LocationManager locationManager = (LocationManager) this

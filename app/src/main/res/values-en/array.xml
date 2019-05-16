@@ -14,6 +14,24 @@
         <item>Unmarried</item>
     </string-array>
 
+    <string-array name="credentials">
+
+        <item>社保号</item>
+        <item>身份证</item>
+        <item>病例号</item>
+        <item>护照号</item>
+        <item>其它</item>
+    </string-array>
+
+    <string-array name="querycredentials">
+        <item>查询所有信息</item>
+        <item>社保号</item>
+        <item>身份证</item>
+        <item>病例号</item>
+        <item>护照号</item>
+        <item>其它</item>
+    </string-array>
+
     <string-array name="birthControlMode">
         <item>Select</item>
         <item>Condom</item>

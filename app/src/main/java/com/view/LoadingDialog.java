@@ -6,12 +6,14 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.activity.R;
+import com.shizhenbao.UI.MyTitleView;
 import com.shizhenbao.util.Const;
 
 
 public class LoadingDialog {
     private Dialog loadingDialog;
     private TextView textView;
+    private MyTitleView mt_tv_show;
     public static LoadingDialog instance=null;
     public LoadingDialog(Context context){
         loadingDialog=new Dialog(context,R.style.myDialogTheme);
@@ -31,6 +33,18 @@ public class LoadingDialog {
         textView= (TextView) loadingDialog.findViewById(R.id.loading_message);
     }
 
+ //旋转90度的
+    public LoadingDialog(Context context, String myTextview) {
+        loadingDialog = new Dialog(context, R.style.myDialogTheme);
+        loadingDialog.setContentView(R.layout.toast_view);
+        loadingDialog.setCanceledOnTouchOutside(false);
+        mt_tv_show = loadingDialog.findViewById(R.id.toast_viewss);
+        mt_tv_show.setTextColor("#F8F8FF");
+    }
+
+    public void setMyMessage(String message) {
+        mt_tv_show.setText(message);
+    }
     /**
      *
      * @param message
@@ -38,6 +52,11 @@ public class LoadingDialog {
     public void setMessage(String message) {
         textView.setText(message);
     }
+
+    public boolean isShow() {
+        return loadingDialog.isShowing();
+    }
+
     /**
      *
      */

@@ -35,6 +35,7 @@ public class Updater {
     public void download(UpdaterConfig updaterConfig) {
         //系统的下载组件是否可用
         if (!UpdaterUtils.checkDownloadState(updaterConfig.getContext())) {
+
             Toast.makeText(updaterConfig.getContext(),"下载服务不可用，请您启用", Toast.LENGTH_SHORT).show();
             //当下载服务不可用的时候，就调用这个方法，启用下载服务
             UpdaterUtils.showDownloadSetting(updaterConfig.getContext());

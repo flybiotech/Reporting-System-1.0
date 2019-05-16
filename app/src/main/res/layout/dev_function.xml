@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_main_status">
+
+        <TextView
+            android:id="@+id/func"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/fun"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="16sp"></TextView>
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/header"
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="1dp" />
+
+    <ImageButton
+        android:id="@+id/ref"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ptz_cap"
+        android:clickable="true"
+        android:onClick="ref"
+        android:scaleType="fitXY"
+        android:src="@drawable/play2"
+        android:textAllCaps="false"></ImageButton>
+
+</RelativeLayout>

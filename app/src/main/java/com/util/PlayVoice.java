@@ -46,7 +46,10 @@ public class PlayVoice {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            mp.start();
+            if (mp != null) {
+                mp.start();
+            }
+
         }
     }
 }

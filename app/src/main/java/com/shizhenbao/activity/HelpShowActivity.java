@@ -6,6 +6,7 @@ import android.media.ThumbnailUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class HelpShowActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//禁止屏幕休眠
         setContentView(R.layout.activity_help_show);
         helpPosition=getIntent().getIntExtra("helpItem", 0);
         helpTitle=getIntent().getStringExtra("helpTitle");
@@ -76,51 +78,91 @@ public class HelpShowActivity extends AppCompatActivity implements View.OnClickL
                         getString(R.string.setting_select_patient_message_show3)+"\n",MDEFAULT,MDEFAULT,MDEFAULT);
                 break;
             case 2:
+                showInfo(getString(R.string.setting_Treasures_of_vision_link_faild_show1)+"\n",
+                        getString(R.string.setting_Treasures_of_vision_link_faild_show2)+"\n",
+                        getString(R.string.setting_Treasures_of_vision_link_faild_show3)+"\n ",
+                        MDEFAULT,MDEFAULT,MDEFAULT);
+                break;
+            case 3:
                 showInfo(getString(R.string.setting_print_attention_show1)+"\n",
                         "",
                         "",
                         MDEFAULT,MDEFAULT,MDEFAULT);
                 break;
-            case 3:
+            case 4:
                 showInfo(getString(R.string.setting_select_case_show)+"\n",
                         "",
                         "",
                         MDEFAULT,MDEFAULT,MDEFAULT);
                 break;
-            case 4:
-
+            case 5:
                 showInfo(getString(R.string.setting_Contrast_case_show1)+"\n",
                         getString(R.string.setting_Contrast_case_show2)+"\n",
                         "",
                         MDEFAULT,MDEFAULT,MDEFAULT);
                 break;
+            case 6:
+                if (isChina) {
+                    showInfo(getString(R.string.setting_Treasures_of_vision_light_show1) + "\n", getString(R.string.setting_Treasures_of_vision_light_show2) + "\n", "",
+                            R.drawable.help0901, R.drawable.help0902, MDEFAULT);
+                } else {
+                    showInfo(getString(R.string.setting_Treasures_of_vision_light_show1)+"\n",getString(R.string.setting_Treasures_of_vision_light_show2)+"\n","",
+                            R.drawable.help0901e,R.drawable.help0902e,MDEFAULT);
+                }
 
+                break;
+            case 7:
 
-            case 5:
-//                if (isChina) {
+                if (isChina) {
                     showInfo(getString(R.string.setting_diagnosis_delete_show1)+"\n",getString(R.string.setting_diagnosis_delete_show2)+"\n","",
                             R.drawable.help1001,R.drawable.help1002,MDEFAULT);
-//                }
-//                else {
+                } else {
+                    showInfo(getString(R.string.setting_diagnosis_delete_show1)+"\n",getString(R.string.setting_diagnosis_delete_show2)+"\n","",
+                            R.drawable.help1001e,R.drawable.help1002e,MDEFAULT);
+                }
+                break;
+
+//            case 8:
+//                showInfo(getString(R.string.setting_removal_used_show)+"\n",
+//                        "",
+//                        "",
+//                        MDEFAULT,MDEFAULT,MDEFAULT);
+//                break;
+
+            case 8:
+                if (isChina) {
+                    showInfo(getString(R.string.setting_picture_edit_show1)+"\n",getString(R.string.setting_picture_edit_show2)+"\n",getString(R.string.setting_picture_edit_show3)+"\n",
+                            R.drawable.help1101, R.drawable.help1102,R.drawable.help1103);
+                } else {
+                    showInfo(getString(R.string.setting_picture_edit_show1)+"\n",getString(R.string.setting_picture_edit_show2)+"\n",getString(R.string.setting_picture_edit_show3)+"\n",
+                            R.drawable.help1101e, R.drawable.help1102e,R.drawable.help1103e);
+                }
+                break;
+
+//            case 9:
+//                if (isChina) {
+//                    showInfo(getString(R.string.setting_diagnosis_delete_show1)+"\n",getString(R.string.setting_diagnosis_delete_show2)+"\n","",
+//                            R.drawable.help1001,R.drawable.help1002,MDEFAULT);
+//                } else {
 //                    showInfo(getString(R.string.setting_diagnosis_delete_show1)+"\n",getString(R.string.setting_diagnosis_delete_show2)+"\n","",
 //                            R.drawable.help1001e,R.drawable.help1002e,MDEFAULT);
 //                }
-
-                break;
-
-            case 6:
+//
+//                break;
+//
+//            case 10:
 //                if (isChina) {
-                    showInfo(getString(R.string.setting_picture_edit_show1)+"\n",getString(R.string.setting_picture_edit_show2)+"\n",getString(R.string.setting_picture_edit_show3)+"\n",
-                            R.drawable.help1101, R.drawable.help1102,R.drawable.help1103);
-//                }
-//                else {
+//                    showInfo(getString(R.string.setting_picture_edit_show1)+"\n",getString(R.string.setting_picture_edit_show2)+"\n",getString(R.string.setting_picture_edit_show3)+"\n",
+//                            R.drawable.help1101, R.drawable.help1102,R.drawable.help1103);
+//                } else {
 //                    showInfo(getString(R.string.setting_picture_edit_show1)+"\n",getString(R.string.setting_picture_edit_show2)+"\n",getString(R.string.setting_picture_edit_show3)+"\n",
 //                            R.drawable.help1101e, R.drawable.help1102e,R.drawable.help1103e);
-////                }
-
-                break;
-
-
+//                }
+//
+//                break;
+//
+//            case 11:
+//                break;
             default:
                 break;
 
@@ -197,6 +239,8 @@ public class HelpShowActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.btn_left:
                 finish();
+                break;
+            default:
                 break;
         }
     }

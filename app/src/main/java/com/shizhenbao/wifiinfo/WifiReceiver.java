@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.orhanobut.logger.Logger;
 import com.shizhenbao.util.Const;
+import com.shizhenbao.util.LogUtil;
+import com.shizhenbao.util.SPUtils;
 
 /**
  * Created by dell on 2017/8/18.
@@ -21,6 +23,7 @@ public class WifiReceiver extends BroadcastReceiver {
     private static String TAG = "TAG_WifiReceiver";
 //    int mark = 0;
     private static WifiConnectinfo mWifiConnectinfo;
+    private static WifiConnectinfoPrint mWifiConnectinfoPrint;
     @Override
     public void onReceive(Context context, Intent intent) {
 //        i++;
@@ -67,16 +70,21 @@ public class WifiReceiver extends BroadcastReceiver {
 
                     String ssid = wifiInfo.getSSID();
                     if (Const.wifiMark) {
-                        if (ssid.equals("\"" + Const.nameShiZhenBao + "\"")) {
+                        LogUtil.e("TAG", "onReceive: ssid=  "+ssid );
+                        if (ssid.equals("\"" +(String) SPUtils.get(context, Const.SZB_WIFI_SSID_KEY, "-1") + "\"")) {
                             if (mWifiConnectinfo != null) {
                                 Const.wifiMark = false;
-                                mWifiConnectinfo.wifiConnectSuccess(1);
-//                                Logger.e(" 二代  mWifiConnectinfo.wifiConnectSuccess(1):");
+                                mWifiConnectinfo.wifiConnectSuccessGetImage(1);
+                            }
+                        }else if (ssid.equals("\"" + (String) SPUtils.get(context, Const.HP_WIFI_SSID_KEY, "-1") + "\"")){
+
+                            if (mWifiConnectinfoPrint != null) {
+                                Const.wifiMark = false;
+                                mWifiConnectinfoPrint.wifiConnectSuccessPrinter(2);
+                                Logger.e(" 二代  mWifiConnectinfoPrint.wifiConnectSuccess(2):");
                             }
                         }
-//                        Logger.e(" 二代  mWifiConnectinfo.wifiConnectSuccess(2):");
-                    } else {
-//                        Logger.e(" 二代 wifi广播" + "Const.wifiMark: " + Const.wifiMark);
+
                     }
 
                 }
@@ -94,11 +102,20 @@ public class WifiReceiver extends BroadcastReceiver {
 
     }
 
+    public  static void setWifiConnectionListener(WifiConnectinfoPrint wifiConnectionListenerPrint) {
+        mWifiConnectinfoPrint = wifiConnectionListenerPrint;
+
+    }
+
         public interface WifiConnectinfo {
 
-            void wifiConnectSuccess(int state);
+            void wifiConnectSuccessGetImage(int state);
 
-            void wifiConnectFaile(int state);
+//            void wifiConnectSuccessPrinter(int state);
+        }
+
+        public interface WifiConnectinfoPrint{
+            void wifiConnectSuccessPrinter(int state);
         }
 
 }
