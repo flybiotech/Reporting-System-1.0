@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/title_item"></include>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="病人上传图片（请按照原图、醋酸白处理、碘油顺序进行选择）"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"></View>
+
+                <com.shizhenbao.UI.MyGridView
+                    android:id="@+id/gv_bingren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="10dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="10dp">
+                </com.shizhenbao.UI.MyGridView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="医生诊断图片"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center_horizontal"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"></View>
+                <GridView
+                    android:id="@+id/gv_yisheng"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:horizontalSpacing="10dp"
+                    android:numColumns="3">
+                </GridView>
+            </LinearLayout>
+            <Button
+                android:id="@+id/bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确定"
+                android:background="@drawable/btn_bg"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

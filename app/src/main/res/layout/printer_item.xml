@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_print_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/et_bianhao"
+                android:layout_width="143dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="7"
+                android:background="@drawable/edittext_shape_normal"
+                android:enabled="false"
+                android:gravity="center"
+                android:hint="@string/patient_id"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+        </TableRow>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text=""
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <TextView
+                android:id="@+id/tv_print_02"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_weight="7"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+        </LinearLayout>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/tablelayout_bg_item"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="1dp"
+            android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+            android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+            <TableRow>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.2dp"
+                    android:background="#fff" />
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_zhengzhuang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_xibaoxue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_dna"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_08"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_quyu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_pinggu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_yindaojin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_nizhen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_yijian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+        </TableLayout>
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:background="#fff" />
+        </TableRow>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text=""
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <TextView
+                android:id="@+id/tv_print_13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_weight="7"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+        </LinearLayout>
+    </TableLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/tablelayout_bg_item"
+        android:orientation="vertical"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        android:paddingTop="1dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+            android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+            <TableRow>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp"
+                    android:background="#fff" />
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_bianjie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_xueguan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_dianranse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+            </TableRow>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow></TableRow>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#fff" />
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tv_print_18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+                <EditText
+                    android:id="@+id/et_cusuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_span="7"
+                    android:background="@drawable/edittext_select"
+                    android:gravity="center"
+                    android:hint="@string/print_message_hint"
+                    android:padding="2dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/textViewNameSize" />
+
+
+            </TableRow>
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/image_Select_patients"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bt_choise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/print_iamge_select"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bt_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/print_azimuth_map"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:id="@+id/bt_baocun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/print_Generate_report"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bt_giveup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/patient_clear"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</LinearLayout>

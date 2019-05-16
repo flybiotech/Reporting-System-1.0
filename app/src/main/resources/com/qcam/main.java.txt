@@ -1,0 +1,1781 @@
+﻿package com.qcam;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlSerializer;
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.PowerManager;
+import android.os.Vibrator;
+import android.os.PowerManager.WakeLock;
+import android.text.Html;
+import android.util.Log;
+import android.util.Xml;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.Display;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.app.Notification;
+import android.app.NotificationManager;
+
+import com.qcam.R;
+import com.thSDK.*;
+
+public class main extends TMyBaseActivity
+{
+  int lanChoice = -1;
+  String PREFERENCES_NAME = "LANGUAGE";
+
+  public static final TApp App = new TApp();
+  private class_AlarmService.AlarmBinder AlarmBind;
+  boolean IsAlarmBind;
+
+  Timer timer = new Timer();
+
+  ImageButton btn1;
+  ImageButton btn2;
+  Button BtnLanguage;
+  ImageButton BtnHelp;
+  ImageButton BtnAlarm;
+  TableLayout lay;
+  TableRow row;
+
+  RelativeLayout layhelp;
+  private MenuItem mExit;
+  private MenuItem mAlarmSet;
+  private MenuItem mTimerset;
+  private MenuItem mCancel;
+
+  View setView;
+  Dialog dialogSet;
+  ToggleButton tg1;
+  ToggleButton tg2;
+  ToggleButton tg3;
+  TextView tx1;
+  TextView tx2;
+  TextView tx3;
+  int timerItem;
+  public String ALMSET = "almarm set";
+
+  public static ArrayList<TDevNode> listnode = new ArrayList();
+  public static ArrayList<Activity> killList = new ArrayList();
+  String SearchMsg;
+  ListView list;
+  int ItemPosition = -1;
+  dlgHelp help;
+
+  NotificationManager notificationManager;
+  boolean IsSearching;
+
+  int addChoice;
+
+  PowerManager powerManager = null;
+  WakeLock wakeLock = null;
+
+  OnItemClickListener ClickListener;
+
+  private void initClickListeners()
+  {
+
+    ClickListener = new OnItemClickListener()
+    {
+      public void onItemClick(AdapterView parent, View view, int position, long id)
+      {
+        ItemPosition = list.getFirstVisiblePosition();
+        App.SelectNode = (TDevNode)listnode.get(position);
+        App.SelectNode.index = position;
+
+        Intent intent = new Intent(main.this, actDevFunction.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("App", App);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        return;
+      }
+    };
+  }
+
+  private ServiceConnection conn = new ServiceConnection()
+  {
+    public void onServiceConnected(ComponentName name, IBinder service)
+    {
+      Log.e("gyl", "onServiceConnected");
+      AlarmBind = (class_AlarmService.AlarmBinder) service;
+      IsAlarmBind = true;
+      AlarmBind.setFront(true);
+
+    }
+
+    public void onServiceDisconnected(ComponentName name)
+    {
+    }
+  };
+
+  @Override
+  public void onCreate(Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+    // WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+    Intent intent = new Intent(this, class_AlarmService.class);
+    bindService(intent, conn, Context.BIND_AUTO_CREATE);
+
+    /* alarm set */
+    LayoutInflater factory = LayoutInflater.from(this);
+    setView = factory.inflate(R.layout.alarm_set, null);
+    dialogSet = onCreateDialog(1);
+
+    tg1 = (ToggleButton) setView.findViewById(R.id.tg11);
+    tg2 = (ToggleButton) setView.findViewById(R.id.tg22);
+    tg3 = (ToggleButton) setView.findViewById(R.id.tg33);
+    tx1 = (TextView) setView.findViewById(R.id.text1);
+    tx2 = (TextView) setView.findViewById(R.id.text2);
+    tx3 = (TextView) setView.findViewById(R.id.text3);
+    LinearLayout hide = (LinearLayout) setView.findViewById(R.id.hide);
+    hide.setVisibility(View.GONE);
+    LinearLayout show = (LinearLayout) setView.findViewById(R.id.show);
+    show.setVisibility(View.VISIBLE);
+    // ////////////////////////////////////////////
+
+    this.SetLanguage();
+
+    setContentView(R.layout.main);
+    initClickListeners();
+    killList.add(this);
+
+    btn1 = (ImageButton) findViewById(R.id.btn1);
+    btn2 = (ImageButton) findViewById(R.id.btn2);
+    lay = (TableLayout) findViewById(R.id.lay);
+    row = (TableRow) findViewById(R.id.row);
+
+    BtnLanguage = (Button) findViewById(R.id.language);
+
+    layhelp = (RelativeLayout) findViewById(R.id.layhelp);
+    BtnHelp = (ImageButton) findViewById(R.id.helpbtn);
+    BtnAlarm = (ImageButton) findViewById(R.id.almbtn);
+    list = (ListView) findViewById(R.id.list);
+
+    WindowManager manage = getWindowManager();
+    Display display = manage.getDefaultDisplay();
+
+    App.ScreenWidth = display.getWidth();
+    App.ScreenHeight = display.getHeight();
+    if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+    {
+
+      TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+      layoutParams1.leftMargin = 10;
+      btn1.setLayoutParams(layoutParams1);
+      TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+      layoutParams2.rightMargin = 10;
+      btn2.setLayoutParams(layoutParams2);
+
+      TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenWidth / 6);
+      lay.setLayoutParams(layout);
+
+      TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+      layoutParams.topMargin = App.ScreenWidth / 48;
+      row.setLayoutParams(layoutParams);
+
+      if (App.ScreenHeight < 500)
+      {
+        RelativeLayout.LayoutParams pamlay = new RelativeLayout.LayoutParams(App.ScreenWidth, App.ScreenHeight / 9);
+        pamlay.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layhelp.setLayoutParams(pamlay);
+
+        RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        pambtn.topMargin = 8;
+        BtnHelp.setLayoutParams(pambtn);
+
+        RelativeLayout.LayoutParams pamalm = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pamalm.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        pamalm.topMargin = 8;
+        BtnAlarm.setLayoutParams(pamalm);
+
+        RelativeLayout.LayoutParams Lan = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pamalm.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        pamalm.topMargin = 8;
+        BtnAlarm.setLayoutParams(pamalm);
+
+        RelativeLayout.LayoutParams lanParams = new RelativeLayout.LayoutParams(App.ScreenWidth / 5, App.ScreenWidth / 8);
+        lanParams.leftMargin = 50;
+        lanParams.topMargin = 8;
+        BtnLanguage.setLayoutParams(lanParams);
+
+      }
+
+    }
+    else
+    {
+      TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+      layoutParams1.leftMargin = 10;
+      btn1.setLayoutParams(layoutParams1);
+
+      TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+      layoutParams2.rightMargin = 10;
+      btn2.setLayoutParams(layoutParams2);
+
+      TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenHeight / 6);
+      lay.setLayoutParams(layout);
+
+      TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+      layoutParams.topMargin = App.ScreenHeight / 48;
+      row.setLayoutParams(layoutParams);
+
+      if (App.ScreenWidth < 500)
+      {
+        RelativeLayout.LayoutParams pamlay = new RelativeLayout.LayoutParams(App.ScreenWidth, App.ScreenWidth / 9);
+        pamlay.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layhelp.setLayoutParams(pamlay);
+
+        RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams((App.ScreenWidth / 9 - 8), (App.ScreenWidth / 9 - 8));
+        pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        pambtn.topMargin = 8;
+        BtnHelp.setLayoutParams(pambtn);
+
+        RelativeLayout.LayoutParams pamalm = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pambtn.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        pambtn.topMargin = 8;
+        BtnAlarm.setLayoutParams(pamalm);
+      }
+    }
+
+    IsSearching = false;
+    help = new dlgHelp(this);
+
+    forbidScreenLock();
+    notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+  }
+
+  @Override
+  protected Dialog onCreateDialog(int id)
+  {
+    switch (id) {
+    case 1:
+      return new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_info).setView(setView).setTitle(R.string.almset)
+          .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
+          {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+              SharedPreferences agPreferences = getSharedPreferences(ALMSET, Activity.MODE_PRIVATE);
+              SharedPreferences.Editor editor = agPreferences.edit();
+              editor.putBoolean("vib", tg1.isChecked());
+              editor.putBoolean("sound", tg2.isChecked());
+              editor.putBoolean("capture", tg3.isChecked());
+              editor.commit();
+              if (IsAlarmBind)
+              {
+                AlarmBind.freshMsg();
+              }
+            }
+          }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+          {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+            }
+          }).create();
+    }
+    return null;
+  }
+
+  void init()
+  {
+    if (mExit != null)
+    {
+      mCancel.setTitle(getString(R.string.cancel));
+      mExit.setTitle(getString(R.string.exit));
+      mAlarmSet.setTitle(getString(R.string.alarmset));
+      mTimerset.setTitle(getString(R.string.timerset));
+    }
+
+    btn1 = (ImageButton) findViewById(R.id.btn1);
+    btn2 = (ImageButton) findViewById(R.id.btn2);
+    lay = (TableLayout) findViewById(R.id.lay);
+    row = (TableRow) findViewById(R.id.row);
+
+    BtnLanguage = (Button) findViewById(R.id.language);
+    layhelp = (RelativeLayout) findViewById(R.id.layhelp);
+    BtnHelp = (ImageButton) findViewById(R.id.helpbtn);
+    BtnAlarm = (ImageButton) findViewById(R.id.almbtn);
+
+    WindowManager manage = getWindowManager();
+    Display display = manage.getDefaultDisplay();
+
+    App.ScreenWidth = display.getWidth();
+    App.ScreenHeight = display.getHeight();
+    if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+    {
+
+      TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+      layoutParams1.leftMargin = 10;
+      btn1.setLayoutParams(layoutParams1);
+      TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+      layoutParams2.rightMargin = 10;
+      btn2.setLayoutParams(layoutParams2);
+
+      TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenWidth / 6);
+      lay.setLayoutParams(layout);
+
+      TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+      layoutParams.topMargin = App.ScreenWidth / 48;
+      row.setLayoutParams(layoutParams);
+
+      if (App.ScreenHeight < 500)
+      {
+        RelativeLayout.LayoutParams pamlay = new RelativeLayout.LayoutParams(App.ScreenWidth, App.ScreenHeight / 9);
+        pamlay.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layhelp.setLayoutParams(pamlay);
+
+        RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        pambtn.topMargin = 8;
+        BtnHelp.setLayoutParams(pambtn);
+
+        RelativeLayout.LayoutParams pamalm = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pamalm.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        pamalm.topMargin = 8;
+        BtnAlarm.setLayoutParams(pamalm);
+
+        RelativeLayout.LayoutParams Lan = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pamalm.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        pamalm.topMargin = 8;
+        BtnAlarm.setLayoutParams(pamalm);
+
+        RelativeLayout.LayoutParams lanParams = new RelativeLayout.LayoutParams(App.ScreenWidth / 5, App.ScreenWidth / 8);
+        lanParams.leftMargin = 50;
+        lanParams.topMargin = 8;
+        BtnLanguage.setLayoutParams(lanParams);
+      }
+    }
+    else
+    {
+      TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+      layoutParams1.leftMargin = 10;
+      btn1.setLayoutParams(layoutParams1);
+
+      TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+      layoutParams2.rightMargin = 10;
+      btn2.setLayoutParams(layoutParams2);
+
+      TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenHeight / 6);
+      lay.setLayoutParams(layout);
+
+      TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+      layoutParams.topMargin = App.ScreenHeight / 48;
+      row.setLayoutParams(layoutParams);
+
+      if (App.ScreenWidth < 500)
+      {
+        RelativeLayout.LayoutParams pamlay = new RelativeLayout.LayoutParams(App.ScreenWidth, App.ScreenWidth / 9);
+        pamlay.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layhelp.setLayoutParams(pamlay);
+
+        RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams((App.ScreenWidth / 9 - 8), (App.ScreenWidth / 9 - 8));
+        pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        pambtn.topMargin = 8;
+        BtnHelp.setLayoutParams(pambtn);
+
+        RelativeLayout.LayoutParams pamalm = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+        pambtn.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        pambtn.topMargin = 8;
+        BtnAlarm.setLayoutParams(pamalm);
+      }
+    }
+    help = new dlgHelp(this);
+    App.IsBackGround = false;
+    list = (ListView) findViewById(R.id.list);
+
+    App.ScreenWidth = display.getWidth();
+    App.ScreenHeight = display.getHeight();
+    int title = dip2px(this, 25);
+    int bottom = dip2px(this, 54);
+    if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+    {
+      LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(App.ScreenWidth, (App.ScreenHeight - bottom - App.ScreenWidth / 6 - title));
+      list.setLayoutParams(layoutParams);
+    }
+    else
+    {
+      LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(App.ScreenWidth, (App.ScreenHeight - 130 - title));
+      list.setLayoutParams(layoutParams);
+    }
+
+    Log.e("gyl", "resume");
+    try
+    {
+      domParseXML();
+    }
+    catch (IOException e)
+    {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    if (listnode.size() == 0)
+    {
+      return;
+    }
+    if (listnode.size() > 1)
+    {
+      for (int i = 0; i < listnode.size(); i++)
+      {
+        TDevNode ndi = (TDevNode) listnode.get(i);
+        for (int n = i + 1; n < listnode.size(); n++)
+        {
+          TDevNode ndn = (TDevNode) listnode.get(n);
+
+          if (ndi.DevIP.equals(ndn.DevIP) && !ndi.DevIP.equals(""))
+          {
+            listnode.remove(n);
+          }
+          if (ndi.UID.equals(ndn.UID) && !ndi.UID.equals(""))
+          {
+            listnode.remove(n);
+          }
+        }
+      }
+
+      createXmlFile();
+    }
+
+    list.setAdapter(new listAdapter(main.this));
+
+    list.setOnItemClickListener(ClickListener);
+
+  }
+
+  private void forbidScreenLock()
+  {
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+  }
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig)
+  {
+    super.onConfigurationChanged(newConfig);
+    if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+    {
+      setContentView(R.layout.main);
+
+      WindowManager manage = getWindowManager();
+      Display display = manage.getDefaultDisplay();
+
+      App.ScreenWidth = display.getWidth();
+      App.ScreenHeight = display.getHeight();
+      if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+      {
+
+        TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+        layoutParams1.leftMargin = 10;
+        // btn1.setLayoutParams(layoutParams1);
+        TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+        layoutParams2.rightMargin = 10;
+        // btn2.setLayoutParams(layoutParams2);
+
+        TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenWidth / 6);
+        lay.setLayoutParams(layout);
+
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+        layoutParams.topMargin = App.ScreenWidth / 48;
+        row.setLayoutParams(layoutParams);
+
+        if (App.ScreenHeight < 500)
+        {
+          RelativeLayout.LayoutParams pamlay = new RelativeLayout.LayoutParams(App.ScreenWidth, App.ScreenHeight / 9);
+          pamlay.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+          layhelp.setLayoutParams(pamlay);
+
+          RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+          pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+          pambtn.topMargin = 8;
+          BtnHelp.setLayoutParams(pambtn);
+
+          RelativeLayout.LayoutParams pamalm = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+          pambtn.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+          pambtn.topMargin = 8;
+          BtnAlarm.setLayoutParams(pambtn);
+        }
+
+      }
+      else
+      {
+        TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+        layoutParams1.leftMargin = 10;
+        btn1.setLayoutParams(layoutParams1);
+
+        TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+        layoutParams2.rightMargin = 10;
+        btn2.setLayoutParams(layoutParams2);
+
+        TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenHeight / 6);
+        lay.setLayoutParams(layout);
+
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+        layoutParams.topMargin = App.ScreenHeight / 48;
+        row.setLayoutParams(layoutParams);
+
+        if (App.ScreenWidth < 500)
+        {
+          RelativeLayout.LayoutParams pamlay = new RelativeLayout.LayoutParams(App.ScreenWidth, App.ScreenWidth / 9);
+          pamlay.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+          layhelp.setLayoutParams(pamlay);
+
+          RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams((App.ScreenWidth / 9 - 8), (App.ScreenWidth / 9 - 8));
+          pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+          pambtn.topMargin = 8;
+          BtnHelp.setLayoutParams(pambtn);
+
+          RelativeLayout.LayoutParams pamalm = new RelativeLayout.LayoutParams((App.ScreenHeight / 9 - 8), (App.ScreenHeight / 9 - 8));
+          pambtn.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+          pambtn.topMargin = 8;
+          BtnAlarm.setLayoutParams(pambtn);
+        }
+      }
+
+    }
+    else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+    {
+      setContentView(R.layout.main);
+
+      WindowManager manage = getWindowManager();
+      Display display = manage.getDefaultDisplay();
+
+      App.ScreenWidth = display.getWidth();
+      App.ScreenHeight = display.getHeight();
+      if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+      {
+
+        TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+        layoutParams1.leftMargin = 10;
+        btn1.setLayoutParams(layoutParams1);
+        TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenWidth / 8, App.ScreenWidth / 8);
+        layoutParams2.rightMargin = 10;
+        btn2.setLayoutParams(layoutParams2);
+
+        TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenWidth / 6);
+        lay.setLayoutParams(layout);
+
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+        layoutParams.topMargin = App.ScreenWidth / 48;
+        row.setLayoutParams(layoutParams);
+
+      }
+      else
+      {
+        TableRow.LayoutParams layoutParams1 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+        layoutParams1.leftMargin = 10;
+        btn1.setLayoutParams(layoutParams1);
+
+        TableRow.LayoutParams layoutParams2 = new TableRow.LayoutParams(App.ScreenHeight / 8, App.ScreenHeight / 8);
+        layoutParams2.rightMargin = 10;
+        btn2.setLayoutParams(layoutParams2);
+
+        TableLayout.LayoutParams layout = new TableLayout.LayoutParams(App.ScreenWidth, App.ScreenHeight / 6);
+        lay.setLayoutParams(layout);
+
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
+        layoutParams.topMargin = App.ScreenHeight / 48;
+        row.setLayoutParams(layoutParams);
+      }
+
+    }
+  }
+
+  public void onClick_About(View v)
+  {
+    help.show();
+  }
+
+  public void onClick_SmartConfig(View v)// zhb
+  {
+    Intent intent = new Intent(main.this, actSmartConfig.class);
+    Bundle bundle = new Bundle();
+    bundle.putSerializable("App", App);
+    intent.putExtras(bundle);        
+    startActivity(intent);
+  }
+
+  public void onClick_Language(View v)
+  {
+
+    final CharSequence[] items = { "简体中文", "繁體中文", "English", "한국의", "Thai" };
+    new AlertDialog.Builder(main.this).setIcon(android.R.drawable.ic_dialog_info).setTitle(R.string.langset)
+        .setSingleChoiceItems(items, lanChoice, new DialogInterface.OnClickListener()
+        {
+          public void onClick(DialogInterface dialog, int item)
+          {
+            lanChoice = item;
+
+          }
+        }).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
+        {
+          public void onClick(DialogInterface dialog, int whichButton)
+          {
+            Configuration config = new Configuration();
+            if (lanChoice == 0)
+              config.locale = Locale.CHINESE;
+            if (lanChoice == 1)
+              config.locale = Locale.TAIWAN;
+            if (lanChoice == 2)
+              config.locale = Locale.ENGLISH;
+            if (lanChoice == 3)
+              config.locale = Locale.KOREAN;
+            if (lanChoice == 4)
+              config.locale = Locale.GERMANY;
+            getApplicationContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+            setContentView(R.layout.main);
+            init();
+            SharedPreferences agPreferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = agPreferences.edit();
+            editor.putInt("choice", lanChoice);
+            editor.commit();
+          }
+        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+        {
+          public void onClick(DialogInterface dialog, int whichButton)
+          {
+            SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+            lanChoice = preferences.getInt("choice", -1);
+          }
+        }).show();
+
+  }
+
+  public void onClick_AlarmLst(View v)
+  {
+    Intent intent = new Intent(main.this, actAlarmImgLst.class);
+    Bundle bundle = new Bundle();
+
+    intent.putExtras(bundle);
+    startActivity(intent);
+  }
+
+  public void onClick_Add(View v)
+  {
+    final CharSequence[] items = { getString(R.string.ipmode), getString(R.string.p2pmode) };
+    new AlertDialog.Builder(main.this).setIcon(android.R.drawable.ic_dialog_info).setTitle(getString(R.string.slectType))
+        .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
+        {
+          public void onClick(DialogInterface dialog, int item)
+          {
+            addChoice = item;
+          }
+        }).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
+        {
+          public void onClick(DialogInterface dialog, int whichButton)
+          {
+            if (0 == addChoice)
+            {
+              Intent intent = new Intent(main.this, actDevAddIP.class);
+              Bundle bundle = new Bundle();
+              bundle.putString("type", "add");
+              intent.putExtras(bundle);
+              startActivityForResult(intent, 0);
+            }
+            if (1 == addChoice)
+            {
+              Intent intent = new Intent(main.this, actDevAddP2P.class);
+              Bundle bundle = new Bundle();
+              bundle.putString("type", "add");
+              intent.putExtras(bundle);
+              startActivityForResult(intent, 0);
+            }
+
+          }
+        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+        {
+          public void onClick(DialogInterface dialog, int whichButton)
+          {
+
+          }
+        }).show();
+
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu)
+  {
+    getMenuInflater().inflate(R.menu.activity_dev, menu);
+
+    mExit = menu.getItem(0);
+    mAlarmSet = menu.getItem(1);
+    mTimerset = menu.getItem(2);
+    mCancel = menu.getItem(3);
+    mAlarmSet.setTitle(getString(R.string.alarmset));
+    mTimerset.setTitle(getString(R.string.timerset));
+
+    // mCancel.setTitle(getString(R.string.cancel));
+    mExit.setOnMenuItemClickListener(new OnMenuItemClickListener()
+    {
+
+      public boolean onMenuItemClick(MenuItem item)
+      {
+        // if (wakeLock != null && wakeLock.isHeld()) {
+        // wakeLock.release();
+        // }
+
+        for (Activity act : main.killList)
+
+        {
+          act.finish();
+        }
+        notificationManager.cancelAll();
+
+        // android.os.Process.killProcess(android.os.Process.myPid());
+        return false;
+      }
+    });
+    mCancel.setOnMenuItemClickListener(new OnMenuItemClickListener()
+    {
+
+      public boolean onMenuItemClick(MenuItem item)
+      {
+
+        return false;
+      }
+    });
+
+    mAlarmSet.setOnMenuItemClickListener(new OnMenuItemClickListener()
+    {
+
+      public boolean onMenuItemClick(MenuItem item)
+      {
+
+        SharedPreferences preferences = getSharedPreferences(ALMSET, Activity.MODE_PRIVATE);
+        tg1.setChecked(preferences.getBoolean("vib", true));
+        tg2.setChecked(preferences.getBoolean("sound", true));
+        tg3.setChecked(preferences.getBoolean("capture", true));
+        // android:textOff="@string/nosnd"
+        // android:textOn="@string/snd" />
+        dialogSet.show();
+        tg1.setTextOn(getString(R.string.vibrate));
+        tg1.setTextOff(getString(R.string.novibrate));
+        tg2.setTextOn(getString(R.string.snd));
+        tg2.setTextOff(getString(R.string.nosnd));
+        tg3.setTextOn(getString(R.string.cap));
+        tg3.setTextOff(getString(R.string.nocap));
+        tx1.setText(getString(R.string.whevib));
+        tx2.setText(getString(R.string.whesnd));
+        tx3.setText(getString(R.string.whecap));
+        if (tg1.isChecked())
+        {
+          tg1.setText(getString(R.string.vibrate));
+        }
+        else
+        {
+          tg1.setText(getString(R.string.novibrate));
+        }
+        if (tg2.isChecked())
+        {
+          tg2.setText(getString(R.string.snd));
+        }
+        else
+        {
+          tg2.setText(getString(R.string.nosnd));
+        }
+        if (tg3.isChecked())
+        {
+          tg3.setText(getString(R.string.cap));
+        }
+        else
+        {
+          tg3.setText(getString(R.string.nocap));
+        }
+
+        Button buttonPositive = (Button) ((AlertDialog) dialogSet).getButton(DialogInterface.BUTTON_POSITIVE);
+        Button buttonNegative = (Button) ((AlertDialog) dialogSet).getButton(DialogInterface.BUTTON_NEGATIVE);
+        buttonPositive.setText(getString(R.string.ok));
+        buttonNegative.setText(getString(R.string.cancel));
+
+        // dialogSet.show();
+
+        return false;
+      }
+    });
+
+    final SharedPreferences preferences = getSharedPreferences(ALMSET, Activity.MODE_PRIVATE);
+    mTimerset.setOnMenuItemClickListener(new OnMenuItemClickListener()
+    {
+
+      public boolean onMenuItemClick(MenuItem item)
+      {
+
+        final CharSequence[] items = { getString(R.string.style1), getString(R.string.style2), getString(R.string.style3) };
+        new AlertDialog.Builder(main.this).setIcon(android.R.drawable.ic_dialog_info).setTitle(R.string.timerset)
+            .setSingleChoiceItems(items, preferences.getInt("timer", 1), new DialogInterface.OnClickListener()
+            {
+              public void onClick(DialogInterface dialog, int item)
+              {
+
+                timerItem = item;
+
+              }
+            }).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
+            {
+              public void onClick(DialogInterface dialog, int whichButton)
+              {
+                Log.e("DevList", "timer set is " + timerItem);
+                SharedPreferences agPreferences = getSharedPreferences(ALMSET, Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = agPreferences.edit();
+                editor.putInt("timer", timerItem);
+                editor.commit();
+
+                boolean serviceStatus = isServiceStarted(main.this, "com.qcamcam.PollingService");
+                if (serviceStatus)
+                {
+                  Intent i1 = new Intent(main.this, class_PollingService.class);
+                  Intent i2 = new Intent(main.this, class_AlarmService.class);
+                  main.this.stopService(i1);
+                  // ImgListActivity.this.stopService(i2);
+
+                  i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                  startService(i1);
+
+                }
+              }
+            }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+            {
+              public void onClick(DialogInterface dialog, int whichButton)
+              {
+
+              }
+            }).show();
+
+        return false;
+      }
+    });
+
+    return true;
+  }
+
+  public boolean isServiceStarted(Context context, String serviceClassName)
+  {
+    boolean isStarted = false;
+    try
+    {
+      ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+      List<ActivityManager.RunningServiceInfo> runningServices = activityManager.getRunningServices(Integer.MAX_VALUE);
+      for (ActivityManager.RunningServiceInfo service : runningServices)
+      {
+        if (serviceClassName.equals(service.service.getClassName()))
+        {
+          isStarted = true;
+          break;
+        }
+      }
+    }
+    catch (SecurityException e)
+    {
+      e.printStackTrace();
+      return false;
+    }
+    return isStarted;
+  }
+
+  public boolean onKeyDown(int keyCode, KeyEvent msg)
+  {
+    if (keyCode == KeyEvent.KEYCODE_BACK)
+    {
+      App.IsBackGround = true;
+      Intent i = new Intent(Intent.ACTION_MAIN);
+      i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      i.addCategory(Intent.CATEGORY_HOME);
+      startActivity(i);
+      backNotification();
+    }
+    return false;
+  }
+
+  private void backNotification()
+  {
+
+    Intent intent = new Intent(this, main.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+    Notification alarmNotification = new Notification();
+
+    alarmNotification.icon = R.drawable.icon_np;
+    alarmNotification.tickerText = getString(R.string.app_name);
+    alarmNotification.setLatestEventInfo(this, getString(R.string.app_name), getString(R.string.app_name), pendingIntent);
+    alarmNotification.flags = Notification.FLAG_AUTO_CANCEL;
+
+    notificationManager.notify(0, alarmNotification);
+
+    // this.finish();
+
+  }
+
+  private void startNotification(String sn, Boolean vib, Boolean snd)
+  {
+    Intent intent = new Intent(this, actAlarmImgLst.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+    Notification alarmNotification = new Notification();
+    alarmNotification.icon = R.drawable.icon_np;
+    alarmNotification.tickerText = getString(R.string.alarm);
+    ;
+    alarmNotification.setLatestEventInfo(this, getString(R.string.alarm), sn, pendingIntent);
+    alarmNotification.flags = Notification.FLAG_AUTO_CANCEL;
+    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    notificationManager.notify(0, alarmNotification);
+    if (vib)
+      TFun.Vibrate(main.this, 1500);
+    if (snd)
+    {
+      Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);//
+      Ringtone rt = RingtoneManager.getRingtone(getApplicationContext(), uri);
+      rt.play();
+    }
+  }
+
+  public void domParseXML() throws IOException
+  {
+    
+    File file = new File(TApp.xmlFileName);
+    if (!file.exists())
+    {
+      file.createNewFile();
+    }
+    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    DocumentBuilder db = null;
+
+    try
+    {
+      db = dbf.newDocumentBuilder();
+    }
+    catch (ParserConfigurationException e)
+    {
+      e.printStackTrace();
+    }
+
+    Document doc = null;
+    try
+    {
+      doc = db.parse(file);
+    }
+    catch (SAXException e)
+    {
+      e.printStackTrace();
+      return;
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+      return;
+    }
+
+    doc.getDocumentElement();
+    Element root = doc.getDocumentElement();
+    NodeList infor = root.getElementsByTagName("infor");
+    NodeList dev = root.getElementsByTagName("item");
+
+    Element lst = (Element) infor.item(0);
+
+    for (int i = 0; i < dev.getLength(); i++)
+    {
+      TDevNode nd = new TDevNode();
+      Element devinfo = (Element) dev.item(i);
+
+      nd.SN = devinfo.getAttribute("sn");
+      nd.DevIP = devinfo.getAttribute("ip");
+      nd.DataPort = devinfo.getAttribute("dataport");
+      nd.HttpPort = devinfo.getAttribute("httpport");
+      nd.DevName = devinfo.getAttribute("name");
+      nd.UserName = devinfo.getAttribute("usr");
+      nd.Password = devinfo.getAttribute("pwd");
+      nd.UID = devinfo.getAttribute("uid");
+      nd.UIDPsd = devinfo.getAttribute("uidpsd");
+
+      String hand = devinfo.getAttribute("byhand");
+      if (hand.equals("true"))
+        nd.byhand = true;
+      else
+        nd.byhand = false;
+
+      hand = devinfo.getAttribute("vibrate");
+      if (hand.equals("true"))
+        nd.IsVibrate = true;
+      else
+        nd.IsVibrate = false;
+
+      hand = devinfo.getAttribute("capture");
+      if (hand.equals("true"))
+        nd.IsCapture = true;
+      else
+        nd.IsCapture = false;
+
+      hand = devinfo.getAttribute("sound");
+      if (hand.equals("true"))
+        nd.IsSound = true;
+      else
+        nd.IsSound = false;
+
+      hand = devinfo.getAttribute("red");
+      if (hand.equals("true"))
+        nd.IsRed = true;
+      else
+        nd.IsRed = false;
+
+      listnode.add(nd);
+    }
+    sort_list();
+  }
+
+  public static void sort_list()
+  {
+    for (int m = 0; m < listnode.size() - 1; m++)
+    {
+      TDevNode md = listnode.get(m);
+      for (int n = m + 1; n < listnode.size(); n++)
+      {
+        TDevNode nd = listnode.get(n);
+        if (nd.SN.equals(md.SN) && !nd.SN.equals("00000000") && n != m + 1 && !nd.SN.equals(""))
+        {
+          listnode.remove(n);
+          if (nd.DevIP.equals(""))
+            listnode.add(m + 2, nd);
+          else
+            listnode.add(m + 1, nd);
+          break;
+        }
+      }
+    }
+  }
+
+  public static void createXmlFile()
+  {
+    FileOutputStream xmlfd = null;
+    try
+    {
+      xmlfd = new FileOutputStream(TApp.xmlFileName);
+    }
+    catch (FileNotFoundException e)
+    {
+    }
+    XmlSerializer serializer = Xml.newSerializer();
+    try
+    {
+      serializer.setOutput(xmlfd, "UTF-8");
+      serializer.startDocument(null, true);
+      serializer.startTag(null, "infor");
+      for (int i = 0; i < listnode.size(); i++)
+      {
+        TDevNode nd;
+        nd = listnode.get(i);
+        serializer.startTag(null, "item");
+        serializer.attribute(null, "sn", nd.SN);
+        serializer.attribute(null, "ip", nd.DevIP);
+        serializer.attribute(null, "dataport", nd.DataPort);
+        serializer.attribute(null, "httpport", nd.HttpPort);
+        serializer.attribute(null, "name", nd.DevName);
+        serializer.attribute(null, "usr", nd.UserName);
+        serializer.attribute(null, "pwd", nd.Password);
+        serializer.attribute(null, "uid", nd.UID);
+        serializer.attribute(null, "uidpsd", nd.UIDPsd);
+
+        if (nd.byhand)
+          serializer.attribute(null, "byhand", "true");
+        else
+          serializer.attribute(null, "byhand", "false");
+
+        if (nd.IsSound)
+          serializer.attribute(null, "sound", "true");
+        else
+          serializer.attribute(null, "sound", "false");
+
+        if (nd.IsVibrate)
+          serializer.attribute(null, "vibrate", "true");
+        else
+          serializer.attribute(null, "vibrate", "false");
+
+        if (nd.IsRed)
+          serializer.attribute(null, "red", "true");
+        else
+          serializer.attribute(null, "red", "false");
+
+        if (nd.IsCapture)
+          serializer.attribute(null, "capture", "true");
+        else
+          serializer.attribute(null, "capture", "false");
+
+        serializer.endTag(null, "item");
+      }
+
+      serializer.endTag(null, "infor");
+      serializer.endDocument();
+      serializer.flush();
+      xmlfd.close();
+    }
+    catch (Exception e)
+    {
+    }
+  }
+
+  public void onClick_Search(View v)
+  {
+    if (!IsSearching)
+    {
+      IsSearching = true;
+      threadSearch.start();
+    }
+    else
+    {
+      Toast.makeText(main.this, R.string.searchnotFinished, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  @Override
+  protected void onPause()
+  {
+    super.onPause();
+    App.IsBackGround = true;
+  }
+
+  @Override
+  protected void onDestroy()
+  {
+    super.onDestroy();
+    Log.e("devlist", "ondestroy");
+    if (IsAlarmBind)
+    {
+      AlarmBind.setFront(false);
+      unbindService(conn);
+    }
+    if (wakeLock != null && wakeLock.isHeld())
+      this.wakeLock.release();
+  }
+
+  @Override
+  protected void onResume()
+  {
+    super.onResume();
+    this.SetLanguage();
+
+    App.IsBackGround = false;
+
+    list = (ListView) findViewById(R.id.list);
+
+    WindowManager manage = getWindowManager();
+    Display display = manage.getDefaultDisplay();
+
+    App.ScreenWidth = display.getWidth();
+    App.ScreenHeight = display.getHeight();
+
+    if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+    {
+      int title = dip2px(this, 25);
+      int bottom = dip2px(this, 54);
+      LinearLayout.LayoutParams layoutParamsx = new LinearLayout.LayoutParams(App.ScreenWidth, (App.ScreenHeight - bottom - App.ScreenWidth / 6 - title));
+
+      // LinearLayout.LayoutParams layoutParams = new
+      // LinearLayout.LayoutParams(ScreenWidth,
+      // (ScreenHeight-68-ScreenWidth/6));
+      list.setLayoutParams(layoutParamsx);
+    }
+    else
+    {
+      LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(App.ScreenWidth, (App.ScreenHeight - 130));
+      list.setLayoutParams(layoutParams);
+    }
+
+    Log.e("gyl", "resume");
+    try
+    {
+      domParseXML();
+    }
+    catch (IOException e)
+    {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    if (listnode.size() == 0)
+    {
+      return;
+    }
+
+    if (listnode.size() > 1)
+    {
+      for (int i = 0; i < listnode.size(); i++)
+      {
+        TDevNode ndi = (TDevNode) listnode.get(i);
+        for (int n = i + 1; n < listnode.size(); n++)
+        {
+          TDevNode ndn = (TDevNode) listnode.get(n);
+          if (ndi.DevIP.equals(ndn.DevIP) && !ndi.DevIP.equals(""))
+          {
+            listnode.remove(n);
+          }
+          if (ndi.UID.equals(ndn.UID) && !ndi.UID.equals(""))
+          {
+            listnode.remove(n);
+          }
+        }
+      }
+
+      createXmlFile();
+    }
+
+    list.setAdapter(new listAdapter(main.this));
+
+    list.setOnItemClickListener(ClickListener);
+
+    Log.e("gyl", "ItemPosition is " + ItemPosition);
+    list.setSelection(ItemPosition);
+
+    powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+    this.wakeLock = this.powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "com.qcamcam.AlarmService");
+    this.wakeLock.acquire();
+
+  }
+
+  protected void onActivityResult(int paramInt1, int paramInt2, Intent paramIntent)
+  {
+    Bundle bundle = paramIntent.getExtras(); //
+
+    if (bundle != null)
+    {
+      String type = bundle.getString("type");
+      if (type.equals("change"))
+      {
+
+        String key = bundle.getString("key");
+        String sn = bundle.getString("sn");
+        String ip = bundle.getString("ip");
+        String dataport = bundle.getString("dataport");
+        String httpport = bundle.getString("httpport");
+        String name = bundle.getString("name");
+        String usr = bundle.getString("usr");
+        String pwd = bundle.getString("pwd");
+        String uid = bundle.getString("uid");
+        String uidpsd = bundle.getString("uidpsd");
+        TDevNode nd = new TDevNode();
+        nd.SN = sn;
+        nd.DevIP = ip;
+        nd.DataPort = dataport;
+        nd.HttpPort = httpport;
+        nd.DevName = name;
+        nd.UserName = usr;
+        nd.Password = pwd;
+        nd.byhand = true;
+        TDevNode tmp = listnode.get(Integer.parseInt(key));
+        nd.IsCapture = tmp.IsCapture;
+        nd.IsVibrate = tmp.IsVibrate;
+        nd.IsSound = tmp.IsSound;
+        nd.UID = uid;
+        nd.UIDPsd = uidpsd;
+        listnode.remove(Integer.parseInt(key));
+        listnode.add(Integer.parseInt(key), nd);
+
+        list.setAdapter(new listAdapter(main.this));
+        list.setOnItemClickListener(ClickListener);
+        createXmlFile();
+
+      }
+      if (type.equals("add"))
+      {
+
+        String sn = bundle.getString("sn");
+        String ip = bundle.getString("ip");
+        String dataport = bundle.getString("dataport");
+        String httpport = bundle.getString("httpport");
+        String name = bundle.getString("name");
+        String usr = bundle.getString("usr");
+        String pwd = bundle.getString("pwd");
+        String uid = bundle.getString("uid");
+        String uidpsd = bundle.getString("uidpsd");
+        TDevNode nd = new TDevNode();
+        nd.SN = sn;
+        nd.DevIP = ip;
+        nd.DataPort = dataport;
+        nd.HttpPort = httpport;
+        nd.DevName = name;
+        nd.UserName = usr;
+        nd.Password = pwd;
+        nd.UID = "";
+        nd.UIDPsd = "";
+        nd.byhand = true;
+
+        boolean equal = false;
+
+        if (!ip.equals(""))
+        {
+          for (int n = 0; n < listnode.size(); n++)
+          {
+            TDevNode ndn = (TDevNode) listnode.get(n);
+            if (ndn.DevIP.equals(ip))
+            {
+              equal = true;
+            }
+          }
+          if (!equal)
+            listnode.add(nd);
+        }
+        TDevNode uidnd = new TDevNode();
+        uidnd.SN = "";
+        uidnd.DevIP = "";
+        uidnd.DataPort = "";
+        uidnd.HttpPort = "";
+        uidnd.DevName = name;
+        uidnd.UserName = "";
+        uidnd.Password = "";
+        uidnd.UID = uid;
+        uidnd.UIDPsd = uidpsd;
+        uidnd.byhand = true;
+
+        if (!uid.equals(""))
+        {
+          equal = false;
+          for (int n = 0; n < listnode.size(); n++)
+          {
+            TDevNode ndn = (TDevNode) listnode.get(n);
+            if (ndn.UID.equals(uid))
+            {
+
+              equal = true;
+            }
+          }
+          if (!equal)
+            listnode.add(uidnd);
+        }
+
+        list.setAdapter(new listAdapter(main.this));
+        list.setOnItemClickListener(ClickListener);
+        createXmlFile();
+      }
+      if (type.equals("delete"))
+      {
+        String key = bundle.getString("key");
+        listnode.remove(Integer.parseInt(key));
+
+        list.setAdapter(new listAdapter(main.this));
+        list.setOnItemClickListener(ClickListener);
+        createXmlFile();
+      }
+
+      if (IsAlarmBind)
+      {
+        AlarmBind.freshMsg();
+      }
+    }
+
+  }
+
+  public class listAdapter extends BaseAdapter
+  {
+    private LayoutInflater mInflater;
+
+    int choice;
+    String[] phoneNum;
+    Map<String, Object> phonemap;
+
+    public listAdapter(Context context)
+    {
+      // Cache the LayoutInflate to avoid asking for a new one each time.
+      mInflater = LayoutInflater.from(context);
+      choice = 0;
+    }
+
+    public int getCount()
+    {
+
+      return listnode.size();
+
+    }
+
+    public Object getItem(int position)
+    {
+      return position;
+    }
+
+    public long getItemId(int position)
+    {
+      return position;
+    }
+
+    public View getView(final int position, View convertView, ViewGroup parent)
+    {
+      ViewListItem holder = null;
+      if (convertView == null)
+      {
+        convertView = mInflater.inflate(R.layout.main_item, null);
+        RelativeLayout lay = (RelativeLayout) convertView.findViewById(R.id.devItem);
+        // we want to bind data to.
+        WindowManager manage = getWindowManager();
+        Display display = manage.getDefaultDisplay();
+
+        holder = new ViewListItem();
+        holder.Title = (TextView) convertView.findViewById(R.id.lblTitle);
+        holder.Text = (TextView) convertView.findViewById(R.id.lblText);
+        holder.BtnRight = (ImageButton) convertView.findViewById(R.id.BtnRight);
+        convertView.setTag(holder);
+
+        App.ScreenWidth = display.getWidth();
+        App.ScreenHeight = display.getHeight();
+        if (main.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+          if (App.ScreenWidth < 450)
+          {
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(App.ScreenWidth, (App.ScreenHeight / 8));
+
+            lay.setLayoutParams(layoutParams);
+
+            RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams(App.ScreenWidth / 6, App.ScreenWidth / 9);
+            pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            pambtn.rightMargin = 20;
+            pambtn.topMargin = 4;
+            holder.BtnRight.setLayoutParams(pambtn);
+          }
+
+        }
+        else
+        {
+          if (App.ScreenHeight < 450)
+          {
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(App.ScreenWidth, (App.ScreenWidth / 7));
+            lay.setLayoutParams(layoutParams);
+            RelativeLayout.LayoutParams pambtn = new RelativeLayout.LayoutParams(App.ScreenWidth / 6, App.ScreenWidth / 9);
+            pambtn.rightMargin = 20;
+            pambtn.topMargin = 4;
+            pambtn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            holder.BtnRight.setLayoutParams(pambtn);
+          }
+        }
+      }
+      else
+      {
+        holder = (ViewListItem) convertView.getTag();
+      }
+      final TDevNode nd = (TDevNode) listnode.get(position);
+      if (!nd.DevIP.equals(""))
+      {
+        if (!nd.IsRed)
+        {
+          holder.Title.setText(nd.DevName);
+          holder.Text.setText(nd.SN + "&" + nd.DevIP);
+        }
+        else
+        {
+          CharSequence ch = Html.fromHtml("<font color='red'>" + nd.DevName + "</font>");
+          holder.Title.setText(ch);
+          ch = Html.fromHtml("<font color='red'>" + nd.SN + "&" + nd.DevIP + "</font>");
+          holder.Text.setText(ch);
+        }
+      }
+      else
+      {
+        CharSequence ch = Html.fromHtml("<font color='blue'>" + nd.DevName + "</font>");
+        holder.Title.setText(ch);
+        ch = Html.fromHtml("<font color='blue'>" + nd.UID + "</font>");
+        holder.Text.setText(ch);
+      }
+
+      holder.BtnRight.setOnClickListener(new OnClickListener()
+      {
+        public void onClick(View v)
+        {
+          if (!nd.DevIP.equals(""))
+          {
+            Intent intent = new Intent(main.this, actDevAddIP.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("key", "" + position);
+            bundle.putString("type", "change");
+            bundle.putString("sn", nd.SN);
+            bundle.putString("ip", nd.DevIP);
+            bundle.putString("dataport", nd.DataPort);
+            bundle.putString("httpport", nd.HttpPort);
+            bundle.putString("name", nd.DevName);
+            bundle.putString("usr", nd.UserName);
+            bundle.putString("pwd", nd.Password);
+
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 0);
+          }
+          else
+          {
+            Intent intent = new Intent(main.this, actDevAddP2P.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("key", "" + position);
+            bundle.putString("type", "change");
+            bundle.putString("name", nd.DevName);
+            bundle.putString("uid", nd.UID);
+            bundle.putString("uidpsd", nd.UIDPsd);
+
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 0);
+          }
+
+        }
+      });
+
+      return convertView;
+    }
+
+    class ViewListItem
+    {
+      TextView Title;
+      TextView Text;
+      ImageButton BtnRight;
+    }
+  }
+
+//  public void setIp(String msg) throws UnsupportedEncodingException
+//  {
+//    this.SearchMsg = msg;
+//  }
+
+  public static int dip2px(Context context, float dipValue)
+  {
+    final float scale = context.getResources().getDisplayMetrics().density;
+    return (int) (dipValue * scale + 0.5f);
+  }
+
+  Handler handlerSearch = new Handler()
+  {
+    public void handleMessage(Message msg)
+    {
+      super.handleMessage(msg);
+
+      switch (msg.what) {
+      case 0:
+        if (!SearchMsg.equals(""))
+        {
+          ArrayList<TDevNode> tmpnode = new ArrayList();
+          for (int i = 0; i < listnode.size(); i++)
+          {
+            TDevNode nd = (TDevNode) listnode.get(i);
+            if (nd.byhand)
+            {
+              tmpnode.add(nd);
+            }
+          }
+          listnode.clear();
+          for (int i = 0; i < tmpnode.size(); i++)
+          {
+            TDevNode nd = (TDevNode) tmpnode.get(i);
+            listnode.add(nd);
+          }
+
+          String[] sMsgLst = SearchMsg.split("@");
+          for (int i = 0; i < sMsgLst.length; i++)
+          {
+            String[] sDevLst = sMsgLst[i].split(",");
+            final TDevNode nd = new TDevNode();
+            nd.DevIP = sDevLst[0];
+            nd.SN = sDevLst[1];
+            nd.DataPort = sDevLst[2];
+            nd.HttpPort = sDevLst[3];
+            nd.DevName = sDevLst[5];
+
+            Boolean IsFind = false;
+            for (int k = 0; k < listnode.size(); k++)
+            {
+              TDevNode tmpnd = (TDevNode) listnode.get(k);
+              if (tmpnd.DevIP.equals(nd.DevIP))
+              {
+                IsFind = true;
+                break;
+              }
+
+            }
+            if (!IsFind || (IsFind && sDevLst.length > 6))
+            {
+              Log.e("gyl", "array len is " + sDevLst.length);
+              if (!IsFind)
+              {
+                listnode.add(nd);
+                if (TFun.getWifiSSID(main.this).contains("IPCAM_AP"))
+                {
+                  new AlertDialog.Builder(main.this).setIcon(android.R.drawable.ic_dialog_info).setTitle(R.string.wifiset).setMessage(nd.DevName)
+                      .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
+                      {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                          Intent intent = new Intent(main.this, actWifiSet.class);
+                          Bundle bundle = new Bundle();
+                          bundle.putString("ip", nd.DevIP);
+                          bundle.putString("dataport", nd.DataPort);
+                          bundle.putString("httpport", nd.HttpPort);
+                          bundle.putString("usr", nd.UserName);
+                          bundle.putString("pwd", nd.Password);
+                          bundle.putString("uid", "");
+                          bundle.putString("uidpsd", "");
+                          intent.putExtras(bundle);
+                          startActivity(intent);
+                        }
+                      }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+                      {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
+                      }).show();
+                }
+              }
+
+              TDevNode nd_w = new TDevNode();
+
+              if (sDevLst.length == 6)
+              {
+                continue;
+              }
+              int port = Integer.valueOf(nd.SN.substring(6, 8), 16);
+
+              nd_w.DevIP = sDevLst[6];
+
+              IsFind = false;
+              for (int k = 0; k < listnode.size(); k++)
+              {
+                TDevNode tmpnd = (TDevNode) listnode.get(k);
+                if (tmpnd.DevIP.equals(nd_w.DevIP))
+                {
+                  IsFind = true;
+                  break;
+                }
+              }
+
+              nd_w.DataPort = "" + (port + 7000);
+              nd_w.HttpPort = "" + (port + 8000);
+
+              nd_w.SN = sDevLst[1];
+              nd_w.DevName = sDevLst[5];
+              nd_w.IsRed = true;
+              if (!IsFind && !nd_w.DevIP.equals(""))
+                listnode.add(nd_w);
+
+              if (sDevLst.length == 8)
+              {
+                TDevNode nd_p2p = new TDevNode();
+
+                nd_p2p.SN = sDevLst[1];
+                nd_p2p.DevIP = "";
+                nd_p2p.DataPort = "";
+                nd_p2p.HttpPort = "";
+                nd_p2p.DevName = sDevLst[5];
+                nd_p2p.UserName = "";
+                nd_p2p.Password = "";
+                nd_p2p.UID = sDevLst[7];
+                nd_p2p.UIDPsd = "123456";
+                nd_p2p.byhand = false;
+
+                IsFind = false;
+                for (int n = 0; n < listnode.size(); n++)
+                {
+                  TDevNode ndn = (TDevNode) listnode.get(n);
+                  if (ndn.UID.equals(sDevLst[7]))
+                  {
+                    IsFind = true;
+                  }
+                }
+                if (!IsFind)
+                  listnode.add(nd_p2p);
+              }
+            }
+          }
+
+          list.setAdapter(new listAdapter(main.this));
+          list.setOnItemClickListener(ClickListener);
+        }
+        else
+        {
+          Log.e("gyl", "dev null");
+        }
+        createXmlFile();
+        if (IsAlarmBind)
+        {
+          AlarmBind.freshMsg();
+        }
+        Toast.makeText(main.this, R.string.searchFinished, Toast.LENGTH_SHORT).show();
+        break;
+
+      default:
+        break;
+      }
+    }
+
+    public void SendMsg(int status)
+    {
+      sendMessage(Message.obtain(handlerSearch, status, status));
+    }
+  };
+  
+
+  //class TSearchThread extends Thread
+  Thread threadSearch = new Thread()  
+  {
+    public void run()
+    {
+      SearchMsg = lib.jthNet_SearchDev_old();
+      Message msg = new Message();
+      msg.what = 0;
+      msg.arg1 = 0;
+      msg.arg2 = 0;
+      // msg.obj = bitmap;
+      handlerSearch.sendMessage(msg);
+      IsSearching = false;
+    }
+  };
+}

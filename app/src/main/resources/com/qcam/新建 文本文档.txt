@@ -1,0 +1,124 @@
+
+  static int timeCnt = 0;
+  void askAlm()
+  {
+    timer.schedule(new TimerTask()
+    {
+      @Override
+      public void run()
+      {
+        timeCnt++;
+        for (int n = 0; n < listnode.size(); n++)
+        {
+          TDevNode ndn = (TDevNode) listnode.get(n);
+          if (ndn.IsVibrate || ndn.IsCapture || ndn.IsSound)
+          {
+            if (!ndn.DevIP.equals(""))
+            {
+              String urlStr = "http://" + ndn.DevIP + ":" + ndn.HttpPort + "/cfg.cgi?User=" + ndn.UserName + "&Psd=" + ndn.Password + "&MsgID=72&s=23231";
+              HttpGet request = new HttpGet(urlStr);
+              try
+              {
+                HttpResponse response = new DefaultHttpClient().execute(request);
+                if (response.getStatusLine().getStatusCode() == 200)
+                {
+                  String msg = EntityUtils.toString(response.getEntity());
+                  if (!msg.equals("0"))
+                  {
+                    // Log.e("gyl","123");
+                    if (ndn.IsVibrate || ndn.IsSound)
+                    {
+                      if (App.IsBackGround)
+                      {
+                        startNotification(ndn.SN, ndn.IsVibrate, ndn.IsSound);
+                      }
+                      else
+                      {
+                        TFun.Vibrate(main.this, 1500);
+                      }
+                    }
+
+                    if (ndn.IsCapture)
+                    {
+                      urlStr = "http://" + ndn.DevIP + ":" + ndn.HttpPort + "/cfg.cgi?User=" + ndn.UserName + "&Psd=" + ndn.Password + "&MsgID=20&chl=1";
+                      Bitmap bitmap = TFun.httpGetBitmap(urlStr);
+                      if (bitmap == null)
+                      {
+                        break;
+                      }
+
+                      String sdRootPath = TFun.getSDRootPath();
+                      if (sdRootPath == null)
+                      {
+                        break;
+                      }
+
+                      SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+                      String date = sDateFormat.format(new java.util.Date());
+
+                      String fileName = ndn.SN + "_" + date + ".jpg";
+                      String filePath = sdRootPath + "/alarm/" + fileName;
+                      if (!TFun.makeDir(TFun.getSDRootPath() + "/alarm/"))
+                      {
+                        return;
+                      }
+                      Log.d("gyl", "file path :" + filePath);
+                      if (TFun.saveBitmapInJPG(filePath, bitmap))
+                      {
+
+                      }
+                    }
+                  }
+
+                }
+              }
+              catch (IOException e)
+              {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+              }
+            }
+            else
+            {
+              String sdRootPath = TFun.getSDRootPath();
+              if (sdRootPath == null)
+              {
+                break;
+              }
+
+              SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+              String date = sDateFormat.format(new java.util.Date());
+
+              String fileName = ndn.SN + "_" + date + ".jpg";
+              String filePath = sdRootPath + "/alarm/" + fileName;
+              if (!TFun.makeDir(TFun.getSDRootPath() + "/alarm/"))
+              {
+                return;
+              }
+              Log.d("gyl", "file path :" + filePath);
+              int ret = lib.jthNet_GetImage(ndn.UID, ndn.UIDPsd, fileName);
+              if (ret != 0)
+              {
+                if (ndn.IsVibrate || ndn.IsSound)
+                {
+
+                  if (App.IsBackGround)
+                  {
+                    startNotification(ndn.UID, ndn.IsVibrate, ndn.IsSound);
+                  }
+                  else
+                  {
+                    TFun.Vibrate(main.this, 1500);
+                  }
+                }
+              }
+
+            }
+
+          }
+        }
+
+      }
+    }, 1, 20000);
+  }
+

@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="#fff" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_id"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_bianhao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:enabled="false"
+                android:hint="@string/patient_id"
+                android:padding="2dp"
+                android:text="1"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_name"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_djName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_required"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textColorHint="@color/lightRed" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_telephone"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_djPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_required"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textColorHint="@color/lightRed" />
+
+            <TextView
+                android:id="@+id/tv_patient_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_age"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_djAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_required"
+                android:inputType="number"
+                android:maxLength="2"
+                android:padding="2dp"
+                android:textAllCaps="false"
+                android:textColorHint="@color/lightRed" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+
+            <TextView
+                android:id="@+id/tv_patient_05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_medical_record_number"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_CaseNumbe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_record_num_hint"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_06"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_parity_num"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_childCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_parity_num_hint"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_07"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_occupation"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_occupation"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_smoking_history"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_smokeTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_smoking_history"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_09"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_abortion_num"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_abortionCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_abortion_num"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_sex_num"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_sexPartnerCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_sex_num"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_gravidity_num"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_pregnantCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_gravidity_num_hint"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tv_patient_12"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_social_security_number"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_ssNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_security_num_hint"
+                android:inputType="number"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="H    C   G"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_HCG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="8"
+                android:background="@drawable/edittext_select"
+                android:hint="HCG"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_ID_hint"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_idNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="8"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_ID_hint"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_patient_15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_check_notes_hint"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <EditText
+                android:id="@+id/edit_modify_checkNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_span="8"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_check_notes_hint"
+                android:inputType="textMultiLine"
+                android:padding="2dp"
+                android:textAllCaps="false" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_blood_type"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <Spinner
+                android:id="@+id/spin_modify_bloodType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/bloodType"
+                android:padding="2dp"></Spinner>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_contraceptive_methods"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <Spinner
+                android:id="@+id/spin_modify_birthControlMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/birthControlMode"
+                android:padding="2dp"></Spinner>
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#fff" />
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_marriage"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <Spinner
+                android:id="@+id/spin_modify_marry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/marry"
+                android:padding="2dp"></Spinner>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="2dp"
+                android:text="@string/patient_source"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textViewNameSize" />
+
+            <Spinner
+                android:id="@+id/spin_modify_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:entries="@array/languages"
+                android:padding="2dp"></Spinner>
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:background="#fff" />
+
+        <TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_span="2"
+                android:background="#fff" />
+
+            <Button
+                android:id="@+id/text_modify_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_span="2"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:text="@string/patient_clear"
+                android:textAllCaps="false" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_span="2"
+                android:background="#fff" />
+
+            <Button
+                android:id="@+id/text_modify_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_span="2"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:text="@string/patient_save"
+                android:textAllCaps="false" />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</LinearLayout>

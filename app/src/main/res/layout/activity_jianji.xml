@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_item" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#fff">
+
+        <Button
+            android:id="@+id/btn_jianji_refresh01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/setting_Repaint"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textViewNameSize" />
+
+        <Button
+            android:id="@+id/btn_jianji_save01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_bg"
+            android:text="@string/patient_save"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textViewNameSize" />
+
+        <Button
+            android:id="@+id/btn_jianji_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/setting_picture_select"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textViewNameSize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image_jianji_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/kb" />
+
+    </LinearLayout>
+</LinearLayout>

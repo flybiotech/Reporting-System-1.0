@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.shizhenbao.activity.NewOrOldCaseActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/LinerHeight"
+        android:background="@drawable/title_shape">
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/case_patient_contrast_tip"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textSize="@dimen/textSizetitle" />
+
+        <Button
+            android:id="@+id/btn_left01"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/patient_return"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textSize="@dimen/buttonsSizeEN" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_bg"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_nor01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/case_image_show"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textViewNameSize" />
+
+        <TextView
+            android:id="@+id/tv_nor02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/case_result_show"
+            android:textAllCaps="false"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_nor03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/case_assessment_show"
+            android:textAllCaps="false"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/nooc_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

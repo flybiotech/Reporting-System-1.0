@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="languages">
+        <item>Select</item>
+        <item>Hospitalized</item>
+        <item>Outpatient</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="marry">
+        <item>Select</item>
+        <item>Married</item>
+        <item>Unmarried</item>
+    </string-array>
+
+    <string-array name="birthControlMode">
+        <item>Select</item>
+        <item>Condom</item>
+        <item>Contraceptives</item>
+        <item>Njectable Contraceptive</item>
+        <item>Female Condom</item>
+        <item>Ligation</item>
+        <item>IUD</item>
+    </string-array>
+
+    <string-array name="bloodType">
+        <item>Select</item>
+        <item>Type A</item>
+        <item>Type B</item>
+        <item>Type AB</item>
+        <item>Type O</item>
+        <item>Other</item>
+    </string-array>
+</resources>

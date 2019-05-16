@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_item" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!--<ListView-->
+                <!--android:id="@+id/list"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="#ffffff"-->
+                <!--android:cacheColorHint="#ffffff"-->
+                <!--android:divider="#969696"-->
+                <!--android:dividerHeight="0.5px"-->
+                <!--android:elevation="4dp" />-->
+            <Button
+                android:id="@+id/bt_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/image_get_image"/>
+        </RelativeLayout>
+
+        <!-- wifi 加载的动画-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.shizhenbao.UI.WifiLoadingAnim
+                android:id="@+id/wifiLoadingAnim"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

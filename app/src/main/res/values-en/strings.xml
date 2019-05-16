@@ -1,0 +1,701 @@
+<resources>
+
+
+    <string name="accessibility_service_description">智能安装服务，无需用户的任何操作就可以自动安装程序。</string>
+
+
+    <!-- 视珍宝相关-->
+
+    <string name="cancel">取消</string>
+
+
+    <string name="title_activity_new_or_old_case">NewOrOldCaseActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    //--------------------------------------------------------------------------
+
+    “视珍宝”英文翻译 SHIZHENBAO；
+
+    ----------------------------------------------------注册登陆模块
+
+    <string name="app_name">Image Acquisition V2.0</string>
+    <string name="bt_login_permission">Authorize the appropriate permissions.</string>
+    <string name="bt_dialog_show"> Loading...</string>
+    <string name="login_error_show">Invalid login or password,try again.</string>
+    <string name="user_name">Username:</string>
+    <string name="user_name_hint">Username*</string>
+    <string name="user_password">Password:</string>
+    <string name="user_password_hint">Password*</string>
+    <string name="user_password_memory">Remember me</string>
+    <string name="no_user_account">Create a new Account now?</string>
+    <string name="user_register">Sign Up</string>
+    <string name="login"> Sign in</string>
+    <string name="user_register_message_error">Denotes a required field.</string>
+    <string name="user_register_success">Registration successful,sign in please.</string>
+    <string name="user_register_password_error">Passwords must contain at least 6 characters.</string>
+    <string name="user_register_email_error">Enter a valid email address.</string>
+    <string name="user_register_faild_password">The password and Confirm Password fields you entered do not match.</string>
+    <string name="user_register_faild_account">Username already exists</string>
+    <string name="quit_program">To exit programming,press it again.</string>
+    <string name="user_password_registration_hint">password(Contain at least 6 characters)</string>
+    <string name="user_password_again">Password:</string>
+    <string name="user_password_again_hint">Confirm  password</string>
+    <string name="user_register_email"> E-Mail:</string>
+    <string name="user_register_email_hint">name@example.com</string>
+    <string name="user_regester_hosptal">Hospital:</string>
+    <string name="user_regester_department">Department:</string>
+    <string name="user_regester_hosptal_hint">Enter name of hospital</string>
+    <string name="user_regester_department_hint">Enter name of department</string>
+    <!--<string name="button_ok">Create Account </string>-->
+    <string name="button_ok">Done </string>
+    <string name="button_cancel"> Cancel</string>
+    <string name="ok">sure</string>
+
+    //-----------------------------------------------------------------患者信息模块
+
+    <string name="patients_information">Patient</string>
+    <string name="patient_id">Patient Code</string>
+    <string name="patient_name">Name</string>
+    <string name="patient_telephone">Phone No. </string>
+    <string name="patient_age">Age</string>
+    <string name="patient_gravidity_num">Pregnancy Times</string>
+    <string name="patient_parity_num">Birth Time</string>
+    <string name="patient_occupation">Occupation</string>
+    <string name="patient_smoking_history">Smoking History</string>
+    <string name="patient_abortion_num">Abortion Times</string>
+    <string name="patient_sex_num">Sex Partners</string>
+    <string name="patient_medical_record_number">Medical record No.</string>
+    <string name="patient_social_security_number">Social security No.</string>
+    <string name="patient_HCG">HCG </string>
+    <string name="patient_ID">ID No.</string>
+    <string name="patient_check_notes">Remark</string>
+    <string name="patient_blood_type">Blood Type (ABO)</string>
+    <string name="patient_contraceptive_methods">Contraception</string>
+    <string name="patient_marriage">Marriage</string>
+    <string name="patient_source">Patient transferred from</string>
+    <string name="patient_nothing">Select</string>
+    <string name="patient_unregistered"> Unregistered</string>
+    <string name="patient_required">Required</string>
+    <string name="patient_gravidity_num_hint">Times of pregnancy</string>
+    <string name="patient_parity_num_hint">Parity</string>
+    <string name="patient_occupation_hint">Your professional</string>
+    <string name="patient_smoking_history_hint">Smoking History </string>
+    <string name="patient_abortion_num_hint">Times of abortion</string>
+    <string name="patient_sex_num_hint">Number of sex partners</string>
+    <string name="patient_record_num_hint">Medical record No</string>
+    <string name="patient_security_num_hint">Social security No</string>
+    <string name="patient_HCG_hint">HCG</string>
+    <string name="patient_ID_hint">ID Card</string>
+    <string name="patient_check_notes_hint">Comment</string>
+    <string name="patient_clear">Clear All</string>
+    <string name="patient_save">Save</string>
+    <string name="patient_add_new">Add</string>
+    <string name="patient_register">Register</string>
+    <string name="patient_return">Cancel</string>
+    <string name="patient_menu"> Menu</string>
+    <string name="patient_right_select">Inquiry</string>
+    <string name="patient_hospitalization"> Hospitalized</string>
+    <string name="patient_Outpatient_Department">Outpatient</string>
+    <string name="patient_other">Other</string>
+    <string name="patient_link_telephoen">Telephone</string>
+    <string name="patient_married">Married</string>
+    <string name="patient_unmarried">Unmarried</string>
+    <string name="patient_condom"> Condom</string>
+    <string name="patient_acyterion">Contraceptives</string>
+    <string name="patient_Contraceptive_needle">Njectable Contraceptive</string>
+    <string name="patient_female_condom">Female Condom</string>
+    <string name="patient_Ligation">Ligation</string>
+    <string name="patient_Women__IUD">IUD</string>
+    <string name="patient_A_type">Type A</string>
+    <string name="patient_B_type">Type B</string>
+    <string name="patient_AB_type">Type AB</string>
+    <string name="patient_O_type">Type O</string>
+    <string name="patient_other_type">Other</string>
+    <string name="patient_clear_sure">Determined to clear the date?</string>
+    <string name="patient_empty">Clear</string>
+    <string name="patient_no_empty">Cancel</string>
+    <string name="patient_save_message">Save the current patient information first</string>
+    <string name="patient_register_error_message">Required information</string>
+    <string name="patient_register_success_message">Patient information was saved successfully</string>
+    <string name="patient_yet_register">Registered</string>
+    <string name="patient_ID_error">The ID number you entered is </string>
+    <string name="patient_ID_error2">,please try again</string>
+    <string name="patient_telephone_error">Enter the correct phone number</string>
+    <string name="patient_select_patients_condition">Query Condition</string>
+    <string name="patient_select_patients_message">Querying</string>
+    <string name="patient_select_name">Enter the name</string>
+    <string name="patient_select_ID">Enter the ID Card</string>
+    <string name="patient_select_medical_record_number">Enter the medical record number</string>
+    <string name="patient_select_social_security_number">Enter the social security number</string>
+    <string name="patient_select_data">Date</string>
+    <string name="patient_select">Query</string>
+    <string name="patient_show_delete_all">Del ALL</string>
+    <string name="patient_show_title">Patient Information</string>
+    <string name="patient_show_delete_all_prompt">Determine to delete all information?</string>
+    <string name="patient_show_delete">Delete</string>
+    <string name="patient_show_updata">Modify</string>
+    <string name="patient_show_delete_sure">Determine to delete the information?</string>
+    <string name="patient_show_updata_error">Generated report,cannot change</string>
+    <string name="patient_modify_success">Modify Complete</string>
+    <string name="patient_data_no">No Date</string>
+    <string name="patient_Biopsy_location"> iopsy Position</string>
+
+    //--------------------------------------------------------图像获取模块
+
+    <string name="image_Select_patients">Patient Selection</string>
+    <string name="image_cancel">Cancel</string>
+    <string name="image_Previous_page">PgUp</string>
+    <string name="image_next_page">PgDn</string>
+    <string name="image_dialog_automatic">Help you select automatically</string>
+    <string name="image_set_wifi">WIFI Settings</string>
+    <string name="image_set_wifi_message"> No host is detected,click WLAN select the available</string>
+    <string name="image_set_wifi_sure">WLAN</string>
+    <string name="image_set_patients_error">Register the information first</string>
+    <string name="image_patients_last">The last page</string>
+    <string name="image_patients_first">The first page</string>
+    <string name="image_get_image">Image</string>
+    <string name="image_camera">Camera</string>
+    <string name="image_search">Search</string>
+    <!--<string name="image_photograph_type">设置拍照模式，每次 Take photos every</string>-->
+    <!--Take photos every-&#45;&#45;&#45;&#45;seconds in &#45;&#45;&#45;&#45;minutes-->
+    <!--Set the photo mode,photograph every 10 seconds in 3 minutes.-->
+
+    <string name="image_setting_refresh">Refresh</string>
+    <string name="image_manage_delete_title">Determine to delete this image?</string>
+    <string name="image_manage_delete_ok">Delete</string>
+    <string name="image_manage_delete_no">Cancel</string>
+    <string name="image_manager_picture_nothing">No images</string>
+
+    //----------------------------------------------------------报告打印模块
+
+    <string name="print_patient_id">Patient Code</string>
+    <string name="print_diagnosis_result">Diagnosis</string>
+    <string name="print_cytology">Cytology</string>
+    <string name="print_HPV_DNA">HPV_DNA</string>
+    <string name="print_symptom">Symptom</string>
+    <string name="print_Overall_assessment">Evaluation</string>
+    <string name="print_Lesion_area">Lesion Location</string>
+    <string name="print_colposcopic"> Colposcopy</string>
+    <string name="print_Suspected">Colposcopy Diagnosis</string>
+    <string name="print_attention">Dr.\'s Advice</string>
+    <string name="print_baogaoshengcheng">Create Report</string>
+    <string name="print_Assessment_results">Reid Colposcopic Index</string>
+    <string name="print_border">Boundary/Surface</string>
+    <string name="print_color">Color</string>
+    <string name="print_blood_vessel">Blood vessel</string>
+    <string name="print_Iodine_staining">Iodine stain</string>
+    <string name="print_Acetic_acid_change"> Evaluation</string>
+    <string name="print_opinion">Biopsy</string>
+    <string name="print_Report_printing">Print</string>
+    <string name="print_id_null">Number Required</string>
+    <string name="print_patient_select">Select patient first</string>
+    <string name="print_dialog_title">ToolTip</string>
+    <string name="print_dialog_message">Report is printing ,please wait</string>
+    <string name="print_message_supplement">Complete diagnostic information</string>
+    <string name="print_hospital_setting">Hospital Name</string>
+    <string name="print_department_setting">Department</string>
+    <string name="print_setting_message">Log in Admin to setting hospital information</string>
+    <string name="print_data_clear">Clear Data</string>
+    <string name="print_report_select">Select report preview,then select the PDF report to print</string>
+    <string name="print_report_preview">Report Preview</string>
+    <string name="print_report_dialog_title">Report Print</string>
+    <string name="print_report_dialog_message">Determine the print report?</string>
+    <string name="print_report_dialog_yes">Print</string>
+    <string name="print_report_dialog_no">Cancel</string>
+    <string name="print_download_faild">Download failed</string>
+    <string name="print_patient_nothing">No patient needs to be diagnosed</string>
+    <string name="print_Choosing_terms">Term Select</string>
+    <string name="print_terms_delete">Confirm deletion? </string>
+    <string name="print_terms_delete_title">Hint</string>
+    <string name="print_Generate_report_faild"> Failure generating report,please try again.The cause might be a image error,try to regenerate after relogin.</string>
+    <string name="print_Notice_title">Warning</string>
+    <string name="print_pdf_dialog_title">pdf </string>
+    <string name="print_pdf_dialog_message">Determine to generate PDF files ?</string>
+    <string name="print_pdf_dialog_loding">Generating report...</string>
+    <string name="print_message_hint">Input</string>
+    <string name="print_iamge_select">Pic. Selection</string>
+    <string name="print_azimuth_map">Lesion Location Map</string>
+    <string name="print_Generate_report">Report Generate</string>
+    <string name="print_Report_Preview">Report Preview List</string>
+    <string name="print_Report_Non_existent">PDF file doesn`t exist</string>
+    <string name="print_Report_loading_success">LoadComplete</string>
+    <string name="print_Report_nothing">Have no PDF report</string>
+    <string name="print_Report_updata">Modify List</string>
+    <string name="print_Report_updata_title">Modify Report</string>
+    <string name="print_Report_success">Report generated</string>
+    <string name="print_picture_no_choise"> Unselected images that need to deleted</string>
+    <string name="print_picture_three">Select three images to upload at most</string>
+    <string name="print_Clear_the_screen">Clear</string>
+    <string name="print_Revoke">Undo</string>
+    <string name="print_eight_no_more">Mark 8 places at most</string>
+    <string name="graffiti_cant_undo_after_clearing">Clear screen and irrevocable</string>
+    <string name="graffiti_saving_picture">Save the image</string>
+    <string name="graffiti_enter">Enter</string>
+    <string name="graffiti_cancel">Cancel</string>
+    //---------------------------------------------病例管理模块
+
+    <string name="case_title">Case File</string>
+    <string name="case_patient_telephone">No.</string>
+    <string name="case_select_telephoen_hint">Enter your telephone number</string>
+    <string name="case_select_data">Documented date</string>
+    <string name="case_select_data_begin">start from</string>
+    <string name="case_select_data_end">ending date</string>
+    <string name="case_patient_list">medical record</string>
+    <string name="case_patient_contrast_tip">Comparison of two results</string>
+    <string name="case_patient_nothing">no suffer patient were found</string>
+    <string name="case_register_message">Registration information</string>
+    <string name="case_image_show">Pictures displaying</string>
+    <string name="case_image_up">Turn on</string>
+    <string name="case_image_down">Turn down</string>
+    <string name="case_image_Contrast_up">Turn on contrast picture</string>
+    <string name="case_image_Contrast_down">Turn down contrast picture</string>
+    <string name="case_message_title">Case information</string>
+    <string name="case_result_show">Case result show</string>
+    <string name="case_assessment_show">Case assessment show</string>
+    <string name="case_assessment_result_show">Case assessment results</string>
+    <string name="case_contrast_assessment_result_show">Comparison of case assessment results</string>
+    <string name="case_diagnosis_result_show">Medical record diagnosis result</string>
+    <string name="case_contrast_diagnosis_result_show">Diagnostic results of comparative medical records</string>
+    <string name="case_only_two">only two pieces of case management can be chosen to compare</string>
+    <string name="case_is_two">Choose two, can carry on the medical record contrast</string>
+
+    //---------------------------------------------系统中心模块
+
+    <string name="setting_backups_success_message">Data backup successful</string>
+    <string name="setting_recovery_success_message">Data recovery successful</string>
+    <string name="setting_data_clear_success_message">Data cleared successfully</string>
+    <string name="setting_network_Unavailability">The network connection is unavailable,please switched network</string>
+    <string name="setting_link_server_faild">The server connection failed. Please check the network service</string>
+    <string name="setting_local_sn">please input local SN number</string>
+    <string name="setting_backups_loading">the file is being backed up,please wait a second</string>
+    <string name="setting_recovery_loading">the file is being recoveried,please wait a second</string>
+    <string name="setting_ftp_server_title">please set FTP</string>
+    Server fist
+    <string name="setting_ftp_server_success">FTP server setup successful</string>
+    <string name="setting_ftp_server_error">please fill in compete data ,otherwise the FTP backup and recovery will not be used</string>
+    <string name="setting_ftp_backups">FTP back up</string>
+    <string name="setting_local_backups">Local back up</string>
+    <string name="setting_ftp_recovery">FTP recovery</string>
+    <string name="setting_local_recovery">Recovery from the local</string>
+    <string name="setting_recovery_no_data">no backup data,it can’t be restored</string>
+    <string name="setting_input_terms">please input term</string>
+    <string name="setting_save_Route">Preservation path</string>
+    <string name="setting_User_switching">Account Switch </string>
+    <string name="setting_User_management">Account Management</string>
+    <string name="setting_Modify_password">Password</string>
+    <string name="setting_wifi">WIFI</string>
+    <string name="setting_Networking_test">Networking Test</string>
+    <string name="setting_add_terms">Add Terms of colposcopy</string>
+    <string name="setting_advanced_setting">Admin Settings</string>
+    <string name="setting_Picture_editor">Picture Edit</string>
+    <string name="setting_data_backup">Data Backup</string>
+    <string name="setting_data_backupoast">There is no external SD temporarily unable to backup data to SD card</string>
+    <string name="setting_data_recovery">Data Recovery</string>
+    <string name="setting_Parameter_configuration">Parameter Configuration</string>
+    <string name="setting_removal">Removal key</string>
+    <string name="setting_about_us">About</string>
+    <string name="setting_Common_problem">Help</string>
+    <string name="setting_title">Settings</string>
+    <string name="setting_hospital_modify">Setting hospital modify</string>
+    <string name="setting_department_modify">Modify the name of department</string>
+    <string name="setting_FTP">Server settings</string>
+    <string name="setting_picture_Route">Collection of image path settings</string>
+    <string name="setting_FTP_Route">FTP backup path settings</string>
+    <string name="setting_local_route">Local backup path settings</string>
+
+    <string name="setting_dialog_dissmiss">Pop up box absent time</string>
+    <string name="setting_please_change">Select</string>
+    <string name="setting_FTP_Route_hint">Please input FTP backup to save the path</string>
+    <string name="setting_local_Route_hint">Please enter a local backup to save the path</string>
+    <string name="setting_dialog_dissmiss_hint">Please enter the dialog disappearing time</string>
+    <string name="setting_dialog_dissmiss_faild1">Setup failed. The time settings cannot be empty</string>
+    <string name="setting_dialog_dissmiss_faild2">Setup failed. The time setting cannot be negative</string>
+    <string name="setting_dialog_dissmiss_success">Time setting successful</string>
+    <string name="setting_Version_updata">version update</string>
+    <string name="setting_Version_updata_message">Find a new version! Please update it in time</string>
+    <string name="setting_Version_Newest">Its the latest version, no need to update it</string>
+    <string name="setting_Restore_factory_settings">Reset factory settings</string>
+    <string name="setting_Restore_factory_settings_message">This purge will clear the database,persist data locally and images</string>
+    <string name="setting_Restore_initial_password">Restore initial password</string>
+    <string name="setting_manager_delete">delete</string>
+    <string name="setting_Restore_initial_password_success">Initial password settings successful</string>
+    <string name="setting_faild_Jurisdiction">You do not have permission</string>
+    <string name="setting_faild_Admin">VIP users can not be delete</string>
+    <string name="setting_delete_user">Are you sure you want to delete this user?</string>
+    <string name="setting_password_modify_success">Password modification succeeded</string>
+    <string name="setting_password_Dissimilarity">The two input password is inconsistent</string>
+    <string name="setting_password_Original">The input password is inconsistent with the original password</string>
+    <string name="setting_message_nothing">Input information cannot be empty</string>
+    <string name="setting_old_password">Original password:</string>
+    <string name="setting_old_password_hint">Enter original  password</string>
+    <string name="setting_new_password">New password</string>
+    <string name="setting_new_password_hint">Enter new password</string>
+    <string name="setting_new_password_sure">Confirm password:</string>
+    <string name="setting_new_password_sure_hint">Enter new password again</string>
+    <string name="setting_clear_success">clear success</string>
+    <string name="setting_wifi_name">Select  WIFI</string>
+    <string name="setting_gps">GPS settings</string>
+    <string name="setting_gps_list">You need to turn on the GPS switch first and you will search for nearby WiFi information</string>
+    <string name="setting_wifi_title">setting</string>
+    <string name="setting_Treasures_of_vision_wifi">SZB WIFI</string>
+    <string name="setting_printer_wifi">Printer WIFI</string>
+    <string name="setting_WIFI_name">Name of WIFI:</string>
+    <string name="setting_WIFI_name_hint">Enter the name of WIFI</string>
+    <string name="setting_WIFI_password">Password of WIFI:</string>
+    <string name="setting_WIFI_password_hint">Enter the password of WIFI</string>
+    <string name="setting_link_wifi_success">Congratulations of joining the designated WiFi</string>
+    <string name="setting_link_wifi_test">Trying to connect to the specified WiFi, already waiting</string>
+    <string name="setting_link_wifi_faild">There is no connection to the specified WiFi. Please re test the connection</string>
+    <string name="setting_link_network_stop">The network connection test has stopped</string>
+    <string name="setting_link_network_success">3g/4g connection test successful</string>
+    <string name="setting_link_network_faild">3g/4g network connection failure</string>
+    <string name="setting_link_test">Testing the connection network</string>
+    <string name="setting_link_wifi_testting">Attempting to connect to WiFi, please wait a moment</string>
+    <string name="setting_button_test">Click the button test</string>
+    <string name="setting_button_printer_test">HP printer connection test</string>
+    <string name="setting_button_Treasures_of_vision_test">Digital electronic colposcopy connection test</string>
+    <string name="setting_button_network_test">3G/4G network connection test</string>
+    <string name="setting_button_test_stop">Stop network connection test</string>
+    <string name="setting_sd">Cannot operate on SD card</string>
+    <string name="setting_edit_no_more">You have saved three edited images, which are no longer editable. You can enter the picture management interface and delete the already edited pictures</string>
+    <string name="setting_file_null">Folder path is empty</string>
+    <string name="setting_length">length</string>
+    <string name="setting_acreage">The measure of area</string>
+    <string name="setting_picture_saved">You have saved this picture already</string>
+    <string name="setting_picture_manage">Picture management</string>
+    <string name="setting_picture_preview">refreshing</string>
+    <string name="setting_picture_edit_yes">Edited picture</string>
+    <string name="setting_picture_edit_no">UN edited pictures</string>
+    <string name="setting_picture_save_success">Save successfully</string>
+    <string name="setting_permission_closed">You do not have the permission to open it</string>
+    <string name="setting_picture_show_faild">Picture failed</string>
+    <string name="setting_Repaint">Repaint</string>
+    <string name="setting_picture_select">Select picture</string>
+    <string name="setting_Running_equipment">Running equipment:</string>
+    <string name="setting_Running_equipment_hint">Android Tablet PC,Android Intelligent mobile phone</string>
+    <string name="setting_Processor">CPU:</string>
+    <string name="setting_Processor_hint">No less than 1.5GHz</string>
+    <string name="setting_Storage_space">Internal storage:</string>
+    <string name="setting_Storage_space_hint">no less than 8g</string>
+    <string name="setting_Run_memory">RAM:</string>
+    <string name="setting_Run_memory_hint">No less than 3G</string>
+    <string name="setting_android_version">Android version:</string>
+    <string name="setting_android_version_hint">No less than 4.2 edition</string>
+    <string name="setting_Version_specification_model">Version specification model FLY-SZB-S</string>
+    <string name="setting_version">Number of edition V</string>
+    <string name="setting_ordinary_register">How to check the information of patient registration ?</string>
+    <string name="setting_select_patient_message">How do ordinary users register</string>
+    <string name="setting_print_attention">What we should pay attention to when we print reports</string>
+    <string name="setting_select_case">How to view patient s medical records</string>
+    <string name="setting_Contrast_case">How to compare patient is medical records ?</string>
+    <string name="setting_diagnosis_delete"> How to delete diagnostic terms ?</string>
+    <string name="setting_picture_edit">How to edit a patient is picture ?</string>
+    <string name="setting_ordinary_register_show1">1 : When you login the software at the first time, register a Admin user, because the Admin account has been default, so you only need to fill in the password, and then fill in the mailbox and your hospital and department, and then click on”save”</string>
+    <string name="setting_ordinary_register_show2">2 : When registering an ordinary user, you can only complete the registration by filling in the account number and password</string>
+    <string name="setting_select_patient_message_show1">1 : Click the query in the patient information interface to jump to the query condition interface</string>
+    <string name="setting_select_patient_message_show2">2 : If you need to query all the patient information of the account, click the query directly. If you need to query specific patient information, can enter the query conditions, click on the query (does not need to be precise, the query conditions can enter specific information, the account name contains information about the condition of the patients are all queries to)</string>
+    <string name="setting_select_patient_message_show3">3 : Administrator can query the information of all the patients who have not generated the report. The average user can only query the information of the patient whose name is not generated</string>
+    <string name="setting_print_attention_show1">1 : If the PDF report generates a failure during the generation of the report, the PDF report can be selected in the [menu] -> [report modification] -> selects the PDF report, then changes the PDF report, and then clicks to generate the report</string>
+    <string name="setting_select_case_show">1 : Select "case management" - > input query conditions (enter a condition or several conditions can be), then click "query" - > click you need to look at the patient directly, and then show the cases of patient information</string>
+    <string name="setting_Contrast_case_show1">1 : Select [case management] -> input query condition (not input condition or enter a condition or input several conditions), then click [query]</string>
+    <string name="setting_Contrast_case_show2">2 : Select the two cases you want to compare and then click on one of the selected cases</string>
+    <string name="setting_diagnosis_delete_show1">1 : Once you have entered the report print interface, select an option </string>
+    <string name="setting_diagnosis_delete_show2">2 : Long press the selected option, when a dialog pops up, click delete</string>
+    <string name="setting_picture_edit_show1">1 : Select [system Settings] to enter system Settings interface, select [image editing]</string>
+    <string name="setting_picture_edit_show2">2 : Select the patient who needs to edit the image</string>
+    <string name="setting_picture_edit_show3">3 : Select an image that needs to be edited, and then you can start editing</string>
+    <string name="setting_WeChat">Treasure WeChat public platform   </string>
+    <string name="setting_The_official_website">Treasure official website</string>
+    <string name="setting_version_message">Version information :</string>
+    <string name="setting_local_sn_message">Local SN number</string>
+    <string name="setting_server_ip">Server IP</string>
+    <string name="setting_server_ip_hint">Please input the IP of FTP server</string>
+    <string name="setting_server_port">Server port number</string>
+    <string name="setting_server_port_hint">please input the number of FTP server</string>
+    <string name="setting_server_name">User name</string>
+    <string name="setting_server_name_hint">please input the user name of FTP server</string>
+    <string name="setting_server_password">Password</string>
+    <string name="setting_server_password_hint">Please input the password of FTP server</string>
+    <string name="setting_next">Next step</string>
+    <string name="setting_delete_sure_again">Please make sure again</string>
+
+    //--------------------------------------------超级超级用户
+
+    <string name="super_manager">Set Administrator Password</string>
+    <string name="super_manager_error">Register a Administrator first</string>
+    <string name="super_manager_success">Modify complete</string>
+    <string name="super_manager_initial">Set password to initial value</string>
+
+    //---------------------------------------------医生术语数据库数据
+
+    <string name="term_cytology1">Atypical Glandular Cells</string>
+    <string name="term_cytology2">Inflammatory Diseases(Trichomonad、Yeast,Bacterial Vaginosis,Actinomyce,Herpes)</string>
+    <string name="term_cytology3">NILM(negative for intraepithelial lesion or malignancy)</string>
+    <string name="term_cytology4">Reactive Cellular Changes(Inflammation, Atroghy , Radiation,Contraceptive Device,Hysterectomy)</string>
+    <string name="term_cytology5">ASC-US(Atypical squamous cells of undetermined significance)</string>
+    <string name="term_cytology6">ASC-H(cannot exclude HSIL)</string>
+    <string name="term_cytology7">(low-grade squamous intraepithelial lesion)</string>
+    <string name="term_cytology8">(high-grade squamous intraeepithelial)</string>
+    <string name="term_cytology9">HSIL</string>
+    <string name="term_cytology10">other adenocarcinoma</string>
+    <string name="term_cytology11">SCC(squamous cervical cell)</string>
+    <string name="term_cytology12">AGC-NOS(Atypical glandular cells,)</string>
+    <string name="term_cytology13">AGC(Atypical endocervical Cells)</string>
+    <string name="term_cytology14">AGC(Atypical endocervical Cells)</string>
+    <string name="term_cytology15">AGC(Atypical endocervical Cells)</string>
+    <string name="term_cytology16">AIS(adenocarinoma in situ)</string>
+    <string name="term_cytology17">EIA</string>
+
+    <string name="term_HPV_DNA1">Non HPV16/18</string>
+    <string name="term_HPV_DNA2">HPV-DNA+</string>
+    <string name="term_HPV_DNA3">HPV-DNA-</string>
+    <string name="term_HPV_DNA4">HPV 16</string>
+    <string name="term_HPV_DNA5">HPV 18</string>
+    <string name="term_HPV_DNA6"></string>
+    <string name="term_HPV_DNA7"></string>
+    <string name="term_HPV_DNA8"></string>
+    <string name="term_HPV_DNA9"></string>
+    <string name="term_HPV_DNA10"></string>
+    <string name="term_HPV_DNA11"></string>
+    <string name="term_HPV_DNA12"></string>
+    <string name="term_HPV_DNA13"></string>
+    <string name="term_HPV_DNA14"></string>
+    <string name="term_HPV_DNA15"></string>
+    <string name="term_HPV_DNA16"></string>
+    <string name="term_HPV_DNA17"></string>
+
+    <string name="term_symptom1">Purulent secre,smelly</string>
+    <string name="term_symptom2">Vaginal bleeding of gestation period</string>
+    <string name="term_symptom3">Bloody discharge(hemorrhagic leucorrhea)</string>
+    <string name="term_symptom4">Watery leucorrhea()</string>
+    <string name="term_symptom5">Purulent leucorrhea</string>
+    <string name="term_symptom6">Cervical neoplasm</string>
+    <string name="term_symptom7">Pruritus vulvae</string>
+    <string name="term_symptom8">Sore vulvae</string>
+    <string name="term_symptom9">Leukoplakia vulvae (vulva skin pigmentary defect)</string>
+    <string name="term_symptom10">Neoplasms of vulva</string>
+    <string name="term_symptom11">Lower abdomen ache</string>
+    <string name="term_symptom12">Sensation of rectal tenesmus</string>
+    <string name="term_symptom13">Follow-up after cervical CIN therapy</string>
+    <string name="term_symptom14">Follow-up after cervical cancer treatment</string>
+    <string name="term_symptom15">Pre-pregnancy checks</string>
+    <string name="term_symptom16">Routine check-up</string>
+    <string name="term_symptom17"></string>
+
+
+    <string name="term_Assessment1">OSCJ(original squamocolumnar junction)visualize</string>
+    <string name="term_Assessment2">OSCJ(original squamocolumnar junction) partly visible</string>
+    <string name="term_Assessment3">OSCJ(original squamocolumnar junction) invisible</string>
+    <string name="term_Assessment4">Tz-Ⅰ</string>
+    <string name="term_Assessment5">Tz-Ⅱ</string>
+    <string name="term_Assessment6">Tz-Ⅲ</string>
+    <string name="term_Assessment7"> Colposcopy satisfaction</string>
+    <string name="term_Assessment8">Colposcopy dissatisfaction(OSCJ invisible)</string>
+    <string name="term_Assessment9">Colposcopy dissatisfaction(cervicite)</string>
+    <string name="term_Assessment10">Colposcopy dissatisfaction(bleeding)</string>
+    <string name="term_Assessment11">Colposcopy dissatisfaction(bruise)</string>
+    <string name="term_Assessment12"></string>
+    <string name="term_Assessment13"></string>
+    <string name="term_Assessment14"></string>
+    <string name="term_Assessment15"></string>
+    <string name="term_Assessment16"></string>
+    <string name="term_Assessment17"></string>
+
+    <string name="term_Lesion1">Inflammatory diseases</string>
+    <string name="term_Lesion2">Squamous metaplasia</string>
+    <string name="term_Lesion3">Squamous atrophic change</string>
+    <string name="term_Lesion4">Flat condyloma</string>
+    <string name="term_Lesion5">Hyperkeratosis</string>
+    <string name="term_Lesion6">Squamous epithelium</string>
+    <string name="term_Lesion7">CIN-1</string>
+    <string name="term_Lesion8">CIN-2</string>
+    <string name="term_Lesion9">CIN-3</string>
+    <string name="term_Lesion10">Carcinoma in situ</string>
+    <string name="term_Lesion11">Affect the glands</string>
+    <string name="term_Lesion12"></string>
+    <string name="term_Lesion13">Microinvasive squamous cell carcinoma</string>
+    <string name="term_Lesion14">Invasive squamous cell carcinoma</string>
+    <string name="term_Lesion15">Adenocarcinoma in situ</string>
+    <string name="term_Lesion16"></string>
+    <string name="term_Lesion17"></string>
+
+    <string name="term_colposcopic1">leukoplakia(keratinization,hyperkeratosis)</string>
+    <string name="term_colposcopic2">Micro emulsions or micro gyriform acetowhite epithelium</string>
+    <string name="term_colposcopic3">Coarse mosaic</string>
+    <string name="term_colposcopic4">Carse punctuation</string>
+    <string name="term_colposcopic5">Sharper edge</string>
+    <string name="term_colposcopic6">Original squamous epithelium(maturity)</string>
+    <string name="term_colposcopic7">Riginal squamous epithelium(atrophy)</string>
+    <string name="term_colposcopic8">Columnar ectopy Ⅰ</string>
+    <string name="term_colposcopic9">Columnar ectopy Ⅱ</string>
+    <string name="term_colposcopic10">Columnar ectopy Ⅲ</string>
+    <string name="term_colposcopic11">Squamous metaplasia</string>
+    <string name="term_colposcopic12">Nabothian cyst</string>
+    <string name="term_colposcopic13">pit pattern crypt</string>
+    <string name="term_colposcopic14"></string>
+    <string name="term_colposcopic15">Sharp but irregular,geographical satellites</string>
+    <string name="term_colposcopic16">fine mosaic</string>
+    <string name="term_colposcopic17">fine vessels</string>
+
+    <string name="term_Suspected1">NILM(negatiove for intraepithelial lesion or malignancy)</string>
+    <string name="term_Suspected2">low-grade squamous intraepithelial lesion,LSIL</string>
+    <string name="term_Suspected3">high-grade squamous intraepithelial lesion,HSIL</string>
+    <string name="term_Suspected4"></string>
+    <string name="term_Suspected5"></string>
+    <string name="term_Suspected6">Others:condyloma,inflammatory diseases,polyp
+Changes after cervical treatment,such as stenosis,deformation,distort,bruise,thickening or endometriosis
+</string>
+    <string name="term_Suspected7">Suggestion after colposcopy</string>
+    <string name="term_Suspected8"></string>
+    <string name="term_Suspected9"></string>
+    <string name="term_Suspected10"></string>
+    <string name="term_Suspected11"></string>
+    <string name="term_Suspected12"></string>
+    <string name="term_Suspected13"></string>
+    <string name="term_Suspected14"></string>
+    <string name="term_Suspected15"></string>
+    <string name="term_Suspected16"></string>
+    <string name="term_Suspected17"></string>
+
+    <string name="term_attention1"> Report back to the hospital within seven working days</string>
+    <string name="term_attention2">Remove the vaginal gauze after 24 hours,note the bleeding and secretion condition</string>
+    <string name="term_attention3">Forbidden sex and baths,avoid strenuous exercise in two weeks</string>
+    <string name="term_attention4">The vagina can have a small amount of bleeding,about 3 to 5 days,return to hospital for more bleeding</string>
+    <string name="term_attention5">watches your diet</string>
+    <string name="term_attention6"></string>
+    <string name="term_attention7"></string>
+    <string name="term_attention8"></string>
+    <string name="term_attention9"></string>
+    <string name="term_attention10"></string>
+    <string name="term_attention11"></string>
+    <string name="term_attention12"></string>
+    <string name="term_attention13"></string>
+    <string name="term_attention14"></string>
+    <string name="term_attention15"></string>
+    <string name="term_attention16"></string>
+    <string name="term_attention17"></string>
+
+    <string name="term_opinion1">TCT</string>
+    <string name="term_opinion2">LAVH</string>
+    <string name="term_opinion3">cervical biopsy</string>
+    <string name="term_opinion4">Cryotherapy</string>
+    <string name="term_opinion5">cervical conization</string>
+    <string name="term_opinion6"></string>
+    <string name="term_opinion7"></string>
+    <string name="term_opinion8"></string>
+    <string name="term_opinion9"></string>
+    <string name="term_opinion10"></string>
+    <string name="term_opinion11"></string>
+    <string name="term_opinion12"></string>
+    <string name="term_opinion13"></string>
+    <string name="term_opinion14"></string>
+    <string name="term_opinion15"></string>
+    <string name="term_opinion16"></string>
+    <string name="term_opinion17"></string>
+
+
+    <string name="term_border1">Microcondylomatous or micropapillary contour flat lesions with indistinct margins
+Feathered or finely scalloped margins angular,jagged lesions 3 satellite lesions beyond the margin of the transformation zone
+</string>
+    <string name="term_border2">Regular-shaped,symmetrical lesions with smooth,straight outlines</string>
+    <string name="term_border3">Rolled,peeling edges internal demarcations between areas of differing colposcopic appearance-a central area of high-grade change Well-defined coarse punctation or coarse mosaic</string>
+    <string name="term_border4"></string>
+    <string name="term_border5"></string>
+    <string name="term_border6"></string>
+    <string name="term_border7"></string>
+    <string name="term_border8"></string>
+    <string name="term_border9"></string>
+    <string name="term_border10"></string>
+    <string name="term_border11"></string>
+    <string name="term_border12"></string>
+    <string name="term_border13"></string>
+    <string name="term_border14"></string>
+    <string name="term_border15"></string>
+    <string name="term_border16"></string>
+    <string name="term_border17"></string>
+
+
+    <string name="term_color1">Low-intensity acetowhitening(not completely opaque);indistinct acetowhitening.transparent or translucent acetowhitening.Prue snow-white color with intense surface shine(rare)</string>
+    <string name="term_color2">Intermediate shade-gray/white color and shiny surface</string>
+    <string name="term_color3">Dull;opaque,oyster white;gray</string>
+    <string name="term_color4"></string>
+    <string name="term_color5"></string>
+    <string name="term_color6"></string>
+    <string name="term_color7"></string>
+    <string name="term_color8"></string>
+    <string name="term_color9"></string>
+    <string name="term_color10"></string>
+    <string name="term_color11"></string>
+    <string name="term_color12"></string>
+    <string name="term_color13"></string>
+    <string name="term_color14"></string>
+    <string name="term_color15"></string>
+    <string name="term_color16"></string>
+    <string name="term_color17"></string>
+
+
+    <string name="term_blood_vessel1">Fine/uniform caliber vessels closely and uniformly placed,Poorly formed patterns of fine punctation and/of mosaic.Vessels beyond the margin of the transformation zone.Fine vessels within microcondylomatous or micropapillary lesions</string>
+    <string name="term_blood_vessel2">Absent vessels</string>
+    <string name="term_blood_vessel3">Well-defined coarse punctation or coarse mosaic</string>
+    <string name="term_blood_vessel4"></string>
+    <string name="term_blood_vessel5"></string>
+    <string name="term_blood_vessel6"></string>
+    <string name="term_blood_vessel7"></string>
+    <string name="term_blood_vessel8"></string>
+    <string name="term_blood_vessel9"></string>
+    <string name="term_blood_vessel10"></string>
+    <string name="term_blood_vessel11"></string>
+    <string name="term_blood_vessel12"></string>
+    <string name="term_blood_vessel13"></string>
+    <string name="term_blood_vessel14"></string>
+    <string name="term_blood_vessel15"></string>
+    <string name="term_blood_vessel16"></string>
+    <string name="term_blood_vessel17"></string>
+
+    <string name="term_Iodine_staining1">Positive iodine uptake gicing mahogany brown color,negative uptake of insignificant lesion,i,e.,yellow staining by a lesion scoring three point or less on the first three criteria areas beyond the margin of the transformation zone,conspicuous on colposcopy,evident as iodine-negative areas (such areas are frequently due to parakeratosis)</string>
+    <string name="term_Iodine_staining2">Partial iodine uptake-variegated,speckled appearance</string>
+    <string name="term_Iodine_staining3">Negative iodine uptake of significant lesion,i.e.,yellow staining by a lesion already scoring four points or more on the first three criteria</string>
+    <string name="term_Iodine_staining4"></string>
+    <string name="term_Iodine_staining5"></string>
+    <string name="term_Iodine_staining6"></string>
+    <string name="term_Iodine_staining7"></string>
+    <string name="term_Iodine_staining8"></string>
+    <string name="term_Iodine_staining9"></string>
+    <string name="term_Iodine_staining10"></string>
+    <string name="term_Iodine_staining11"></string>
+    <string name="term_Iodine_staining12"></string>
+    <string name="term_Iodine_staining13"></string>
+    <string name="term_Iodine_staining14"></string>
+    <string name="term_Iodine_staining15"></string>
+    <string name="term_Iodine_staining16"></string>
+    <string name="term_Iodine_staining17"></string>
+
+
+    <string name="term_Acetic_acid1"></string>
+    <string name="term_Acetic_acid2"></string>
+    <string name="term_Acetic_acid3"></string>
+    <string name="term_Acetic_acid4"></string>
+    <string name="term_Acetic_acid5"></string>
+    <string name="term_Acetic_acid6"></string>
+    <string name="term_Acetic_acid7"></string>
+    <string name="term_Acetic_acid8"></string>
+    <string name="term_Acetic_acid9"></string>
+    <string name="term_Acetic_acid10"></string>
+    <string name="term_Acetic_acid11"></string>
+    <string name="term_Acetic_acid12"></string>
+    <string name="term_Acetic_acid13"></string>
+    <string name="term_Acetic_acid14"></string>
+    <string name="term_Acetic_acid15"></string>
+    <string name="term_Acetic_acid16"></string>
+    <string name="term_Acetic_acid17"></string>
+
+    <!-- 版本更新的相关信息-->
+    <string name="notification_fail">Download failed.</string>
+
+    <string name="pdfcreate_Inspection_record">Inspection Record</string>
+    <string name="pdfcreate_cervical_cytology">Cytology</string>
+    <string name="pdfcreate_HPV">HPV_DNA</string>
+    <string name="pdfcreate_check_data">Examination</string>
+    <string name="pdfcreate_check_doctor">Doctor</string>
+
+
+</resources>

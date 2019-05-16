@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="languages">
+        <item>无</item>
+        <item>住院</item>
+        <item>门诊</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="marry">
+        <item>无</item>
+        <item>已婚</item>
+        <item>未婚</item>
+    </string-array>
+
+    <string-array name="birthControlMode">
+        <item>无</item>
+        <item>安全套</item>
+        <item>避孕药</item>
+        <item>避孕针</item>
+        <item>女性安全套</item>
+        <item>男女结扎</item>
+        <item>女人上节育环</item>
+    </string-array>
+
+    <string-array name="bloodType">
+        <item>无</item>
+        <item>A型</item>
+        <item>B型</item>
+        <item>AB型</item>
+        <item>o型</item>
+        <item>其它</item>
+    </string-array>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textAllCaps="false" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/bt_click"
+            android:text="@string/button_cancel"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_printerbefore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/bt_click"
+            android:text="@string/image_Previous_page"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_printernext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bt_click"
+            android:text="@string/image_next_page"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,154 @@
+/*
+ * Hewlett-Packard Company
+ * All rights reserved.
+ *
+ * This file, its contents, concepts, methods, behavior, and operation
+ * (collectively the "Software") are protected by trade secret, patent,
+ * and copyright laws. The use of the Software is governed by a license
+ * agreement. Disclosure of the Software to third parties, in any form,
+ * in whole or in part, is expressly prohibited except as authorized by
+ * the license agreement.
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = 'v1'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+    }
+}
+
+android {
+
+    def sha = ""
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        if (org.gradle.internal.os.OperatingSystem.current().windows == false) {
+            def cmd = "git rev-parse --short HEAD"
+            def proc = cmd.execute()
+            sha = proc.text.trim()
+            versionCode = 418
+        } else {
+            versionCode = 418
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+        debug {
+            versionNameSuffix = " (debug-${sha})"
+        }
+
+    }
+
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+def siteUrl = 'https://github.com/IPGPTP/DroidPrint'
+def gitUrl = 'https://github.com/IPGPTP/DroidPrint.git'
+group = 'com.hp.mss'
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_API_KEY')
+
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'mobileprintsdk'
+        userOrg = 'mobileprintsdk'
+        desc = 'Android Mobile Print SDK'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://developers.hp.com/forums/mobile-print-sdk'
+        vcsUrl = gitUrl
+        licenses = ['MIT']
+        labels = ['Android', 'Print', 'SDK']
+        publicDownloadNumbers = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+
+                name 'Mobile Print SDK'
+                url siteUrl
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) << {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+    // options.encoding = 'UTF-8'
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+task copyAarFile(type: Copy) << {
+    def myDir = System.getProperty("user.dir")
+    def myFile = "mobileprintsdk.aar"
+
+    from("${myDir}/app/build/outputs/aar/")
+    into("${myDir}/")
+    include("mobileprintsdk.aar")
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["volley"]
+}

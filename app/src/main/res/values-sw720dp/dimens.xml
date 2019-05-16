@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    \
+    <dimen name="title_bar_height">60dp</dimen>
+
+    <!-- title_item.xml  -->
+    <dimen name="textSizetitle">30sp</dimen>
+    <dimen name="buttonsSize">24dp</dimen>
+    <dimen name="buttonHeight">48dp</dimen>
+    <dimen name="buttonWidth">102dp</dimen>
+    <dimen name="LinerHeight">60dp</dimen>
+
+    <!--  frag_layout_patient.xml-->
+    <dimen name="textViewNameSize">24sp</dimen>
+    <!--<dimen name="buttonHeight">72dp</dimen>-->
+
+    <!-- liveVidActivity -->
+    <dimen name="nameSizeLive">18sp</dimen>
+
+
+</resources>
+

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:Android="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    Android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/tv_pid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_pName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_pAge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_pTel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_pResouce"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_pMarray"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
+</LinearLayout>
