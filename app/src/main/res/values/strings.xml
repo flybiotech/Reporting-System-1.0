@@ -699,13 +699,13 @@
     <string name="setting_android_version">Android版本：</string>
     <string name="setting_android_version_hint">不低于4.4</string>
     <string name="setting_app_name">软件名称 </string>
-    <string name="setting_app_name1">：报告系统2.0</string>
+    <string name="setting_app_name1">：报告系统1.0</string>
     <string name="setting_Version_specification_model">软件型号规格</string>
     <string name="setting_Version_specification_model_ancer">：FLY-SZB-S</string>
     <string name="setting_version">软件发布版本</string>
     <string name="setting_version_ancer">：V</string>
     <string name="setting_version_all">软件完整版本</string>
-    <string name="setting_version_all_ancer">：V2.0.0.0.1176</string>
+    <string name="setting_version_all_ancer">：V1.0.0.0.698</string>
     <string name="setting_ordinary_register">普通用户如何注册?</string>
     <string name="setting_select_patient_message">如何查询病人登记的信息?</string>
     <string name="setting_Treasures_of_vision_modify">如何修改主机的设备名称?</string>

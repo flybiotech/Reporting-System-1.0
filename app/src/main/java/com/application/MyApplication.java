@@ -1,8 +1,6 @@
 package com.application;
 
-import android.app.Application;
 import android.content.Context;
-import android.net.wifi.WifiManager;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
@@ -13,9 +11,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.DiskLogAdapter;
 import com.orhanobut.logger.Logger;
-import com.tencent.bugly.crashreport.CrashReport;
+
 import org.litepal.LitePalApplication;
 
 
@@ -47,7 +44,7 @@ public class MyApplication extends LitePalApplication {
         }
         CrashHandler.getInstance().init(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
-        CrashReport.initCrashReport(getApplicationContext(), "50f7042afa", true);
+//        CrashReport.initCrashReport(getApplicationContext(), "50f7042afa", true);
         mContext = getApplicationContext();
     }
     public static Context getmContext(){
