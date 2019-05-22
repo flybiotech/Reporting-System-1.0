@@ -147,7 +147,7 @@ public class GraffitiActivity extends Activity {
     float mCenterXOnGraffiti;
     float mCenterYOnGraffiti;
     private RadioButton rb1,rb2,rb3;
-    private RadioGroup rg;
+//    private RadioGroup rg;
     private GraffitiParams mGraffitiParams;
 
     // 触摸屏幕超过一定时间才判断为需要隐藏设置面板
@@ -264,7 +264,7 @@ public class GraffitiActivity extends Activity {
 
                     @Override
                     public void onReady() {
-                        mGraffitiView.setPaintSize(size1);
+                        mGraffitiView.setPaintSize(size2);
 //                        mGraffitiView.setPaintSize(mGraffitiParams.mPaintSize > 0 ? mGraffitiParams.mPaintSize
 //                                : mGraffitiView.getPaintSize());
 //                        mPaintSizeBar.setProgress((int) (mGraffitiView.getPaintSize() + 10));
@@ -309,58 +309,58 @@ public class GraffitiActivity extends Activity {
         mTouchSlop = ViewConfiguration.get(getApplicationContext()).getScaledTouchSlop();
         getWidth();
         initView();
-        initClick();
+//        initClick();
 
     }
 
-    private int size1 = 90;
+//    private int size1 = 90;
     private int size2 = 120;
-    private int size3 = 150;
+//    private int size3 = 150;
     private void getWidth(){
         Log.e("aaaa11","111111111111" );
         int width = (int) SPUtils.get(GraffitiActivity.this, Const.smallestWidthDP,0);
         Log.e("aaaa",width+"");
         if(width == 768.0){
-            size1 = 60;
+//            size1 = 60;
             size2 = 80;
-            size3 = 110;
+//            size3 = 110;
         }
         if(width ==800.0 ){
-            size1 = 40;
+//            size1 = 40;
             size2 = 60;
-            size3 = 90;
+//            size3 = 90;
         }
     }
 
     private void initClick() {
-       rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(RadioGroup radioGroup, int i) {
-               switch (i){
-                   case R.id.rb1:
-                       if (mGraffitiView.isSelectedItem()) {
-                           mGraffitiView.setSelectedItemSize(size1);
-                       } else {
-                           mGraffitiView.setPaintSize(size1);
-                       }
-                       break;
-                   case R.id.rb2:
-                       if (mGraffitiView.isSelectedItem()) {
-                           mGraffitiView.setSelectedItemSize(size2);
-                       } else {
-                           mGraffitiView.setPaintSize(size2);
-                       }
-                       break;
-                   case R.id.rb3:
-                       if (mGraffitiView.isSelectedItem()) {
-                           mGraffitiView.setSelectedItemSize(size3);
-                       } else {
-                           mGraffitiView.setPaintSize(size3);
-                       }
-                       break;
-               }
-           }
-       });
+//       rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//           @Override
+//           public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//               switch (i){
+//                   case R.id.rb1:
+//                       if (mGraffitiView.isSelectedItem()) {
+//                           mGraffitiView.setSelectedItemSize(size2);
+//                       } else {
+//                           mGraffitiView.setPaintSize(size2);
+//                       }
+//                       break;
+//                   case R.id.rb2:
+//                       if (mGraffitiView.isSelectedItem()) {
+//                           mGraffitiView.setSelectedItemSize(size2);
+//                       } else {
+//                           mGraffitiView.setPaintSize(size2);
+//                       }
+//                       break;
+//                   case R.id.rb3:
+//                       if (mGraffitiView.isSelectedItem()) {
+//                           mGraffitiView.setSelectedItemSize(size2);
+//                       } else {
+//                           mGraffitiView.setPaintSize(size2);
+//                       }
+//                       break;
+//               }
+//           }
+//       });
     }
 
     private void createGraffitiText(final GraffitiText graffitiText, final float x, final float y) {
@@ -443,12 +443,12 @@ public class GraffitiActivity extends Activity {
 
         findViewById(R.id.btn_clear).setOnClickListener(mOnClickListener);
         findViewById(R.id.btn_undo).setOnClickListener(mOnClickListener);
-        rb1 = findViewById(R.id.rb1);
-        rb2 = findViewById(R.id.rb2);
-        rb3 = findViewById(R.id.rb3);
-        rg = findViewById(R.id.rg);
-
-        rb1.setChecked(true);
+//        rb1 = findViewById(R.id.rb1);
+//        rb2 = findViewById(R.id.rb2);
+//        rb3 = findViewById(R.id.rb3);
+////        rg = findViewById(R.id.rg);
+//
+//        rb1.setChecked(true);
 
         findViewById(R.id.graffiti_btn_finish).setOnClickListener(mOnClickListener);
         findViewById(R.id.graffiti_btn_back).setOnClickListener(mOnClickListener);

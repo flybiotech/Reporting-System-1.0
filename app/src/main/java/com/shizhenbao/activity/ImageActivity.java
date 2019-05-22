@@ -141,17 +141,17 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                     if(!file.getName().equals("方位.png")&&file.getName()!="方位.png"){
 //                        String image=file.getName().substring(17,file.getName().length());
                         String image=file.getName();
-                        if(image.contains("yuantu")&&image.contains(".jpg")){
+                        if(image.contains("质控图")&&image.contains(".jpg")){
                             Item itemImage=new Item();
                             itemImage.setCb(new CheckBox(this));
                             itemImage.setPath(gathPath+"/"+file.getName());//图片路径
                             listitem.add(itemImage);
-                        }else if(image.contains("dianyou")&&image.contains(".jpg")){
+                        }else if(image.contains("碘油")&&image.contains(".jpg")){
                             Item itemImage=new Item();
                             itemImage.setCb(new CheckBox(this));
                             itemImage.setPath(gathPath+"/"+file.getName());//图片路径
                             listitem4.add(itemImage);
-                        }else if(image.contains("cusuanbai")&&image.contains(".jpg")){
+                        }else if(image.contains("醋酸白")&&image.contains(".jpg")){
                             Item itemImage=new Item();
                             itemImage.setCb(new CheckBox(this));
                             itemImage.setPath(gathPath+"/"+file.getName());//图片路径

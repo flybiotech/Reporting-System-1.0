@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -37,6 +39,8 @@ import com.shizhenbao.db.LoginRegister;
 import com.shizhenbao.db.UserManager;
 import com.shizhenbao.pop.User;
 import com.shizhenbao.util.Const;
+import com.shizhenbao.util.FileCopyUtils;
+import com.shizhenbao.util.InstallApkUtils;
 import com.shizhenbao.util.Item;
 import com.shizhenbao.util.LogUtil;
 import com.shizhenbao.util.OneItem;
@@ -50,6 +54,7 @@ import com.view.MyToast;
 import org.litepal.LitePal;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +98,8 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
     View view;
     private String SZB_WIFI_NAME = "";
     private String SZB_WIFI_PASS = "";
+    private InstallApkUtils installApkUtils;
+    private FileCopyUtils fileCopyUtils;
     Runnable runnable_fresh = new Runnable() {
         @Override
         public void run() {
@@ -147,8 +154,9 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
 //        btn_right.setVisibility(View.GONE);
         btn_left.setVisibility(View.VISIBLE);
         filePath = new CreateFileConstant();
+        fileCopyUtils = new FileCopyUtils(getContext());
 //        list = (ListView) view.findViewById(R.id.list);
-
+        installApkUtils = new InstallApkUtils(getContext());
         wifiLoadingAnim = (WifiLoadingAnim) view.findViewById(R.id.wifiLoadingAnim);
         if (listnode_search == null) {
             listnode_search = new ArrayList();
@@ -205,6 +213,8 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
         } catch (Exception e) {
             e.printStackTrace();
         }
+        fileCopyUtils.selectFile();
+
     }
 
     @Override
@@ -350,8 +360,28 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * 判断是否已安装图像获取软件
+     */
+    private void isInstalled(){
+        PackageInfo packageInfo = null;//管理已安装app包名
+        packageInfo = installApkUtils.isInstallApk(Const.imageApkPackage);
+        if (packageInfo == null) {//判断是否安装惠普打印机服务插件
 
-
+            try {
+                boolean isApkExists = installApkUtils.copyAPK2SD(Const.imageApkName);
+                if(isApkExists){
+                    installApkUtils.installApk(getActivity(), Environment.getExternalStorageDirectory() + "/" + Const.imageApkName);
+                }else {
+                    MyToast.showToast(getActivity(),getString(R.string.apkinstallfaild));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            selectUser(0);
+        }
+    }
 
     @Override //开始连接wifi
     public void startWifiConnecting(String type) {
@@ -368,7 +398,9 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
         if (type.equals(Const.WIFI_TYPE_SZB) && mState) {
             stopAnimWifi();
             setWifiText("");
-            selectUser(0);
+
+            isInstalled();
+
         }
     }
 
@@ -784,8 +816,13 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
                 if (userlist.get(arg2 + num * 5).getGatherPath() != null) {
 
                     Const.saveImageFilePath = userlist.get(arg2 + num * 5).getGatherPath();
-                    Const.nameJianJi = userlist.get(arg2 + num * 5).getpName();
-                    searchDev();
+                    Log.e("getImage",Const.saveImageFilePath);
+                    SPUtils.put(getContext(),Const.patientKey,Const.saveImageFilePath);
+
+                    Intent intent = new Intent(getContext().getPackageManager().getLaunchIntentForPackage(Const.imageApkPackage));
+                    startActivity(intent);
+//                    Const.nameJianJi = userlist.get(arg2 + num * 5).getpName();
+//                    searchDev();
                 }
                 dialogadd.cancel();
                 num = 0;

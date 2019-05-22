@@ -25,7 +25,10 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_select"
             android:hint="@string/setting_server_ip_hint"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:digits="0123456789."
+            android:maxLines="1"
+            android:maxLength="20"/>
     </LinearLayout>
 
     <LinearLayout
@@ -50,7 +53,9 @@
             android:background="@drawable/edittext_select"
             android:hint="@string/setting_server_port_hint"
             android:inputType="number"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:maxLines="1"
+            android:maxLength="10"/>
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +79,9 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_select"
             android:hint="@string/setting_server_name_hint"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:maxLength="10"
+            android:maxLines="1"/>
     </LinearLayout>
 
     <LinearLayout
@@ -98,6 +105,8 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_select"
             android:hint="@string/setting_server_password_hint"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:maxLength="15"
+            android:maxLines="1"/>
     </LinearLayout>
 </LinearLayout>

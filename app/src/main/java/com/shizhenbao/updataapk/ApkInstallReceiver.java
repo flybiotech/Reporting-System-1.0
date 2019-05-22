@@ -95,68 +95,7 @@ public class ApkInstallReceiver extends BroadcastReceiver {
         }
     }
 
-
-//    /**
-//     * 通过隐式意图调用系统安装程序安装APK
-//     */
-//    public static void install(Context context) {
-//        File file = new File(
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-//                , "myApp.apk");
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        // 由于没有在Activity环境下启动Activity,设置下面的标签
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        if(Build.VERSION.SDK_INT>=24) { //判读版本是否在7.0以上
-//            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-//            Uri apkUri =
-//                    FileProvider.getUriForFile(context, "com.a520wcf.chapter11.fileprovider", file);
-//            //添加这一句表示对目标应用临时授权该Uri所代表的文件
-//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-//        }else{
-//            intent.setDataAndType(Uri.fromFile(file),
-//                    "application/vnd.android.package-archive");
-//        }
-//        context.startActivity(intent);
-//    }
-
-
-//    public void openFile(File file, Context context) {
-//        Intent intent = new Intent();
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        intent.setAction(Intent.ACTION_VIEW);
-//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){//android 7.0
-//            Uri uriForFile = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".fileprovider", file);
-//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            intent.setDataAndType(uriForFile, context.getContentResolver().getType(uriForFile));
-//        }else{
-//            intent.setDataAndType(Uri.fromFile(file), getMIMEType(file));
-//        }
-//        try {
-//            context.startActivity(intent);
-//        } catch (Exception var5) {
-//            var5.printStackTrace();
-//            Toast.makeText(context, "没有找到打开此类文件的程序", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//    public String getMIMEType(File file) {
-//        String var1 = "";
-//        String var2 = file.getName();
-//        String var3 = var2.substring(var2.lastIndexOf(".") + 1, var2.length()).toLowerCase();
-////        MimeTypeMap类是专门处理mimeType的类。
-//        var1 = MimeTypeMap.getSingleton().getMimeTypeFromExtension(var3);
-//        return var1;
-//    }
-
-//    public static boolean deleteFileWithPath(String filePath) {
-//        SecurityManager checker = new SecurityManager();
-//        File f = new File(filePath);
-//        checker.checkDelete(filePath);
-//        if (f.isFile()) {
-//            f.delete();
-//            return true;
-//        }
-//        return false;
-//    }
-
+    /**
+     *
+     */
 }

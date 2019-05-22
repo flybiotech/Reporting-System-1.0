@@ -2,7 +2,11 @@ package com.shizhenbao.UI;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.constraint.solver.widgets.ConstraintAnchor;
 import android.support.v7.app.AlertDialog;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.method.DialerKeyListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -12,12 +16,15 @@ import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.Path;
 import com.shizhenbao.pop.SystemSet;
 import com.shizhenbao.util.Const;
+import com.shizhenbao.util.EditRegularUtils;
 import com.shizhenbao.util.OneItem;
 import com.view.MyToast;
 
+import org.apache.tools.ant.types.resources.comparators.Type;
 import org.litepal.LitePal;
 
 import java.io.File;
+import java.sql.Types;
 import java.util.List;
 
 public class MyEditTextDialog {
@@ -35,24 +42,32 @@ public class MyEditTextDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle(title); //设置对话框标题
         final EditText edit = new EditText(mContext);
+        EditRegularUtils.editLenth(edit);
         builder.setView(edit);
         if(temp == 0){
+            EditRegularUtils.speChat(edit,15);
             edit.setText(doctor.getEdit_hos_name());
         }else if(temp == 1){//科室
+            EditRegularUtils.speChat(edit,10);
             edit.setText(doctor.getEdit_hos_keshi());
         }else if(temp == 2){//采集图片路径
+            EditRegularUtils.speChat(edit,10);
             if(!OneItem.getOneItem().getGather_path().equals("")||OneItem.getOneItem().getGather_path()!=null){
                 edit.setText(OneItem.getOneItem().getGather_path());
             }
         }else if(temp == 3){//ftp备份路径
+            EditRegularUtils.speChat(edit,10);
             if(!OneItem.getOneItem().getBackUpNetPath().equals("")||OneItem.getOneItem().getBackUpNetPath()!=null){
                 edit.setText(OneItem.getOneItem().getBackUpNetPath());
             }
         }else if(temp ==4){//本地备份
+            EditRegularUtils.speChat(edit,10);
             if(!OneItem.getOneItem().getBackUpPath().equals("")||OneItem.getOneItem().getBackUpPath()!=null){
                 edit.setText(OneItem.getOneItem().getBackUpPath());
             }
         }else if(temp ==5){//弹出框消失时间
+            EditRegularUtils.speChat(edit,2);
+            edit.setInputType(InputType.TYPE_CLASS_NUMBER);
             builder.setTitle(title+"（s）");
             systemSets = LitePal.findAll(SystemSet.class);
             if(systemSets.size() > 0){
@@ -94,6 +109,7 @@ public class MyEditTextDialog {
         dialog.setCanceledOnTouchOutside(true); //设置弹出框失去焦点是否隐藏,即点击屏蔽其它地方是否隐藏
         dialog.show();
     }
+
     /**
      * 设置本地保存图片的路径
      */

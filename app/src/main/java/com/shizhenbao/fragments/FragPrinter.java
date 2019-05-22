@@ -607,7 +607,7 @@ public class FragPrinter extends BaseFragment implements View.OnClickListener, P
             }
         } else if (requestCode == REQUEST_CODE_APP_INSTALL) {
             if (resultCode == Activity.RESULT_OK) {
-                installApkUtils.initInstallAPK();
+                installApkUtils.initInstallAPK(Const.hpApkName);
             }
         }
     }
@@ -883,20 +883,16 @@ public class FragPrinter extends BaseFragment implements View.OnClickListener, P
     //    List<User> userlist = new ArrayList<User>();
     private void isPkgInstalled(final String pkgName) {
         PackageInfo packageInfo = null;//管理已安装app包名
-        try {
-            packageInfo = getContext().getPackageManager().getPackageInfo(pkgName, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            packageInfo = null;
-            e.printStackTrace();
-        }
+        packageInfo = installApkUtils.isInstallApk(pkgName);
         if (packageInfo == null) {//判断是否安装惠普打印机服务插件
-            String path = Environment.getExternalStorageDirectory() + "/hp.apk";//打印服务插件本地路径
+
             try {
-                File file = new File(path);
-                if (!file.exists()) {
-                    installApkUtils.copyAPK2SD(path);//将项目中的服务插件复制到本地路径下
+                boolean isApkExists = installApkUtils.copyAPK2SD(Const.hpApkName);
+                if(isApkExists){
+                    installApkUtils.installApk(getActivity(),Environment.getExternalStorageDirectory() + "/" + Const.hpApkName);
+                }else {
+                    MyToast.showToast(getActivity(),getString(R.string.apkinstallfaild));
                 }
-                installApk(getActivity(), path);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -933,31 +929,6 @@ public class FragPrinter extends BaseFragment implements View.OnClickListener, P
         }
     }
 
-    //根据android 版本选择不同的安装方式
-    private void installApk(Context context, String fileApk) {
-
-        if (fileApk != null) {
-            File file = new File(fileApk);
-            if (Build.VERSION.SDK_INT >= 24) {//android 7.0以上
-                installApkUtils.initInstallAPK();
-            }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){//Android 8.0以上，增加了一个未知来源安装的权限
-                if(!getContext().getPackageManager().canRequestPackageInstalls()){
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
-                    startActivityForResult(intent,1);
-                }else {
-                    installApkUtils.initInstallAPK();
-                }
-            } else{//android 6.0以下直接安装
-                Intent install = new Intent(Intent.ACTION_VIEW);
-                install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                install.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                context.startActivity(install);
-            }
-        } else {
-            MyToast.showToast(getActivity(),getString(R.string.print_download_faild));
-//            SouthUtil.showToast(getActivity(), getActivity().getString(R.string.print_download_faild));
-        }
-    }
 
     //模拟点击事件
     private void setSimulateClick(View view, float x, float y) {

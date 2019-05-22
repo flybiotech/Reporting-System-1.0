@@ -532,7 +532,7 @@
     <string name="imageacitivty_acetowhite_second">秒/</string>
     <string name="imageacitivty_acetowhite_minute">分钟</string>
     <string name="printFaild">报告打印失败</string>
-
+    <string name="apkinstallfaild">插件安装失败</string>
     //---------------------------------------------病例管理模块
 
     <string name="case_title">病历管理</string>

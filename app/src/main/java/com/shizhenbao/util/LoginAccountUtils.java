@@ -152,9 +152,9 @@ public class LoginAccountUtils {
         //数据库为空时，填充数据
         if(systemSetList.size() == 0){
             SystemSet systemSet = new SystemSet();
-            systemSet.setBackUpPath("FALUYUAN");//本地备份路径
-            systemSet.setBackUpNetPath("/LUFAYUAN/");//ftp备份路径
-            systemSet.setGather_path("SZB_save");//采集图片路径
+            systemSet.setBackUpPath("FALUYUAN_1");//本地备份路径
+            systemSet.setBackUpNetPath("/LUFAYUAN_1/");//ftp备份路径
+            systemSet.setGather_path("SZB_save_1");//采集图片路径
             systemSet.setDialog_time(3);//对话框自动消失时间
             systemSet.save();
             OneItem.getOneItem().setBackUpPath(systemSet.getBackUpPath());
@@ -163,11 +163,11 @@ public class LoginAccountUtils {
             Const.delayTime=systemSet.getDialog_time();
         }else {
             if (systemSetList.get(0).getBackUpPath() == null || "".equals(systemSetList.get(0).getBackUpPath())) {
-                systemSetList.get(0).setBackUpPath("FALUYUAN");
+                systemSetList.get(0).setBackUpPath("FALUYUAN_1");
             } else if (systemSetList.get(0).getBackUpNetPath() == null || "".equals(systemSetList.get(0).getBackUpNetPath())) {
-                systemSetList.get(0).setBackUpNetPath("/LUFAYUAN/");
+                systemSetList.get(0).setBackUpNetPath("/FALUYUAN_1/");
             }else if(systemSetList.get(0).getGather_path()==null || "".equals(systemSetList.get(0).getGather_path())){
-                systemSetList.get(0).setGather_path("SZB_save");
+                systemSetList.get(0).setGather_path("SZB_save_1");
             }else if(systemSetList.get(0).getDialog_time()<0){
                 systemSetList.get(0).setDialog_time(3);
             }

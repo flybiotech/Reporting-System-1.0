@@ -161,20 +161,16 @@ public class PDFPreviewActivity extends AppCompatActivity implements OnPageChang
     //打印机
     private void isPkgInstalled(final String pkgName, final String pdfPath) {
         PackageInfo packageInfo = null;//管理已安装app包名
-        try {
-            packageInfo = getPackageManager().getPackageInfo(pkgName, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            packageInfo = null;
-            e.printStackTrace();
-        }
+        packageInfo = installApkUtils.isInstallApk(pkgName);
         if (packageInfo == null) {//判断是否安装惠普打印机服务插件
-            String path = Environment.getExternalStorageDirectory() + "/hp.apk";//打印服务插件本地路径
+
             try {
-                File file = new File(path);
-                if (!file.exists()) {
-                    installApkUtils.copyAPK2SD(path);//将项目中的服务插件复制到本地路径下
+                boolean isApkExists = installApkUtils.copyAPK2SD(Const.hpApkName);
+                if(isApkExists){
+                    installApkUtils.installApk(PDFPreviewActivity.this,Environment.getExternalStorageDirectory() + "/" + Const.hpApkName);
+                }else {
+                    MyToast.showToast(PDFPreviewActivity.this,getString(R.string.apkinstallfaild));
                 }
-                installApk(this, path);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -224,31 +220,6 @@ public class PDFPreviewActivity extends AppCompatActivity implements OnPageChang
         }
     }
 
-    //根据android 版本选择不同的安装方式
-    private void installApk(Context context, String fileApk) {
-
-        if (fileApk != null) {
-            File file = new File(fileApk);
-            if (Build.VERSION.SDK_INT >= 24) {//android 7.0以上
-                installApkUtils.initInstallAPK();
-            }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){//Android 8.0以上，增加了一个未知来源安装的权限
-                if(!getPackageManager().canRequestPackageInstalls()){
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
-                    startActivityForResult(intent,1);
-                }else {
-                    installApkUtils.initInstallAPK();
-                }
-            } else{//android 6.0以下直接安装
-                Intent install = new Intent(Intent.ACTION_VIEW);
-                install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                install.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                context.startActivity(install);
-            }
-        } else {
-            MyToast.showToast(this,getString(R.string.print_download_faild));
-//            SouthUtil.showToast(this, getString(R.string.print_download_faild));
-        }
-    }
 
     @Override
     public void onPageError(int page, Throwable t) {

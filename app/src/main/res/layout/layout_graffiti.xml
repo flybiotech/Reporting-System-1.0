@@ -102,35 +102,35 @@
                         <!--android:textSize="14dp" />-->
                 <!--</LinearLayout>-->
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/rg"
-                    android:layout_marginTop="@dimen/dp_10"
-                    >
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb1"
-                        android:text="@string/location_size_1"
-                        android:textSize="@dimen/dp_20"
-                        />
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb2"
-                        android:text="@string/location_size_2"
-                        android:textSize="@dimen/dp_20"
-                        android:layout_marginLeft="@dimen/dp_20"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rb3"
-                        android:text="@string/location_size_3"
-                        android:textSize="@dimen/dp_20"
-                        android:layout_marginLeft="@dimen/dp_20"/>
-                </RadioGroup>
+                <!--<RadioGroup-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:id="@+id/rg"-->
+                    <!--android:layout_marginTop="@dimen/dp_10"-->
+                    <!--&gt;-->
+                    <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/rb1"-->
+                        <!--android:text="@string/location_size_1"-->
+                        <!--android:textSize="@dimen/dp_20"-->
+                        <!--/>-->
+                    <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/rb2"-->
+                        <!--android:text="@string/location_size_2"-->
+                        <!--android:textSize="@dimen/dp_20"-->
+                        <!--android:layout_marginLeft="@dimen/dp_20"/>-->
+                    <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/rb3"-->
+                        <!--android:text="@string/location_size_3"-->
+                        <!--android:textSize="@dimen/dp_20"-->
+                        <!--android:layout_marginLeft="@dimen/dp_20"/>-->
+                <!--</RadioGroup>-->
 
             </LinearLayout>
             <FrameLayout

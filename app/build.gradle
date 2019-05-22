@@ -22,7 +22,7 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled true  //突破应用方法数65535的一个限制
 
 //        javaCompileOptions {
 //            annotationProcessorOptions {

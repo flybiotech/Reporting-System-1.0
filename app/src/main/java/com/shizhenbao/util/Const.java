@@ -34,10 +34,15 @@ public class Const {
     public static boolean isIntent = true;//判断是不是从其他三个fragment 跳到 FragGetImage的
     public static boolean isIntentFrag = false;//判断当前的fragment （主要是用在FragGetImage）的是否可见，
     public static String PageHp = "com.hp.android.printservice"; // 惠普打印机服务插件包名
+    public static String hpApkName = "hp.apk";
+
     public static String PageMapria = "org.mopria.printplugin"; // org.mopria.printplugin
     public static boolean wifiMark = false; //wifi广播的标记，这个作用： true 表示，wifi连接成功时，可以回调相关的方法
     public static boolean wifiRepeat = false;//wifi当前的wifi是否是重复连接
 
+    public static String imageApkPackage = "com.molink.brean.fly";
+    public static String imageApkName = "com.stub.StubApp.apk";
+    public static String patientKey = "patientKey";
 
     public static String saveImageFilePath = null; //图像获取界面中，选择的患者的图片保存的路径
 
@@ -104,4 +109,7 @@ public class Const {
     public static String smallestWidthDP = "WidthDP";//获得当前平板的最小宽度
 
     public static Context context;
+
+    public static String originalPath = Environment.getExternalStorageDirectory()+"/AFLY_Save";//第一次复制的原始文件路径
+
 }
