@@ -167,7 +167,6 @@ public class MyEditTextDialog {
             temp=Integer.parseInt(edit.getText().toString().trim());
         }else {
             MyToast.showToast(mContext,mContext.getString( R.string.setting_dialog_dissmiss_faild1));
-//            Toast.makeText(mContext, R.string.setting_dialog_dissmiss_faild1, Toast.LENGTH_SHORT).show();
             return;
         }
         if(temp>=3 && temp <=15){
@@ -180,10 +179,8 @@ public class MyEditTextDialog {
             }
             system.get(0).save();
             MyToast.showToast(mContext,mContext.getString( R.string.setting_dialog_dissmiss_success));
-//            Toast.makeText(mContext, R.string.setting_dialog_dissmiss_success, Toast.LENGTH_SHORT).show();
         }else {
             MyToast.showToast(mContext,mContext.getString( R.string.setting_dialog_dissmiss_faild2));
-//            Toast.makeText(mContext, R.string.setting_dialog_dissmiss_faild2, Toast.LENGTH_SHORT).show();
             return;
         }
     }

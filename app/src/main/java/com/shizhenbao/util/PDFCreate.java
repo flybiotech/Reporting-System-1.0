@@ -359,29 +359,29 @@ public class PDFCreate {
             doc.add(initAlignment(p14,p14_1));
             doc.add(initAlignment(p50,p50_1));
             int isDisplay = (int) SPUtils.get(context, Const.display, -1);
-            if(isDisplay == 1){
-                Paragraph p56=new Paragraph("   ",font1);
-
-                Paragraph p57=new Paragraph(context.getString(R.string.print_Assessment_results)+":  ",font2);
-
-                Paragraph p51 = new Paragraph(context.getString(R.string.print_border)+"：  ", font1);
-                Paragraph p51_1 = new Paragraph( user.getBianjie(), font1);
-                Paragraph p52 = new Paragraph(context.getString(R.string.print_color)+"：  ", font1);
-                Paragraph p52_1 = new Paragraph(user.getColor(), font1);
-                Paragraph p53 = new Paragraph(context.getString(R.string.print_blood_vessel)+"：  ", font1);
-                Paragraph p53_1 = new Paragraph(user.getXueguna(), font1);
-                Paragraph p54 = new Paragraph(context.getString(R.string.print_Iodine_staining)+"：  ", font1);
-                Paragraph p54_1 = new Paragraph(user.getDianranse(), font1);
-                Paragraph p55 = new Paragraph(context.getString(R.string.print_Acetic_acid_change)+"：  ", font1);
-                Paragraph p55_1 = new Paragraph(user.getCusuan(), font1);
-                doc.add(p56);
-                doc.add(p57);
-                doc.add(initAlignment(p51,p51_1));
-                doc.add(initAlignment(p52,p52_1));
-                doc.add(initAlignment(p53,p53_1));
-                doc.add(initAlignment(p54,p54_1));
-                doc.add(initAlignment(p55,p55_1));
-            }
+//            if(isDisplay == 1){
+//                Paragraph p56=new Paragraph("   ",font1);
+//
+//                Paragraph p57=new Paragraph(context.getString(R.string.print_Assessment_results)+":  ",font2);
+//
+//                Paragraph p51 = new Paragraph(context.getString(R.string.print_border)+"：  ", font1);
+//                Paragraph p51_1 = new Paragraph( user.getBianjie(), font1);
+//                Paragraph p52 = new Paragraph(context.getString(R.string.print_color)+"：  ", font1);
+//                Paragraph p52_1 = new Paragraph(user.getColor(), font1);
+//                Paragraph p53 = new Paragraph(context.getString(R.string.print_blood_vessel)+"：  ", font1);
+//                Paragraph p53_1 = new Paragraph(user.getXueguna(), font1);
+//                Paragraph p54 = new Paragraph(context.getString(R.string.print_Iodine_staining)+"：  ", font1);
+//                Paragraph p54_1 = new Paragraph(user.getDianranse(), font1);
+//                Paragraph p55 = new Paragraph(context.getString(R.string.print_Acetic_acid_change)+"：  ", font1);
+//                Paragraph p55_1 = new Paragraph(user.getCusuan(), font1);
+//                doc.add(p56);
+//                doc.add(p57);
+//                doc.add(initAlignment(p51,p51_1));
+//                doc.add(initAlignment(p52,p52_1));
+//                doc.add(initAlignment(p53,p53_1));
+//                doc.add(initAlignment(p54,p54_1));
+//                doc.add(initAlignment(p55,p55_1));
+//            }
 
             /**
              * 指定位置添加文本

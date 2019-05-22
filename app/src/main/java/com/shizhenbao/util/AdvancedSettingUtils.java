@@ -40,9 +40,9 @@ public class AdvancedSettingUtils {
         stringList = new ArrayList<>();
         stringList.add(mContext.getString(R.string.setting_hospital_modify));
         stringList.add(mContext.getString(R.string.setting_department_modify));
-        stringList.add(mContext.getString(R.string.setting_FTP));
+//        stringList.add(mContext.getString(R.string.setting_FTP));
         stringList.add(mContext.getString(R.string.setting_picture_Route));
-        stringList.add(mContext.getString(R.string.setting_FTP_Route));
+//        stringList.add(mContext.getString(R.string.setting_FTP_Route));
         stringList.add(mContext.getString(R.string.setting_local_route));
         stringList.add(mContext.getString(R.string.setting_dialog_dissmiss));
         return stringList;
@@ -81,19 +81,19 @@ public class AdvancedSettingUtils {
                     case 1:
                         myEditTextDialog.editDialogShow(mContext.getString(R.string.user_regester_department_hint),1);
                         break;
+//                    case 2:
+//                        recoveryUtils.FTPSetDialog();
+//                        break;
                     case 2:
-                        recoveryUtils.FTPSetDialog();
-                        break;
-                    case 3:
                         myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_save_Route),2);
                         break;
-                    case 4:
-                        myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_FTP_Route_hint),3);
-                        break;
-                    case 5:
+//                    case 4:
+//                        myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_FTP_Route_hint),3);
+//                        break;
+                    case 3:
                         myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_local_Route_hint),4);
                         break;
-                    case 6:
+                    case 4:
                         myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_dialog_dissmiss_hint),5);
                         break;
                     default:break;

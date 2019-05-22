@@ -676,7 +676,9 @@
         android:orientation="vertical"
         android:paddingLeft="@dimen/dp_1"
         android:paddingRight="@dimen/dp_1"
-        android:paddingTop="@dimen/dp_1">
+        android:paddingTop="@dimen/dp_1"
+        android:visibility="gone"
+        >
 
         <TableLayout
             android:layout_width="match_parent"

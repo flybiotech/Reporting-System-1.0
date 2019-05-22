@@ -24,18 +24,41 @@
     <drawable name="nopressed_bg">#fff</drawable>
 
     <!-- 警示性按钮的背景颜色 -->
-    <drawable name="button_caution_pressed">#d1337b</drawable>
-    <drawable name="button_caution_normal">#f559b1</drawable>
+    <!--<drawable name="button_caution_pressed">#d1337b</drawable>-->
+    <!--<drawable name="button_caution_normal">#f559b1</drawable>-->
 
     <!-- 标题栏返回按钮的背景颜色 -->
-    <drawable name="button_backward_pressed">#40F64C99</drawable>
-    <drawable name="button_backward_normal">#0000</drawable>
+    <!--<drawable name="button_backward_pressed">#40F64C99</drawable>-->
+    <!--<drawable name="button_backward_normal">#0000</drawable>-->
 
     <!-- 按钮和输入框的背景色-->
-    <color name="weakRed">#FFE4E1</color>
-    <color name="weakRed1">#FFF0F5</color>
-    <color name="lightRed">#FF69B4</color>
+    <!--<color name="weakRed">#FFE4E1</color>-->
+    <!--<color name="weakRed1">#FFF0F5</color>-->
+    <!--<color name="weakRed1">#EFF8FE</color>-->
+    <!--<color name="lightRed">#FF69B4</color>-->
+    <!--<color name="textColorback">#EEA9B8</color>-->
+    <!--边框的颜色-->
+    <!--<color name="weakRed">#bbdefb</color>-->
+    <!--<color name="weakRed">#4caf50</color>-->
+    <!--<color name="weakRed">#64dd17</color>-->
+    <!--<color name="weakRed">#b2ebf2</color>-->
+    <color name="weakRed">#92B6D5</color>
+    <!--<color name="weakRed">#c1cbd7</color>-->
+    <!--<color name="weakRed">#9ca8b8</color>-->
 
+    <color name="textColorback">#6BC1FA</color>
+    <!--bar 和title的颜色-->
+    <!--<color name="weakRed1">#f5f5f5</color>-->
+    <!--<color name="weakRed1">#b2ebf2</color>-->
+    <!--<color name="weakRed1">#fafafa</color>-->
+    <color name="weakRed1">#fafafa</color>
+    <!--ba的颜色-->
+    <!--<color name="weakRedback">#f5f5f5</color>-->
+    <color name="weakRedback">#fafafa</color>
+    <!--<color name="weakRed1">#41C5F7</color>-->
+    <!--<color name="weakRed1">#ABEFF8FE</color>-->
+    <!--必填字段你的颜色-->
+    <color name="lightRed">#0883D6</color>
 
     <!-- 视珍宝相关的-->
     <color name="possible_result_points">#c0ffff00</color>
@@ -56,10 +79,15 @@
     <color name="appcolor1">#1eaed6</color>
     <color name="divider">#666666</color>
     <color name="textcolor">#535353</color>
-    <color name="textcase">#FF97BC</color>
+    <!--<color name="textcase">#FF97BC</color>-->
     <color name="bg_xcarc">#00000000</color>
-    <color name="bg_mytitleView">#FFF0F5</color>
-    <color name="bg_mytitleViewshen">#FF69B4</color>
-    <color name="bg_mytitleViewhui">#51516F</color>
+    <!--<color name="bg_mytitleView">#FFF0F5</color>-->
+    <!--<color name="bg_mytitleViewshen">#FF69B4</color>-->
+    <!--<color name="bg_mytitleViewhui">#51516F</color>-->
 
+
+    <color name="textcase">#0883D6</color>
+    <color name="bg_mytitleView">#ABEFF8FE</color>
+    <color name="bg_mytitleViewshen">#0883D6</color>
+    <color name="bg_mytitleViewhui">#51516F</color>
 </resources>

@@ -527,7 +527,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
-        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:visibility="gone"
+        >
 
         <TableRow>
 
@@ -590,7 +592,9 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
-        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10"
+        android:visibility="gone"
+        >
 
         <TableRow>
 
@@ -651,7 +655,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            >
 
             <TextView
                 android:layout_width="0dp"
@@ -688,7 +694,9 @@
         android:orientation="vertical"
         android:paddingLeft="1dp"
         android:paddingRight="1dp"
-        android:paddingTop="1dp">
+        android:paddingTop="1dp"
+        android:visibility="gone"
+        >
 
         <TableLayout
             android:layout_width="match_parent"
