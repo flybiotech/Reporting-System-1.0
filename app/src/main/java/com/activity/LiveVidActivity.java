@@ -83,7 +83,7 @@ public class LiveVidActivity extends BaseActivity implements View.OnClickListene
     //定时刷新列表
     public int TIME = 1000;
     public boolean updateDevTimeExec = false;
-
+    private String mTextColor = "#51516F";
     //已经在FragGetImage 中，初始化视珍宝拍照和拍摄视频的默认时间
     Handler handler = new Handler() {
         @Override
@@ -294,7 +294,7 @@ public class LiveVidActivity extends BaseActivity implements View.OnClickListene
 
             tx_xcarc.setTextColor("#ffffffff");
         } else {
-            tx_xcarc.setTextColor("#51516F");
+            tx_xcarc.setTextColor(mTextColor);
             tx_xcarc.setBackgroundResource(R.drawable.text_shape_nor);
 
         }
@@ -303,7 +303,7 @@ public class LiveVidActivity extends BaseActivity implements View.OnClickListene
             bt_start.setTextColor("#ffffffff");
             bt_start.setBackgroundResource(R.drawable.text_shape_select);
         } else {
-            bt_start.setTextColor("#51516F");
+            bt_start.setTextColor(mTextColor);
             bt_start.setBackgroundResource(R.drawable.text_shape_nor);
         }
 
@@ -311,7 +311,7 @@ public class LiveVidActivity extends BaseActivity implements View.OnClickListene
             tx_snap_time.setTextColor("#000000");
 //            tx_snap_time.setBackgroundResource(R.drawable.text_shape_select);
         } else {
-            tx_snap_time.setTextColor("#51516F");
+            tx_snap_time.setTextColor(mTextColor);
 //            tx_snap_time.setBackgroundResource(R.drawable.text_shape_nor);
         }
 
@@ -319,7 +319,7 @@ public class LiveVidActivity extends BaseActivity implements View.OnClickListene
             bt_claer.setTextColor("#ffffffff");
             bt_claer.setBackgroundResource(R.drawable.text_shape_select);
         } else {
-            bt_claer.setTextColor("#51516F"); //深灰色
+            bt_claer.setTextColor(mTextColor); //深灰色
             bt_claer.setBackgroundResource(R.drawable.text_shape_nor);
         }
 

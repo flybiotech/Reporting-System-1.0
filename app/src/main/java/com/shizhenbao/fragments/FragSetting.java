@@ -184,43 +184,43 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
                         intent.putExtra("wifiIndex", 0);
                         startActivity(intent);
                         break;
-                    case 4://wifi联网测试
-                        intent=new Intent(getContext(),WIFITestActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 5://添加术语
+//                    case 4://wifi联网测试
+//                        intent=new Intent(getContext(),WIFITestActivity.class);
+//                        startActivity(intent);
+//                        break;
+                    case 4://添加术语
                         termAddUtils.showTermDialog();
                         break;
-                    case 6://高级设置
+                    case 5://高级设置
 //                        lv_add();
                         advancedSettingUtils.advancedDialog(advancedSettingUtils.addData());
                         break;
-                    case 7://图片编辑
-                        intent=new Intent(getContext(), JianjiActivity.class);
-                        Const.dialogshow=0;
-                        startActivity(intent);
-                        break;
-                    case 8://数据备份
+//                    case 7://图片编辑
+//                        intent=new Intent(getContext(), JianjiActivity.class);
+//                        Const.dialogshow=0;
+//                        startActivity(intent);
+//                        break;
+                    case 6://数据备份
                         backupsUtils.askBackupDialog();
                         break;
-                    case 9://数据恢复
+                    case 7://数据恢复
                         recoveryUtils.inquiryRecoverDialog();
                         break;
-                    case 10:
+                    case 8:
                         print_list = new ArrayList<>();
                         print_list.add(getString(R.string.setting_print_display));
                         print_list.add(getString(R.string.setting_print_nodisplay));
                         backupsUtils.advancedDialog(print_list);
                         break;
-                    case 11://视珍宝硬件参数设置
+                    case 9://视珍宝硬件参数设置
                         intent=new Intent(getContext(), YinjianActivity.class);
                         startActivity(intent);
                         break;
-                    case 12://关于
+                    case 10://关于
                         intent=new Intent(getContext(), GuanyuActivity.class);
                         startActivity(intent);
                         break;
-                    case 13://帮助
+                    case 11://帮助
                         intent=new Intent(getContext(), HelpActivity.class);
                         startActivity(intent);
                         break;
@@ -235,10 +235,10 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
         list.add(getString(R.string.setting_User_management));
         list.add(getString(R.string.setting_Modify_password));
         list.add(getString(R.string.setting_wifi));
-        list.add(getString(R.string.setting_Networking_test));
+//        list.add(getString(R.string.setting_Networking_test));
         list.add(getString(R.string.setting_add_terms));
         list.add(getString(R.string.setting_advanced_setting));
-        list.add(getString(R.string.setting_Picture_editor));
+//        list.add(getString(R.string.setting_Picture_editor));
         list.add(getString(R.string.setting_data_backup));
         list.add(getString(R.string.setting_data_recovery));
         list.add(getString(R.string.setting_print_set));

@@ -137,24 +137,25 @@ public class BackupsUtils {
      */
 
     public void askBackupDialog(){
-        final CharSequence[] items = {mContext.getString(R.string.setting_ftp_backups), mContext.getString(R.string.setting_local_backups)};//弹出框展示内容
+//        final CharSequence[] items = {mContext.getString(R.string.setting_ftp_backups), mContext.getString(R.string.setting_local_backups)};//弹出框展示内容
+        final CharSequence[] items = { mContext.getString(R.string.setting_local_backups),""};//弹出框展示内容
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);//声明弹出框
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                switch (item) {
-                    case 0:
-                        boolean ab=networkUtils.isNetworkAvailable();//判断wifi是否可以连接
-                        if(ab){
-                            networkUtils.getUrl(1);
-                        }else {
-                            MyToast.showToast(mContext,mContext.getString(R.string.setting_network_Unavailability));
-//                            Toast.makeText(mContext,mContext.getString(R.string.setting_network_Unavailability), Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    case 1:
+//                switch (item) {
+//                    case 0:
+//                        boolean ab=networkUtils.isNetworkAvailable();//判断wifi是否可以连接
+//                        if(ab){
+//                            networkUtils.getUrl(1);
+//                        }else {
+//                            MyToast.showToast(mContext,mContext.getString(R.string.setting_network_Unavailability));
+////                            Toast.makeText(mContext,mContext.getString(R.string.setting_network_Unavailability), Toast.LENGTH_SHORT).show();
+//                        }
+//                        break;
+//                    case 1:
                         localBackup();
-                        break;
-                }
+//                        break;
+//                }
 
             }
         });

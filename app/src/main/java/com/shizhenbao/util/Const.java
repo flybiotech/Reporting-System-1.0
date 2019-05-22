@@ -24,7 +24,7 @@ public class Const {
     public static String SZB_WIFI_PASS_KEY = "SZB_Pass";
 
     public static String HP_SSID_FILTER = "HP"; //WiFi过滤
-    public static String SZB_SSID_FILTER = "IPCAM";
+    public static String SZB_SSID_FILTER = "FLY";
     public static String WIFI_TYPE_HP_PDF= "TYPE_HP_PDF";//设置连接wifi的类型
     public static String WIFI_TYPE_HP= "TYPE_HP";//设置连接wifi的类型
     public static String WIFI_TYPE_SZB = "TYPE_SZB";//设置连接wifi的类型
