@@ -40,7 +40,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:background="@color/colorAccent"></View>
+                    android:background="@color/lightRed"></View>
 
                 <com.shizhenbao.UI.MyGridView
                     android:id="@+id/gv_yuanshi"
@@ -69,7 +69,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:background="@color/colorAccent"></View>
+                    android:background="@color/lightRed"></View>
 
                 <com.shizhenbao.UI.MyGridView
                     android:id="@+id/gv_cusuan"
@@ -98,7 +98,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:background="@color/colorAccent"></View>
+                    android:background="@color/lightRed"></View>
 
                 <com.shizhenbao.UI.MyGridView
                     android:id="@+id/gv_dianyou"
@@ -113,7 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_50"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,7 +128,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:background="@color/colorAccent"></View>
+                    android:background="@color/lightRed"></View>
 
                 <GridView
                     android:id="@+id/gv_yisheng"
@@ -165,6 +166,6 @@
         android:paddingLeft="@dimen/dp_2"
         android:scaleType="center"
         android:src="@drawable/graffiti_btn_finish"
-        app:backgroundTint="@color/PluginToolbarBKColor"
+        app:backgroundTint="@color/lightRed"
         />
 </RelativeLayout>

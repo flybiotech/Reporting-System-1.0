@@ -55,8 +55,8 @@ public class InstallApkUtils {
     public boolean copyAPK2SD(String apkName) throws IOException {
         File file = null;
         String filePath = null;
-        if(apkName.equals("hp.apk")){
-            filePath = Environment.getExternalStorageDirectory() + "/hp.apk";//打印服务插件本地路径
+        if(apkName.equals(Const.mopriaApkName)){
+            filePath = Environment.getExternalStorageDirectory() + "/" + Const.mopriaApkName;//打印服务插件本地路径
         }else {
             filePath = Environment.getExternalStorageDirectory() + "/com.stub.StubApp.apk";//打印服务插件本地路径
 

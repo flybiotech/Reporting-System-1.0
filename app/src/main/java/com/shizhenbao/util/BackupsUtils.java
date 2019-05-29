@@ -11,6 +11,7 @@ import android.os.storage.StorageManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,8 +23,10 @@ import android.widget.Toast;
 import com.activity.R;
 import com.shizhenbao.activity.GuanyuActivity;
 import com.shizhenbao.constant.CreateFileConstant;
+import com.shizhenbao.entry.AESUtils3;
 import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.User;
+import com.shizhenbao.service.BackupService;
 import com.util.FileUtil;
 import com.util.SouthUtil;
 import com.view.MyToast;
@@ -153,7 +156,10 @@ public class BackupsUtils {
 //                        }
 //                        break;
 //                    case 1:
-                        localBackup();
+//                        localBackup();
+
+                Intent intent = new Intent(mContext, BackupService.class);
+                mContext.startService(intent);
 //                        break;
 //                }
 
@@ -167,18 +173,24 @@ public class BackupsUtils {
      * 本地备份
      */
 
-    private void localBackup(){
+    public void localBackup(){
+
         if(null != Const.sn && !Const.sn.equals("")){
             String SDSize = initSDMemoryAvailable();
             if(SDSize == null){
-                MyToast.showToast(mContext,mContext.getString(R.string.setting_data_backupoast));
+//                MyToast.showToast(mContext,mContext.getString(R.string.setting_data_backupoast));
+                if(backupResult != null){
+                    backupResult.sdResult(0);
+                }
                 return;
             }
-            myProgressDialog.dialogShow(mContext.getString(R.string.setting_backups_loading));
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Message message = handler.obtainMessage();
+//            myProgressDialog.dialogShow(mContext.getString(R.string.setting_backups_loading));
+
+
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Message message = handler.obtainMessage();
                     String backupFileSize = fileUtil.getAutoFilesSize();
                     String BackupFileSize_new = "1";
                     String SDsize_new = "1";
@@ -190,22 +202,37 @@ public class BackupsUtils {
                         SDsize_new=SDSize.substring(0,SDSize.indexOf("G"));
                     }
                     if(Double.parseDouble(SDsize_new) - Double.parseDouble(BackupFileSize_new) < 0.1){
-                        message.what = -1;
+//                        message.what = -1;
+                        if(backupResult != null){
+                            backupResult.sdResult(1);
+                        }
                     }else {
-                        initCopyToSD();
+                        int fileresilt = initCopyToSD();
+                        boolean docResult = initBackUpDoctor(2);
+                        boolean userResult = initBackUpUser(2);
 
-                        initBackUpDoctor(2);
-                        initBackUpUser(2);
+                        Log.e("backupUtils",fileresilt + "" +  docResult + userResult + "aa");
 
-                        message.what = 1;
+                        if(fileresilt == 0 && docResult && userResult){
+                            if(backupResult != null){
+                                backupResult.backuoResult(true);
+                            }
+                        }else {
+                            if(backupResult != null){
+                                backupResult.backuoResult(false);
+                            }
+                        }
+//                        message.what = 1;
                     }
-                    handler.sendMessage(message);
-                }
-            }).start();
+//                    handler.sendMessage(message);
+//                }
+//            }).start();
         }else {
-            Intent intent=new Intent(mContext,GuanyuActivity.class);
-            mContext.startActivity(intent);
-            MyToast.showToast(mContext,mContext.getString(R.string.setting_local_sn));
+
+            if(backupResult != null){
+                backupResult.snResult();
+            }
+
         }
     }
 
@@ -326,7 +353,7 @@ public class BackupsUtils {
     /**
      * 备份医生数据库
      */
-    public void  initBackUpDoctor(int type){
+    public boolean  initBackUpDoctor(int type){
         List<Doctor> backupsList = LitePal.findAll(Doctor.class);
         JSONObject allDataDoctor = new JSONObject();
         JSONArray array=new JSONArray();
@@ -352,7 +379,9 @@ public class BackupsUtils {
                 object.put("edit_hos_name",edit_hos_name);
                 object.put("edit_hos_keshi",edit_hos_keshi);
             }catch (Exception e){
+
                 e.printStackTrace();
+                return false;
             }
             array.put(object);
         }
@@ -362,13 +391,13 @@ public class BackupsUtils {
             e.printStackTrace();
         }
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            return;
+            return false;
         }
         File file = null;
         if(type == 1){
             file = new File(Environment.getExternalStorageDirectory().toString() + File.separator + OneItem.getOneItem().getGather_path() + File.separator + Const.sn+"doctor.txt");
         }else if(type ==2){
-            file = new File(sdFile.getAbsolutePath()+"/Android/data/com.activity/"+Const.sn+ "/" +"doctor.txt");
+            file = new File(sdFile.getAbsolutePath()+"/Android/data/com.flybiotech.reportsystem1/"+Const.sn+ "/" +"doctor.txt");
         }
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -376,20 +405,23 @@ public class BackupsUtils {
         PrintStream out = null;
         try {
             out = new PrintStream(new FileOutputStream(file));
-            out.print(allDataDoctor.toString());
+            String a= AESUtils3.encrypt(allDataDoctor.toString(),"fly123456");
+            out.print(a);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return false;
         } finally {
             if (out != null) {
                 out.close();
             }
         }
+        return true;
     }
 
     /**
      * 备份患者数据库,1代表路径为本地，2代表路径为SD
      */
-    public void initBackUpUser(int type){
+    public boolean initBackUpUser(int type){
         List<User> backupsList = LitePal.findAll(User.class);
         JSONObject allData = new JSONObject();
         JSONArray array=new JSONArray();
@@ -501,11 +533,11 @@ public class BackupsUtils {
             e.printStackTrace();
         }
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            return;
+            return false;
         }
         File file = null;
         if(type ==2){
-            file = new File(sdFile.getAbsolutePath()+"/Android/data/com.activity/"+Const.sn + "/"+"user.txt");
+            file = new File(sdFile.getAbsolutePath()+"/Android/data/com.flybiotech.reportsystem1/"+Const.sn + "/"+"user.txt");
         }else {
             file = new File(Environment.getExternalStorageDirectory().toString() + File.separator + OneItem.getOneItem().getGather_path() + File.separator + Const.sn+"user.txt");
         }
@@ -516,21 +548,37 @@ public class BackupsUtils {
         PrintStream out = null;
         try {
             out = new PrintStream(new FileOutputStream(file));
-            out.print(allData.toString());
+            String a= AESUtils3.encrypt(allData.toString(),"fly123456");
+            out.print(a);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return false;
         } finally {
             if (out != null) {
                 out.close();
             }
         }
+        return true;
     }
 
     private File sdFile = null;
     private SDUtils sdUtils;
-    public void initCopyToSD(){
+    public int initCopyToSD(){
         sdFile = sdUtils.getSDFile();
-        initCopyFile(new Item().getSD()+"/"+ OneItem.getOneItem().getGather_path(),sdFile.getAbsolutePath()+"/Android/data/com.activity/"+Const.sn+ "/" + OneItem.getOneItem().getGather_path()+"/");
+        int result = initCopyFile(new Item().getSD()+"/"+ OneItem.getOneItem().getGather_path(),sdFile.getAbsolutePath()+"/Android/data/com.flybiotech.reportsystem1/"+Const.sn+ "/" + OneItem.getOneItem().getGather_path()+"/");
+        return result;
     }
 
+
+    public interface BackupResult{
+        void backuoResult(boolean result);
+        void sdResult(int temp);//0代表无SD，1代表SD卡内存不足
+        void snResult();
+
+    }
+    static BackupResult backupResult;
+
+    public static void setBackupResult(BackupResult backupResultListener){
+        backupResult = backupResultListener;
+    }
 }

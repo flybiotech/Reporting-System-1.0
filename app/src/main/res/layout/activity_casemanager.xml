@@ -60,7 +60,8 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/print_diagnosis_result"
                 android:textColor="@color/textcase"
-                android:textSize="@dimen/dp_16" />
+                android:textSize="@dimen/dp_16"
+                />
 
             <TextView
                 android:id="@+id/tv_zhenduanresult_clm"
@@ -78,7 +79,8 @@
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
                 android:textColor="@color/textcase"
-                android:textSize="@dimen/dp_16" />
+                android:textSize="@dimen/dp_16"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_pinggu_clm"
@@ -89,6 +91,7 @@
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingTop="@dimen/dp_5"
                 android:textSize="@dimen/dp_16"
+                android:visibility="gone"
                 />
 
             <LinearLayout

@@ -45,28 +45,28 @@ public class MyEditTextDialog {
         EditRegularUtils.editLenth(edit);
         builder.setView(edit);
         if(temp == 0){
-            EditRegularUtils.speChat(edit,15);
+            EditRegularUtils.editmaxLenth(edit,15);
             edit.setText(doctor.getEdit_hos_name());
         }else if(temp == 1){//科室
-            EditRegularUtils.speChat(edit,10);
+            EditRegularUtils.editmaxLenth(edit,10);
             edit.setText(doctor.getEdit_hos_keshi());
         }else if(temp == 2){//采集图片路径
-            EditRegularUtils.speChat(edit,10);
+            EditRegularUtils.editmaxLenth(edit,10);
             if(!OneItem.getOneItem().getGather_path().equals("")||OneItem.getOneItem().getGather_path()!=null){
                 edit.setText(OneItem.getOneItem().getGather_path());
             }
         }else if(temp == 3){//ftp备份路径
-            EditRegularUtils.speChat(edit,10);
+            EditRegularUtils.editmaxLenth(edit,10);
             if(!OneItem.getOneItem().getBackUpNetPath().equals("")||OneItem.getOneItem().getBackUpNetPath()!=null){
                 edit.setText(OneItem.getOneItem().getBackUpNetPath());
             }
         }else if(temp ==4){//本地备份
-            EditRegularUtils.speChat(edit,10);
+            EditRegularUtils.editmaxLenth(edit,10);
             if(!OneItem.getOneItem().getBackUpPath().equals("")||OneItem.getOneItem().getBackUpPath()!=null){
                 edit.setText(OneItem.getOneItem().getBackUpPath());
             }
         }else if(temp ==5){//弹出框消失时间
-            EditRegularUtils.speChat(edit,2);
+            EditRegularUtils.editmaxLenth(edit,2);
             edit.setInputType(InputType.TYPE_CLASS_NUMBER);
             builder.setTitle(title+"（s）");
             systemSets = LitePal.findAll(SystemSet.class);

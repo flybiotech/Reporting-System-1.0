@@ -353,11 +353,13 @@
         </TableRow>
 
         <View
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="5dp"
             android:background="#fff" />
 
-        <TableRow>
+        <TableRow
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_10"
@@ -368,7 +370,8 @@
                 android:padding="2dp"
                 android:text="@string/print_border"
                 android:textAllCaps="false"
-                android:textSize="@dimen/textViewNameSize" />
+                android:textSize="@dimen/textViewNameSize"
+                />
 
             <EditText
                 android:id="@+id/et_bianjie"
@@ -390,7 +393,8 @@
             android:layout_height="5dp"
             android:background="#fff" />
 
-        <TableRow>
+        <TableRow
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_11"
@@ -421,9 +425,11 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="5dp"
-            android:background="#fff" />
+            android:background="#fff"
+            android:visibility="gone"/>
 
-        <TableRow>
+        <TableRow
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_12"
@@ -456,7 +462,8 @@
             android:layout_height="5dp"
             android:background="#fff" />
 
-        <TableRow>
+        <TableRow
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_13"
@@ -487,7 +494,8 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="5dp"
-            android:background="#fff" />
+            android:background="#fff"
+            android:visibility="gone"/>
 
         <TableRow></TableRow>
 
@@ -495,9 +503,11 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="5dp"
-            android:background="#fff" />
+            android:background="#fff"
+            android:visibility="gone"/>
 
-        <TableRow>
+        <TableRow
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_14"

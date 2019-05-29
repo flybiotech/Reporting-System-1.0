@@ -53,9 +53,9 @@ public class HelpActivity extends AppCompatActivity {
         list.add(getString(R.string.setting_select_case));
         list.add(getString(R.string.setting_Contrast_case));
 //        list.add(getString(R.string.setting_removal_used));
-        list.add(getString(R.string.setting_Treasures_of_vision_light));
+//        list.add(getString(R.string.setting_Treasures_of_vision_light));
         list.add(getString(R.string.setting_diagnosis_delete));
-        list.add(getString(R.string.setting_picture_edit));
+//        list.add(getString(R.string.setting_picture_edit));
         listView = (ListView) findViewById(R.id.listview_help_layout);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);

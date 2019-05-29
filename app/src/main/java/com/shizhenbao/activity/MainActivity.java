@@ -229,31 +229,31 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         switch (state) {
             case 0:
-                patientInfo.setTextColor(Color.RED);
+                patientInfo.setTextColor(R.color.lightRed);
                 patientInfo.setSelected(true);
                 //判断是不是从其他三个fragment 跳到 FragGetImage的
                 Const.isIntent = true;
                 OneItem.getOneItem().setViewPagerCount(0); //记录当前 是第几个 fragment
                 break;
             case 1:
-                getImageInfo.setTextColor(Color.RED);
+                getImageInfo.setTextColor(R.color.lightRed);
                 getImageInfo.setSelected(true);
                 break;
             case 2:
-                printerInfo.setTextColor(Color.RED);
+                printerInfo.setTextColor(R.color.lightRed);
                 printerInfo.setSelected(true);
                 Const.isIntent = true;
                 OneItem.getOneItem().setViewPagerCount(2); //记录当前 是第几个 fragment
                 break;
             case 3:
-                casemanager.setTextColor(Color.RED);
+                casemanager.setTextColor(R.color.lightRed);
                 casemanager.setSelected(true);
                 Const.isIntent = true;
                 OneItem.getOneItem().setViewPagerCount(3); //记录当前 是第几个 fragment
                 break;
 
             case 4:
-                settingInfo.setTextColor(Color.RED);
+                settingInfo.setTextColor(R.color.lightRed);
                 settingInfo.setSelected(true);
                 Const.isIntent = true;
                 OneItem.getOneItem().setViewPagerCount(4); //记录当前 是第几个 fragment

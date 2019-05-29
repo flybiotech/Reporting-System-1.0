@@ -119,9 +119,14 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
                     dialogadd.dismiss();
                     MyToast.showToast(getActivity(),getString(R.string.image_dialog_automatic));
 //                    SouthUtil.showToast(getActivity(), getString(R.string.image_dialog_automatic));
+
                     Const.saveImageFilePath = userlist.get(0).getGatherPath();
-                    Const.nameJianJi = userlist.get(0).getpName();
-                    searchDev();
+                    Log.e("getImage",Const.saveImageFilePath);
+                    SPUtils.put(getContext(),Const.patientKey,Const.saveImageFilePath);
+
+                    Intent intent = new Intent(getContext().getPackageManager().getLaunchIntentForPackage(Const.imageApkPackage));
+                    startActivity(intent);
+
                 }
             }
         }
@@ -148,11 +153,11 @@ public class FragGetImage extends BaseFragment implements View.OnClickListener,
         tv_title.setText(getString(R.string.image_get_image));
         btn_left.setText(getString(R.string.image_camera));
         btn_right.setText(getString(R.string.image_search));
-
+        btn_left.setVisibility(View.GONE);
         btn_left.setOnClickListener(this);
         btn_right.setOnClickListener(this);
 //        btn_right.setVisibility(View.GONE);
-        btn_left.setVisibility(View.VISIBLE);
+//        btn_left.setVisibility(View.VISIBLE);
         filePath = new CreateFileConstant();
         fileCopyUtils = new FileCopyUtils(getContext());
 //        list = (ListView) view.findViewById(R.id.list);

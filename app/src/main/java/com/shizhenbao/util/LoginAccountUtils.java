@@ -225,7 +225,7 @@ public class LoginAccountUtils {
         pathList = LitePal.findAll(Path.class);
         if(pathList.size() == 0){
             Path p = new Path();
-            p.setPicPath("SZB_save");
+            p.setPicPath("SZB_save_1");
             p.save();
         }
     }

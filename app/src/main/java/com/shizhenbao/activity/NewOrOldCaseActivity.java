@@ -73,7 +73,7 @@ public class NewOrOldCaseActivity extends FragmentActivity implements View.OnCli
         pjFrag = new PingJiaFragment();
         fragList.add(imageFrag);
         fragList.add(zdFrag);
-        fragList.add(pjFrag);
+//        fragList.add(pjFrag);
     }
 
 

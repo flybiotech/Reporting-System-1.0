@@ -101,17 +101,17 @@ public class HelpShowActivity extends AppCompatActivity implements View.OnClickL
                         "",
                         MDEFAULT,MDEFAULT,MDEFAULT);
                 break;
+//            case 6:
+//                if (isChina) {
+//                    showInfo(getString(R.string.setting_Treasures_of_vision_light_show1) + "\n", getString(R.string.setting_Treasures_of_vision_light_show2) + "\n", "",
+//                            R.drawable.help0901, R.drawable.help0902, MDEFAULT);
+//                } else {
+//                    showInfo(getString(R.string.setting_Treasures_of_vision_light_show1)+"\n",getString(R.string.setting_Treasures_of_vision_light_show2)+"\n","",
+//                            R.drawable.help0901e,R.drawable.help0902e,MDEFAULT);
+//                }
+//
+//                break;
             case 6:
-                if (isChina) {
-                    showInfo(getString(R.string.setting_Treasures_of_vision_light_show1) + "\n", getString(R.string.setting_Treasures_of_vision_light_show2) + "\n", "",
-                            R.drawable.help0901, R.drawable.help0902, MDEFAULT);
-                } else {
-                    showInfo(getString(R.string.setting_Treasures_of_vision_light_show1)+"\n",getString(R.string.setting_Treasures_of_vision_light_show2)+"\n","",
-                            R.drawable.help0901e,R.drawable.help0902e,MDEFAULT);
-                }
-
-                break;
-            case 7:
 
                 if (isChina) {
                     showInfo(getString(R.string.setting_diagnosis_delete_show1)+"\n",getString(R.string.setting_diagnosis_delete_show2)+"\n","",

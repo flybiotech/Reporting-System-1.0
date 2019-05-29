@@ -5,8 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.widget.ListView;
-
-import com.model.DevModel;
 import com.shizhenbao.pop.User;
 
 import java.util.List;
@@ -35,6 +33,8 @@ public class Const {
     public static boolean isIntentFrag = false;//判断当前的fragment （主要是用在FragGetImage）的是否可见，
     public static String PageHp = "com.hp.android.printservice"; // 惠普打印机服务插件包名
     public static String hpApkName = "hp.apk";
+
+    public static String mopriaApkName = "MopriaPrintService_2.1.10.apk";
 
     public static String PageMapria = "org.mopria.printplugin"; // org.mopria.printplugin
     public static boolean wifiMark = false; //wifi广播的标记，这个作用： true 表示，wifi连接成功时，可以回调相关的方法

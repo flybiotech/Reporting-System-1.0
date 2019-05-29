@@ -607,7 +607,7 @@ public class FragPrinter extends BaseFragment implements View.OnClickListener, P
             }
         } else if (requestCode == REQUEST_CODE_APP_INSTALL) {
             if (resultCode == Activity.RESULT_OK) {
-                installApkUtils.initInstallAPK(Const.hpApkName);
+                installApkUtils.initInstallAPK(Const.mopriaApkName);
             }
         }
     }
@@ -760,7 +760,7 @@ public class FragPrinter extends BaseFragment implements View.OnClickListener, P
                 Intent intent = null;
                 switch (item.getItemId()) {
                     case R.id.printer01://报告打印
-                        isPkgInstalled(Const.PageHp);
+                        isPkgInstalled(Const.PageMapria);
 //                        Logger.e("Const.PageHp = "+Const.PageHp);
                         break;
                     case R.id.printer02://b报告预览
@@ -887,9 +887,9 @@ public class FragPrinter extends BaseFragment implements View.OnClickListener, P
         if (packageInfo == null) {//判断是否安装惠普打印机服务插件
 
             try {
-                boolean isApkExists = installApkUtils.copyAPK2SD(Const.hpApkName);
+                boolean isApkExists = installApkUtils.copyAPK2SD(Const.mopriaApkName);
                 if(isApkExists){
-                    installApkUtils.installApk(getActivity(),Environment.getExternalStorageDirectory() + "/" + Const.hpApkName);
+                    installApkUtils.installApk(getActivity(),Environment.getExternalStorageDirectory() + "/" + Const.mopriaApkName);
                 }else {
                     MyToast.showToast(getActivity(),getString(R.string.apkinstallfaild));
                 }
@@ -1730,7 +1730,7 @@ public class FragPrinter extends BaseFragment implements View.OnClickListener, P
                         }
                         onResume();
                         if (saveState) {
-                            isPkgInstalled(Const.PageHp);
+                            isPkgInstalled(Const.PageMapria);
                         }
 
                     }

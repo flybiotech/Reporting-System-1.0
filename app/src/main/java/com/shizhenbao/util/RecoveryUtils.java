@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.activity.R;
 import com.shizhenbao.activity.GuanyuActivity;
 import com.shizhenbao.activity.ZhenDuanXiugaiActivity;
+import com.shizhenbao.entry.AESUtils3;
 import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.SystemSet;
 import com.shizhenbao.pop.User;
@@ -81,10 +82,10 @@ public class RecoveryUtils{
      */
     public void inquiryRecoverDialog(){
 //        final CharSequence[] items = {mContext.getString(R.string.setting_ftp_recovery), mContext.getString(R.string.setting_local_recovery)};//弹出框展示内容
-        final CharSequence[] items = {mContext.getString(R.string.setting_local_recovery), ""};//弹出框展示内容
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);//声明弹出框
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
+//        final CharSequence[] items = {mContext.getString(R.string.setting_local_recovery), ""};//弹出框展示内容
+//        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);//声明弹出框
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int item) {
 //                switch (item){
 //                    case 0:
 //                        boolean ab=networkUtils.isNetworkAvailable();//判断wifi是否可以连接
@@ -99,49 +100,81 @@ public class RecoveryUtils{
                         //先判断本地是否有备份信息
                         File sdFile = sdUtils.getSDFile();
                         if(null == sdFile){
-                            MyToast.showToast(mContext,mContext.getString(R.string.settint_no_sd));
+                            if(recoverListener != null){
+                                recoverListener.sdResultRecover(0);
+                            }
+//                            MyToast.showToast(mContext,mContext.getString(R.string.settint_no_sd));
                             return;
                         }
-                        File backFile = new File(sdFile.getAbsolutePath()+"/Android/data/com.activity/"+Const.sn+ "/");
+
+                        if(null == Const.sn || Const.sn.equals("")){
+                            if(recoverListener != null){
+                                recoverListener.sdResultRecover(2);
+                            }
+                            return;
+                        }
+
+                        File backFile = new File(sdFile.getAbsolutePath()+"/Android/data/com.flybiotech.reportsystem1/"+Const.sn+ "/");
                         //文件不存在
                         if(!backFile.exists()){
-                            MyToast.showToast(mContext,mContext.getString(R.string.setting_recovery_no_data));
+
+                            if(recoverListener != null){
+                                recoverListener.sdResultRecover(1);
+                            }
+//                            MyToast.showToast(mContext,mContext.getString(R.string.setting_recovery_no_data));
 //                            Toast.makeText(mContext, R.string.setting_recovery_no_data, Toast.LENGTH_SHORT).show();
                             return;
                         }else {//存在备份文件
-                            myProgressDialog.dialogShow(mContext.getString(R.string.setting_recovery_loading));
-                            thread = new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int isText = -1;
+//                            myProgressDialog.dialogShow(mContext.getString(R.string.setting_recovery_loading));
+//                            thread = new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    int isText = -1;
                                     File []files = backFile.listFiles();
+                                    boolean userResult = false;
+                                    boolean doctorResult = false;
+                                    int copyResult = -1;
                                     if(files.length > 0){
-                                        Message message = handler.obtainMessage();
+//                                        Message message = handler.obtainMessage();
                                         for(int i =0 ;i<files.length;i++){
                                             String fileName = files[i].getName();
                                             if(fileName.contains("user.txt")){
-                                                recoverJson(files[i].getAbsolutePath(),0);
+                                                userResult = recoverJson(files[i].getAbsolutePath(),0);
                                             }else if(fileName.contains("doctor.txt")){
-                                                recoverJson(files[i].getAbsolutePath(),1);
+                                                doctorResult = recoverJson(files[i].getAbsolutePath(),1);
                                             }else {
-                                                copyUtils.copy(files[i].getAbsolutePath(),Environment.getExternalStorageDirectory()+"/SZB_save/");
+                                                copyResult = copyUtils.copy(files[i].getAbsolutePath(),Environment.getExternalStorageDirectory()+"/SZB_save_1/");
                                             }
                                         }
-                                        message.what = 1;
-                                        handler.sendMessage(message);
+
+                                        Log.e("recoverUtils",userResult +"1111111" + doctorResult + copyResult +"");
+
+                                        if(userResult && doctorResult && copyResult ==1){
+                                            if(recoverListener != null){
+                                                recoverListener.recoverResult(true);
+                                            }
+                                        }else {
+                                            if(recoverListener != null){
+                                                recoverListener.recoverResult(false);
+                                            }
+                                        }
+
+
+//                                        message.what = 1;
+//                                        handler.sendMessage(message);
 
                                     }
-                                }
-                            });
-                            thread.start();
+//                                }
+//                            });
+//                            thread.start();
                         }
 //                        break;
 //                }
 
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
+//            }
+//        });
+//        AlertDialog alert = builder.create();
+//        alert.show();
     }
 
 
@@ -180,10 +213,11 @@ public class RecoveryUtils{
             }
         }
         Data = result.toString();
+        String recoverDate = AESUtils3.decrypt(Data,"fly123456");
         if(temp == 0){
-            recoverLitepal = patientJson(Data);
+            recoverLitepal = patientJson(recoverDate);
         }else {
-            recoverLitepal = doctorJson(Data);
+            recoverLitepal = doctorJson(recoverDate);
         }
 //        myProgressDialog.dialogCancel();
         return recoverLitepal;
@@ -423,6 +457,17 @@ public class RecoveryUtils{
 //            Toast.makeText(this, "SD卡不存在", Toast.LENGTH_SHORT).show();
             return null;
         }
+    }
+
+
+    public interface RecoverListener{
+        void sdResultRecover(int temp);//temp == 0无SD卡，temp == 1无数据,2代表sn为空
+        void recoverResult(boolean result);
+    }
+
+    static RecoverListener recoverListener;
+    public static void setRecoverListener(RecoverListener recover){
+        recoverListener = recover;
     }
 }
 

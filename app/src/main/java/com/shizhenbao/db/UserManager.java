@@ -133,8 +133,8 @@ public class UserManager {
                 isSave = users.get(0).save();
             }
         }
-        backupsUtils = new BackupsUtils(context);
-        backupsUtils.initBackUpUser(1);
+//        backupsUtils = new BackupsUtils(context);
+////        backupsUtils.initBackUpUser(1);
         return isSave;
     }
 

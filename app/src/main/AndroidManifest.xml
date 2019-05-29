@@ -69,7 +69,7 @@
             android:name=".ImageBrowserActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ConfigStaActivity"
@@ -87,7 +87,7 @@
             android:name=".LiveVidActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ConfigActivity"
@@ -98,7 +98,7 @@
         <activity
             android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SDMediaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -109,7 +109,7 @@
             android:name=".VideoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name="com.laomo.zxing.CaptureActivity"
@@ -182,7 +182,7 @@
             android:name="com.shizhenbao.activity.PreviewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.shizhenbao.activity.XuanzePDFActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

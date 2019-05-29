@@ -102,6 +102,7 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
         userManager.bianhao(edit_bianhao);//自动生成编号
         if (Const.isSave) {
             clearUserInfo();
+            text_cancle.setEnabled(true);
         }
         initData();//spinner点击事件
         editTextChangeListener();

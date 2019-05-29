@@ -77,7 +77,7 @@ public class PDFPreviewActivity extends AppCompatActivity implements OnPageChang
             @Override
             public void onClick(View v) {
 //                hpPrint.continueButtonPrint(pathName);
-                isPkgInstalled(Const.PageHp, pathName);
+                isPkgInstalled(Const.PageMapria, pathName);
             }
         });
 
@@ -165,9 +165,9 @@ public class PDFPreviewActivity extends AppCompatActivity implements OnPageChang
         if (packageInfo == null) {//判断是否安装惠普打印机服务插件
 
             try {
-                boolean isApkExists = installApkUtils.copyAPK2SD(Const.hpApkName);
+                boolean isApkExists = installApkUtils.copyAPK2SD(Const.mopriaApkName);
                 if(isApkExists){
-                    installApkUtils.installApk(PDFPreviewActivity.this,Environment.getExternalStorageDirectory() + "/" + Const.hpApkName);
+                    installApkUtils.installApk(PDFPreviewActivity.this,Environment.getExternalStorageDirectory() + "/" + Const.mopriaApkName);
                 }else {
                     MyToast.showToast(PDFPreviewActivity.this,getString(R.string.apkinstallfaild));
                 }

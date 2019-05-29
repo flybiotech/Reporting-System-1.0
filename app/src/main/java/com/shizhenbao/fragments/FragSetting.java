@@ -101,7 +101,7 @@ import static android.content.Context.WIFI_SERVICE;
  * Created by dell on 2017/5/22.
  */
 
-public class FragSetting  extends BaseFragment implements View.OnClickListener,NetworkUtils.NetWorkTestResult,BackupService.UpLoadFileProcess, RecoverService.DownloadResult {
+public class FragSetting  extends BaseFragment implements View.OnClickListener,NetworkUtils.NetWorkTestResult, BackupsUtils.BackupResult, RecoveryUtils.RecoverListener {
 
     private double screenInches;//屏幕的尺寸
     private TextView title_text;
@@ -119,6 +119,8 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
     private DeleteDataUtils deleteDataUtils;//删除工具
     private TermAddUtils termAddUtils;//术语添加工具
     private List<String>print_list;
+    private MyProgressDialog myProgressDialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -201,26 +203,34 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
 //                        startActivity(intent);
 //                        break;
                     case 6://数据备份
-                        backupsUtils.askBackupDialog();
+//                        backupsUtils.askBackupDialog();
+
+                        backFile();
                         break;
                     case 7://数据恢复
-                        recoveryUtils.inquiryRecoverDialog();
+
+                        myProgressDialog.dialogShow(getContext().getString(R.string.setting_recovery_loading));
+                        intent = new Intent(getContext(), RecoverService.class);
+                        getActivity().startService(intent);
+//                        recoveryUtils.inquiryRecoverDialog();
+
+
                         break;
-                    case 8:
-                        print_list = new ArrayList<>();
-                        print_list.add(getString(R.string.setting_print_display));
-                        print_list.add(getString(R.string.setting_print_nodisplay));
-                        backupsUtils.advancedDialog(print_list);
-                        break;
-                    case 9://视珍宝硬件参数设置
+//                    case 8:
+//                        print_list = new ArrayList<>();
+//                        print_list.add(getString(R.string.setting_print_display));
+//                        print_list.add(getString(R.string.setting_print_nodisplay));
+//                        backupsUtils.advancedDialog(print_list);
+//                        break;
+                    case 8://视珍宝硬件参数设置
                         intent=new Intent(getContext(), YinjianActivity.class);
                         startActivity(intent);
                         break;
-                    case 10://关于
+                    case 9://关于
                         intent=new Intent(getContext(), GuanyuActivity.class);
                         startActivity(intent);
                         break;
-                    case 11://帮助
+                    case 10://帮助
                         intent=new Intent(getContext(), HelpActivity.class);
                         startActivity(intent);
                         break;
@@ -228,6 +238,16 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
             }
         });
     }
+
+    /**
+     * 备份文件的方法
+     */
+    private void backFile(){
+        myProgressDialog.dialogShow(getString(R.string.setting_backups_loading));
+        Intent intent = new Intent(getContext(), BackupService.class);
+        getActivity().startService(intent);
+    }
+
 
     private void initData() {
         list = new ArrayList<>();
@@ -241,7 +261,7 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
 //        list.add(getString(R.string.setting_Picture_editor));
         list.add(getString(R.string.setting_data_backup));
         list.add(getString(R.string.setting_data_recovery));
-        list.add(getString(R.string.setting_print_set));
+//        list.add(getString(R.string.setting_print_set));
         list.add(getString(R.string.setting_Parameter_configuration));
 //        list.add(getString(R.string.setting_removal));
 //        list.add(getString(R.string.setting_Version_update));
@@ -272,11 +292,11 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
         list.add(getString(R.string.setting_User_switching));
         list.add(getString(R.string.setting_Modify_password));
         list.add(getString(R.string.setting_wifi));
-        list.add(getString(R.string.setting_Networking_test));
+//        list.add(getString(R.string.setting_Networking_test));
         list.add(getString(R.string.setting_add_terms));
-        list.add(getString(R.string.setting_Picture_editor));
+//        list.add(getString(R.string.setting_Picture_editor));
         list.add(getString(R.string.setting_data_backup));
-        list.add(getString(R.string.setting_print_set));
+//        list.add(getString(R.string.setting_print_set));
         list.add(getString(R.string.setting_Parameter_configuration));
 //        list.add("蓝牙连接");
 //        list.add(getString(R.string.setting_Version_update));
@@ -311,37 +331,39 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
                         intent.putExtra("wifiIndex", 0);
                         startActivity(intent);
                         break;
-                    case 3://wifi联网测试
-                        intent=new Intent(getContext(),WIFITestActivity.class);
-                        Const.dialogshow=0;
-                        startActivity(intent);
-                        break;
-                    case 4://添加术语
+//                    case 3://wifi联网测试
+//                        intent=new Intent(getContext(),WIFITestActivity.class);
+//                        Const.dialogshow=0;
+//                        startActivity(intent);
+//                        break;
+                    case 3://添加术语
                         termAddUtils.showTermDialog();
                         break;
-                    case 5://图片编辑
-                        intent=new Intent(getContext(), JianjiActivity.class);
-                        Const.dialogshow=0;
-                        startActivity(intent);
+//                    case 5://图片编辑
+//                        intent=new Intent(getContext(), JianjiActivity.class);
+//                        Const.dialogshow=0;
+//                        startActivity(intent);
+//                        break;
+                    case 4://备份
+//                        backupsUtils.askBackupDialog();
+
+                        backFile();
                         break;
-                    case 6://备份
-                        backupsUtils.askBackupDialog();
-                        break;
-                    case 7:
-                        print_list = new ArrayList<>();
-                        print_list.add(getString(R.string.setting_print_display));
-                        print_list.add(getString(R.string.setting_print_nodisplay));
-                        backupsUtils.advancedDialog(print_list);
-                        break;
-                    case 8://视诊宝硬件参数配置
+//                    case 7:
+//                        print_list = new ArrayList<>();
+//                        print_list.add(getString(R.string.setting_print_display));
+//                        print_list.add(getString(R.string.setting_print_nodisplay));
+//                        backupsUtils.advancedDialog(print_list);
+//                        break;
+                    case 5://视诊宝硬件参数配置
                         intent=new Intent(getContext(), YinjianActivity.class);
                         startActivity(intent);
                         break;
-                    case 9://关于
+                    case 6://关于
                         intent=new Intent(getContext(), GuanyuActivity.class);
                         startActivity(intent);
                         break;
-                    case 10://帮助
+                    case 7://帮助
                         intent=new Intent(getContext(), HelpActivity.class);
                         startActivity(intent);
                         break;
@@ -364,8 +386,8 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
         advancedSettingUtils = new AdvancedSettingUtils(getContext());
         deleteDataUtils = new DeleteDataUtils(getContext());
         termAddUtils = new TermAddUtils(getContext());
-        BackupService.setUpLoadFileProcessListener(this);
-        RecoverService.setDownloadResultListener(this);
+        BackupsUtils.setBackupResult(this);
+        RecoveryUtils.setRecoverListener(this);
     }
 
     /**
@@ -397,7 +419,6 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
             recoveryUtils.FTPSetDialog();
         }
     }
-    private MyProgressDialog myProgressDialog;
     //判断sn是否为空
     private boolean initSN(){
         myProgressDialog.dialogShow(getContext().getString(R.string.setting_backups_loading));
@@ -464,68 +485,83 @@ public class FragSetting  extends BaseFragment implements View.OnClickListener,N
             }
         });
     }
+
     @Override
-    public void getUpLoadFileProcessPrecent(double percent) {
+    public void backuoResult(boolean result) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (percent >= 100) {
-                    myProgressDialog.dialogCancel();
-                    Const.context = null;
-                    MyToast.showToast(getContext(),getString(R.string.setting_backups_success_message));
-                }
-            }
-        });
-    }
-
-    @Override
-    public void loginOut(boolean outResult) {
-
-    }
-
-    @Override
-    public void loginIn(boolean inResult) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if(!inResult){
-                    MyToast.showToast(getContext(),getString(R.string.setting_link_server_faild));
-                }
-            }
-        });
-    }
-
-    @Override
-    public void getDisConnectResult(boolean isDisConnect) {
-
-    }
-
-    @Override
-    public void downloadResult(boolean result) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+                myProgressDialog.dialogCancel();
                 if(result){
-                    myProgressDialog.dialogCancel();
-                    MyToast.showToast(getContext(),getString(R.string.setting_recovery_success_message));
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_backups_success_message));
                 }else {
-                    myProgressDialog.dialogCancel();
-                    MyToast.showToast(getContext(),getString(R.string.setting_recovery_faild_message));
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_backups_faild_message));
                 }
             }
         });
     }
 
     @Override
-    public void fileExistence(boolean result) {
+    public void sdResult(int temp) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(!result){
-                    myProgressDialog.dialogCancel();
-
-                    MyToast.showToast(getContext(),getContext().getString(R.string.ftpFileNo));
+                myProgressDialog.dialogCancel();
+                if(temp == 1){
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_sd_noMemory));
+                }else if(temp == 0){
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_data_backupoast));
                 }
+            }
+        });
+    }
+
+    @Override
+    public void sdResultRecover(int temp) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myProgressDialog.dialogCancel();
+                if(temp == 0){
+                    MyToast.showToast(getContext(),getContext().getString(R.string.settint_no_sd));
+                }else if(temp == 1){
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_recovery_no_data));
+                }else if(temp == 2){
+                    myProgressDialog.dialogCancel();
+                    Intent intent=new Intent(getContext(),GuanyuActivity.class);
+                    getContext().startActivity(intent);
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_local_sn));
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void recoverResult(boolean result) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myProgressDialog.dialogCancel();
+                if(result){
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_recovery_success_message));
+                }else {
+                    MyToast.showToast(getContext(),getContext().getString(R.string.setting_recovery_faild_message));
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void snResult() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myProgressDialog.dialogCancel();
+                Intent intent=new Intent(getContext(),GuanyuActivity.class);
+                getContext().startActivity(intent);
+                MyToast.showToast(getContext(),getContext().getString(R.string.setting_local_sn));
             }
         });
     }

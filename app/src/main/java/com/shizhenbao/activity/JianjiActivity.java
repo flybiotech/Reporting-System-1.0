@@ -147,7 +147,7 @@ public class JianjiActivity extends Activity implements View.OnClickListener, Im
             imagePath = pathnew;
 
         } else {
-            imagePath = new Item().getSD() + "/SZB_save/a.jpg";
+            imagePath = new Item().getSD() + "/SZB_save_1/a.jpg";
         }
         tv_title.setText(getString(R.string.setting_Picture_editor) + "( " + Const.nameJianJi + " )");
 

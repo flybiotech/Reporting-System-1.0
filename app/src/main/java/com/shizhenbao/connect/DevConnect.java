@@ -79,7 +79,7 @@ public class DevConnect {
             new Item().deleteFile(file);
         }
         systemSets.get(0).setHospital_name("");
-        systemSets.get(0).setGather_path("SZB_save");
+        systemSets.get(0).setGather_path("SZB_save_1");
         systemSets.get(0).setBackUpPath("FALUYUAN");
         systemSets.get(0).setBackUpNetPath("/LUFAYUAN/");
         systemSets.get(0).save();
