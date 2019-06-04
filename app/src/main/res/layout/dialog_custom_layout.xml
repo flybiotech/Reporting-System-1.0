@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/bt_click"
+            android:background="@drawable/btn_bg"
             android:text="不删除"
             android:textAllCaps="false" />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="13dp"
-            android:background="@drawable/bt_click"
+            android:background="@drawable/btn_bg"
             android:text="删除"
             android:textAllCaps="false" />
 

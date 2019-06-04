@@ -50,7 +50,7 @@ import rx.schedulers.Schedulers;
 
 public class WifiSettingActivity extends BaseActivity implements View.OnClickListener {
     private Button clear, save, btn_right, btn_left, selectBtnHP, selectBtnGetImageSoft;
-    private EditText editName, editPass;
+    private EditText editName, editPass, editFilter;
     private int wifiID;
     private TextView title_text;
     private List<SystemSet> system;
@@ -135,7 +135,7 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
         editName = (EditText) findViewById(R.id.edit_wifiSetting_name01);
         editPass = (EditText) findViewById(R.id.edit_wifiSetting_pass01);
         title_text = (TextView) findViewById(R.id.title_text);
-
+        editFilter = findViewById(R.id.edit_filters);
         btn_right.setVisibility(View.INVISIBLE);
         clear.setOnClickListener(this);
         save.setOnClickListener(this);
@@ -250,7 +250,7 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
                     .filter(new Func1<ScanResult, Boolean>() {
                         @Override
                         public Boolean call(ScanResult scanResult) {
-                            return scanResult.SSID.contains(Const.HP_SSID_FILTER) || scanResult.SSID.contains(Const.SZB_SSID_FILTER);
+                            return scanResult.SSID.contains(editFilter.getText().toString().trim());
                         }
                     }).map(new Func1<ScanResult, ScanResult>() {
                 @Override

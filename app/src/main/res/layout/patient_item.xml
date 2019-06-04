@@ -11,8 +11,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10"
-        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10">
+        android:shrinkColumns="0,1,2,3,4,5,6,7,8,9,10,11,12"
+        android:stretchColumns="0,1,2,3,4,5,6,7,8,9,10,11,12">
 
         <TableRow>
 
@@ -65,16 +65,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_10"
                 android:background="#fff" />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_10"
+                android:background="#fff" />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_10"
+                android:background="#fff" />
+
         </TableRow>
 
 
-        <TableRow>
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            >
 
             <TextView
                 android:id="@+id/tv_patient_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_id"
                 android:textAllCaps="false"
@@ -91,12 +102,11 @@
                 android:padding="@dimen/dp_2"
                 android:text="1"
                 android:textAllCaps="false" />
-
             <TextView
                 android:id="@+id/tv_patient_02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_name"
                 android:textAllCaps="false"
@@ -106,13 +116,36 @@
                 android:id="@+id/edit_djName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_required"
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
                 android:textColorHint="@color/lightRed"
+                />
+
+            <TextView
+                android:id="@+id/tv_patient_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="1"
+                android:padding="@dimen/dp_2"
+                android:text="@string/patient_age"
+                android:textAllCaps="false"
+                android:textSize="@dimen/dp_16" />
+
+            <EditText
+                android:id="@+id/edit_djAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_age"
+                android:inputType="number"
+                android:maxLength="2"
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
                 />
         </TableRow>
 
@@ -122,13 +155,15 @@
             android:background="#fff" />
 
 
-        <TableRow>
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            >
 
             <TextView
                 android:id="@+id/tv_patient_03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="2dp"
                 android:text="@string/case_patient_telephone"
                 android:textAllCaps="false"
@@ -149,45 +184,10 @@
                 />
 
             <TextView
-                android:id="@+id/tv_patient_04"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_span="2"
-                android:padding="@dimen/dp_2"
-                android:text="@string/patient_age"
-                android:textAllCaps="false"
-                android:textSize="@dimen/dp_16" />
-
-            <EditText
-                android:id="@+id/edit_djAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
-                android:layout_span="3"
-                android:background="@drawable/edittext_select"
-                android:hint="@string/patient_age"
-                android:inputType="number"
-                android:maxLength="2"
-                android:padding="@dimen/dp_2"
-                android:textAllCaps="false"
-                />
-
-
-        </TableRow>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_10"
-            android:background="#fff" />
-
-
-        <TableRow>
-
-            <TextView
                 android:id="@+id/tv_patient_11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_medical_record_number"
                 android:textAllCaps="false"
@@ -202,7 +202,7 @@
                 android:hint="@string/patient_record_num_hint"
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:maxLength="8"
                 android:inputType="text"
                 />
@@ -211,7 +211,7 @@
                 android:id="@+id/tv_patient_06"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_parity_num"
                 android:textAllCaps="false"
@@ -221,7 +221,7 @@
                 android:id="@+id/edit_patient_childCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_15"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_parity_num_hint"
@@ -238,13 +238,16 @@
             android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
-        <TableRow>
+
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            >
 
             <TextView
                 android:id="@+id/tv_patient_07"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_occupation"
                 android:textAllCaps="false"
@@ -267,7 +270,7 @@
                 android:id="@+id/tv_patient_08"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_smoking_history"
                 android:textAllCaps="false"
@@ -277,7 +280,6 @@
                 android:id="@+id/edit_patient_smokeTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_smoking_history_hint"
@@ -286,20 +288,12 @@
                 android:maxLines="1"
                 android:maxLength="8"
                 android:inputType="text"/>
-        </TableRow>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_10"
-            android:background="#fff" />
-
-        <TableRow>
 
             <TextView
                 android:id="@+id/tv_patient_09"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_abortion_num"
                 android:textAllCaps="false"
@@ -315,30 +309,7 @@
                 android:inputType="number"
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:maxLines="1"
-                android:maxLength="8"/>
-
-            <TextView
-                android:id="@+id/tv_patient_10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_span="2"
-                android:padding="@dimen/dp_2"
-                android:text="@string/patient_sex_num"
-                android:textAllCaps="false"
-                android:textSize="@dimen/dp_16" />
-
-            <EditText
-                android:id="@+id/edit_patient_sexPartnerCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
-                android:layout_span="3"
-                android:background="@drawable/edittext_select"
-                android:hint="@string/patient_sex_num_hint"
-                android:inputType="number"
-                android:padding="@dimen/dp_2"
-                android:textAllCaps="false"
+                android:layout_marginRight="@dimen/dp_15"
                 android:maxLines="1"
                 android:maxLength="8"/>
 
@@ -349,13 +320,39 @@
             android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
-        <TableRow>
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            >
+
+            <TextView
+                android:id="@+id/tv_patient_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="1"
+                android:padding="@dimen/dp_2"
+                android:text="@string/patient_sex_num"
+                android:textAllCaps="false"
+                android:textSize="@dimen/dp_16" />
+
+            <EditText
+                android:id="@+id/edit_patient_sexPartnerCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_sex_num_hint"
+                android:inputType="number"
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:maxLength="8"/>
+
 
             <TextView
                 android:id="@+id/tv_patient_05"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_gravidity_num"
                 android:textAllCaps="false"
@@ -379,7 +376,7 @@
                 android:id="@+id/tv_patient_12"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="2dp"
                 android:text="@string/patient_social_security_number"
                 android:textAllCaps="false"
@@ -389,7 +386,7 @@
                 android:id="@+id/edit_patient_ssNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_15"
                 android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_security_num_hint"
@@ -405,13 +402,15 @@
             android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
-        <TableRow>
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            >
 
             <TextView
                 android:id="@+id/tv_patient_13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_HCG"
                 android:textAllCaps="false"
@@ -421,8 +420,7 @@
                 android:id="@+id/edit_patient_HCG"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
-                android:layout_span="8"
+                android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_HCG_hint"
                 android:padding="@dimen/dp_2"
@@ -431,23 +429,11 @@
                 android:maxLength="8"
                 android:inputType="text"/>
 
-        </TableRow>
-
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_10"
-            android:background="#fff"
-            android:textAllCaps="false" />
-
-
-        <TableRow>
-
             <TextView
                 android:id="@+id/tv_patient_14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_ID"
                 android:textAllCaps="false"
@@ -457,8 +443,7 @@
                 android:id="@+id/edit_patient_idNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
-                android:layout_span="8"
+                android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_ID_hint"
                 android:padding="@dimen/dp_2"
@@ -466,22 +451,11 @@
                 android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:maxLength="30"
                 />
-
-        </TableRow>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_10"
-            android:background="#fff"
-            android:textAllCaps="false" />
-
-        <TableRow>
-
             <TextView
                 android:id="@+id/tv_patient_15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"
+                android:layout_span="1"
                 android:padding="@dimen/dp_2"
                 android:text="@string/patient_check_notes"
                 android:textAllCaps="false"
@@ -491,8 +465,8 @@
                 android:id="@+id/edit_patient_checkNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_5"
-                android:layout_span="8"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_span="3"
                 android:background="@drawable/edittext_select"
                 android:hint="@string/patient_check_notes_hint"
                 android:inputType="textMultiLine"
@@ -503,13 +477,16 @@
 
         </TableRow>
 
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_10"
             android:background="#fff" />
 
 
-        <TableRow>
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5">
 
             <TextView
                 android:id="@+id/tv_patient_16"
@@ -529,7 +506,10 @@
                 android:entries="@array/bloodType"
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"></Spinner>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="@dimen/dp_0_1"></View>
             <TextView
                 android:id="@+id/tv_patient_17"
                 android:layout_width="match_parent"
@@ -556,7 +536,9 @@
             android:background="#fff" />
 
 
-        <TableRow>
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5">
 
             <TextView
                 android:id="@+id/tv_patient_18"
@@ -575,7 +557,10 @@
                 android:entries="@array/marry"
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"></Spinner>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="@dimen/dp_0_1"></View>
             <TextView
                 android:id="@+id/tv_patient_19"
                 android:layout_width="match_parent"
@@ -598,7 +583,7 @@
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_120"
+            android:layout_height="@dimen/dp_60"
             android:background="#fff" />
 
         <TableRow>
@@ -623,7 +608,7 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_1"
-                android:layout_span="1"
+                android:layout_span="2"
                 android:background="#fff" />
 
             <Button
@@ -640,7 +625,7 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_1"
-                android:layout_span="1"
+                android:layout_span="2"
                 android:background="#fff" />
 
             <Button
@@ -654,11 +639,11 @@
                 android:textSize="@dimen/dp_15"
                 android:textAllCaps="false" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_1"
-                android:layout_span="1"
-                android:background="#fff" />
+            <!--<View-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="@dimen/dp_1"-->
+                <!--android:layout_span="1"-->
+                <!--android:background="#fff" />-->
 
         </TableRow>
 

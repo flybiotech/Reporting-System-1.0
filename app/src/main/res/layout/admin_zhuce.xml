@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:fadeScrollbars="false"-->
-        <!--android:scrollbarSize="@dimen/scrolWidth"-->
-        <!--android:scrollbarThumbVertical="@color/viewfinder_mask"-->
-        <!--&gt;-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="@dimen/scrolWidth"
+        android:scrollbarThumbVertical="@color/viewfinder_mask"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
@@ -56,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
@@ -85,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/dp_10">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,7 +116,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -140,7 +144,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/dp_10">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -167,7 +172,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/dp_10">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -188,7 +194,6 @@
                         android:hint="@string/user_regester_department_hint"
                         android:textAllCaps="false" />
                 </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     <!--</ScrollView>-->
 
@@ -235,8 +240,8 @@
             android:layout_weight="1" />
 
     </LinearLayout>
-
-
+</LinearLayout>
+    </ScrollView>
     <!--<RelativeLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->

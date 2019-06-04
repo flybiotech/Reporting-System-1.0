@@ -111,15 +111,14 @@ public class RegisterActicity extends AppCompatActivity implements View.OnClickL
         if(doctorList.size()==0){
             if (TextUtils.isEmpty(name.getText().toString().trim())
                     || TextUtils.isEmpty(pass1.getText().toString().trim())
-                    || TextUtils.isEmpty(email.getText().toString().trim())
                     || TextUtils.isEmpty(edit_hos_name.getText().toString().trim())
                     || TextUtils.isEmpty(edit_hos_keshi.getText().toString().trim())) {
                 MyToast.showToast(this,getString(R.string.user_register_message_error));
 //                SouthUtil.showToast(this,getString(R.string.user_register_message_error));
             } else {
                 if(pass1.getText().toString().trim().equals(pass2.getText().toString().trim())){
-                    boolean isEmail = isEmail(email.getText().toString());
-                    if (isEmail){
+//                    boolean isEmail = isEmail(email.getText().toString());
+//                    if (isEmail){
                         if(pass1.getText().toString().trim().length()>=6){
                             Const.dialogWifiSetting = true;
                             MyToast.showToast(this,getString(R.string.user_register_success));
@@ -146,12 +145,12 @@ public class RegisterActicity extends AppCompatActivity implements View.OnClickL
                             MyToast.showToast(this,getString(R.string.user_register_password_error));
 //                            SouthUtil.showToast(this,getString(R.string.user_register_password_error));
                         }
-                    }else {
-                        email.setText("");
-                        email.requestFocus();
-                        MyToast.showToast(this,getString(R.string.user_register_email_error));
-//                        SouthUtil.showToast(this,getString(R.string.user_register_email_error));
-                    }
+//                    }else {
+//                        email.setText("");
+//                        email.requestFocus();
+//                        MyToast.showToast(this,getString(R.string.user_register_email_error));
+////                        SouthUtil.showToast(this,getString(R.string.user_register_email_error));
+//                    }
                 }else {
                     MyToast.showToast(this,getString(R.string.user_register_faild_password));
 //                    SouthUtil.showToast(this,getString(R.string.user_register_faild_password));
@@ -160,7 +159,6 @@ public class RegisterActicity extends AppCompatActivity implements View.OnClickL
         }else {
             if (TextUtils.isEmpty(name.getText().toString().trim())
                     || TextUtils.isEmpty(pass1.getText().toString().trim())
-                    || TextUtils.isEmpty(email.getText().toString().trim())
                     ) {
                 MyToast.showToast(this,getString(R.string.user_register_message_error));
 //                SouthUtil.showToast(this,getString(R.string.user_register_message_error));
@@ -168,8 +166,8 @@ public class RegisterActicity extends AppCompatActivity implements View.OnClickL
 
                 if(!"shanghaifaluyuan".equals(name.getText().toString().trim())) {
                     if (pass1.getText().toString().trim().equals(pass2.getText().toString().trim())) {
-                        boolean isEmail = isEmail(email.getText().toString());
-                        if (isEmail) {
+//                        boolean isEmail = isEmail(email.getText().toString());
+//                        if (isEmail) {
                             int i = lr.addDoctor(name.getText().toString(), pass1.getText().toString(), this.email.getText().toString());
                             if (i == 1) {
                                 MyToast.showToast(this,getString(R.string.user_register_faild_account));
@@ -209,12 +207,12 @@ public class RegisterActicity extends AppCompatActivity implements View.OnClickL
 //                                    SouthUtil.showToast(this,getString(R.string.user_register_password_error));
                                 }
                             }
-                        } else {
-                            email.setText("");
-                            email.requestFocus();
-                            MyToast.showToast(this,getString(R.string.user_register_email_error));
-//                            SouthUtil.showToast(this,getString(R.string.user_register_email_error));
-                        }
+//                        } else {
+//                            email.setText("");
+//                            email.requestFocus();
+//                            MyToast.showToast(this,getString(R.string.user_register_email_error));
+////                            SouthUtil.showToast(this,getString(R.string.user_register_email_error));
+//                        }
                     } else {
                         MyToast.showToast(this,getString(R.string.user_register_faild_password));
 //                        SouthUtil.showToast(this,getString(R.string.user_register_faild_password));

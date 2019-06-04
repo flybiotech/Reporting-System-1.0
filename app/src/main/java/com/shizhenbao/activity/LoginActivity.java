@@ -144,19 +144,26 @@ public class  LoginActivity extends BaseActivity implements CompoundButton.OnChe
                 textViews[i].setText(AlignedTextUtils.justifyString(tvDatas[i], 2 ));
             }
         }
-        sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-        String spName = sharedPreferences.getString("loginName", null);
-        String spPass = sharedPreferences.getString("loginPass", null);
-        tv_LoginName.setText(AlignedTextUtils.justifyString(tvDatas[0],3));
-        tv_LoginPass.setText(AlignedTextUtils.justifyString(tvDatas[1],3));
-        if (spName == null || spName.equals("") || spPass == null || spPass.equals("")) {
-            userName.setText(spName);
-            userPass.setText("");
-            checkBox.setChecked(false);
-        } else {
-            userName.setText(spName);
-            userPass.setText(spPass);
-            checkBox.setChecked(true);
+//        sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+//        String spName = sharedPreferences.getString("loginName", null);
+//        String spPass = sharedPreferences.getString("loginPass", null);
+        try {
+            String spName = (String) SPUtils.get(this, "loginName", "");
+            String spPass =(String)SPUtils.get(this, "loginPass", "");
+
+            tv_LoginName.setText(AlignedTextUtils.justifyString(tvDatas[0],3));
+            tv_LoginPass.setText(AlignedTextUtils.justifyString(tvDatas[1],3));
+            if (spName == null || spName.equals("") || spPass == null || spPass.equals("")) {
+                userName.setText(spName);
+                userPass.setText("");
+                checkBox.setChecked(false);
+            } else {
+                userName.setText(spName);
+                userPass.setText(spPass);
+                checkBox.setChecked(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -200,7 +207,7 @@ public class  LoginActivity extends BaseActivity implements CompoundButton.OnChe
                 if (isChecked) {
                     sp.setLoginInfo(userName.getText().toString().trim(), userPass.getText().toString().trim());
                 } else {
-                    sp.setLoginInfo(" ", " ");
+                    sp.setLoginInfo("", "");
                 }
                 break;
             default:

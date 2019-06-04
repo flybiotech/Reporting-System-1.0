@@ -48,7 +48,7 @@ public class ImageViewRotation extends android.support.v7.widget.AppCompatImageV
 //        float centralX = (right - left) / 2.0f;
 //        float centralY = (bottom - top) / 2.0f;
         canvas.save();//保存旋转前画布状态
-        canvas.rotate(90, getMeasuredWidth()/2, getMeasuredHeight()/2);
+        canvas.rotate(0, getMeasuredWidth()/2, getMeasuredHeight()/2);
         super.onDraw(canvas);
         canvas.restore();//取去出旋转前保存的状态
     }

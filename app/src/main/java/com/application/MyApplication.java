@@ -15,6 +15,9 @@ import com.orhanobut.logger.Logger;
 
 import org.litepal.LitePalApplication;
 
+import io.vov.vitamio.MediaPlayer;
+import io.vov.vitamio.Vitamio;
+
 
 /**
  * Created by gyl1 on 3/31/17.
@@ -26,7 +29,7 @@ public class MyApplication extends LitePalApplication {
     public static final String TAG = MyApplication.class
             .getSimpleName();
     private static MyApplication mInstance;
-
+    private MediaPlayer mediaPlayer;
     private static Context mContext;
     @Override
     protected void attachBaseContext(Context base) {
@@ -46,6 +49,7 @@ public class MyApplication extends LitePalApplication {
         Logger.addLogAdapter(new AndroidLogAdapter());
 //        CrashReport.initCrashReport(getApplicationContext(), "50f7042afa", true);
         mContext = getApplicationContext();
+        Vitamio.isInitialized(getApplicationContext());
     }
     public static Context getmContext(){
         return mContext;

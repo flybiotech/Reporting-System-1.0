@@ -50,7 +50,32 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:text="@string/setting_WIFI_filters"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textViewNameSize" />
+
+        <EditText
+            android:id="@+id/edit_filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/setting_WIFI_filters_hint"
+            android:textAllCaps="false"
+
+            />
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

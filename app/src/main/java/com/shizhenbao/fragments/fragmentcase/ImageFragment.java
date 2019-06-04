@@ -37,7 +37,8 @@ import rx.schedulers.Schedulers;
 public class ImageFragment extends Fragment implements View.OnClickListener {
 
     private Button btnPre01,btnNext01,btnPre02, btnNext02;
-    private ImageViewRotation image01, image02;
+//    private ImageViewRotation image01, image02;
+    private ImageView image01, image02;
     private TextView tvName01, tvName02;
     private List<User> mList = new ArrayList<User>();
     private ArrayList<String> listImage01 = new ArrayList<String>();
@@ -57,8 +58,8 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
         btnNext01 = (Button) view.findViewById(R.id.btn_casenext01);//原图下一张
         btnPre02 = (Button) view.findViewById(R.id.btn_casepre02);//对比图上一张
         btnNext02 = (Button) view.findViewById(R.id.btn_casenext02);//对比图下一张
-        image01 = (ImageViewRotation) view.findViewById(R.id.frag_imagecase_01);//显示原图
-        image02 = (ImageViewRotation) view.findViewById(R.id.frag_imagecase_02);//显示对比图
+        image01 = view.findViewById(R.id.frag_imagecase_01);//显示原图
+        image02 = view.findViewById(R.id.frag_imagecase_02);//显示对比图
         tvName01 = (TextView) view.findViewById(R.id.textview_caseName01); //对比病例的姓名
         tvName02 = (TextView) view.findViewById(R.id.textview_caseName02); //对比病例的姓名
 
@@ -177,6 +178,8 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
     //展示图片
     private void showImages(int position,List<String>urlsImage,User user,ImageView image,TextView imageName) {
         if (urlsImage.size() < 1) {
+
+
             return;
         }
         //显示照片
@@ -220,8 +223,6 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-
-
     }
 
 
@@ -249,6 +250,20 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
                     public void onCompleted() {
                         if (urlsImage.size() > 0) {
                             showImages(position,urlsImage,user,image,imageName);//展示图片
+                        }else {
+                            if(position == 1){
+                                btnNext01.setVisibility(View.GONE);
+                                btnPre01.setVisibility(View.GONE);
+                                tvName01.setText(getString(R.string.patient_id)+":"+user.getpId()+"\n"+getString(R.string.patient_name) + ":"+ user.getpName()
+                                        + "\n" + getString(R.string.case_image_show_time) + ":" + user.getRegistDate()
+                                        + "\n"+ getString(R.string.case_image_showbi)+ ":" +getString(R.string.havenoimage));
+                            }else {
+                                btnNext02.setVisibility(View.GONE);
+                                btnPre02.setVisibility(View.GONE);
+                                tvName02.setText(getString(R.string.patient_id)+":"+user.getpId()+"\n"+getString(R.string.patient_name) + ":"+ user.getpName()
+                                        + "\n" + getString(R.string.case_image_show_time) + ":" + user.getRegistDate()
+                                        + "\n"+ getString(R.string.case_image_showbi)+ ":" +getString(R.string.havenoimage));
+                            }
                         }
                     }
 
@@ -282,11 +297,19 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
             if (split.length > 0) {
 
 
-                if (split[1].equals("cusuanbai")) {
+                if (split[1].equals("醋酸白")) {
                     String imageCatagory = changeInfo(split[1]);
-                    textView.setText(getString(R.string.patient_id)+":"+pId+"\n"+getString(R.string.patient_name) + ":"+ name
-                            + "\n" + getString(R.string.case_image_show_time) + ":" + registerDate
-                            + "\n"+ getString(R.string.case_image_showbi)+ ":" + imageCatagory + " " + split[2] + getString(R.string.imageacitivty_acetowhite_second) + split[3] + getString(R.string.imageacitivty_acetowhite_minute));
+                    if(split.length == 4){
+
+                        textView.setText(getString(R.string.patient_id)+":"+pId+"\n"+getString(R.string.patient_name) + ":"+ name
+                                + "\n" + getString(R.string.case_image_show_time) + ":" + registerDate
+                                + "\n"+ getString(R.string.case_image_showbi)+ ":" + imageCatagory + "." + split[2]);
+                    }else {
+                        textView.setText(getString(R.string.patient_id)+":"+pId+"\n"+getString(R.string.patient_name) + ":"+ name
+                                + "\n" + getString(R.string.case_image_show_time) + ":" + registerDate
+                                + "\n"+ getString(R.string.case_image_showbi)+ ":" + imageCatagory);
+                    }
+
                 } else {
                     String imageCatagory = changeInfo(split[1]);
                     textView.setText(getString(R.string.patient_id)+":"+pId+"\n"+getString(R.string.patient_name) + ":" + name
@@ -303,13 +326,13 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
     private String changeInfo(String filePath) {
         String imageCatagory =getString(R.string.image_artword);
         switch (filePath) {
-            case "yuantu":
+            case "质控图":
                 imageCatagory= getString(R.string.image_artword);
                 break;
-            case "cusuanbai":
+            case "醋酸白":
                 imageCatagory= getString(R.string.image_acetic_acid_white);
                 break;
-            case "dianyou":
+            case "碘油":
                 imageCatagory= getString(R.string.image_Lipiodol);
                 break;
             default:

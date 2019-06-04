@@ -43,7 +43,7 @@ public class AdvancedSettingUtils {
 //        stringList.add(mContext.getString(R.string.setting_FTP));
         stringList.add(mContext.getString(R.string.setting_picture_Route));
 //        stringList.add(mContext.getString(R.string.setting_FTP_Route));
-        stringList.add(mContext.getString(R.string.setting_local_route));
+//        stringList.add(mContext.getString(R.string.setting_local_route));
         stringList.add(mContext.getString(R.string.setting_dialog_dissmiss));
         return stringList;
     }
@@ -90,10 +90,10 @@ public class AdvancedSettingUtils {
 //                    case 4:
 //                        myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_FTP_Route_hint),3);
 //                        break;
+//                    case 3:
+//                        myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_local_Route_hint),4);
+//                        break;
                     case 3:
-                        myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_local_Route_hint),4);
-                        break;
-                    case 4:
                         myEditTextDialog.editDialogShow(mContext.getString(R.string.setting_dialog_dissmiss_hint),5);
                         break;
                     default:break;

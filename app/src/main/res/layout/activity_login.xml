@@ -30,18 +30,21 @@
                     android:layout_weight="1"
                     android:text="@string/user_name"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/dp_25" />
+                    android:textSize="@dimen/dp_25"
+                    android:gravity="center"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginRight="@dimen/dp_100">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        >
 
                         <EditText
                             android:id="@+id/edit_loginName"
@@ -73,7 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/height"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/dp_100">
 
                 <TextView
                     android:id="@+id/tv_loginpass"
@@ -84,7 +88,8 @@
                     android:layout_weight="1"
                     android:text="@string/user_password"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/dp_25" />
+                    android:textSize="@dimen/dp_25"
+                    android:gravity="center"/>
 
                 <LinearLayout
                     android:layout_width="0dp"

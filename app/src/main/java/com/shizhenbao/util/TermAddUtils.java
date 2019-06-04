@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.activity.R;
 import com.shizhenbao.pop.Diacrisis;
 import com.util.AlignedTextUtils;
+import com.view.MyToast;
 
 import org.litepal.LitePal;
 
@@ -132,7 +133,9 @@ public class TermAddUtils {
                             diacrisis.save();
                             dialogInterface.cancel();
                         }
+                        MyToast.showToast(mContext,mContext.getString(R.string.setting_picture_save_success) );
                     }
+
                 })
                 .create();
         dialog.setCanceledOnTouchOutside(false);//使除了dialog以外的地方不能被点击

@@ -800,13 +800,13 @@ public class CaseManagerActivity extends AppCompatActivity implements View.OnCli
     private String changeInfo(String filePath) {
         String imageCatagory =getString(R.string.image_artword);
         switch (filePath) {
-            case "yuantu":
+            case "质控图":
                 imageCatagory= getString(R.string.image_artword);
                 break;
-            case "cusuanbai":
+            case "醋酸白":
                 imageCatagory= getString(R.string.image_acetic_acid_white);
                 break;
-            case "dianyou":
+            case "碘油":
                 imageCatagory= getString(R.string.image_Lipiodol);
                 break;
             default:
@@ -856,7 +856,7 @@ public class CaseManagerActivity extends AppCompatActivity implements View.OnCli
                 .filter(new Func1<File, Boolean>() {
                     @Override
                     public Boolean call(File file) {
-                        return file.getName().endsWith(".mp4") ;
+                        return file.getName().endsWith(".avi") ;
                     }
                 })
                 .map(new Func1<File, String>() {

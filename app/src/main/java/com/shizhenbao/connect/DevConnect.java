@@ -1,6 +1,7 @@
 package com.shizhenbao.connect;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 
 import com.shizhenbao.pop.Diacrisis;
@@ -8,8 +9,10 @@ import com.shizhenbao.pop.Doctor;
 import com.shizhenbao.pop.Path;
 import com.shizhenbao.pop.SystemSet;
 import com.shizhenbao.pop.User;
+import com.shizhenbao.sharePreferencess.SharedPreferenceText;
 import com.shizhenbao.util.Const;
 import com.shizhenbao.util.Item;
+import com.shizhenbao.util.SPUtils;
 import com.view.LoadingDialog;
 
 import org.litepal.LitePal;
@@ -32,9 +35,11 @@ public class DevConnect {
     private Handler handle;
     private boolean cancle = false;
     long msTime=-1;
+    private SharedPreferenceText sharedPreferenceText;
     public DevConnect(Context context,Handler mHandle) {
         mContext = context;
         this.handle = mHandle;
+        sharedPreferenceText = new SharedPreferenceText(mContext);
     }
 
     public void lostwifi(){
@@ -85,16 +90,24 @@ public class DevConnect {
         systemSets.get(0).save();
         LitePal.deleteAll(Path.class);
 
+
+
     }
     /**
      * 删除本地数据
      */
     private void deleteLocal(){
-        List<SystemSet>setList=LitePal.findAll(SystemSet.class);
-        new Item().deleteFile(new File(new Item().getSD()+"/"+setList.get(0).getGather_path()));
-        List<Path>pathList=LitePal.findAll(Path.class);
-        for(int i=0;i<pathList.size();i++){
-            new Item().deleteFile(new File(new Item().getSD()+"/"+pathList.get(i).getPicPath()));
+        try {
+            SPUtils.put(mContext,"loginName", "");
+            SPUtils.put(mContext,"loginPass", "");
+            List<SystemSet>setList=LitePal.findAll(SystemSet.class);
+            new Item().deleteFile(new File(new Item().getSD()+"/"+setList.get(0).getGather_path()));
+            List<Path>pathList=LitePal.findAll(Path.class);
+            for(int i=0;i<pathList.size();i++){
+                new Item().deleteFile(new File(new Item().getSD()+"/"+pathList.get(i).getPicPath()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

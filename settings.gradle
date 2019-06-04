@@ -1,1 +1,1 @@
-include ':app', ':filePickerLib', ':okhttputils', ':photoview', ':mobileprintsdk', ':android-pdf-viewer'
+include ':app', ':filePickerLib', ':okhttputils', ':photoview', ':mobileprintsdk', ':android-pdf-viewer', ':vitamio'

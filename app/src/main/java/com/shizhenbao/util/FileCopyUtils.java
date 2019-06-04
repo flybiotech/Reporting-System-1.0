@@ -71,7 +71,15 @@ public class FileCopyUtils {
                         if (getSize(new File(Const.originalPath + "/碘油/PHOTOS"))) {
                             isCopySuccess = copyFile(patientPath+ "/",3);
                         }
-
+                        if(getSize(new File(Const.originalPath + "/质控图/VIDEOS"))){
+                            isCopySuccess = copyFile(patientPath + "/",4);
+                        }
+                        if (getSize(new File(Const.originalPath + "/醋酸白/VIDEOS"))) {
+                            isCopySuccess = copyFile(patientPath+ "/",5);
+                        }
+                        if (getSize(new File(Const.originalPath + "/碘油/VIDEOS"))) {
+                            isCopySuccess = copyFile(patientPath+ "/",6);
+                        }
                         //复制完成后，开始删除
                         if(Const.originalPath != null && isCopySuccess){
                             File orFile = new File(Const.originalPath);
@@ -86,6 +94,7 @@ public class FileCopyUtils {
                                 fileCopyListener.fileCopyResult(false);
                             }
                         }
+                        thread.interrupt();
                     }
                 });
                 thread.start();
@@ -102,6 +111,15 @@ public class FileCopyUtils {
         }
         if(temp == 3){
             fromPath = Const.originalPath + "/碘油/PHOTOS/";
+        }
+        if(temp == 4){
+            fromPath = Const.originalPath + "/质控图/VIDEOS/";
+        }
+        if(temp == 5){
+            fromPath = Const.originalPath + "/醋酸白/VIDEOS/";
+        }
+        if(temp == 6){
+            fromPath = Const.originalPath + "/碘油/VIDEOS/";
         }
         boolean isSuccess = cicleCoyeFile(fromPath,path);
         return isSuccess;
