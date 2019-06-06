@@ -2,6 +2,7 @@ package com.shizhenbao.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -84,8 +85,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         btn_search = (Button) findViewById(R.id.btn_search_search);//搜索按钮
 
         edit_IdNumber = (EditText) findViewById(R.id.editText_search_IdNumber);
+        edit_IdNumber.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_CaseNumbe = (EditText) findViewById(R.id.editText_search_CaseNumbe);
+        edit_CaseNumbe.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_SSNumber = (EditText) findViewById(R.id.editText_search_SSNumber);
+        edit_SSNumber.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_Name = (EditText) findViewById(R.id.editText_search_Name);
         textView_date = (TextView) findViewById(R.id.textView_search_Date);
 

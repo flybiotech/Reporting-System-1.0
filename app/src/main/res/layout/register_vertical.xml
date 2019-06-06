@@ -48,6 +48,7 @@
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_name_hint"
+                        android:maxLength="10"
                         android:textAllCaps="false" />
                 </LinearLayout>
 
@@ -75,6 +76,7 @@
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_password_registration_hint"
+                        android:maxLength="20"
                         android:textAllCaps="false" />
                 </LinearLayout>
 

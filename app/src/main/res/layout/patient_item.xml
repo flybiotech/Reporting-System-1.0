@@ -123,42 +123,6 @@
                 android:textAllCaps="false"
                 android:textColorHint="@color/lightRed"
                 />
-
-            <TextView
-                android:id="@+id/tv_patient_04"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_span="1"
-                android:padding="@dimen/dp_2"
-                android:text="@string/patient_age"
-                android:textAllCaps="false"
-                android:textSize="@dimen/dp_16" />
-
-            <EditText
-                android:id="@+id/edit_djAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_15"
-                android:layout_span="3"
-                android:background="@drawable/edittext_select"
-                android:hint="@string/patient_age"
-                android:inputType="number"
-                android:maxLength="2"
-                android:padding="@dimen/dp_2"
-                android:textAllCaps="false"
-                />
-        </TableRow>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_10"
-            android:background="#fff" />
-
-
-        <TableRow
-            android:layout_marginLeft="@dimen/dp_5"
-            >
-
             <TextView
                 android:id="@+id/tv_patient_03"
                 android:layout_width="match_parent"
@@ -180,7 +144,44 @@
                 android:inputType="number"
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
-                android:maxLength="15"
+                android:maxLength="11"
+                android:layout_marginRight="@dimen/dp_15"
+                />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_10"
+            android:background="#fff" />
+
+
+        <TableRow
+            android:layout_marginLeft="@dimen/dp_5"
+            >
+
+            <TextView
+                android:id="@+id/tv_patient_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="1"
+                android:padding="@dimen/dp_2"
+                android:text="@string/patient_age"
+                android:textAllCaps="false"
+                android:textSize="@dimen/dp_16" />
+
+            <EditText
+                android:id="@+id/edit_djAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_span="3"
+                android:background="@drawable/edittext_select"
+                android:hint="@string/patient_age"
+                android:inputType="number"
+                android:maxLength="2"
+                android:padding="@dimen/dp_2"
+                android:textAllCaps="false"
                 />
 
             <TextView
@@ -229,7 +230,7 @@
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
                 android:maxLines="1"
-                android:maxLength="8"/>
+                android:maxLength="2"/>
 
         </TableRow>
 
@@ -311,7 +312,7 @@
                 android:textAllCaps="false"
                 android:layout_marginRight="@dimen/dp_15"
                 android:maxLines="1"
-                android:maxLength="8"/>
+                android:maxLength="2"/>
 
         </TableRow>
 
@@ -345,7 +346,7 @@
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
                 android:maxLines="1"
-                android:maxLength="8"/>
+                android:maxLength="2"/>
 
 
             <TextView
@@ -369,7 +370,7 @@
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
                 android:maxLines="1"
-                android:maxLength="8"/>
+                android:maxLength="2"/>
 
 
             <TextView
@@ -449,7 +450,8 @@
                 android:padding="@dimen/dp_2"
                 android:textAllCaps="false"
                 android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:maxLength="30"
+                android:maxLength="18"
+                android:inputType="text"
                 />
             <TextView
                 android:id="@+id/tv_patient_15"

@@ -164,6 +164,7 @@
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_regester_hospital_hint"
+                        android:maxLength="20"
                         android:textAllCaps="false" />
                 </LinearLayout>
 
@@ -192,6 +193,7 @@
                         android:background="@drawable/edit"
                         android:gravity="center"
                         android:hint="@string/user_regester_department_hint"
+                        android:maxLength="10"
                         android:textAllCaps="false" />
                 </LinearLayout>
         </LinearLayout>

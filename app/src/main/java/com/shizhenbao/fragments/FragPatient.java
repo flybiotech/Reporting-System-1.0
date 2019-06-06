@@ -136,6 +136,7 @@ public class FragPatient  extends BaseFragment implements View.OnClickListener  
         edit_djAge= (EditText) view.findViewById(R.id.edit_djAge);//年龄
         edit_djPhone= (EditText) view.findViewById(R.id.edit_djPhone);//电话
         edit_IdNumber= (EditText) view.findViewById(R.id.edit_patient_idNumber);//身份证号码
+        edit_IdNumber.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_CaseNumbe= (EditText) view.findViewById(R.id.edit_patient_CaseNumbe);//病例号
         edit_CaseNumbe.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_SSNumber= (EditText) view.findViewById(R.id.edit_patient_ssNumber);//社保号，

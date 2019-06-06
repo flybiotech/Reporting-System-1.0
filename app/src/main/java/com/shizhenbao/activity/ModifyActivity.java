@@ -77,6 +77,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
             edit_djPhone.setText(list.get(i).getTel());//显示要修改的病人的电话
             edit_IdNumber.setText(list.get(i).getIdNumber());//显示要修改的病人的身份证信息
             edit_CaseNumbe.setText(list.get(i).getCaseNumbe());//显示要修改的病人的病历号
+
             edit_SSNumber.setText(list.get(i).getsSNumber());  //显示要修改的病人的社保号
 
             edit_hCG.setText(list.get(i).gethCG());  //
@@ -235,6 +236,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         edit_djPhone = (EditText) findViewById(R.id.edit_modify_djPhone);//电话
 
         edit_IdNumber= (EditText) findViewById(R.id.edit_modify_idNumber);//身份证号码
+        edit_IdNumber.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_CaseNumbe= (EditText) findViewById(R.id.edit_modify_CaseNumbe);//病例号
         edit_CaseNumbe.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit_SSNumber= (EditText) findViewById(R.id.edit_modify_ssNumber);//社保号，

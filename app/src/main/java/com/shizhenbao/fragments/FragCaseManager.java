@@ -3,6 +3,7 @@ package com.shizhenbao.fragments;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -84,8 +85,11 @@ public class FragCaseManager extends BaseFragment implements View.OnClickListene
         nameTv = new String[]{getString(R.string.patient_name), getString(R.string.case_patient_telephone), getString(R.string.patient_medical_record_number), getString(R.string.patient_social_security_number)};
         editName = (EditText) view.findViewById(R.id.edit_casesearch_Name);
         editTel = (EditText) view.findViewById(R.id.edit_casesearch_tel);
+        editTel.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit01 = (EditText) view.findViewById(R.id.edit_casesearch_01);//病例号
+        edit01.setRawInputType(Configuration.KEYBOARD_QWERTY);
         edit02 = (EditText) view.findViewById(R.id.edit_casesearch_02);//社保号码
+        edit02.setRawInputType(Configuration.KEYBOARD_QWERTY);
         startDate = (EditText) view.findViewById(R.id.edit_casesearch_datestart);//开始时间
         endDate = (EditText) view.findViewById(R.id.edit_casesearch_dateend);//结束时间
         startDate.setOnClickListener(this);

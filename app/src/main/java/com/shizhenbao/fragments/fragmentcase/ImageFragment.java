@@ -248,23 +248,23 @@ public class ImageFragment extends Fragment implements View.OnClickListener {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        if (urlsImage.size() > 0) {
+//                        if (urlsImage.size() > 0) {
                             showImages(position,urlsImage,user,image,imageName);//展示图片
-                        }else {
-                            if(position == 1){
-                                btnNext01.setVisibility(View.GONE);
-                                btnPre01.setVisibility(View.GONE);
-                                tvName01.setText(getString(R.string.patient_id)+":"+user.getpId()+"\n"+getString(R.string.patient_name) + ":"+ user.getpName()
-                                        + "\n" + getString(R.string.case_image_show_time) + ":" + user.getRegistDate()
-                                        + "\n"+ getString(R.string.case_image_showbi)+ ":" +getString(R.string.havenoimage));
-                            }else {
-                                btnNext02.setVisibility(View.GONE);
-                                btnPre02.setVisibility(View.GONE);
-                                tvName02.setText(getString(R.string.patient_id)+":"+user.getpId()+"\n"+getString(R.string.patient_name) + ":"+ user.getpName()
-                                        + "\n" + getString(R.string.case_image_show_time) + ":" + user.getRegistDate()
-                                        + "\n"+ getString(R.string.case_image_showbi)+ ":" +getString(R.string.havenoimage));
-                            }
-                        }
+//                        }else {
+//                            if(position == 0){
+//                                btnNext01.setVisibility(View.GONE);
+//                                btnPre01.setVisibility(View.GONE);
+//                                tvName01.setText(getString(R.string.patient_id)+":"+user.getpId()+"\n"+getString(R.string.patient_name) + ":"+ user.getpName()
+//                                        + "\n" + getString(R.string.case_image_show_time) + ":" + user.getRegistDate()
+//                                        + "\n"+ getString(R.string.case_image_showbi)+ ":" +getString(R.string.havenoimage));
+//                            }else {
+//                                btnNext02.setVisibility(View.GONE);
+//                                btnPre02.setVisibility(View.GONE);
+//                                tvName02.setText(getString(R.string.patient_id)+":"+user.getpId()+"\n"+getString(R.string.patient_name) + ":"+ user.getpName()
+//                                        + "\n" + getString(R.string.case_image_show_time) + ":" + user.getRegistDate()
+//                                        + "\n"+ getString(R.string.case_image_showbi)+ ":" +getString(R.string.havenoimage));
+//                            }
+//                        }
                     }
 
                     @Override
